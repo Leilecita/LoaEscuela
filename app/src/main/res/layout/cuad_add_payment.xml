@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/dialog_left"
+    android:paddingTop="@dimen/dialog_top"
+    android:background="@drawable/rec_dialog"
+    android:paddingRight="@dimen/dialog_right"
+    android:paddingBottom="@dimen/dialog_bottom"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="26sp"
+            android:text="Nuevo pago"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/word"
+            android:layout_gravity="center"
+            android:fontFamily="@font/opensansregular"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="2.5"
+                android:layout_height="40dp"
+                android:textColor="@color/word"
+                android:fontFamily="@font/opensanslight"
+                android:text="Fecha "
+                android:textSize="25sp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="300dp"
+                    android:layout_height="40dp"
+                    android:paddingLeft="8dp"
+                    android:id="@+id/date"
+                    android:textColor="@color/word"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/rec_edith_dialog"
+                    android:fontFamily="@font/opensanslight"
+                    android:text=" "
+                    android:textSize="25sp"
+                    />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/word"
+                android:visibility="gone"
+                android:id="@+id/pack"
+                android:fontFamily="@font/opensanslight"
+                android:text="Pack 10 cl"
+                android:textSize="22sp"
+                android:layout_marginBottom="4dp"
+                />
+
+
+        </LinearLayout>
+
+
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="2.5"
+                android:text="Pagado "
+                android:textColor="@color/word"
+                android:layout_gravity="center"
+                android:fontFamily="@font/opensanslight"
+                android:textSize="@dimen/text_cuad_dialog"
+                android:layout_height="40dp"
+
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="$"
+                    android:textColor="@color/word"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/opensanslight"
+                    android:textSize="@dimen/text_cuad_dialog"
+                    android:layout_height="40dp"
+
+                    />
+
+                <TextView
+                    android:id="@+id/payed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/opensanslight"
+                    android:gravity="center"
+                    android:paddingRight="8dp"
+                    android:text=""
+                    android:textColor="@color/word"
+                    android:textSize="@dimen/text_cuad_dialog"
+
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text=" / "
+                    android:textColor="@color/word"
+                    android:gravity="center"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/opensanslight"
+                    android:textSize="@dimen/text_cuad_dialog"
+                    android:layout_height="40dp"
+
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="$"
+                    android:textColor="@color/word"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/opensanslight"
+                    android:textSize="@dimen/text_cuad_dialog"
+                    android:layout_height="40dp"
+
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_weight="2"
+                    android:text=""
+                    android:gravity="center_vertical"
+                    android:textColor="@color/word"
+                    android:id="@+id/pack_value"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/opensanslight"
+                    android:textSize="@dimen/text_cuad_dialog"
+                    android:layout_height="40dp"
+
+                    />
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="2.5"
+                android:text="Restan "
+                android:textColor="@color/word"
+                android:layout_gravity="center"
+                android:fontFamily="@font/opensanslight"
+                android:textSize="@dimen/text_cuad_dialog"
+                android:layout_height="40dp"
+
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="$"
+                    android:textColor="@color/word"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/opensanslight"
+                    android:textSize="@dimen/text_cuad_dialog"
+                    android:layout_height="40dp"
+
+                    />
+
+                <TextView
+                    android:id="@+id/rest"
+
+                    android:layout_width="365dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/opensanslight"
+                    android:gravity="left|center_vertical"
+                    android:text="8000"
+                    android:textColor="@color/word"
+                    android:textSize="@dimen/text_cuad_dialog"
+
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/line_payment"
+
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="2.3"
+                android:layout_marginTop="16dp"
+                android:text="Pago   "
+                android:textColor="@color/word"
+                android:fontFamily="@font/opensanslight"
+                android:textSize="@dimen/text_cuad_dialog"
+                android:layout_height="wrap_content"
+
+                />
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="2.5"
+                android:gravity="center"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/rec_edith_dialog"
+                android:layout_height="40dp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="$"
+                    android:textColor="@color/word"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/opensanslight"
+                    android:textSize="26sp"
+                    android:layout_height="40dp"
+
+                    />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/word"
+                    android:inputType="numberDecimal"
+                    android:background="@null"
+                    android:paddingLeft="4dp"
+                    android:id="@+id/value_payment"
+                    android:fontFamily="@font/opensanslight"
+                    android:textSize="@dimen/text_cuad_dialog">
+
+                </EditText>
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1.7"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:background="@drawable/circle2"
+                            android:orientation="vertical"
+                            android:id="@+id/efect"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:paddingLeft="8dp"
+                            android:paddingRight="8dp">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:textColor="#fff"
+                                android:src="@drawable/moneylogo"
+                                android:textSize="22sp"
+                                android:gravity="center"
+                                />
+
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:fontFamily="@font/opensanslight"
+                            android:textColor="@color/word"
+                            android:text="efectivo"
+                            android:textSize="16sp"
+                            android:layout_gravity="center"
+                            android:layout_height="20dp" />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:background="@drawable/circle_unselected"
+                            android:orientation="horizontal"
+                            android:id="@+id/card"
+                            android:layout_gravity="center"
+                            android:paddingLeft="8dp"
+                            android:paddingRight="8dp">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:textColor="#fff"
+                                android:textSize="22sp"
+                                android:src="@drawable/cardlogo"
+                                android:gravity="center"
+                                />
+                        </LinearLayout>
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:fontFamily="@font/opensanslight"
+                            android:textColor="@color/word"
+                            android:text="tarjeta"
+                            android:textSize="16sp"
+                            android:layout_gravity="center"
+                            android:layout_height="20dp" />
+
+
+
+                    </LinearLayout>
+
+
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:orientation="horizontal">
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="40dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="12dp"
+                android:id="@+id/cancel"
+                android:background="@drawable/rec_edith_dialog"
+                android:backgroundTint="@color/colorcircle"
+                android:orientation="horizontal"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/text_school"
+                    android:layout_gravity="center"
+                    android:paddingLeft="12sp"
+                    android:gravity="center"
+                    android:paddingRight="12sp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/opensansregular"
+                    android:textSize="22sp"
+                    android:text="Cancelar"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="40dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="4dp"
+                android:id="@+id/ok"
+                android:background="@drawable/rec_edith_dialog"
+                android:backgroundTint="@color/colorcircle"
+                android:orientation="horizontal"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingLeft="12sp"
+                    android:gravity="center"
+                    android:paddingRight="12sp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/opensansregular"
+                    android:textSize="22sp"
+                    android:text="Guardar"
+                    />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+</LinearLayout>
+
+
+

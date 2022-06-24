@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:gravity="center_vertical"
+    android:textSize="26sp"
+    android:orientation="vertical"
+    android:fontFamily="@font/opensanslight"
+    android:paddingBottom="2dp"
+    android:paddingTop="2dp"
+    android:textColor="@color/word"
+    android:background="@color/color_line_div">
+    <TextView
+
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:visibility="gone"
+        style="@style/DivisorCategoryStyle"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center_vertical"
+        android:background="@color/color1gray"
+        android:orientation="horizontal"
+
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1.9"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_height="60dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="OCT"
+                android:layout_gravity="bottom"
+                android:textAllCaps="true"
+                android:gravity="center_horizontal|bottom"
+                android:textSize="@dimen/big_big_text"
+                android:textColor="@color/word_clear"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="6"
+                android:gravity="center_horizontal"
+                android:layout_gravity="top"
+                android:textSize="@dimen/big_big_text"
+                android:textColor="@color/word"
+                />
+
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1.8"
+            android:id="@+id/type"
+            android:gravity="center"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Tipo"
+                android:fontFamily="@font/opensansregular"
+                android:textSize="@dimen/big_big_text"
+                android:textColor="@color/word"
+                android:gravity="center_vertical"
+                />
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/description"
+            android:layout_weight="1.3"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="22dp"
+                android:text="Detalle "
+
+                android:paddingRight="4dp"
+                android:fontFamily="@font/opensansregular"
+                android:textSize="@dimen/big_big_text"
+                android:textColor="@color/word"
+                android:gravity="center_vertical"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_weight="2.1"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1.8"
+            android:orientation="horizontal"
+            android:id="@+id/amount"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:fontFamily="@font/opensansregular"
+                android:layout_height="match_parent"
+                android:text="Valor"
+                android:textSize="@dimen/big_big_text"
+                android:textColor="@color/word"
+                android:gravity="center"
+                />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

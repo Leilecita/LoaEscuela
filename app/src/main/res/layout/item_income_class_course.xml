@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_marginLeft="14dp"
+    android:layout_marginRight="12dp"
+    android:layout_marginTop="6dp"
+    android:layout_marginBottom="6dp"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="· "
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_gravity="bottom"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/date"
+            android:gravity="center"
+            android:layout_marginTop="2dp"
+            android:text="10/10/2019"
+            android:fontFamily="@font/opensanslight"
+            android:layout_gravity="center"
+            android:textColor="@color/word"
+            android:textSize="20sp"
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="24dp"
+            android:id="@+id/payment_method"
+            android:gravity="center"
+            android:fontFamily="@font/opensanslight"
+            android:layout_marginTop="2dp"
+            android:layout_gravity="center"
+            android:textColor="@color/word"
+            />
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/amount"
+            android:gravity="center"
+            android:layout_marginTop="2dp"
+            android:text="1900"
+            android:fontFamily="@font/opensanslight"
+            android:layout_gravity="center"
+            android:textColor="@color/word"
+            android:textSize="20sp"
+            />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical"
+            />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/line_edit"
+        android:visibility="gone"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="6dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/date_edit"
+                android:fontFamily="@font/opensanslight"
+                android:gravity="center"
+                android:background="@drawable/rec_find"
+                android:padding="6dp"
+                android:layout_margin="4dp"
+                android:layout_marginTop="2dp"
+                android:text="10/10/2019"
+                android:layout_gravity="center"
+                android:textColor="@color/word"
+                android:textSize="18sp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rec_find"
+                android:padding="6dp"
+                android:fontFamily="@font/opensanslight"
+                android:id="@+id/payment_method_edit"
+                android:gravity="center"
+                android:layout_margin="4dp"
+                android:layout_marginTop="2dp"
+                android:text=""
+                android:layout_gravity="center"
+                android:textColor="@color/word"
+                android:textSize="18sp"
+                />
+
+            <EditText
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/amount_edit"
+                android:gravity="center"
+                android:fontFamily="@font/opensanslight"
+                android:layout_margin="4dp"
+                android:background="@drawable/rec_find"
+                android:padding="6dp"
+                android:layout_marginTop="2dp"
+                android:text="1900"
+                android:layout_gravity="center"
+                android:textColor="@color/word"
+                android:textSize="18sp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:padding="8dp"
+                android:id="@+id/ok"
+                />
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:padding="8dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:id="@+id/close"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,33 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.loaescuela.activities.MainActivity">
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_sign_out"
+        android:orderInCategory="100"
+        android:title="@string/action_sign_out"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_planillas"
+        android:orderInCategory="100"
+        android:title="@string/action_assists"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_assists"
+        android:orderInCategory="100"
+        android:title="Asistencias"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_assists_resum"
+        android:orderInCategory="100"
+        android:title="Resumen diario asistencias"
+        app:showAsAction="never" />
+</menu>

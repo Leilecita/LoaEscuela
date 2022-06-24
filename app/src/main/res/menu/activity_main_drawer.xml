@@ -1,0 +1,69 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/options_white"
+            android:title="Inicio"/>
+
+
+    </group>
+
+    <item android:title="General"
+        android:id="@+id/general"
+        >
+        <menu>
+
+            <item
+                android:id="@+id/nav_assists"
+                android:icon="@drawable/options_white"
+                android:title="Asistencias"/>
+
+            <item
+                android:id="@+id/nav_payments"
+                android:icon="@drawable/options_white"
+                android:title="Pagos"/>
+
+            <item
+                android:id="@+id/nav_resum"
+                android:icon="@drawable/options_white"
+                android:title="Resumen diario asistencias"/>
+
+            <item
+                android:id="@+id/nav_students"
+                android:icon="@drawable/options_white"
+                android:title="Alumnos"/>
+
+            <item
+                android:id="@+id/nav_create_student"
+                android:icon="@drawable/options_white"
+                android:title="Alumno nuevo"/>
+
+
+
+        </menu>
+    </item>
+
+    <item android:title="Ajustes" >
+
+        <menu>
+            <item
+                android:id="@+id/nav_planillas"
+                android:icon="@drawable/options_white"
+                android:title="Planillas"/>
+
+
+
+        </menu>
+    </item>
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_session"
+            android:icon="@drawable/options_white"
+            android:title="Cerrar sesión"/>
+    </group>
+
+
+</menu>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:descendantFocusability="blocksDescendants"
+    android:background="@color/colorgray"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar"
+        android:backgroundTint="@color/colorPrimary"
+        android:background="@color/colorPrimary">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:id="@+id/line_home"
+            android:orientation="horizontal"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/returnn"
+                android:layout_gravity="center"
+                android:id="@+id/home"
+                android:layout_marginRight="4dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:id="@+id/title"
+                android:text="  Pagos del dia"
+                android:fontFamily="@font/opensanslight"
+                android:textSize="@dimen/title_bar_text"
+                android:textColor="@color/white"
+                />
+
+        </LinearLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_events"
+        android:layout_width="match_parent"
+        android:scrollbars="vertical"
+        android:layout_height="match_parent"
+        />
+
+
+
+</LinearLayout>
+
