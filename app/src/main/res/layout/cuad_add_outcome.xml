@@ -1,0 +1,320 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view_mistake"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rec_dialog"
+    android:backgroundTint="@color/background_dialog"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dialog_margin_bottom"
+        android:layout_marginTop="@dimen/dialog_margin_top"
+        android:layout_marginLeft="@dimen/dialog_margin_left"
+        android:layout_marginRight="@dimen/dialog_margin_right"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="Gasto "
+                android:fontFamily="@font/opensansregular"
+                android:textSize="20sp"
+                android:textColor="@color/word"
+                android:gravity="center"
+                />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="12dp"
+                    android:layout_height="@dimen/height_rec_cuad_inpunt"
+                    android:background="@drawable/rec_find"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_weight="2.1"
+                        android:fontFamily="@font/opensansregular"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="Fecha "
+                        android:paddingLeft="8dp"
+                        android:textSize="@dimen/general_text"
+                        android:textColor="@color/colorPrimaryIntLetter2" />
+                    <TextView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="2dp"
+                        android:layerType="software"
+                        android:layout_marginRight="4dp"
+                        android:background="@drawable/line_dotted_vertical"
+                        />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:id="@+id/date"
+                        android:layout_weight="1.9"
+                        android:layout_height="35dp"
+                        android:inputType="textCapSentences"
+                        android:paddingLeft="8dp"
+                        android:fontFamily="@font/opensansregular"
+                        android:textSize="@dimen/general_text"
+                        android:textColor="@color/word"
+                        android:background="@drawable/rec_find"
+
+                        />
+
+
+
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/line_in_operation"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:background="@drawable/rec_rounded_8"
+                            android:orientation="horizontal">
+
+
+                            <Spinner
+                                android:layout_width="match_parent"
+                                android:layout_weight="2"
+                                android:inputType="textCapWords"
+                                android:layout_height="match_parent"
+                                android:backgroundTint="@color/transparent"
+                                android:fontFamily="@font/opensanslight"
+                                android:dropDownVerticalOffset="35dp"
+                                android:textColorHint="@color/word_clear"
+                                android:background="@drawable/rec_find"
+                                android:textColor="@color/colorPrimaryDarkLetter"
+                                android:textSize="@dimen/general_text"
+                                android:id="@+id/coin"
+                                />
+
+                            <TextView
+                                android:layout_width="1dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="4dp"
+                                android:layout_marginTop="2dp"
+                                android:layout_marginBottom="2dp"
+                                android:layerType="software"
+                                android:layout_marginRight="4dp"
+                                android:background="@drawable/line_dotted_vertical"
+                                />
+
+
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_weight="2"
+                                android:inputType="numberDecimal"
+                                android:keyboardNavigationCluster="true"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/rec_find"
+                                android:paddingLeft="8dp"
+                                android:paddingTop="1dp"
+                                android:text=""
+                                android:textColorHint="@color/word_clear"
+                                android:textColor="@color/colorPrimaryDarkLetter"
+                                android:textSize="@dimen/general_text"
+                                android:id="@+id/value"
+                                />
+                            <TextView
+                                android:layout_width="20dp"
+                                android:textSize="@dimen/big_big_text"
+                                android:text=""
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:textColor="@color/colorPrimaryClearLetter"
+                                android:fontFamily="@font/arialroundedreg"
+                                android:layout_height="wrap_content" />
+
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="12dp"
+                    android:layout_height="@dimen/height_rec_cuad_inpunt"
+                    android:visibility="gone"
+                    android:background="@drawable/rec_find"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_weight="2"
+                        android:fontFamily="@font/opensansregular"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="Tipo "
+                        android:paddingLeft="8dp"
+                        android:textSize="@dimen/general_text"
+                        android:textColor="@color/colorPrimaryIntLetter2" />
+                    <TextView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="2dp"
+                        android:layerType="software"
+                        android:layout_marginRight="4dp"
+                        android:background="@drawable/line_dotted_vertical"
+                        />
+
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:id="@+id/type"
+                        android:layout_weight="2"
+                        android:layout_height="35dp"
+                        android:inputType="textCapSentences"
+                        android:paddingLeft="8dp"
+                        android:fontFamily="@font/opensanslight"
+                        android:textSize="@dimen/general_text"
+                        android:textColor="@color/word"
+                        android:background="@drawable/rec_find"
+
+                        />
+
+                    <TextView
+                        android:layout_width="20dp"
+                        android:textSize="@dimen/big_big_text"
+                        android:text=""
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:textColor="@color/colorPrimaryClearLetter"
+                        android:fontFamily="@font/arialroundedreg"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_rec_cuad_inpunt"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/rec_find"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_weight="2"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:fontFamily="@font/opensansregular"
+                        android:text="Descripcion "
+                        android:paddingLeft="8dp"
+                        android:textSize="@dimen/general_text"
+                        android:textColor="@color/colorPrimaryIntLetter2" />
+
+                    <TextView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="2dp"
+                        android:layerType="software"
+                        android:layout_marginRight="4dp"
+                        android:background="@drawable/line_dotted_vertical"
+                        />
+
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_weight="2"
+                        android:layout_height="35dp"
+                        android:textColor="@color/word"
+                        android:id="@+id/description"
+                        android:textSize="@dimen/general_text"
+                        android:fontFamily="@font/opensanslight"
+                        android:paddingLeft="8dp"
+                        android:inputType="textCapSentences"
+                        android:background="@drawable/rec_find"
+                        android:layout_gravity="center_vertical|left"
+                        android:gravity="center_vertical|left"
+                        />
+                    <TextView
+                        android:layout_width="20dp"
+                        android:textSize="@dimen/big_big_text"
+                        android:text=""
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:textColor="@color/colorPrimaryClearLetter"
+                        android:fontFamily="@font/arialroundedreg"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cancel"
+                    android:layout_weight="1"
+                    android:text="Cancelar"
+                    android:fontFamily="@font/opensansregular"
+                    android:textSize="@dimen/general_text"
+                    android:gravity="center"
+                    android:textColor="@color/colorDialogButton"
+                    />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:id="@+id/ok"
+                    android:layout_height="@dimen/height_button"
+                    android:layout_weight="1"
+                    android:textColor="#ffff"
+                    android:textSize="@dimen/general_text"
+                    android:textAllCaps="false"
+
+                    android:background="@drawable/rec_find"
+                    android:backgroundTint="@color/colorDialogButton"
+                    android:text="Guardar"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
+
+
+
+

@@ -47,6 +47,10 @@ public class DateHelper {
         return onlyTime(date);
     }
 
+    public String getActualDateToShow() {
+        return actualDateToShow();
+    }
+
     public String getOnlyTimeHour(String date) {
         String date2=onlyTime(date);
         return onlyHourMinut(date2);
@@ -55,6 +59,14 @@ public class DateHelper {
     public String getOnlyTime() {
         return onlyTime();
     }
+
+    public String onlyDayMonthComplete(String date) {
+        String[] parts = date.split(" ");
+        String part1 = parts[0]; // fecha
+        String[] partsDate = date.split("-");
+        return partsDate[0]+"-"+partsDate[1] + "-01 00:00:00";
+    }
+
 
     public String getNextDay(String date) {
         try {

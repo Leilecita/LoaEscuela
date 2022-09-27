@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/background"
+    android:descendantFocusability="blocksDescendants"
+    android:layout_height="match_parent"
+    android:id="@+id/listado">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/toolbar"
+            android:elevation="4dp"
+            android:background="@color/colorPrimary">
+
+            <LinearLayout
+                android:layout_width="50dp"
+                android:id="@+id/home"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/returnn"
+                    android:id="@+id/returnn"
+                    android:layout_marginRight="4dp"
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:id="@+id/title"
+                android:fontFamily="@font/opensansregular"
+                android:text=" Gastos"
+                android:textSize="@dimen/title_text"
+                android:textColor="@color/white"
+                />
+        </androidx.appcompat.widget.Toolbar>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/empty"
+                android:textSize="18sp"
+                android:visibility="gone"
+                android:textColor="@color/colorPrimaryClearLetter"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center_horizontal"
+
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_outcomes"
+                android:layout_width="match_parent"
+                android:clipToPadding="false"
+                android:paddingBottom="@dimen/peek_height"
+                android:layout_height="match_parent"
+
+                />
+        </FrameLayout>
+    </LinearLayout>
+
+    <include layout="@layout/bottom_shet_out" />
+
+    <LinearLayout
+        android:layout_width="65dp"
+        android:background="@drawable/buttonbshadow"
+        android:backgroundTint="@color/colorPrimary"
+        android:layout_gravity="bottom|right"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="80dp"
+        android:id="@+id/add_outcome"
+        android:paddingRight="2dp"
+        android:layout_alignParentBottom="true"
+        android:layout_height="65dp">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:padding="18dp"
+            android:id="@+id/image_button"
+            android:layout_height="match_parent"
+            />
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -5,11 +5,13 @@ import android.util.Log;
 import com.example.loaescuela.network.models.ClassCourse;
 import com.example.loaescuela.network.models.DataIncomeCourse;
 import com.example.loaescuela.network.models.Income;
+import com.example.loaescuela.network.models.Outcome;
 import com.example.loaescuela.network.models.Planilla;
 import com.example.loaescuela.network.models.PlanillaAlumno;
 import com.example.loaescuela.network.models.PlanillaPresente;
 import com.example.loaescuela.network.models.ReportClassCourse;
 import com.example.loaescuela.network.models.ReportIncomeStudent;
+import com.example.loaescuela.network.models.ReportOutcome;
 import com.example.loaescuela.network.models.ReportPresent;
 import com.example.loaescuela.network.models.ReportResumAsist;
 import com.example.loaescuela.network.models.ReportStudentAsist;
@@ -106,7 +108,23 @@ public class ApiClient {
     }
 
 
+    //OUTCOMES
 
+    public void postOutcome(Outcome inc, GenericCallback<Outcome> callback){
+        handleRequest( ApiUtils.getAPIService().postOutcome(inc), callback);
+    }
+
+    public void putOutcome(Outcome inc, GenericCallback<Outcome> callback){
+        handleRequest( ApiUtils.getAPIService().putOutcome(inc), callback);
+    }
+
+    public void delteOutcome(Long id, final GenericCallback<Void> callback){
+        handleDeleteRequest( ApiUtils.getAPISessionService().deleteOutcome(id), callback);
+    }
+
+    public void getAllOutcomes(Integer page, final GenericCallback<List<ReportOutcome>> callback){
+        handleRequest( ApiUtils.getAPISessionService().getAllOutcomes("getAllIncomes", page), callback);
+    }
 
 
     //PLANILLAS

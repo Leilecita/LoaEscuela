@@ -1,6 +1,6 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="false"
-        android:drawable="@drawable/bdebt"
+        android:drawable="@drawable/estadisticasesc"
         >
         <shape>
             <solid
@@ -12,7 +12,7 @@
         </shape>
     </item>
     <item android:state_pressed="true"
-        android:drawable="@drawable/debt_press"
+        android:drawable="@drawable/estadist_press"
         >
         <shape>
             <solid

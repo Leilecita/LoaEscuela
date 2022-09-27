@@ -1,0 +1,156 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottomSheet"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:orientation="vertical"
+    android:backgroundTint="@color/background_bottom_shet"
+    app:layout_behavior="@string/bottom_sheet_behavior"
+    app:behavior_hideable="false"
+    app:behavior_peekHeight="@dimen/peek_height" >
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="1dp"
+        android:layout_height="wrap_content" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="4dp"
+        android:background="@drawable/rec_rounded_8"
+        android:backgroundTint="@color/background_bottom_shet"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:background="@drawable/rec_rounded_8"
+            android:paddingTop="8dp"
+            android:backgroundTint="@color/background_bottom_shet"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:id="@+id/all"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="6dp"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_gravity="center"
+                    android:id="@+id/im_all"
+                    android:layout_height="40dp"
+                    android:alpha="0.8"
+                    />
+
+                <TextView
+                    android:layout_width="65dp"
+                    android:textSize="@dimen/text_detail_bottom"
+                    android:paddingTop="4dp"
+                    android:gravity="center_horizontal"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryDarkLetter"
+                    android:text="Todos"
+
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:id="@+id/day"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="6dp"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_gravity="center"
+                    android:id="@+id/im_day"
+                    android:alpha="0.6"
+                    android:layout_height="40dp"
+                    android:backgroundTint="@color/colorPrimaryDarkLetter"
+                    android:background="@drawable/buttonbshadow"
+                    />
+
+                <TextView
+                    android:layout_width="65dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryDarkLetter"
+                    android:textSize="@dimen/text_detail_bottom"
+                    android:paddingTop="4dp"
+                    android:gravity="center_horizontal"
+                    android:text="dia"
+
+                    />
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:id="@+id/month"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="6dp"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_gravity="center"
+                    android:alpha="0.6"
+                    android:id="@+id/im_month"
+                    android:layout_height="40dp"
+                    android:backgroundTint="@color/colorPrimaryDarkLetter"
+                    android:background="@drawable/buttonbshadow"
+                    />
+
+                <TextView
+                    android:layout_width="65dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryDarkLetter"
+                    android:textSize="@dimen/text_detail_bottom"
+                    android:paddingTop="4dp"
+                    android:gravity="center_horizontal"
+                    android:text="mes"
+
+                    />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_coins"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:clipToPadding="false"
+            android:paddingRight="80dp"
+            android:layout_height="100dp"
+
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_types"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:orientation="horizontal"
+            android:clipToPadding="false"
+            android:paddingRight="80dp"
+            android:layout_height="wrap_content"
+
+            />
+    </LinearLayout>
+
+
+</LinearLayout>

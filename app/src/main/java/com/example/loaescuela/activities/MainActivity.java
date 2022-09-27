@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -31,6 +32,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     CoordinatorLayout coordinatorLayout;
     FrameLayout frameLayout;
 
+    ImageView payments;
+    ImageView assists;
+    ImageView students;
+    ImageView spendings;
+    ImageView outcomes;
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -47,10 +53,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             startActivity(new Intent(getBaseContext(),AssistsResumByDayActivity.class));
         } else if (id == R.id.nav_planillas) {
             startActivity(new Intent(this, PlanillasActivity.class));
-
         }  else if (id == R.id.nav_students) {
             startActivity(new Intent(this, StudentsListActivity.class));
-
         }else if( id == R.id.nav_home){
            // selectFragment(0);
         }
@@ -99,15 +103,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         super.onCreate(savedInstanceState);
 
         this.configureToolBar();
-
         this.configureDrawerLayout();
-
         this.configureNavigationView();
 
         frameLayout =  findViewById(R.id.main_content);
         coordinatorLayout=findViewById(R.id.rl);
-
-
 
         if (!SessionPrefs.get(this).isLoggedIn()) {
             startActivity(new Intent(this, LoginActivity.class));
@@ -115,17 +115,44 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             return;
         }
 
-
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        assists = findViewById(R.id.asistencia);
+        students = findViewById(R.id.students);
+        payments = findViewById(R.id.payments);
+        outcomes = findViewById(R.id.spendings);
+
+        outcomes.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onClick(View v) {
+                startActivity(new Intent(getBaseContext(), OutcomesActivity.class));
             }
         });
+
+        students.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getBaseContext(), StudentsListActivity.class));
+
+            }
+        });
+
+        payments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getBaseContext(), BoxMovementsActivity.class);
+               // i.putExtra("NAMEFRAGMENT", "lei");
+                startActivity(i);
+            }
+        });
+
+        assists.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getBaseContext(), AssistsActivity.class));
+            }
+        });
+
     }
 
     @Override

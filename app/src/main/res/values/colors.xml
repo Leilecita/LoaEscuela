@@ -20,6 +20,15 @@
     <color name="colorgray">#f5f5f5</color>
 
 
+    <color name="background_dialog">#F8F7F7</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="colorPrimaryDarkLetter">#4f426b</color>
+    <color name="colorPrimaryIntLetter">#5C4D7C</color>
+    <color name="colorPrimaryIntLetter2">#6C5F8A</color>
+    <color name="colorPrimaryClearLetter">#9D92B6</color>
+    <color name="colorPrimaryClear2">#DBD8E4</color>
+
+
     <color name="pers">#817699</color>
     <color name="santi">#9f94b5</color>
     <color name="local">#A49FB8</color>
@@ -38,8 +47,6 @@
 
     <color name="colorAccent">#9788b8</color>
 
-    <color name="colorPrimaryDarkLetter">#382e4f</color>
-    <color name="colorPrimaryClearLetter">#9088a3</color>
     <color name="clearhintletter">#cbc9d1</color>
 
     <color name="color_line_div">#cac1de</color>

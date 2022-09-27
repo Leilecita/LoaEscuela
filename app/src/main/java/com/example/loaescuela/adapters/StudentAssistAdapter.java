@@ -1,12 +1,15 @@
 package com.example.loaescuela.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -86,6 +89,8 @@ public class StudentAssistAdapter extends BaseAdapter<ReportStudentAsistItem,Stu
         public LinearLayout line_info_student;
         public LinearLayout more_info;
 
+        public ImageView cuad_image;
+
 
         public ViewHolder(View v) {
             super(v);
@@ -97,6 +102,7 @@ public class StudentAssistAdapter extends BaseAdapter<ReportStudentAsistItem,Stu
             more_info = v.findViewById(R.id.more_info);
             buyed_classes = v.findViewById(R.id.buyed_classes);
             debt_amount = v.findViewById(R.id.debt_amount);
+            cuad_image = v.findViewById(R.id.cuad_image);
         }
     }
 
@@ -128,11 +134,12 @@ public class StudentAssistAdapter extends BaseAdapter<ReportStudentAsistItem,Stu
 
         holder.text_name.setText(currentClient.nombre + " " + currentClient.apellido);
 
+        //holder.cuad_image.setColorFilter(Color.parseColor(#5C4D7C), PorterDuff.Mode.SRC_ATOP);
+        holder.cuad_image.setColorFilter(Color.parseColor("#5C4D7C"), PorterDuff.Mode.SRC_ATOP);
 
         holder.taken_clases.setText(String.valueOf(currentClient.taken_classes.get(0).cant_presents));
         holder.buyed_classes.setText(String.valueOf(currentClient.taken_classes.get(0).cant_buyed_classes));
         holder.debt_amount.setText(String.valueOf(currentClient.taken_classes.get(0).tot_amount - currentClient.taken_classes.get(0).tot_paid_amount));
-
 
 
         if(currentClient.presente.equals("si")){
@@ -144,8 +151,9 @@ public class StudentAssistAdapter extends BaseAdapter<ReportStudentAsistItem,Stu
         holder.check_presente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                addPresent(currentClient);
                 if(holder.check_presente.isChecked()){
-                    addPresent(currentClient);
+
                 }
             }
         });
@@ -209,10 +217,7 @@ public class StudentAssistAdapter extends BaseAdapter<ReportStudentAsistItem,Stu
 
                 }
             });
-
-
         }
-
     }
 
 

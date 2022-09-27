@@ -117,6 +117,7 @@ public class IncomeStudentAdapter extends BaseAdapter<ReportIncomeStudent, Incom
         public TextView type;
 
         public LinearLayout lineDetail;
+        public LinearLayout lineDetailText;
         public TextView circlePendient;
         public LinearLayout moreInfo;
 
@@ -125,6 +126,7 @@ public class IncomeStudentAdapter extends BaseAdapter<ReportIncomeStudent, Incom
         public LinearLayout linePayment;
         public TextView textPayment;
         public TextView valPayment;
+        public TextView detail;
 
 
         public RecyclerView list_events;
@@ -140,6 +142,8 @@ public class IncomeStudentAdapter extends BaseAdapter<ReportIncomeStudent, Incom
             circlePendient= v.findViewById(R.id.circle_pendient);
             image= v.findViewById(R.id.image);
 
+            lineDetailText = v.findViewById(R.id.line_detail_text);
+            detail = v.findViewById(R.id.detail);
             linePayment= v.findViewById(R.id.line_payment);
             textPayment= v.findViewById(R.id.textpayment);
             valPayment= v.findViewById(R.id.valpayment);
@@ -163,6 +167,8 @@ public class IncomeStudentAdapter extends BaseAdapter<ReportIncomeStudent, Incom
             vh.amount.setText(null);
         if(vh.student_name!=null)
             vh.student_name.setText(null);
+        if(vh.detail!=null)
+            vh.detail.setText(null);
 
     }
 
@@ -175,6 +181,8 @@ public class IncomeStudentAdapter extends BaseAdapter<ReportIncomeStudent, Incom
         final ReportIncomeStudent current_general = getItem(position);
 
         holder.amount.setText(ValuesHelper.get().getIntegerQuantity(current_general.amount));
+        holder.detail.setText(current_general.detail);
+
 
         holder.student_name.setText(current_general.description);
 
@@ -183,6 +191,17 @@ public class IncomeStudentAdapter extends BaseAdapter<ReportIncomeStudent, Incom
         }else{
             holder.hour.setText(DateHelper.get().getOnlyTimeFromCreated(current_general.income_created));
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(holder.lineDetailText.getVisibility() == View.VISIBLE){
+                    holder.lineDetailText.setVisibility(View.GONE);
+                }else{
+                    holder.lineDetailText.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         holder.lineDetail.setOnClickListener(new View.OnClickListener() {
             @Override

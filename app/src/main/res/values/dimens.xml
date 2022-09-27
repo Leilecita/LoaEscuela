@@ -27,6 +27,13 @@
     <dimen name="circle">120dp</dimen>
 
     <dimen name="chip_height">50sp</dimen>
+    <dimen name="widht_button">120</dimen>
+    <dimen name="button_principal">150</dimen>
+    <dimen name="text_detail_bottom">16sp</dimen>
+
+
+    <dimen name="height_button">35dp</dimen>
+    <dimen name="height_rec_cuad_inpunt">35dp</dimen>
 
 
 

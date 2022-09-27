@@ -231,7 +231,7 @@ public class ClassCourseAdapter extends BaseAdapter<ReportClassCourse,ClassCours
             @Override
             public boolean onLongClick(View v) {
 
-                adapterIncomeInfo.createIncome2(current.class_course_id);
+                adapterIncomeInfo.createIncome2(current.class_course_id, current);
               //  createIncome(current.class_course_id, current,position, holder);
                 return false;
             }

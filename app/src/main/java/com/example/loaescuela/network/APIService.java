@@ -4,11 +4,13 @@ import com.example.loaescuela.adapters.PlanillaAdapter;
 import com.example.loaescuela.network.models.ClassCourse;
 import com.example.loaescuela.network.models.DataIncomeCourse;
 import com.example.loaescuela.network.models.Income;
+import com.example.loaescuela.network.models.Outcome;
 import com.example.loaescuela.network.models.Planilla;
 import com.example.loaescuela.network.models.PlanillaAlumno;
 import com.example.loaescuela.network.models.PlanillaPresente;
 import com.example.loaescuela.network.models.ReportClassCourse;
 import com.example.loaescuela.network.models.ReportIncomeStudent;
+import com.example.loaescuela.network.models.ReportOutcome;
 import com.example.loaescuela.network.models.ReportPresent;
 import com.example.loaescuela.network.models.ReportResumAsist;
 import com.example.loaescuela.network.models.ReportStudentAsist;
@@ -83,6 +85,19 @@ public interface APIService {
     @PUT("incomes.php")
     Observable<Response<Income>> putIncome(@Body Income income);
 
+    //OUTCOMES
+
+    @POST("outcomes.php")
+    Observable<Response<Outcome>> postOutcome(@Body Outcome inc);
+
+    @DELETE("outcomes.php")
+    Observable<ResponseBody>  deleteOutcome(@Query("id") Long id);
+
+    @PUT("outcomes.php")
+    Observable<Response<Outcome>> putOutcome(@Body Outcome outcome);
+
+    @GET("outcomes.php")
+    Observable<Response<List<ReportOutcome>>> getAllOutcomes(@Query("method") String method , @Query("page") Integer page );
 
     //PLANILLAS
     @GET("planillas.php")

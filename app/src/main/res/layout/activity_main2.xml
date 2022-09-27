@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.MainActivity"
+    >
+
+
+    <LinearLayout
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:id="@+id/toolbar"
+                android:theme="@style/ThemeOverlay"
+                app:layout_scrollFlags="scroll|enterAlways|snap"
+                android:layout_height="wrap_content">
+
+            </androidx.appcompat.widget.Toolbar>
+
+
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <RelativeLayout
+            android:orientation="vertical" android:layout_width="match_parent"
+            android:paddingBottom="40dp"
+            android:background="@drawable/fondoapp2"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerInParent="true"
+                android:id="@+id/students"
+                android:background="@drawable/custom_button_prod"/>
+
+            <ImageView
+                android:layout_width="120dp"
+                android:id="@+id/asistencia"
+                android:layout_above="@id/students"
+                android:layout_toLeftOf="@id/box"
+                android:layout_marginBottom="-20dp"
+                android:layout_marginRight="5dp"
+                android:layout_height="120dp"
+                android:background="@drawable/custom_button"
+                />
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:id="@+id/payments"
+                android:layout_toRightOf="@+id/box"
+                android:layout_marginLeft="5dp"
+                android:layout_above="@id/students"
+                android:layout_marginBottom="-20dp"
+                android:src="@drawable/custom_button_list_box"/>
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginBottom="20dp"
+                android:id="@+id/box"
+                android:visibility="invisible"
+                android:layout_above="@id/students"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/custom_button_boxes"/>
+
+
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:id="@+id/statistics"
+                android:layout_marginTop="-30dp"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/clients"
+                android:layout_below="@id/students"
+                android:src="@drawable/custom_button_statistics"/>
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:id="@+id/clients"
+                android:layout_marginTop="38dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/students"
+                android:src="@drawable/custom_button_debt"/>
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_below="@id/students"
+                android:layout_marginTop="-30dp"
+                android:layout_marginRight="5dp"
+                android:id="@+id/spendings"
+                android:layout_toLeftOf="@id/clients"
+                android:src="@drawable/custom_button_personal"/>
+
+
+
+
+
+        </RelativeLayout>
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

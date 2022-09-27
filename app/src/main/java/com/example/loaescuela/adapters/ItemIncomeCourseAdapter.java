@@ -31,6 +31,7 @@ import com.example.loaescuela.network.Error;
 import com.example.loaescuela.network.GenericCallback;
 import com.example.loaescuela.network.models.DataIncomeCourse;
 import com.example.loaescuela.network.models.Income;
+import com.example.loaescuela.network.models.ReportClassCourse;
 import com.example.loaescuela.network.models.ReportIncome;
 import com.example.loaescuela.types.Constants;
 
@@ -352,7 +353,7 @@ public class ItemIncomeCourseAdapter extends BaseAdapter<ReportIncome, ItemIncom
 
     }
 
-    public void createIncome2( final Long mClassCourseId){
+    public void createIncome2(final Long mClassCourseId, ReportClassCourse currentCourse){
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View dialogView = inflater.inflate(R.layout.cuad_add_payment, null);
@@ -427,8 +428,10 @@ public class ItemIncomeCourseAdapter extends BaseAdapter<ReportIncome, ItemIncom
             @Override
             public void onClick(View v) {
 
+                String detail = currentCourse.category+" "+currentCourse.sub_category+" "+currentCourse.classes_number+"cl";
+
                 if(ValidatorHelper.get().isTypeDouble(value.getText().toString().trim())){
-                    createIncome(Double.valueOf(value.getText().toString()),mClassCourseId, date);
+                    createIncome(Double.valueOf(value.getText().toString()),mClassCourseId, date, detail);
                     dialog.dismiss();
                 }
             }
@@ -442,9 +445,9 @@ public class ItemIncomeCourseAdapter extends BaseAdapter<ReportIncome, ItemIncom
         });
     }
 
-    public void createIncome(Double amount,Long class_course_id, TextView date){
+    public void createIncome(Double amount,Long class_course_id, TextView date, String detail){
 
-        DataIncomeCourse inc= new DataIncomeCourse(amount,"efectivo", class_course_id);
+        DataIncomeCourse inc= new DataIncomeCourse(amount,"efectivo", class_course_id, detail);
         // inc.datetime= DateHelper.get().getActualDate();
         inc.datetime = date.getText().toString().trim();
         inc.created = date.getText().toString().trim();

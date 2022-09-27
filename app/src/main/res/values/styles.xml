@@ -14,7 +14,16 @@
         <item name="titleTextStyle">@style/MyTitleTextStyle</item>
     </style>
 
+    <style name="PopUpTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:background">@drawable/rec_rounded_8</item>
+        <item name="android:popupMenuStyle">@drawable/rec_rounded_8</item>
 
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorPrimaryIntLetter</item>
+
+        <item name="android:fontFamily">@font/opensansregular</item>
+    </style>
 
     <style name="MyTitleTextStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textSize">18sp</item>
