@@ -60,10 +60,10 @@ public class OutcomeAdapter extends BaseAdapter<ReportOutcome, OutcomeAdapter.Vi
             return -1;
         } else {
             if(groupBy.equals("day")){
-                Date date = DateHelper.get().parseDate(DateHelper.get().onlyDateComplete(getItem(position).outcome_created));
+                Date date = DateHelper.get().parseDate(DateHelper.get().onlyDateComplete(getItem(position).created));
                 return date.getTime();
             }else{
-                Date date = DateHelper.get().parseDate(DateHelper.get().onlyDayMonthComplete(getItem(position).outcome_created));
+                Date date = DateHelper.get().parseDate(DateHelper.get().onlyDayMonthComplete(getItem(position).created));
                 return date.getTime();
             }
         }
@@ -84,10 +84,10 @@ public class OutcomeAdapter extends BaseAdapter<ReportOutcome, OutcomeAdapter.Vi
             LinearLayout linear = (LinearLayout) holder.itemView;
             final ReportOutcome e = getItem(position);
 
-            String dateToShow2 = DateHelper.get().getNameDay(e.outcome_created);
-            String numberDay = DateHelper.get().numberDay(e.outcome_created);
-            String month = DateHelper.get().getNameMonth2(DateHelper.get().onlyDate(e.outcome_created));
-            String year = DateHelper.get().getYear(DateHelper.get().onlyDate(e.outcome_created));
+            String dateToShow2 = DateHelper.get().getNameDay(e.created);
+            String numberDay = DateHelper.get().numberDay(e.created);
+            String month = DateHelper.get().getNameMonth2(DateHelper.get().onlyDate(e.created));
+            String year = DateHelper.get().getYear(DateHelper.get().onlyDate(e.created));
 
             int count = linear.getChildCount();
             View v = null;
@@ -207,14 +207,14 @@ public class OutcomeAdapter extends BaseAdapter<ReportOutcome, OutcomeAdapter.Vi
 
         final ReportOutcome outcome = getItem(position);
 
-        holder.description.setText(outcome.description);
+        holder.description.setText(outcome.observation);
         holder.category.setText(outcome.type);
 
-        holder.value.setText(  ValuesHelper.get().getIntegerQuantityRounded(outcome.value));
+        holder.value.setText(  ValuesHelper.get().getIntegerQuantityRounded(outcome.amount));
         // holder.type.setText(firstLettrUpCase(outcome.type));
 
-        holder.user_name.setText(outcome.user_name);
-        holder.hour.setText(DateHelper.get().onlyHourMinut(DateHelper.get().getOnlyTime(outcome.outcome_created)));
+       // holder.user_name.setText(outcome.user_name);
+        holder.hour.setText(DateHelper.get().onlyHourMinut(DateHelper.get().getOnlyTime(outcome.created)));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -335,7 +335,7 @@ public class OutcomeAdapter extends BaseAdapter<ReportOutcome, OutcomeAdapter.Vi
         type.setText(o.type);
         descr.setText(o.description);
         value.setText(String.valueOf(o.value));
-        date.setText(o.outcome_created);
+        date.setText(o.created);
 
         date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -374,7 +374,7 @@ public class OutcomeAdapter extends BaseAdapter<ReportOutcome, OutcomeAdapter.Vi
                     @Override
                     public void onSuccess(Outcome data) {
 
-                        if(!data.created.equals(o.outcome_created)){
+                        if(!data.created.equals(o.created)){
                             if(onRefresh!=null){
                                 onRefresh.onRefresh();
                             }

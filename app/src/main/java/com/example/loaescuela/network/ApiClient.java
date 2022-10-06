@@ -79,8 +79,8 @@ public class ApiClient {
         handleRequest( ApiUtils.getAPISessionService().postClassCourse(c), callback);
     }
 
-    public void getCoursesByStudentId(Long id, final GenericCallback<List<ReportClassCourse>> callback){
-        handleRequest( ApiUtils.getAPISessionService().getCoursesByStudentId("getCoursesByStudent", id), callback);
+    public void getCoursesByStudentId(Long id, Integer page, final GenericCallback<List<ReportClassCourse>> callback){
+        handleRequest( ApiUtils.getAPISessionService().getCoursesByStudentId("getCoursesByStudent", page, id), callback);
     }
 
 
@@ -123,7 +123,7 @@ public class ApiClient {
     }
 
     public void getAllOutcomes(Integer page, final GenericCallback<List<ReportOutcome>> callback){
-        handleRequest( ApiUtils.getAPISessionService().getAllOutcomes("getAllIncomes", page), callback);
+        handleRequest( ApiUtils.getAPISessionService().getAllOutcomes("getAllOutcomes", page), callback);
     }
 
 
@@ -151,6 +151,10 @@ public class ApiClient {
 
     public void getStudents(String query, Integer page,String category, String orderby, final GenericCallback<List<Student>> callback ){
         handleRequest( ApiUtils.getAPISessionService().getStudents(page,query, "getStudents",category, orderby), callback);
+    }
+
+    public void getStudents2(String query, Integer page,final GenericCallback<List<Student>> callback ){
+        handleRequest( ApiUtils.getAPISessionService().getStudents2(query,page, "getStudents"), callback);
     }
 
     public void getStudentsAsists(String query,Integer page,String category,String categoria, String subcategoria, String datePresent ,String onlyPresents, final GenericCallback<ReportStudentAsist> callback ){

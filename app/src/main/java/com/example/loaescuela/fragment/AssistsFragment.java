@@ -1,18 +1,14 @@
 package com.example.loaescuela.fragment;
 
-import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,20 +16,17 @@ import com.example.loaescuela.CustomLoadingListItemCreator;
 import com.example.loaescuela.DateHelper;
 import com.example.loaescuela.Interfaces.OnSelectStudent;
 import com.example.loaescuela.R;
-import com.example.loaescuela.activities.AssistsAndIncomesStudentActivity;
+import com.example.loaescuela.activities.todelete.AssistsAndIncomesStudentActivity;
 import com.example.loaescuela.adapters.StudentAssistAdapter;
 import com.example.loaescuela.network.ApiClient;
 import com.example.loaescuela.network.Error;
 import com.example.loaescuela.network.GenericCallback;
 import com.example.loaescuela.network.models.ReportStudentAsist;
 import com.example.loaescuela.network.models.ReportStudentAsistItem;
-import com.example.loaescuela.network.models.ReportStudentValue;
 import com.paginate.Paginate;
 import com.paginate.recycler.LoadingListItemSpanLookup;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
 import java.util.UUID;
 
 public class AssistsFragment extends BaseFragment implements Paginate.Callbacks, OnSelectStudent {

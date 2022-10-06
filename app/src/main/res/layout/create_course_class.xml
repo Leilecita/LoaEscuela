@@ -26,102 +26,161 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_marginTop="16dp"
             android:layout_height="wrap_content"
-            android:paddingTop="2dp"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            >
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:gravity="center|left"
+                android:layout_marginRight="16dp"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="42dp"
+                    android:id="@+id/date_picker"
+                    android:layout_gravity="center"
+
+                    android:background="@drawable/bblanco"
+
+                    android:backgroundTint="@color/colorPrimaryClear"
+                    android:gravity ="center|left"
+                    android:paddingTop="2dp"
+                    android:layout_height="40dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="LUN"
+                        android:id="@+id/dayname"
+                        android:textColor="@color/colorPrimaryDarkLetter"
+                        android:textAllCaps="true"
+                        android:fontFamily="sans-serif"
+                        android:textSize="14sp"
+                        android:gravity="center_horizontal"
+                        android:layout_gravity="center_horizontal"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/num"
+                        android:text="12"
+                        android:paddingTop="12sp"
+                        android:textColor="@color/colorPrimaryDarkLetter"
+                        android:textSize="18sp"
+                        android:gravity="center_horizontal"
+                        android:fontFamily="sans-serif"
+                        android:layout_gravity="center"
+
+                        />
+
+                </RelativeLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingTop="16dp"
-                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:id="@+id/date"
+                android:layout_gravity="center"
+                android:background="@drawable/rec_find"
+                android:layout_height="@dimen/height_rec_cuad_input"
                 >
+
                 <TextView
-                    android:id="@+id/date"
-                    android:layout_height="33dp"
-                    android:fontFamily="@font/opensanslight"
-                    android:paddingLeft="8dp"
+                    android:id="@+id/month"
+                    android:layout_height="@dimen/height_rec_cuad_input"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="12dp"
                     style="@style/Widget.Design.TextInputLayout"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
+                    android:text="ENERO"
                     android:textColor="@color/colorPrimaryDarkLetter"
-                    android:textSize="16sp"
+                    android:textSize="17sp"
+                    android:inputType="textCapWords" />
+
+                <TextView
+                    android:id="@+id/year"
+                    android:layout_height="@dimen/height_rec_cuad_input"
                     android:gravity="center_vertical"
                     android:layout_weight="1"
-                    android:background="@drawable/rec_text_edit"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="4dp"
+                    style="@style/Widget.Design.TextInputLayout"
+                    android:layout_width="wrap_content"
+                    android:text="2023"
+                    android:textColor="@color/colorPrimaryDarkLetter"
+
+                    android:textSize="17sp"
                     android:inputType="textCapWords" />
+
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_weight="5"
-                    android:id="@+id/date_picker"
-                    android:layout_height="33dp"
-                    android:src="@drawable/date"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/cal"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="8dp"
                     />
 
             </LinearLayout>
 
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_marginTop="12dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rec_find"
+            android:layout_height="@dimen/height_rec_cuad_input"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/rec_rounded_8"
             android:orientation="horizontal">
-
 
             <Spinner
                 android:id="@+id/spinner_cat"
-                android:spinnerMode="dropdown"
-                android:layout_width="fill_parent"
-                android:paddingLeft="0dp"
-                android:layout_marginLeft="3dp"
+                android:layout_width="match_parent"
                 android:layout_weight="1"
+                android:layout_height="@dimen/height_rec_cuad_input"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="6dp"
+                android:dropDownVerticalOffset="40dp"
+                android:paddingLeft="0dp"
+                android:spinnerMode="dropdown" />
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="4dp"
+                android:layerType="software"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
                 android:layout_marginRight="4dp"
-                android:dropDownVerticalOffset="38dp"
-                android:layout_height="35dp" />
+                android:background="@drawable/line_vertical"
+                />
 
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_marginTop="12dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rec_find"
-            android:orientation="horizontal">
 
 
             <Spinner
                 android:id="@+id/spinner_sub_cat"
-                android:spinnerMode="dropdown"
-                android:layout_width="fill_parent"
-                android:paddingLeft="0dp"
-                android:layout_marginLeft="3dp"
+                android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:layout_marginRight="4dp"
-                android:dropDownVerticalOffset="38dp"
-                android:layout_height="35dp" />
+                android:layout_height="@dimen/height_rec_cuad_input"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="6dp"
+                android:dropDownVerticalOffset="40dp"
+                android:paddingLeft="0dp"
+                android:spinnerMode="dropdown" />
+
 
         </LinearLayout>
 
 
 
 
-        <EditText
-            android:id="@+id/other_type"
-            android:layout_height="33dp"
-            android:visibility="gone"
-            android:layout_weight="1"
-            android:layout_marginTop="12dp"
-            android:paddingLeft="8dp"
-            style="@style/Widget.Design.TextInputLayout"
-            android:layout_width="match_parent"
-            android:hint="Ingrese otro tipo"
-            android:textColor="@color/colorPrimaryDarkLetter"
-            android:textSize="@dimen/general_text"
-            android:fontFamily="@font/opensanslight"
-            android:background="@drawable/rec_text_edit"
-            android:inputType="textCapWords" />
+
+
+
+
+
 
 
 
@@ -130,14 +189,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="2dp"
+            android:layout_marginTop="14dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:layout_marginTop="12dp"
                 android:layout_marginRight="4dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/height_rec_cuad_input"
                 android:background="@drawable/rec_find"
                 android:orientation="horizontal">
 
@@ -148,8 +207,9 @@
                     android:layout_width="match_parent"
                     style="@style/Widget.Design.TextInputLayout"
                     android:paddingLeft="8dp"
+                    android:layout_gravity="center"
                     android:textColor="@color/colorPrimaryDarkLetter"
-                    android:layout_height="33dp"
+                    android:layout_height="@dimen/height_rec_cuad_input"
                     android:textSize="16sp"
                     android:inputType="number"
                     android:background="@drawable/rec_text_edit"
@@ -161,39 +221,11 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_marginTop="12dp"
-                android:layout_marginRight="4dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rec_find"
-                android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/paid_amount"
-                    android:hint="$ a cuenta"
-                    android:fontFamily="@font/opensanslight"
-                    android:layout_width="match_parent"
-                    style="@style/Widget.Design.TextInputLayout"
-                    android:paddingLeft="8dp"
-                    android:textColor="@color/colorPrimaryDarkLetter"
-                    android:layout_height="33dp"
-                    android:textSize="16sp"
-                    android:inputType="number"
-                    android:background="@drawable/rec_text_edit"
-                    />
-
-
-
-
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:layout_marginTop="12dp"
                 android:layout_marginRight="4dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rec_find"
@@ -207,7 +239,7 @@
                     style="@style/Widget.Design.TextInputLayout"
                     android:paddingLeft="8dp"
                     android:textColor="@color/colorPrimaryDarkLetter"
-                    android:layout_height="33dp"
+                    android:layout_height="@dimen/height_rec_cuad_input"
                     android:textSize="16sp"
                     android:inputType="number"
                     android:background="@drawable/rec_text_edit"
@@ -225,14 +257,168 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="14dp"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_marginRight="4dp"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rec_find"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/paid_amount"
+                    android:hint="$ a cuenta"
+                    android:fontFamily="@font/opensanslight"
+                    android:layout_width="match_parent"
+                    style="@style/Widget.Design.TextInputLayout"
+                    android:paddingLeft="8dp"
+                    android:textColor="@color/colorPrimaryDarkLetter"
+                    android:layout_height="@dimen/height_rec_cuad_input"
+                    android:textSize="16sp"
+                    android:inputType="number"
+                    android:background="@drawable/rec_text_edit"
+                    />
+
+
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/circle2"
+                            android:orientation="vertical"
+                            android:id="@+id/efect"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:paddingLeft="8dp"
+                            android:paddingRight="8dp">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:textColor="#fff"
+                                android:src="@drawable/moneylogo"
+                                android:textSize="22sp"
+                                android:gravity="center"
+                                />
+
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:fontFamily="@font/opensanslight"
+                            android:textColor="@color/word"
+                            android:text="efectivo"
+                            android:textSize="16sp"
+                            android:visibility="gone"
+                            android:layout_gravity="center"
+                            android:layout_height="20dp" />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/circle_unselected"
+                            android:orientation="horizontal"
+                            android:id="@+id/card"
+                            android:layout_gravity="center"
+                            android:paddingLeft="8dp"
+                            android:paddingRight="8dp">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:textColor="#fff"
+                                android:textSize="22sp"
+                                android:src="@drawable/cardlogo"
+                                android:gravity="center"
+                                />
+                        </LinearLayout>
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:fontFamily="@font/opensanslight"
+                            android:textColor="@color/word"
+                            android:text="tarjeta"
+                            android:textSize="16sp"
+                            android:visibility="gone"
+                            android:layout_gravity="center"
+                            android:layout_height="20dp" />
+
+
+
+                    </LinearLayout>
+
+
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:paddingTop="2dp"
+            android:layout_marginTop="14dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
                 android:orientation="horizontal">
                 <EditText
                     android:id="@+id/observation"
@@ -242,7 +428,7 @@
                     style="@style/Widget.Design.TextInputLayout"
                     android:paddingLeft="8dp"
                     android:textColor="@color/colorPrimaryDarkLetter"
-                    android:layout_height="33dp"
+                    android:layout_height="@dimen/height_rec_cuad_input"
                     android:textSize="16sp"
                     android:background="@drawable/rec_text_edit"
                     />
@@ -252,30 +438,7 @@
             </LinearLayout>
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginLeft="4dp"
-                android:orientation="horizontal">
-                <EditText
-                    android:id="@+id/anio"
-                    android:hint="anio"
-                    android:fontFamily="@font/opensanslight"
-                    android:layout_width="match_parent"
-                    style="@style/Widget.Design.TextInputLayout"
-                    android:paddingLeft="8dp"
-                    android:inputType="number"
-                    android:textColor="@color/colorPrimaryDarkLetter"
-                    android:layout_height="33dp"
-                    android:textSize="16sp"
-                    android:background="@drawable/rec_text_edit"
-                    />
 
-
-
-            </LinearLayout>
         </LinearLayout>
 
 

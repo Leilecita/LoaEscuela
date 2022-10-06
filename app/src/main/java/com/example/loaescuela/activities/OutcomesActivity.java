@@ -26,6 +26,7 @@ import com.example.loaescuela.adapters.OutcomeAdapter;
 import com.example.loaescuela.network.ApiClient;
 import com.example.loaescuela.network.Error;
 import com.example.loaescuela.network.GenericCallback;
+import com.example.loaescuela.network.models.Outcome;
 import com.example.loaescuela.network.models.ReportIncomeStudent;
 import com.example.loaescuela.network.models.ReportOutcome;
 import com.paginate.Paginate;
@@ -152,7 +153,7 @@ public class OutcomesActivity extends BaseActivity implements Paginate.Callbacks
             @Override
             public void onClick(View view) {
                 clearFilters();
-               // mAdapter.setGroupBy("day");
+                mAdapter.setGroupBy("day");
                 im_day.setAlpha(1f);
                 clearview();
             }
@@ -162,7 +163,7 @@ public class OutcomesActivity extends BaseActivity implements Paginate.Callbacks
             @Override
             public void onClick(View view) {
                 clearFilters();
-                //mAdapter.setGroupBy("month");
+                mAdapter.setGroupBy("month");
                 im_month.setAlpha(1f);
                 clearview();
             }
@@ -269,7 +270,7 @@ public class OutcomesActivity extends BaseActivity implements Paginate.Callbacks
         final EditText descr=  dialogView.findViewById(R.id.description);
         final EditText type=  dialogView.findViewById(R.id.type);
 
-        final EditText value=  dialogView.findViewById(R.id.value);
+        final EditText value=  dialogView.findViewById(R.id.amount);
         final Spinner spinnerCoin=  dialogView.findViewById(R.id.coin);
 
         final TextView cancel=  dialogView.findViewById(R.id.cancel);
@@ -298,7 +299,23 @@ public class OutcomesActivity extends BaseActivity implements Paginate.Callbacks
                 String typeT= ((type.getText().toString().trim().matches("")) ? "" : type.getText().toString().trim());
                 Double valueT=Double.valueOf(((value.getText().toString().trim().matches("")) ? "0" : value.getText().toString().trim()));
 
-                String coin = spinnerCoin.getSelectedItem().toString().trim();
+                //String coin = spinnerCoin.getSelectedItem().toString().trim();
+
+                Outcome out = new Outcome();
+                out.amount = valueT;
+                out.observation = descrT;
+
+                ApiClient.get().postOutcome(out, new GenericCallback<Outcome>() {
+                    @Override
+                    public void onSuccess(Outcome data) {
+                        clearview();
+                    }
+
+                    @Override
+                    public void onError(Error error) {
+
+                    }
+                });
 
 
                 dialog.dismiss();

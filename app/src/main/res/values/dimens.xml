@@ -5,6 +5,7 @@
 
     <dimen name="description_top_bar">40dp</dimen>
     <dimen name="general_text">16sp</dimen>
+    <dimen name="medium_text">17sp</dimen>
     <dimen name="big_text">20sp</dimen>
     <dimen name="big_big_text">22sp</dimen>
     <dimen name="padding_top">19sp</dimen>
@@ -33,12 +34,17 @@
 
 
     <dimen name="height_button">35dp</dimen>
-    <dimen name="height_rec_cuad_inpunt">35dp</dimen>
+    <dimen name="height_rec_cuad_input">38dp</dimen>
+
+    <dimen name="student_padding_top">7dp</dimen>
+    <dimen name="student_padding_bottom">7dp</dimen>
+    <dimen name="student_padding_left">12dp</dimen>
+    <dimen name="student_padding_right">12dp</dimen>
 
 
 
-    <!--tablet 24 celu 22-->
-    <dimen name="text_cuad_dialog">24sp</dimen>
+
+    <dimen name="text_cuad_dialog">18sp</dimen>
 
     <!--tablet 26 celu 22-->
     <dimen name="title_bar_text">25sp</dimen>

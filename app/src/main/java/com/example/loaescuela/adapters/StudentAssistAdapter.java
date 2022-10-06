@@ -151,7 +151,7 @@ public class StudentAssistAdapter extends BaseAdapter<ReportStudentAsistItem,Stu
         holder.check_presente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addPresent(currentClient);
+                addPresent(currentClient, position);
                 if(holder.check_presente.isChecked()){
 
                 }
@@ -180,7 +180,7 @@ public class StudentAssistAdapter extends BaseAdapter<ReportStudentAsistItem,Stu
     }
 
 
-    private void addPresent(ReportStudentAsistItem r){
+    private void addPresent(ReportStudentAsistItem r, Integer pos){
 
         PlanillaPresente p = new PlanillaPresente();
         p.alumno_id = r.student_id;
@@ -191,6 +191,8 @@ public class StudentAssistAdapter extends BaseAdapter<ReportStudentAsistItem,Stu
             ApiClient.get().deletePlanillaPresente(r.planilla_presente_id, new GenericCallback<Void>() {
                 @Override
                 public void onSuccess(Void data) {
+
+
                     if(onSelectStudent!=null){
                         onSelectStudent.onSelectStudent();
                     }
@@ -207,6 +209,7 @@ public class StudentAssistAdapter extends BaseAdapter<ReportStudentAsistItem,Stu
             ApiClient.get().postPlanillaPresente(p , new GenericCallback<PlanillaPresente>() {
                 @Override
                 public void onSuccess(PlanillaPresente data) {
+
                     if(onSelectStudent!=null){
                         onSelectStudent.onSelectStudent();
                     }

@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +25,7 @@ import com.example.loaescuela.DateHelper;
 import com.example.loaescuela.Interfaces.OnRefresListCourses;
 import com.example.loaescuela.R;
 import com.example.loaescuela.adapters.ClassCourseAdapter;
+import com.example.loaescuela.adapters.SpinnerAdapter;
 import com.example.loaescuela.adapters.StudentPresentAdapter;
 import com.example.loaescuela.network.ApiClient;
 import com.example.loaescuela.network.Error;
@@ -43,9 +45,9 @@ import java.util.List;
 
 public class AssistsCoursesIncomesByStudentActivity extends BaseActivity implements Paginate.Callbacks , OnRefresListCourses {
 
-    private RecyclerView mRecyclerView;
-    private StudentPresentAdapter mAdapter;
-    private RecyclerView.LayoutManager layoutManager;
+  //  private RecyclerView mRecyclerView;
+   // private StudentPresentAdapter mAdapter;
+   // private RecyclerView.LayoutManager layoutManager;
 
     private RecyclerView mRecyclerViewCC;
     private ClassCourseAdapter mCCAdapter;
@@ -66,6 +68,11 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
 
     private StickyRecyclerHeadersDecoration headersDecorCC;
     private StickyRecyclerHeadersDecoration headersDecor;
+
+    private TextView text_name;
+    private TextView category;
+
+    private String mActualDate;
 
 
     public static void start(Context mContext, Long id, String name, String surname){
@@ -98,12 +105,14 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
             }
         });
 
-        name = findViewById(R.id.name);
-        name.setText(getIntent().getStringExtra("NAME")+" "+getIntent().getStringExtra("SURNAME"));
+        //name = findViewById(R.id.name);
+        text_name = findViewById(R.id.text_name);
+        category = findViewById(R.id.category);
+        text_name.setText(getIntent().getStringExtra("NAME")+" "+getIntent().getStringExtra("SURNAME"));
 
         student_id = getIntent().getLongExtra("ID",-1);
 
-        mRecyclerView = findViewById(R.id.list_reports);
+       /* mRecyclerView = findViewById(R.id.list_reports);
         layoutManager = new LinearLayoutManager(this    );
         mRecyclerView.setLayoutManager(layoutManager);
         mAdapter = new StudentPresentAdapter(this, new ArrayList<ReportPresent>());
@@ -117,7 +126,9 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
                 headersDecor.invalidateHeaders();
             }
         });
+*/
 
+        mActualDate = DateHelper.get().onlyDate(DateHelper.get().getActualDate2());
 
         mRecyclerViewCC = findViewById(R.id.list_courses);
         layoutManagerCC = new LinearLayoutManager(this    );
@@ -126,14 +137,14 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
         mRecyclerViewCC.setAdapter(mCCAdapter);
         mCCAdapter.setOnRefreshListCourses(this);
 
-        headersDecorCC = new StickyRecyclerHeadersDecoration(mCCAdapter);
+       /* headersDecorCC = new StickyRecyclerHeadersDecoration(mCCAdapter);
         mRecyclerViewCC.addItemDecoration(headersDecorCC);
 
         mCCAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override public void onChanged() {
                 headersDecorCC.invalidateHeaders();
             }
-        });
+        });*/
 
 
       /*  headersDecor = new StickyRecyclerHeadersDecoration(mAdapter);
@@ -153,7 +164,7 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
             }
         });
 
-        listCourses();
+        //listCourses();
 
         implementsPaginate();
     }
@@ -164,31 +175,41 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
         super.onResume();
         if(!isLoading()) {
             mCurrentPage = 0;
-            mAdapter.clear();
+            mCCAdapter.clear();
             hasMoreItems=true;
         }
     }
 
     public void clearView(){
         mCurrentPage = 0;
-        mAdapter.clear();
+        mCCAdapter.clear();
         hasMoreItems=true;
 
         //renueva los cursos
-        listCourses();
+       // listCourses();
     }
 
     public void listCourses(){
-
-        ApiClient.get().getCoursesByStudentId(student_id, new GenericCallback<List<ReportClassCourse>>() {
+        loadingInProgress=true;
+        ApiClient.get().getCoursesByStudentId(student_id, mCurrentPage, new GenericCallback<List<ReportClassCourse>>() {
             @Override
             public void onSuccess(List<ReportClassCourse> data) {
-                mCCAdapter.setItems(data);
+                if (data.size() == 0) {
+                    hasMoreItems = false;
+                }else{
+                    int prevSize = mCCAdapter.getItemCount();
+                    mCCAdapter.pushList(data);
+                    mCurrentPage++;
+                    if(prevSize == 0){
+                        layoutManagerCC.scrollToPosition(0);
+                    }
+                }
+                loadingInProgress = false;
             }
 
             @Override
             public void onError(Error error) {
-
+                loadingInProgress = false;
             }
         });
 
@@ -199,7 +220,7 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
 
 
 
-    public void listPlanillas(){
+  /*  public void listPlanillas(){
 
         loadingInProgress=true;
 
@@ -226,7 +247,7 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
             }
         });
 
-    }
+    }*/
 
     private void implementsPaginate(){
 
@@ -234,7 +255,7 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
         mCurrentPage=0;
         hasMoreItems = true;
 
-        paginate= Paginate.with(mRecyclerView, this)
+        paginate= Paginate.with(mRecyclerViewCC, this)
                 .setLoadingTriggerThreshold(2)
                 .addLoadingListItem(true)
                 .setLoadingListItemCreator(new CustomLoadingListItemCreator())
@@ -249,7 +270,7 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
 
     @Override
     public void onLoadMore() {
-        listPlanillas();
+        listCourses();
     }
 
     @Override
@@ -272,52 +293,35 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
         final EditText anio=  dialogView.findViewById(R.id.anio);
         final EditText obs=  dialogView.findViewById(R.id.observation);
 
-        final TextView date=  dialogView.findViewById(R.id.date);
+        final LinearLayout date=  dialogView.findViewById(R.id.date);
         final EditText amount_course=  dialogView.findViewById(R.id.amount);
         final EditText paid_amount_course =  dialogView.findViewById(R.id.paid_amount);
         final EditText number_classes=  dialogView.findViewById(R.id.number_classes);
 
-        final ImageView date_picker=  dialogView.findViewById(R.id.date_picker);
-
         final Spinner spinnerType=  dialogView.findViewById(R.id.spinner_cat);
         final Spinner spinnerSubCat=  dialogView.findViewById(R.id.spinner_sub_cat);
-        final Spinner spinnerMonth =  dialogView.findViewById(R.id.spinner_month);
 
+        final TextView  day = dialogView.findViewById(R.id.num);
+        final TextView  month = dialogView.findViewById(R.id.month);
+        final TextView year = dialogView.findViewById(R.id.year);
+        final TextView dayName = dialogView.findViewById(R.id.dayname);
+
+        String mOnlyDate = DateHelper.get().onlyDate(mActualDate);
+
+        year.setText(DateHelper.get().getYear(mOnlyDate));
+        day.setText(DateHelper.get().getOnlyDay((mOnlyDate)));
+        month.setText(DateHelper.get().getNameMonth2((mOnlyDate)));
+        dayName.setText(DateHelper.get().getNameDay((mOnlyDate)));
 
         //SPINNER Categoria
         List<String> spinner_type_cat = new ArrayList<>();
         enumNameToStringArray(CategoryType.values(),spinner_type_cat);
+        initialSpinner(spinnerType, spinner_type_cat);
 
-        ArrayAdapter<String> adapter_type = new ArrayAdapter<String>(this,
-                R.layout.spinner_item,spinner_type_cat);
-        adapter_type.setDropDownViewResource(R.layout.spinner_item);
-        spinnerType.setAdapter(adapter_type);
-
-
-        //SPINNER Sub Categoria
+        //SPINNER Subcat
         List<String> spinner_sub_cat = new ArrayList<>();
-        //enumNameToStringArraySub(SubCategoryType.values(),spinner_sub_cat);
-
-        for (SubCategoryType value: SubCategoryType.values()) {
-            if(value.getName().equals(Constants.TYPE_ALL)){
-                spinner_sub_cat.add("Sub Categoria");
-            }else{
-                spinner_sub_cat.add(value.getName());
-            }
-        }
-
-        ArrayAdapter<String> adapter_sub_cat = new ArrayAdapter<String>(this,
-                R.layout.spinner_item,spinner_sub_cat);
-        adapter_sub_cat.setDropDownViewResource(R.layout.spinner_item);
-        spinnerSubCat.setAdapter(adapter_sub_cat);
-
-        date.setText(DateHelper.get().getActualDate2());
-        date_picker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // selectDate(date);
-            }
-        });
+        enumNameToStringArraySub(SubCategoryType.values(),spinner_sub_cat);
+        initialSpinner(spinnerSubCat, spinner_sub_cat);
 
 
         final TextView cancel=  dialogView.findViewById(R.id.cancel);
@@ -334,12 +338,12 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
                 course.paid_amount = Double.valueOf(paid_amount_course.getText().toString().trim());
                 course.payment_method = "efectivo";
 
-                course.created = date.getText().toString().trim();
+                course.created = mActualDate;
 
                 ApiClient.get().postClassCourse(course, new GenericCallback<ClassCourse>() {
                     @Override
                     public void onSuccess(ClassCourse data) {
-                        listCourses();
+                        clearView();
                     }
 
                     @Override
@@ -364,13 +368,33 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
 
     }
 
+    private void initialSpinner(final Spinner spinner, List<String> data){
+        ArrayAdapter<String> adapterZone = new SpinnerAdapter(this, R.layout.item_custom, data);
+        spinner.setAdapter(adapterZone);
+        spinner.setPopupBackgroundDrawable(this.getResources().getDrawable(R.drawable.rec_rounded_8));
+    }
+
     private static <T extends Enum<CategoryType>> void enumNameToStringArray(CategoryType[] values, List<String> spinner_type_cat) {
         for (CategoryType value: values) {
             if(value.getName().equals(Constants.TYPE_ALL)){
-                spinner_type_cat.add("Categoria");
+                // spinner_type_cat.add(Constants.TYPE_ALL);
+                spinner_type_cat.add("Formato");
             }else{
                 spinner_type_cat.add(value.getName());
             }
         }
     }
+
+    private static <T extends Enum<SubCategoryType>> void enumNameToStringArraySub(SubCategoryType[] values, List<String> spinner_sub_cat) {
+        for (SubCategoryType value : values) {
+            if (value.getName().equals(Constants.TYPE_ALL)) {
+                // spinner_sub_cat.add(Constants.TYPE_ALL);
+                spinner_sub_cat.add("Categoria");
+            } else {
+                spinner_sub_cat.add(value.getName());
+            }
+        }
+    }
+
+
 }

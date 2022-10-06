@@ -71,6 +71,7 @@ public class StudentToAssistAdapter extends BaseAdapter<Student,StudentToAssistA
         public TextView text_name;
         public TextView text_name2;
         public TextView text_year;
+        public TextView category;
 
         public TextView firstLetter;
         public LinearLayout select;
@@ -81,6 +82,7 @@ public class StudentToAssistAdapter extends BaseAdapter<Student,StudentToAssistA
             text_name = v.findViewById(R.id.text_name);
             text_name2 = v.findViewById(R.id.name2_student);
             select = v.findViewById(R.id.select);
+            category = v.findViewById(R.id.category);
         }
     }
 
@@ -111,6 +113,7 @@ public class StudentToAssistAdapter extends BaseAdapter<Student,StudentToAssistA
         final Student current = getItem(position);
 
         holder.text_name.setText(current.nombre + " " + current.apellido);
+        holder.category.setText(current.category);
 
         holder.select.setOnClickListener(new View.OnClickListener() {
             @Override

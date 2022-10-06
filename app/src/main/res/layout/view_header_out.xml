@@ -50,7 +50,7 @@
             android:textSize="18sp"
 
             android:paddingLeft="6dp"
-            android:text="Julio"
+            android:text=""
             android:layout_gravity="center_vertical"
             android:textColor="@color/colorPrimaryIntLetter"
             android:layout_height="match_parent"

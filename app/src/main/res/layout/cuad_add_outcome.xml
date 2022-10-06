@@ -38,7 +38,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_marginTop="12dp"
-                    android:layout_height="@dimen/height_rec_cuad_inpunt"
+                    android:layout_height="@dimen/height_rec_cuad_input"
                     android:background="@drawable/rec_find"
                     android:orientation="horizontal">
                     <TextView
@@ -169,7 +169,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_marginTop="12dp"
-                    android:layout_height="@dimen/height_rec_cuad_inpunt"
+                    android:layout_height="@dimen/height_rec_cuad_input"
                     android:visibility="gone"
                     android:background="@drawable/rec_find"
                     android:orientation="horizontal">
@@ -223,7 +223,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_rec_cuad_inpunt"
+                    android:layout_height="@dimen/height_rec_cuad_input"
                     android:layout_marginTop="12dp"
                     android:background="@drawable/rec_find"
                     android:orientation="horizontal">
@@ -260,6 +260,61 @@
                         android:fontFamily="@font/opensanslight"
                         android:paddingLeft="8dp"
                         android:inputType="textCapSentences"
+                        android:background="@drawable/rec_find"
+                        android:layout_gravity="center_vertical|left"
+                        android:gravity="center_vertical|left"
+                        />
+                    <TextView
+                        android:layout_width="20dp"
+                        android:textSize="@dimen/big_big_text"
+                        android:text=""
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:textColor="@color/colorPrimaryClearLetter"
+                        android:fontFamily="@font/arialroundedreg"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_rec_cuad_input"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/rec_find"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_weight="2"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:fontFamily="@font/opensansregular"
+                        android:text="Valor "
+                        android:paddingLeft="8dp"
+                        android:textSize="@dimen/general_text"
+                        android:textColor="@color/colorPrimaryIntLetter2" />
+
+                    <TextView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="2dp"
+                        android:layerType="software"
+                        android:layout_marginRight="4dp"
+                        android:background="@drawable/line_dotted_vertical"
+                        />
+
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_weight="2"
+                        android:layout_height="35dp"
+                        android:textColor="@color/word"
+                        android:id="@+id/amount"
+                        android:textSize="@dimen/general_text"
+                        android:fontFamily="@font/opensanslight"
+                        android:paddingLeft="8dp"
+                        android:inputType="numberDecimal"
                         android:background="@drawable/rec_find"
                         android:layout_gravity="center_vertical|left"
                         android:gravity="center_vertical|left"

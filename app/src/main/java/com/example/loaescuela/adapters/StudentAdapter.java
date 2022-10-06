@@ -55,12 +55,10 @@ public class StudentAdapter extends BaseAdapter<Student,StudentAdapter.ViewHolde
         }
     }
 
-
-
     @Override
     public RecyclerView.ViewHolder onCreateHeaderViewHolder(ViewGroup parent) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.view_header_clients, parent, false);
+                .inflate(R.layout.view_header_out, parent, false);
         return new RecyclerView.ViewHolder(view) {
         };
     }
@@ -73,22 +71,66 @@ public class StudentAdapter extends BaseAdapter<Student,StudentAdapter.ViewHolde
             LinearLayout linear = (LinearLayout) holder.itemView;
             final Student e = getItem(position);
 
-            String dateToShow2 = DateHelper.get().getOnlyDate(DateHelper.get().changeOrderDate(e.updated_date));
-            // String dateToShow2 = DateHelper.get().getNameMonth2(e.created).substring(0, 3);
+            String dateToShow2 = DateHelper.get().getNameDay(e.updated_date);
             String numberDay = DateHelper.get().numberDay(e.updated_date);
+            String month = DateHelper.get().getNameMonth2(DateHelper.get().onlyDate(e.updated_date));
+            String year = DateHelper.get().getYear(DateHelper.get().onlyDate(e.updated_date));
+
+           // String dateToShow2 = DateHelper.get().getOnlyDate(DateHelper.get().changeOrderDate(e.updated_date));
+            // String dateToShow2 = DateHelper.get().getNameMonth2(e.created).substring(0, 3);
+            //String numberDay = DateHelper.get().numberDay(e.updated_date);
 
             int count = linear.getChildCount();
             View v = null;
             View v2 = null;
+            View v3 = null;
 
             for (int k = 0; k < count; k++) {
-                v = linear.getChildAt(k);
+                v3 = linear.getChildAt(k);
                 if (k == 0) {
+                    LinearLayout linear4 = (LinearLayout) v3;
 
-                    TextView t = (TextView) v;
-                    t.setText(dateToShow2);
+                    int count3 = linear4.getChildCount();
+
+                    for (int i = 0; i < count3; i++) {
+                        v = linear4.getChildAt(i);
+                        if (i == 0) {
+
+                            TextView t = (TextView) v;
+                            t.setText(dateToShow2);
+                            //if(groupBy.equals("day")){
+                                t.setVisibility(View.VISIBLE);
+                            //}else{
+//                                t.setVisibility(View.GONE);
+  //                          }
+
+
+                        } else if (i == 1) {
+
+                            TextView t2 = (TextView) v;
+                            t2.setText(numberDay);
+                           // if(groupBy.equals("day")){
+                                t2.setVisibility(View.VISIBLE);
+                            //}else{
+                              //  t2.setVisibility(View.GONE);
+                            //}
+
+
+                        }else if (i == 2) {
+
+                            TextView t2 = (TextView) v;
+                            t2.setText(month);
+
+                        }else if (i == 3) {
+
+                            TextView t2 = (TextView) v;
+                            t2.setText(year);
+
+                        }
+                    }
                 }
             }
+
         }
     }
 

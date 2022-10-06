@@ -16,6 +16,7 @@ import com.example.loaescuela.DateHelper;
 import com.example.loaescuela.R;
 import com.example.loaescuela.ValuesHelper;
 import com.example.loaescuela.network.models.ReportIncomeStudent;
+import com.example.loaescuela.network.models.ReportOutcome;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter;
 
 import java.util.Date;
@@ -47,7 +48,7 @@ public class IncomeStudentAdapter extends BaseAdapter<ReportIncomeStudent, Incom
     @Override
     public RecyclerView.ViewHolder onCreateHeaderViewHolder(ViewGroup parent) {
         final View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.view_header_income_event_day, parent, false);
+                .inflate(R.layout.view_header_out, parent, false);
 
         return new RecyclerView.ViewHolder(view) {
 
@@ -58,49 +59,63 @@ public class IncomeStudentAdapter extends BaseAdapter<ReportIncomeStudent, Incom
     public void onBindHeaderViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (position < getItemCount()) {
 
-            LinearLayout linear = (LinearLayout) holder.itemView;
 
+            LinearLayout linear = (LinearLayout) holder.itemView;
             final ReportIncomeStudent e = getItem(position);
 
-            String dateToShow2 = DateHelper.get().getDayEvent(e.income_created);
-
-            String month =DateHelper.get().getNameMonth(DateHelper.get().getOnlyDate(e.income_created));
+            String dateToShow2 = DateHelper.get().getNameDay(e.income_created);
+            String numberDay = DateHelper.get().numberDay(e.income_created);
+            String month = DateHelper.get().getNameMonth2(DateHelper.get().onlyDate(e.income_created));
+            String year = DateHelper.get().getYear(DateHelper.get().onlyDate(e.income_created));
 
             int count = linear.getChildCount();
             View v = null;
             View v2 = null;
             View v3 = null;
 
-            for(int k=0; k<count; k++) {
+            for (int k = 0; k < count; k++) {
                 v3 = linear.getChildAt(k);
-                if(k==1){
-                    LinearLayout linear4= (LinearLayout) v3;
+                if (k == 0) {
+                    LinearLayout linear4 = (LinearLayout) v3;
+
                     int count3 = linear4.getChildCount();
 
-                    for(int i=0; i<count3; i++) {
+                    for (int i = 0; i < count3; i++) {
                         v = linear4.getChildAt(i);
-                        if(i==0){
-                            LinearLayout linear2= (LinearLayout) v;
+                        if (i == 0) {
 
-                            int count2 = linear2.getChildCount();
-
-                            for(int j=0; j<count2; j++) {
-
-                                v2 = linear2.getChildAt(j);
-
-                                if(j==0){
-                                    TextView t2= (TextView) v2;
-                                    t2.setText(month.substring(0,3));
-                                }else if(j == 1){
+                            TextView t = (TextView) v;
+                            t.setText(dateToShow2);
+                            //if(groupBy.equals("day")){
+                                t.setVisibility(View.VISIBLE);
+                            //}else{
+                             //   t.setVisibility(View.GONE);
+                            //}
 
 
-                                    TextView t= (TextView) v2;
-                                    t.setText(dateToShow2);
-                                }
-                            }
+                        } else if (i == 1) {
+
+                            TextView t2 = (TextView) v;
+                            t2.setText(numberDay);
+                           // if(groupBy.equals("day")){
+                                t2.setVisibility(View.VISIBLE);
+                            //}else{
+                            //    t2.setVisibility(View.GONE);
+                            //}
+
+
+                        }else if (i == 2) {
+
+                            TextView t2 = (TextView) v;
+                            t2.setText(month);
+
+                        }else if (i == 3) {
+
+                            TextView t2 = (TextView) v;
+                            t2.setText(year);
+
                         }
                     }
-
                 }
             }
         }
@@ -139,7 +154,7 @@ public class IncomeStudentAdapter extends BaseAdapter<ReportIncomeStudent, Incom
             amount= v.findViewById(R.id.amount);
             type= v.findViewById(R.id.type);
             lineDetail= v.findViewById(R.id.line_detail);
-            circlePendient= v.findViewById(R.id.circle_pendient);
+           // circlePendient= v.findViewById(R.id.circle_pendient);
             image= v.findViewById(R.id.image);
 
             lineDetailText = v.findViewById(R.id.line_detail_text);

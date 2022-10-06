@@ -2,7 +2,10 @@
 <RelativeLayout
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/violet3"
+    android:paddingTop="@dimen/student_padding_top"
+    android:layout_margin="4dp"
+    android:paddingBottom="@dimen/student_padding_bottom"
+    android:background="@drawable/rec_rounded_8"
     android:id="@+id/content"
     android:layout_height="wrap_content" >
 
@@ -10,23 +13,22 @@
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:id="@+id/infotop"
-        android:layout_height="70dp">
+        android:layout_height="wrap_content">
 
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="2.56"
+            android:layout_weight="2.7"
             android:gravity="center"
             android:orientation="vertical"
             android:id="@+id/line_date"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp">
+            >
 
             <TextView
                 android:id="@+id/date_month"
-                android:layout_width="50dp"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:textAllCaps="true"
@@ -35,61 +37,48 @@
                 android:text="ABR"
                 android:textColor="@color/colorPrimaryDark"
 
-                android:textSize="16sp" />
+                android:textSize="13sp" />
 
             <TextView
                 android:id="@+id/date_day"
-                android:layout_width="50dp"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:textAllCaps="true"
                 android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/opensanslight"
                 android:gravity="center_horizontal"
-                android:paddingTop="22dp"
+                android:paddingTop="14dp"
                 android:text="21"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="22sp" />
+                android:textSize="18sp" />
 
         </RelativeLayout>
 
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_weight="2.5"
+            android:layout_width="100dp"
             android:layout_gravity="center_vertical"
             android:gravity="center"
-
+            android:layout_marginLeft="4dp"
             android:layout_height="wrap_content">
-         <!--   <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:id="@+id/image_school"
-                android:gravity="center"
 
-                android:text="Escuela"
-                android:fontFamily="@font/opensanslight"
-                android:textColor="@color/word"
-                /> -->
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:textSize="@dimen/big_text"
-                android:textColor="@color/colorPrimaryDark"
                 android:id="@+id/category"
-                android:text=""
-                android:minWidth="65dp"
-                android:gravity="right|center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:fontFamily="@font/opensanslight"
-                />
+                android:gravity="left|center_vertical"
+                android:text="Highschool"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/big_text" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_weight="2.2"
+            android:layout_weight="2.5"
             android:layout_gravity="center_vertical|right"
             android:gravity="center"
             android:layout_height="wrap_content">
@@ -98,11 +87,11 @@
                 android:layout_width="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_height="wrap_content"
-                android:text="15"
+                android:text="20"
                 android:minWidth="20dp"
                 android:id="@+id/classes_number"
                 android:fontFamily="@font/opensanslight"
-                android:textSize="@dimen/big_text"
+                android:textSize="@dimen/medium_text"
                 android:textColor="@color/colorPrimaryDark"
                 android:gravity="right"
                 />
@@ -114,21 +103,10 @@
                 android:text=" cl"
                 android:minWidth="20dp"
                 android:fontFamily="@font/opensanslight"
-                android:textSize="@dimen/big_text"
+                android:textSize="@dimen/medium_text"
                 android:textColor="@color/colorPrimaryDark"
                 android:gravity="right"
                 />
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                android:padding="7dp"
-                android:layout_gravity="center"
-                />
-
-
-
-
         </LinearLayout>
 
         <LinearLayout
@@ -142,24 +120,24 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:textSize="@dimen/big_text"
+                android:textSize="@dimen/medium_text"
                 android:textColor="@color/colorPrimaryDark"
                 android:id="@+id/paid_amount"
-                android:text="1000"
+                android:text="10000"
 
-                android:minWidth="65dp"
+                android:minWidth="55dp"
                 android:gravity="right|center_vertical"
                 android:layout_gravity="center_vertical"
-                android:fontFamily="@font/opensanslight"
+                android:fontFamily="@font/opensansregular"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/big_text"
+                android:textSize="@dimen/medium_text"
                 android:textColor="@color/colorPrimaryDark"
                 android:layout_gravity="center_vertical"
                 android:text=" / "
-                android:fontFamily="@font/opensanslight"
+                android:fontFamily="@font/opensansregular"
                 />
 
             <TextView
@@ -167,12 +145,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:fontFamily="@font/opensanslight"
+                android:fontFamily="@font/opensansregular"
                 android:gravity="center_vertical"
-                android:minWidth="80dp"
-                android:text="1000"
+                android:minWidth="60dp"
+                android:text="100000"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="@dimen/big_text" />
+                android:textSize="@dimen/medium_text" />
 
 
 
@@ -180,8 +158,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_weight="2.7"
+            android:layout_width="30dp"
             android:id="@+id/infobutton"
             android:layout_height="match_parent">
 
@@ -255,15 +232,6 @@
         </LinearLayout>
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:id="@+id/div1"
-            android:layout_below="@id/line_classes"
-            style="@style/DivisorCategoryStyle"
-            android:textColor="@color/color_line_div"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -271,26 +239,27 @@
             android:id="@+id/lin_incomes"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:layout_below="@id/div1"
             android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/opensanslight"
+                android:layout_marginLeft="22dp"
+                android:gravity="left|center_vertical"
+                android:text="historial pagos"
+                android:textColor="@color/violet1"
+                android:textSize="@dimen/general_text"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginTop="10dp"
 
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_width="110dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:textSize="@dimen/big_text"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:text="Pagos"
-                    android:fontFamily="@font/opensanslight"
-                    />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
@@ -338,16 +307,65 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/lin_incomes"
+            android:layout_height="wrap_content"
+            android:id="@+id/complete_pack"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/rec_rounded_8"
+            android:backgroundTint="@color/violet3"
+            >
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="6dp"
+                android:textColor="@color/colorPrimaryIntLetter2"
+                android:paddingTop="6dp"
+                android:fontFamily="@font/opensansregular"
+                android:textSize="@dimen/general_text"
+                android:layout_height="wrap_content"
+                android:text="completar pack"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/lin_incomes"
+            android:layout_height="wrap_content"
+            android:id="@+id/load_income"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/rec_rounded_8"
+            android:backgroundTint="@color/colorPrimaryClearLetter"
+            >
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="6dp"
+                android:textColor="@color/white"
+                android:paddingTop="6dp"
+                android:fontFamily="@font/opensansregular"
+                android:textSize="@dimen/general_text"
+                android:layout_height="wrap_content"
+                android:text="$ cargar pago"
+                />
+
+        </LinearLayout>
+
 
     </RelativeLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:layout_below="@id/info"
-        style="@style/DivisorCategoryStyle"
-        android:textColor="@color/word_clear"/>
+
 
 </RelativeLayout>

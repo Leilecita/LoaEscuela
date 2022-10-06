@@ -55,7 +55,7 @@
             />
 
         <activity
-            android:name=".activities.AssistsAndIncomesStudentActivity"
+            android:name=".activities.todelete.AssistsAndIncomesStudentActivity"
             android:screenOrientation="portrait"
             android:parentActivityName=".activities.MainActivity"
             />
@@ -101,7 +101,9 @@
             />
         <activity
             android:name=".activities.AssistsActivity"
-            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+
+         android:screenOrientation="portrait"
             android:parentActivityName=".activities.MainActivity"
             />
 

@@ -84,7 +84,7 @@ public class ItemIncomeCourseAdapter extends BaseAdapter<ReportIncome, ItemIncom
     public static class ViewHolder extends RecyclerView.ViewHolder  {
 
         public TextView date;
-        public ImageView payment_method;
+        public TextView payment_method;
         public TextView amount;
 
         public TextView value;
@@ -104,7 +104,7 @@ public class ItemIncomeCourseAdapter extends BaseAdapter<ReportIncome, ItemIncom
             super(v);
 
             date= v.findViewById(R.id.date);
-            payment_method= v.findViewById(R.id.payment_method);
+            payment_method = v.findViewById(R.id.payment_method);
             payment_method_edit = v.findViewById(R.id.payment_method_edit);
             amount = v.findViewById(R.id.amount);
             amount_edit = v.findViewById(R.id.amount_edit);
@@ -137,15 +137,10 @@ public class ItemIncomeCourseAdapter extends BaseAdapter<ReportIncome, ItemIncom
 
         holder.amount.setText(ValuesHelper.get().getIntegerQuantity(current.amount));
         holder.date.setText(DateHelper.get().onlyDate(current.created));
+        holder.payment_method.setText(current.payment_method);
 
-       /* if(current.payment_method.equals(Constants.TYPE_TARJETA)){
-            holder.payment_method.setImageResource(R.mipmap.card_w);
-        }else if(current.payment_method.equals(Constants.TYPE_EFECTIVO)){
-            holder.payment_method.setImageResource(R.mipmap.money_w);
-        } */
 
         holder.amount_edit.setText(String.valueOf(current.amount));
-       // holder.date_edit.setText(current.created);
         holder.payment_method_edit.setText(current.payment_method);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -359,19 +354,33 @@ public class ItemIncomeCourseAdapter extends BaseAdapter<ReportIncome, ItemIncom
         final View dialogView = inflater.inflate(R.layout.cuad_add_payment, null);
         builder.setView(dialogView);
 
-        final TextView date=  dialogView.findViewById(R.id.date);
+        final LinearLayout date=  dialogView.findViewById(R.id.date);
         final EditText value=  dialogView.findViewById(R.id.value_payment);
         final TextView payed=  dialogView.findViewById(R.id.payed);
         final TextView pack_value=  dialogView.findViewById(R.id.pack_value);
         final TextView rest=  dialogView.findViewById(R.id.rest);
 
-        date.setText(DateHelper.get().getActualDate());
+        final TextView  day = dialogView.findViewById(R.id.num);
+        final TextView  month = dialogView.findViewById(R.id.month);
+        final TextView year = dialogView.findViewById(R.id.year);
+        final TextView dayName = dialogView.findViewById(R.id.dayname);
+
+        String mActualDate = DateHelper.get().getActualDate2();
+        String mOnlyDate = DateHelper.get().onlyDate(mActualDate);
+
+        year.setText(DateHelper.get().getYear(mOnlyDate));
+        day.setText(DateHelper.get().getOnlyDay((mOnlyDate)));
+        month.setText(DateHelper.get().getNameMonth2((mOnlyDate)));
+        dayName.setText(DateHelper.get().getNameDay((mOnlyDate)));
+
+
+       /*date.setText(DateHelper.get().getActualDate());
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectDate(date);
             }
-        });
+        });*/
 
         //payment method
         final LinearLayout efect=  dialogView.findViewById(R.id.efect);
@@ -431,7 +440,7 @@ public class ItemIncomeCourseAdapter extends BaseAdapter<ReportIncome, ItemIncom
                 String detail = currentCourse.category+" "+currentCourse.sub_category+" "+currentCourse.classes_number+"cl";
 
                 if(ValidatorHelper.get().isTypeDouble(value.getText().toString().trim())){
-                    createIncome(Double.valueOf(value.getText().toString()),mClassCourseId, date, detail);
+                    createIncome(Double.valueOf(value.getText().toString()),mClassCourseId, mActualDate, detail);
                     dialog.dismiss();
                 }
             }
@@ -445,12 +454,14 @@ public class ItemIncomeCourseAdapter extends BaseAdapter<ReportIncome, ItemIncom
         });
     }
 
-    public void createIncome(Double amount,Long class_course_id, TextView date, String detail){
+    public void createIncome(Double amount,Long class_course_id, String date, String detail){
 
         DataIncomeCourse inc= new DataIncomeCourse(amount,"efectivo", class_course_id, detail);
         // inc.datetime= DateHelper.get().getActualDate();
-        inc.datetime = date.getText().toString().trim();
-        inc.created = date.getText().toString().trim();
+      //  inc.datetime = date.getText().toString().trim();
+       // inc.created = date.getText().toString().trim();
+        inc.datetime = date;
+        inc.created = date;
 
         ApiClient.get().postIncomeCourse(inc, new GenericCallback<Income>() {
             @Override

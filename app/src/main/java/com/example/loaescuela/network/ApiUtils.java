@@ -11,7 +11,7 @@ public class ApiUtils {
     //public static final String BASE_URL = "http://loa.abarbieri.com.ar/";
 
     public static final String BASE_URL = "http://192.168.0.36/loa_school/";
-   // public static final String BASE_URL = "http://192.168.0.215/loa_school/";
+   // public static final String BASE_URL = "http://192.168.52.198/loa_school/";
 
     public static APIService getAPIService() {
         return RetrofitClient.getClient(BASE_URL).create(APIService.class);

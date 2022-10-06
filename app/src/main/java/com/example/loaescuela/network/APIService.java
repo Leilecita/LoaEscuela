@@ -61,7 +61,7 @@ public interface APIService {
     Observable<Response<ClassCourse>> postClassCourse(@Body ClassCourse c);
 
     @GET("class_courses.php")
-    Observable<Response<List<ReportClassCourse>>> getCoursesByStudentId(@Query("method") String method, @Query("student_id") Long id);
+    Observable<Response<List<ReportClassCourse>>> getCoursesByStudentId(@Query("method") String method, @Query("page") Integer page, @Query("student_id") Long id);
 
     @GET("class_courses.php")
     Observable<Response<List<ReportClassCourse>>> getCourseById(@Query("method") String method, @Query("student_id") Long id,  @Query("course_id") Long course_id);
@@ -116,6 +116,10 @@ public interface APIService {
 
     @GET("students.php")
     Observable<Response<List<Student>>> getStudents(@Query("page") Integer page, @Query("query") String query, @Query("method") String method , @Query("category") String category, @Query("order") String orderby );
+
+    @GET("students.php")
+    Observable<Response<List<Student>>> getStudents2( @Query("query") String query, @Query("page") Integer page,@Query("method") String method);
+
 
     @GET("students.php")
     Observable<Response<ReportStudentAsist>> getStudentsAsists(@Query("method") String method , @Query("query") String query, @Query("page") Integer page, @Query("category") String category, @Query("categoria") String categoria, @Query("subcategoria") String subcategoria ,@Query("date") String datepresent, @Query("onlyPresents") String onlyP );

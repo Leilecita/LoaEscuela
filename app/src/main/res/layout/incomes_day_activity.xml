@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:descendantFocusability="blocksDescendants"
+
     android:background="@color/colorgray"
     android:layout_height="match_parent">
 
@@ -35,7 +35,7 @@
                 android:id="@+id/title"
                 android:text="  Pagos del dia"
                 android:fontFamily="@font/opensanslight"
-                android:textSize="@dimen/title_bar_text"
+                android:textSize="@dimen/title_text"
                 android:textColor="@color/white"
                 />
 
@@ -43,7 +43,38 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="6dp"
+        android:layout_below="@id/toolbar"
+        android:layout_marginRight="10dp"
+        android:id="@+id/line1"
+        >
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:background="@drawable/rec_find"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
 
+            android:clickable="true"/>
+
+
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_users"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_events"
         android:layout_width="match_parent"

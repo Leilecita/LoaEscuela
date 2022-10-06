@@ -29,6 +29,8 @@
     <color name="colorPrimaryClear2">#DBD8E4</color>
 
 
+    <color name="back_transp">#52FDFCFD</color>
+
     <color name="pers">#817699</color>
     <color name="santi">#9f94b5</color>
     <color name="local">#A49FB8</color>

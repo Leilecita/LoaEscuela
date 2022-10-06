@@ -4,10 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.loaescuela.R;
+import com.example.loaescuela.activities.todelete.AssistsAndIncomesStudentActivity;
 import com.example.loaescuela.data.SessionPrefs;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
@@ -140,7 +139,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         payments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getBaseContext(), BoxMovementsActivity.class);
+                Intent i = new Intent(getBaseContext(), ListIncomesDayActivity.class);
                // i.putExtra("NAMEFRAGMENT", "lei");
                 startActivity(i);
             }

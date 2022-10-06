@@ -39,6 +39,10 @@ public class DateHelper {
         return onlyDate(date);
     }
 
+    public String getOnlyDateToShow(String date) {
+        return onlyDateToShow(date);
+    }
+
     public String getOnlyDateComplete(String date) {
         return onlyDateComplete(date);
     }
@@ -294,6 +298,15 @@ public class DateHelper {
         String[] parts = date.split(" ");
         String part1 = parts[0]; // fecha
         return part1;
+    }
+
+    public String onlyDateToShow(String date) {
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        formatter.setTimeZone(TimeZone.getDefault());
+        String dateToShow = formatter.format(date);
+
+        String[] parts = dateToShow.split(" ");
+        return parts[0];
     }
 
     public String getDateFromMonthAndYear(String month, String year){

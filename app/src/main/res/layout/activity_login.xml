@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
+    android:background="@drawable/fondoasist"
     android:orientation="vertical"
 
     >
@@ -33,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:id="@+id/title"
-                android:text="  Loa surf shop"
+                android:text="  Loa escuela de surf"
                 android:textSize="@dimen/title_text"
                 android:fontFamily="@font/opensansregular"
                 android:textColor="@color/white"

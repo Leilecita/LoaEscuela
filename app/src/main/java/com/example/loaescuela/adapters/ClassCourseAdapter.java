@@ -80,7 +80,7 @@ public class ClassCourseAdapter extends BaseAdapter<ReportClassCourse,ClassCours
     @Override
     public RecyclerView.ViewHolder onCreateHeaderViewHolder(ViewGroup parent) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.view_header_assists, parent, false);
+                .inflate(R.layout.vie_header_course, parent, false);
         return new RecyclerView.ViewHolder(view) {
         };
     }
@@ -103,7 +103,6 @@ public class ClassCourseAdapter extends BaseAdapter<ReportClassCourse,ClassCours
             for (int k = 0; k < count; k++) {
                 v = linear.getChildAt(k);
                 if (k == 0) {
-
                     TextView t = (TextView) v;
                     t.setText(year);
                 }
@@ -127,6 +126,7 @@ public class ClassCourseAdapter extends BaseAdapter<ReportClassCourse,ClassCours
         public TextView circle;
 
         public RelativeLayout info;
+        public LinearLayout load_payment;
 
         public ViewHolder(View v){
             super(v);
@@ -141,7 +141,7 @@ public class ClassCourseAdapter extends BaseAdapter<ReportClassCourse,ClassCours
             dateMont = v.findViewById(R.id.date_month);
             dateDay = v.findViewById(R.id.date_day);
             circle = v.findViewById(R.id.circle2);
-
+            load_payment = v.findViewById(R.id.load_income);
         }
     }
 
@@ -224,6 +224,13 @@ public class ClassCourseAdapter extends BaseAdapter<ReportClassCourse,ClassCours
             @Override
             public void onRefreshAmountIncomes() {
 
+            }
+        });
+
+        holder.load_payment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapterIncomeInfo.createIncome2(current.class_course_id, current);
             }
         });
 

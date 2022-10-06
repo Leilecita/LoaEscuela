@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
@@ -109,6 +110,8 @@ public class AssistsActivity extends BaseActivity implements Paginate.Callbacks,
     private Boolean initAppCat = true;
     private Boolean initAppSubCat = true;
 
+    private LinearLayout line_top_info;
+
     public void onSelectStudent(){
         loadStudentsValue();
         clearView();
@@ -199,6 +202,8 @@ public class AssistsActivity extends BaseActivity implements Paginate.Callbacks,
         dayName = findViewById(R.id.dayname);
         listOnlyPresents = findViewById(R.id.presentes);
 
+        line_top_info = findViewById(R.id.line_top_info);
+
         day.setText(DateHelper.get().numberDay(DateHelper.get().getActualDate2()));
 
         listOnlyPresents.setOnClickListener(new View.OnClickListener() {
@@ -268,10 +273,34 @@ public class AssistsActivity extends BaseActivity implements Paginate.Callbacks,
             }
         });
 
-        button= findViewById(R.id.fab_agregarTod);
+        button = findViewById(R.id.fab_agregarTod);
         image_button= findViewById(R.id.image_button);
 
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if( planilla_id != null && planilla_id >= 0 ){
+                    Intent i = new Intent(getBaseContext(), SelectStudentForAssistActivity.class);
+                    i.putExtra("ID", planilla_id);
+                    startActivityForResult(i, SELECT_STUDENT_FOR_ASSIST);
+                }else{
+                    Toast.makeText(getBaseContext(), "Debe seleccionar las categorias", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
         search();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SELECT_STUDENT_FOR_ASSIST) {
+            if(resultCode == RESULT_OK){
+                clearView();
+            }
+        }
     }
 
     private void search(){
@@ -280,23 +309,44 @@ public class AssistsActivity extends BaseActivity implements Paginate.Callbacks,
             @Override
             public void onClick(View view) {
                 searchView.setIconified(false);
+                if(line_top_info.getVisibility() == View.VISIBLE){
+                    line_top_info.setVisibility(View.GONE);
+                    button.setVisibility(View.GONE);
+                }else{
+                    line_top_info.setVisibility(View.VISIBLE);
+                    button.setVisibility(View.VISIBLE);
+                }
             }
         });
 
         searchView.setQueryHint("Buscar");
+
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
 
                 mQuery = "";
                 //refreshList();
-
-
                 clearView();
                /* mCurrentPage = 0;
                 mAdapter.clear();
                 listStudents("");*/
+
+                line_top_info.setVisibility(View.VISIBLE);
+                button.setVisibility(View.VISIBLE);
                 return false;
+            }
+        });
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(line_top_info.getVisibility() == View.VISIBLE){
+                    line_top_info.setVisibility(View.GONE);
+                    button.setVisibility(View.GONE);
+                }else{
+                    line_top_info.setVisibility(View.VISIBLE);
+                    button.setVisibility(View.VISIBLE);
+                }
             }
         });
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
