@@ -24,6 +24,7 @@ import com.example.loaescuela.CustomLoadingListItemCreator;
 import com.example.loaescuela.DateHelper;
 import com.example.loaescuela.Interfaces.OnRefresListCourses;
 import com.example.loaescuela.R;
+import com.example.loaescuela.ValuesHelper;
 import com.example.loaescuela.adapters.ClassCourseAdapter;
 import com.example.loaescuela.adapters.SpinnerAdapter;
 import com.example.loaescuela.adapters.StudentPresentAdapter;
@@ -33,6 +34,7 @@ import com.example.loaescuela.network.GenericCallback;
 import com.example.loaescuela.network.models.ClassCourse;
 import com.example.loaescuela.network.models.ReportClassCourse;
 import com.example.loaescuela.network.models.ReportPresent;
+import com.example.loaescuela.network.models.ReportSeasonPresent;
 import com.example.loaescuela.types.CategoryType;
 import com.example.loaescuela.types.Constants;
 import com.example.loaescuela.types.SubCategoryType;
@@ -60,6 +62,13 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
     private boolean hasMoreItems;
 
     private TextView name;
+
+    //Resum by student
+    private TextView taken_classes;
+    private TextView rest_classes;
+    private TextView paid_amount;
+    private TextView tot_amount;
+
     private LinearLayout home;
 
     private Long student_id = -1l;
@@ -111,6 +120,14 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
         text_name.setText(getIntent().getStringExtra("NAME")+" "+getIntent().getStringExtra("SURNAME"));
 
         student_id = getIntent().getLongExtra("ID",-1);
+
+
+        //resum by season
+
+        taken_classes = findViewById(R.id.taken_classes);
+        rest_classes = findViewById(R.id.rest_classes);
+        paid_amount = findViewById(R.id.paid_amount);
+        tot_amount = findViewById(R.id.tot_amount);
 
        /* mRecyclerView = findViewById(R.id.list_reports);
         layoutManager = new LinearLayoutManager(this    );
@@ -166,6 +183,8 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
 
         //listCourses();
 
+        getResumStudent(student_id);
+
         implementsPaginate();
     }
 
@@ -217,7 +236,24 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
 
 
 
+    public void getResumStudent(Long id){
+        ApiClient.get().getResumInfoByStudent(id, new GenericCallback<List<ReportSeasonPresent>>() {
+            @Override
+            public void onSuccess(List<ReportSeasonPresent> data) {
+                ReportSeasonPresent r = data.get(0);
+                taken_classes.setText(String.valueOf(r.cant_presents));
+                rest_classes.setText(String.valueOf(r.cant_buyed_classes - r.cant_presents));
+                paid_amount.setText(ValuesHelper.get().getIntegerQuantity(r.tot_paid_amount));
+                tot_amount.setText(ValuesHelper.get().getIntegerQuantity(r.tot_amount));
 
+            }
+
+            @Override
+            public void onError(Error error) {
+
+            }
+        });
+    }
 
 
   /*  public void listPlanillas(){

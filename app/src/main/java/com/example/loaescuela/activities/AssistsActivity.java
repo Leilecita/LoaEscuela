@@ -114,7 +114,9 @@ public class AssistsActivity extends BaseActivity implements Paginate.Callbacks,
 
     public void onSelectStudent(){
         loadStudentsValue();
-        clearView();
+        //esto se usa para refrescar solo la cant de presentes
+        //y no tener que refresacr toda la lista
+       // clearView();
     }
 
     public void refreshList(String cat, String subcat,String date, String query, String onlyPresents){
@@ -506,6 +508,7 @@ public class AssistsActivity extends BaseActivity implements Paginate.Callbacks,
                         mActualDate = year+"-"+smonthOfYear+"-"+sdayOfMonth;
                         brakeDownDate();
                         clearView();
+                        loadStudentsValue();
                         refreshList(mCategoria, mSubCategoria, mActualDate, mQuery, mOnlyPresents);
                     }
                 }, mYear, mMonth, mDay);

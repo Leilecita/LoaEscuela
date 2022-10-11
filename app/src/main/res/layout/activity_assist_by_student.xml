@@ -154,7 +154,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="8dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="12dp"
                 >
 
 
@@ -225,8 +225,7 @@
                     android:background="@drawable/rec_rounded_8"
                     android:paddingBottom="@dimen/student_padding_bottom"
                     android:paddingTop="@dimen/student_padding_top"
-                    android:paddingRight="@dimen/student_padding_right"
-                    android:paddingLeft="@dimen/student_padding_left"
+                    android:paddingLeft="8dp"
                     android:backgroundTint="@color/back_transp"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -247,7 +246,7 @@
                             android:fontFamily="@font/opensanslight"
                             android:text="Resumen temporada"
                             android:textColor="@color/colorPrimaryIntLetter"
-                            android:textSize="@dimen/medium_text"
+                            android:textSize="@dimen/general_text"
                             />
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -281,7 +280,7 @@
                                 />
 
                             <TextView
-                                android:id="@+id/amount"
+                                android:id="@+id/tot_amount"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center_vertical"
@@ -346,9 +345,10 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/opensansregular"
                                 android:text="12"
+                                android:id="@+id/taken_classes"
                                 android:paddingLeft="8dp"
                                 android:textColor="@color/colorPrimaryIntLetter"
-                                android:textSize="@dimen/big_text"
+                                android:textSize="@dimen/medium_text"
                                 />
                         </LinearLayout>
 
@@ -374,9 +374,10 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/opensansregular"
                                 android:text="10"
+                                android:id="@+id/rest_classes"
                                 android:paddingLeft="8dp"
                                 android:textColor="@color/colorPrimaryIntLetter"
-                                android:textSize="@dimen/big_text"
+                                android:textSize="@dimen/medium_text"
                                 />
                         </LinearLayout>
                     </LinearLayout>

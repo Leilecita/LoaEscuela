@@ -179,6 +179,10 @@ public class StudentAssistAdapter extends BaseAdapter<ReportStudentAsistItem,Stu
         });
     }
 
+    private void updatePresentStudent(ReportStudentAsistItem r, Integer pos){
+
+    }
+
 
     private void addPresent(ReportStudentAsistItem r, Integer pos){
 
@@ -192,6 +196,10 @@ public class StudentAssistAdapter extends BaseAdapter<ReportStudentAsistItem,Stu
                 @Override
                 public void onSuccess(Void data) {
 
+                    r.presente = "no";
+                    r.planilla_presente_id = -1l;
+
+                    //updateItem(pos, r); lo saque porque me modifica el padding bottom
 
                     if(onSelectStudent!=null){
                         onSelectStudent.onSelectStudent();
@@ -209,6 +217,11 @@ public class StudentAssistAdapter extends BaseAdapter<ReportStudentAsistItem,Stu
             ApiClient.get().postPlanillaPresente(p , new GenericCallback<PlanillaPresente>() {
                 @Override
                 public void onSuccess(PlanillaPresente data) {
+
+                    r.presente = "si";
+                    r.planilla_presente_id = data.id;
+
+                   // updateItem(pos, r);
 
                     if(onSelectStudent!=null){
                         onSelectStudent.onSelectStudent();

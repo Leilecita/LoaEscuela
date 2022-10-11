@@ -13,7 +13,9 @@ import com.example.loaescuela.network.models.ReportClassCourse;
 import com.example.loaescuela.network.models.ReportIncomeStudent;
 import com.example.loaescuela.network.models.ReportOutcome;
 import com.example.loaescuela.network.models.ReportPresent;
+import com.example.loaescuela.network.models.ReportResp;
 import com.example.loaescuela.network.models.ReportResumAsist;
+import com.example.loaescuela.network.models.ReportSeasonPresent;
 import com.example.loaescuela.network.models.ReportStudentAsist;
 import com.example.loaescuela.network.models.ReportStudentValue;
 import com.example.loaescuela.network.models.Student;
@@ -149,6 +151,10 @@ public class ApiClient {
         handleRequest( ApiUtils.getAPISessionService().postStudent(c), callback);
     }
 
+    public void checkExistStudent(String dni, final GenericCallback<ReportResp> callback ){
+        handleRequest( ApiUtils.getAPISessionService().checkExistStudent(dni,"checkExistStudent"), callback);
+    }
+
     public void getStudents(String query, Integer page,String category, String orderby, final GenericCallback<List<Student>> callback ){
         handleRequest( ApiUtils.getAPISessionService().getStudents(page,query, "getStudents",category, orderby), callback);
     }
@@ -164,6 +170,13 @@ public class ApiClient {
     public void getStudentsValue(String category,String categoria, String subcategoria, String datePresent ,final GenericCallback<ReportStudentValue> callback ){
         handleRequest( ApiUtils.getAPISessionService().getStudentsValues( "getValues",category,categoria,subcategoria, datePresent), callback);
     }
+
+    // SEASSONS
+
+    public void getResumInfoByStudent( Long student_id,final GenericCallback<List<ReportSeasonPresent>> callback ){
+        handleRequest( ApiUtils.getAPISessionService().getResumInfoByStudent("getResumInfoByStudent",student_id), callback);
+    }
+
 
     //USER
     public void login(String name,String password, GenericCallback<UserToken> callback){

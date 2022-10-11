@@ -58,6 +58,9 @@ public class StudentsListActivity extends BaseActivity implements Paginate.Callb
     private Button orderByCreated;
     private Button orderByName;
 
+    private LinearLayout add;
+
+
     @Override
     public int getLayoutRes() {
         return R.layout.list_student_activity;
@@ -154,6 +157,14 @@ public class StudentsListActivity extends BaseActivity implements Paginate.Callb
         //trae los empleados
 
         topBarListener(bottomSheet);
+
+        add = findViewById(R.id.add_new_student);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getBaseContext(), CreateStudentActivity.class));
+            }
+        });
 
     }
 

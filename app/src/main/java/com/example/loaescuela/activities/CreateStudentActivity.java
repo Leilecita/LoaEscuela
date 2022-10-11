@@ -1,13 +1,21 @@
 package com.example.loaescuela.activities;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -20,10 +28,12 @@ import com.example.loaescuela.adapters.SpinnerAdapter;
 import com.example.loaescuela.network.ApiClient;
 import com.example.loaescuela.network.Error;
 import com.example.loaescuela.network.GenericCallback;
+import com.example.loaescuela.network.models.ReportResp;
 import com.example.loaescuela.network.models.Student;
 import com.example.loaescuela.types.CategoryType;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
@@ -35,7 +45,8 @@ public class CreateStudentActivity extends BaseActivity{
     private Spinner mStudentCategory;
     private EditText mClientObservation;
     private EditText mStudentDni;
-    private EditText mStudentNacimiento;
+    private TextView mStudentNacimiento;
+    private String mAge;
 
     private LinearLayout save;
 
@@ -43,6 +54,8 @@ public class CreateStudentActivity extends BaseActivity{
 
     public ImageView returnn;
     public TextView title;
+
+    public String mExistAlum;
 
     public void setStyleToolbar(){
         returnn= this.findViewById(R.id.returnn);
@@ -59,7 +72,7 @@ public class CreateStudentActivity extends BaseActivity{
 
     @Override
     public int getLayoutRes() {
-        return R.layout.activity_create_student;
+        return R.layout.create_student;
     }
 
     @Override
@@ -78,6 +91,8 @@ public class CreateStudentActivity extends BaseActivity{
 
         setTitle("Alumno nuevo");
 
+        mExistAlum = "";
+
         mStudentName = findViewById(R.id.student_name);
         mStudentSurName = findViewById(R.id.surname);
         mStudentPhone =  findViewById(R.id.phone);
@@ -87,53 +102,160 @@ public class CreateStudentActivity extends BaseActivity{
 
         save =  findViewById(R.id.save);
 
+        mStudentNacimiento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectDate(mStudentNacimiento);
+            }
+        });
+
         List<String> list = new ArrayList<>();
 
         adapterCategory = new SpinnerAdapter(getApplicationContext(), R.layout.item_custom_cat, enumCat(CategoryType.values(),list));
         mStudentCategory.setAdapter(adapterCategory);
         mStudentCategory.setPopupBackgroundDrawable(getResources().getDrawable(R.drawable.rec_find));
 
-
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                String name = mStudentName.getText().toString().trim();
-                String surname = mStudentSurName.getText().toString().trim();
-                String fecha_nac = mStudentNacimiento.getText().toString().trim();
-                String phone = mStudentPhone.getText().toString().trim();
-                String category= mStudentCategory.getSelectedItem().toString().trim();
-                String dni= mStudentDni.getText().toString().trim();
-
-                if(mStudentName.getText().toString().matches("") || mStudentPhone.getText().toString().matches("")){
-                    Toast.makeText(getBaseContext(), "Los campos obligatorios deben estar completos" , Toast.LENGTH_SHORT).show();
+                if(mExistAlum.equals("true")){
+                    saveExistStudent();
+                }else if(mExistAlum.equals("false")){
+                    saveStudent();
                 }else{
-
-                    Student student = new Student(name, surname, fecha_nac, phone, dni, category );
-
-                    final ProgressDialog progress = ProgressDialog.show(CreateStudentActivity.this, "Creando alumno",
-                            "Aguarde un momento", true);
-
-
-                    ApiClient.get().postStudent(student, new GenericCallback<Student>() {
-                        @Override
-                        public void onSuccess(Student data) {
-                            hideKeyboard(getWindow().getDecorView().findViewById(android.R.id.content));
-                            progress.dismiss();
-
-                            finish();
-                        }
-
-                        @Override
-                        public void onError(Error error) {
-
-                        }
-                    });
-
+                    checkExistStudent(mStudentDni.getText().toString().trim());
                 }
             }
         });
     }
+
+    private void saveExistStudent(){
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            LayoutInflater inflater = (LayoutInflater)this.getSystemService(this.LAYOUT_INFLATER_SERVICE);
+            final View dialogView = inflater.inflate(R.layout.exist_student, null);
+            builder.setView(dialogView);
+
+            final TextView cancel=  dialogView.findViewById(R.id.cancel);
+            final Button ok=  dialogView.findViewById(R.id.ok);
+
+            final AlertDialog dialog = builder.create();
+            dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+            ok.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    saveStudent();
+                    dialog.dismiss();
+
+                }
+
+            });
+            cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+            dialog.show();
+    }
+
+    private void saveStudent(){
+        String name = mStudentName.getText().toString().trim();
+        String surname = mStudentSurName.getText().toString().trim();
+        String fecha_nac = mStudentNacimiento.getText().toString().trim();
+        String phone = mStudentPhone.getText().toString().trim();
+        String category= mStudentCategory.getSelectedItem().toString().trim();
+        String dni= mStudentDni.getText().toString().trim();
+
+        if(mStudentName.getText().toString().matches("") || mStudentPhone.getText().toString().matches("")){
+            Toast.makeText(getBaseContext(), "Los campos obligatorios deben estar completos" , Toast.LENGTH_SHORT).show();
+        }else{
+
+            Student student = new Student(name, surname, fecha_nac, phone, dni, category );
+            student.edad = mAge;
+
+            final ProgressDialog progress = ProgressDialog.show(CreateStudentActivity.this, "Creando alumno",
+                    "Aguarde un momento", true);
+
+
+            ApiClient.get().postStudent(student, new GenericCallback<Student>() {
+                @Override
+                public void onSuccess(Student data) {
+                    hideKeyboard(getWindow().getDecorView().findViewById(android.R.id.content));
+                    progress.dismiss();
+
+                    finish();
+                }
+
+                @Override
+                public void onError(Error error) {
+
+                }
+            });
+        }
+    }
+
+    private void checkExistStudent(String dni){
+        ApiClient.get().checkExistStudent(dni, new GenericCallback<ReportResp>() {
+            @Override
+            public void onSuccess(ReportResp data) {
+                if(data.val.equals("true")){
+                    mExistAlum = "true";
+                }else{
+                    mExistAlum = "false";
+                    saveStudent();
+                }
+            }
+
+            @Override
+            public void onError(Error error) {
+
+            }
+        });
+    }
+
+
+    private void selectDate(TextView nacimiento){
+        final DatePickerDialog datePickerDialog;
+        final Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR); // current year
+        int mMonth = c.get(Calendar.MONTH); // current month
+        final int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+
+        datePickerDialog = new DatePickerDialog(this, AlertDialog.THEME_HOLO_LIGHT,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+                        String sdayOfMonth = String.valueOf(dayOfMonth);
+                        if (sdayOfMonth.length() == 1) {
+                            sdayOfMonth = "0" + dayOfMonth;
+                        }
+                        String smonthOfYear = String.valueOf(monthOfYear + 1);
+                        if (smonthOfYear.length() == 1) {
+                            smonthOfYear = "0" + smonthOfYear;
+                        }
+
+                        Calendar today = Calendar.getInstance();
+                        c.set(year, Integer.valueOf(smonthOfYear) , Integer.valueOf(sdayOfMonth));
+
+                        int age = today.get(Calendar.YEAR) - c.get(Calendar.YEAR);
+
+                        if (today.get(Calendar.DAY_OF_YEAR) < c.get(Calendar.DAY_OF_YEAR)){
+                            age--;
+                        }
+
+                        mAge = String.valueOf(age);
+
+                        nacimiento.setText(year+"-"+smonthOfYear+"-"+sdayOfMonth);
+                    }
+                }, mYear, mMonth, mDay);
+
+        datePickerDialog.show();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

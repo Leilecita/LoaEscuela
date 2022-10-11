@@ -6,6 +6,7 @@
     android:orientation="vertical"
     app:layout_behavior="@string/bottom_sheet_behavior"
     app:behavior_hideable="false"
+    android:backgroundTint="@color/transparent"
     app:behavior_peekHeight="@dimen/peek_height" >
 
     <TextView

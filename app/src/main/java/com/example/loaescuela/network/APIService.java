@@ -12,7 +12,9 @@ import com.example.loaescuela.network.models.ReportClassCourse;
 import com.example.loaescuela.network.models.ReportIncomeStudent;
 import com.example.loaescuela.network.models.ReportOutcome;
 import com.example.loaescuela.network.models.ReportPresent;
+import com.example.loaescuela.network.models.ReportResp;
 import com.example.loaescuela.network.models.ReportResumAsist;
+import com.example.loaescuela.network.models.ReportSeasonPresent;
 import com.example.loaescuela.network.models.ReportStudentAsist;
 import com.example.loaescuela.network.models.ReportStudentValue;
 import com.example.loaescuela.network.models.Student;
@@ -115,6 +117,9 @@ public interface APIService {
     Observable<Response<Student>> postStudent(@Body Student c);
 
     @GET("students.php")
+    Observable<Response<ReportResp>> checkExistStudent(@Query("dni") String dni, @Query("method") String method);
+
+    @GET("students.php")
     Observable<Response<List<Student>>> getStudents(@Query("page") Integer page, @Query("query") String query, @Query("method") String method , @Query("category") String category, @Query("order") String orderby );
 
     @GET("students.php")
@@ -124,9 +129,16 @@ public interface APIService {
     @GET("students.php")
     Observable<Response<ReportStudentAsist>> getStudentsAsists(@Query("method") String method , @Query("query") String query, @Query("page") Integer page, @Query("category") String category, @Query("categoria") String categoria, @Query("subcategoria") String subcategoria ,@Query("date") String datepresent, @Query("onlyPresents") String onlyP );
 
+    @PUT("students.php")
+    Observable<Response<ReportStudentAsist>> updateStudentAsist(@Query("method") String method, @Body ReportStudentAsist studentAsist);
+
     @GET("students.php")
     Observable<Response<ReportStudentValue>> getStudentsValues(@Query("method") String method , @Query("category") String category, @Query("categoria") String categoria, @Query("subcategoria") String subcategoria , @Query("date") String datepresent );
 
+    //SEASSONS
+
+    @GET("seasons.php")
+    Observable<Response<List<ReportSeasonPresent>>> getResumInfoByStudent(@Query("method") String method, @Query("student_id") Long student_id);
 
     //USERS
     @GET("login.php")
