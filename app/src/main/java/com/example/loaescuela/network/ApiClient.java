@@ -2,6 +2,7 @@ package com.example.loaescuela.network;
 
 import android.util.Log;
 
+import com.example.loaescuela.network.models.BeachBox;
 import com.example.loaescuela.network.models.ClassCourse;
 import com.example.loaescuela.network.models.DataIncomeCourse;
 import com.example.loaescuela.network.models.Income;
@@ -9,8 +10,10 @@ import com.example.loaescuela.network.models.Outcome;
 import com.example.loaescuela.network.models.Planilla;
 import com.example.loaescuela.network.models.PlanillaAlumno;
 import com.example.loaescuela.network.models.PlanillaPresente;
+import com.example.loaescuela.network.models.ReportBox;
 import com.example.loaescuela.network.models.ReportClassCourse;
 import com.example.loaescuela.network.models.ReportIncomeStudent;
+import com.example.loaescuela.network.models.ReportNewBox;
 import com.example.loaescuela.network.models.ReportOutcome;
 import com.example.loaescuela.network.models.ReportPresent;
 import com.example.loaescuela.network.models.ReportResp;
@@ -71,8 +74,8 @@ public class ApiClient {
     }
 
 
-    public void getAssistsByStudents(Integer page, Long id,final GenericCallback<List<ReportPresent>> callback){
-        handleRequest( ApiUtils.getAPISessionService().getAssistsByStudent("getPresentsByStudent", page, id), callback);
+    public void getAssistsByStudents( Long id,final GenericCallback<List<ReportPresent>> callback){
+        handleRequest( ApiUtils.getAPISessionService().getAssistsByStudent("getPresentsByStudent", id), callback);
     }
 
     //CURSOS
@@ -105,10 +108,27 @@ public class ApiClient {
         handleRequest( ApiUtils.getAPIService().putIncome(inc), callback);
     }
 
-    public void getAllIncomes(Integer page, final GenericCallback<List<ReportIncomeStudent>> callback){
-        handleRequest( ApiUtils.getAPISessionService().getAllIncomes("getAllIncomes", page), callback);
+    public void getAllIncomes(Integer page, String payment_place, final GenericCallback<List<ReportIncomeStudent>> callback){
+        handleRequest( ApiUtils.getAPISessionService().getAllIncomes("getAllIncomes", page, payment_place), callback);
     }
 
+    //BEACH BOXES
+
+    public void postBeachBox(BeachBox inc, GenericCallback<BeachBox> callback){
+        handleRequest( ApiUtils.getAPIService().postBeachBox(inc), callback);
+    }
+
+    public void getBoxes(Integer page,  final GenericCallback<List<BeachBox>> callback){
+        handleRequest( ApiUtils.getAPISessionService().getBoxes(page), callback);
+    }
+
+    public void getPaidAmountByDay( String date, final GenericCallback<ReportBox> callback){
+        handleRequest( ApiUtils.getAPISessionService().getPaidAmountByDay("getPaidAmountByDay", date), callback);
+    }
+
+    public void getPreviousBox( String created,String date,String dateTo,final GenericCallback<ReportNewBox> callback ){
+        handleRequest( ApiUtils.getAPISessionService().getPreviousBox("getLastBox",created,date,dateTo), callback);
+    }
 
     //OUTCOMES
 
@@ -157,6 +177,10 @@ public class ApiClient {
 
     public void getStudents(String query, Integer page,String category, String orderby, final GenericCallback<List<Student>> callback ){
         handleRequest( ApiUtils.getAPISessionService().getStudents(page,query, "getStudents",category, orderby), callback);
+    }
+
+    public void getStudent(Long studentid, final GenericCallback<Student> callback ){
+        handleRequest( ApiUtils.getAPISessionService().getStudent(studentid), callback);
     }
 
     public void getStudents2(String query, Integer page,final GenericCallback<List<Student>> callback ){

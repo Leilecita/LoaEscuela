@@ -8,6 +8,7 @@ public class ReportStudentAsistItem {
     public String nombre;
     public String apellido;
     public String presente;
+    public String color;
    // public Integer taken_classes;
     public List<ReportSeasonPresent> taken_classes;
 
@@ -15,6 +16,8 @@ public class ReportStudentAsistItem {
 
     public Long student_id;
     public Long planilla_presente_id;
+
+    public Boolean isOpen = false;
 
     public ReportStudentAsistItem(){}
 }

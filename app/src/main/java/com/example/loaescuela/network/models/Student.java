@@ -9,6 +9,7 @@ public class Student {
     public String tel_adulto;
     public String category;
     public String dni;
+    public String color;
 
     public String edad;
 

@@ -1,5 +1,6 @@
 package com.example.loaescuela.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -54,15 +55,29 @@ public class SelectStudentForAssistActivity extends BaseActivity implements Pagi
     private String mCategory = "todos";
 
     private Long mPlanillaId = -1l;
+    private String mCategoria = "";
+    private String mSubCategoria = "";
 
     private Button orderByCreated;
     private Button orderByName;
     private String mOrderBy;
+    private String typeActivity;
+    private String fragmentCategory;
+
+    private LinearLayout add;
 
     @Override
-    public void onSelectStudent(){
-        System.out.println("entra aca");
-        setResult(RESULT_OK);
+    public void onSelectStudent(Long id, String name, String surname, String category){
+
+        if(typeActivity.equals("PAGOS")){
+            AssistsCoursesIncomesByStudentActivity.start(this, id, name, surname, category, typeActivity);
+        }
+
+        Intent intent=new Intent();
+        intent.putExtra("CATEGORIA", category);
+        intent.putExtra("SUBCATEGORIA", mSubCategoria);
+        intent.putExtra("STUDENTID", id);
+        setResult(RESULT_OK, intent);
         finish();
     }
 
@@ -84,6 +99,10 @@ public class SelectStudentForAssistActivity extends BaseActivity implements Pagi
         });
 
         mPlanillaId = getIntent().getLongExtra("ID", -1);
+        mCategoria = getIntent().getStringExtra("CATEGORIA");
+        mSubCategoria = getIntent().getStringExtra("SUBCATEGORIA");
+        typeActivity = getIntent().getStringExtra("TYPE");
+        fragmentCategory = getIntent().getStringExtra("FRAGMENTCATEGORY");
 
         mRecyclerView = findViewById(R.id.list_users);
         layoutManager = new LinearLayoutManager(this    );
@@ -91,6 +110,8 @@ public class SelectStudentForAssistActivity extends BaseActivity implements Pagi
         mAdapter = new StudentToAssistAdapter(this, new ArrayList<Student>());
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnSelectStudent(this);
+        mAdapter.setCategoryActivity(getIntent().getStringExtra("CATEGORIA"));
+        mAdapter.setTypeActivity(typeActivity);
 
         mAdapter.setPlanillaId(mPlanillaId);
 
@@ -167,6 +188,13 @@ public class SelectStudentForAssistActivity extends BaseActivity implements Pagi
 
         topBarListener(bottomSheet);
 
+        add = findViewById(R.id.add_new_student);
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getBaseContext(), CreateStudentActivity.class));
+            }
+        });
     }
 
     private void topBarListener(View bottomSheet){
@@ -174,7 +202,6 @@ public class SelectStudentForAssistActivity extends BaseActivity implements Pagi
         coloniaFilter = bottomSheet.findViewById(R.id.coloniaFilter);
         highschoolFilter = bottomSheet.findViewById(R.id.highschoolFilter);
         allFilter = bottomSheet.findViewById(R.id.all);
-
 
         allFilter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -261,8 +288,6 @@ public class SelectStudentForAssistActivity extends BaseActivity implements Pagi
                 loadingInProgress = false;
             }
         });
-
-
     }
 
     private void implementsPaginate(){
@@ -298,7 +323,5 @@ public class SelectStudentForAssistActivity extends BaseActivity implements Pagi
     public boolean hasLoadedAllItems() {
         return !hasMoreItems;
     }
-
-
 
 }

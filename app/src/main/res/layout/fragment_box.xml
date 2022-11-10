@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/background"
+    android:descendantFocusability="blocksDescendants"
+    android:layout_height="match_parent"
+    android:id="@+id/listado">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/description_top_bar"
+            android:background="@color/background_violet"
+            android:id="@+id/line1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_width="45sp"
+                android:id="@+id/date"
+                android:textColor="@color/colorPrimaryDarkLetter"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                android:text=""
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/venta_ctdo"
+                android:textColor="@color/colorPrimaryDarkLetter"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text=" ctdo"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:textColor="@color/colorPrimaryDarkLetter"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:id="@+id/credit_card"
+                android:layout_height="wrap_content"
+                android:text="tarjeta"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/total_amount"
+                android:textColor="@color/colorPrimaryDarkLetter"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="total"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/rest_box"
+                android:textColor="@color/colorPrimaryDarkLetter"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="rest c"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/dep"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryDarkLetter"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="t ext"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/description_top_bar"
+            android:background="@color/background_violet"
+            android:gravity="center_vertical"
+            android:id="@+id/line_tot_by_period"
+            android:visibility="gone"
+            android:orientation="horizontal"
+            >
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/tot_venta_ctdo"
+                android:textColor="@color/colorPrimaryDarkLetter"
+                android:gravity="center"
+                android:textSize="15sp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:textColor="@color/colorPrimaryDarkLetter"
+                android:gravity="center"
+                android:textSize="15sp"
+                android:id="@+id/tot_credit_card"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/tot_total_amount"
+                android:textColor="@color/colorPrimaryDarkLetter"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/tot_rest_box"
+                android:textColor="@color/colorPrimaryDarkLetter"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/tot_dep"
+                android:textSize="15sp"
+                android:textColor="@color/colorPrimaryDarkLetter"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginBottom="50dp"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/empty"
+                    android:textSize="18sp"
+                    android:visibility="gone"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center_horizontal"
+                    android:text="No hay pedidos para entregar"
+
+
+                    />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/list_box"
+                    android:scrollbars="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="70dp"
+                    android:clipToPadding="false"
+
+                    />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/list_box_period"
+                    android:scrollbars="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="70dp"
+                    android:clipToPadding="false"
+
+                    />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/list_box_month"
+                    android:scrollbars="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="70dp"
+                    android:clipToPadding="false"
+
+
+                    />
+
+            </FrameLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <!-- Bottom Sheet
+    <include layout="@layout/bottom_shet_box" />-->
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

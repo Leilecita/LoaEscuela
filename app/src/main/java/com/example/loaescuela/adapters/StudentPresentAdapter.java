@@ -89,14 +89,18 @@ public class StudentPresentAdapter extends BaseAdapter<ReportPresent, StudentPre
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder  {
-        public TextView fecha_presente;
+        public TextView name_day;
+        public TextView number_day;
+        public TextView month;
         public TextView nombre_planilla;
 
 
 
         public ViewHolder(View v){
             super(v);
-            fecha_presente = v.findViewById(R.id.fecha_presente);
+            name_day = v.findViewById(R.id.name_day);
+            number_day = v.findViewById(R.id.number_day);
+            month = v.findViewById(R.id.month);
             nombre_planilla = v.findViewById(R.id.planilla);
 
         }
@@ -113,11 +117,14 @@ public class StudentPresentAdapter extends BaseAdapter<ReportPresent, StudentPre
 
 
     private void clearViewHolder(StudentPresentAdapter.ViewHolder vh){
-        if(vh.fecha_presente!=null)
-            vh.fecha_presente.setText(null);
+        if(vh.name_day!=null)
+            vh.name_day.setText(null);
+        if(vh.number_day!=null)
+            vh.number_day.setText(null);
+        if(vh.month!=null)
+            vh.month.setText(null);
         if(vh.nombre_planilla!=null)
             vh.nombre_planilla.setText(null);
-
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -126,8 +133,14 @@ public class StudentPresentAdapter extends BaseAdapter<ReportPresent, StudentPre
         clearViewHolder(holder);
 
         final ReportPresent current = getItem(position);
+        String date = DateHelper.get().onlyDate(current.fecha_presente);
+        String day = DateHelper.get().getNameDay(date);
+        String number = DateHelper.get().getDay(date);
+        String month = DateHelper.get().getNameMonth(date);
 
-        holder.fecha_presente.setText(current.fecha_presente);
+        holder.name_day.setText(day);
+        holder.number_day.setText(number);
+        holder.month.setText(month);
         holder.nombre_planilla.setText(current.planilla);
 
     }

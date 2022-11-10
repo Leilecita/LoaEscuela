@@ -2,7 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@drawable/fondoasist"
+    android:background="@drawable/fff5"
     android:layout_height="match_parent"
     >
     <RelativeLayout
@@ -60,8 +60,9 @@
                 android:id="@+id/searchView"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:layout_height="50dp"
+                android:layout_height="@dimen/height_rec_search"
                 android:background="@drawable/rec_find"
+                android:backgroundTint="@color/background_searchview"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
 
@@ -84,14 +85,14 @@
                     android:layout_height="wrap_content">
 
                     <Button
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="40dp"
+                        android:layout_height="@dimen/height_rec_search"
                         android:background="@drawable/button_rec"
                         android:id="@+id/orderClientBy"
                         android:text="A-B"
                         android:fontFamily="@font/opensansregular"
                         android:textSize="17sp"
-                        android:layout_marginLeft="2dp"
+                        android:layout_marginLeft="6dp"
                         android:layout_marginRight="2dp"
                         android:textColor="@color/colorPrimaryDark"
                         android:layout_gravity="center_vertical"
@@ -102,9 +103,9 @@
 
 
                     <Button
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginLeft="2dp"
+                        android:layout_width="40dp"
+                        android:layout_height="@dimen/height_rec_search"
+                        android:layout_marginLeft="6dp"
                         android:layout_marginRight="2dp"
                         android:background="@drawable/button_rec"
                         android:id="@+id/orderClientByCreated"

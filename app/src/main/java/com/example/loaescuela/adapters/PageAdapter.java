@@ -7,9 +7,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.loaescuela.fragment.AssistsFragment;
 import com.example.loaescuela.fragment.BaseFragment;
-import com.example.loaescuela.fragment.IncomesFragment;
+import com.example.loaescuela.fragment.IncomesBeachFragment;
 
 import java.util.ArrayList;
 
@@ -24,8 +23,7 @@ public class PageAdapter extends FragmentPagerAdapter {
         mContext = context;
         mFragments = new ArrayList<>();
 
-        mFragments.add(new AssistsFragment());
-        mFragments.add(new IncomesFragment());
+        mFragments.add(new IncomesBeachFragment());
 
     }
 

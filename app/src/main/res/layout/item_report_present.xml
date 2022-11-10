@@ -2,14 +2,11 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/card_view"
-    android:layout_marginLeft="6dp"
-    android:layout_marginTop="3dp"
-    android:layout_marginBottom="3dp"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="2dp"
     android:layout_marginRight="6dp"
-    android:paddingLeft="@dimen/student_padding_left"
+    android:paddingLeft="8dp"
     android:paddingRight="@dimen/student_padding_right"
-    android:paddingTop="@dimen/student_padding_top"
-    android:paddingBottom="@dimen/student_padding_bottom"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     >
@@ -22,45 +19,76 @@
         android:orientation="vertical"
         >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="2dp">
+
 
 
             <LinearLayout
                 android:layout_width="match_parent"
+
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_weight="1"
                 >
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="0.8"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+
                 <TextView
-                    android:id="@+id/fecha_presente"
+                    android:id="@+id/name_day"
+                    android:layout_width="35dp"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimaryDarkLetter"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="4dp"
+                    android:text="LUN"
+                    android:textSize="@dimen/general_text" />
+                <TextView
+                    android:id="@+id/number_day"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+
+                    android:textColor="@color/colorPrimaryDarkLetter"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="20"
+                    android:textSize="@dimen/general_text" />
+
+                <TextView
+                    android:id="@+id/month"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryDarkLetter"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+
+                    android:inputType="textCapWords"
+                    android:layout_marginLeft="4dp"
+                    android:text="Enero"
+                    android:textSize="@dimen/general_text" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/planilla"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1.4"
+                    android:layout_height="wrap_content"
+
                     android:textColor="@color/colorPrimaryDarkLetter"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
                     android:layout_marginLeft="8dp"
-                    android:text=""
-                    android:textSize="19sp" />
-
-                <TextView
-                    android:id="@+id/planilla"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:textColor="@color/colorPrimaryDarkLetter"
-                    android:layout_gravity="center_vertical"
-                    android:gravity="center_vertical"
-                    android:layout_marginLeft="18dp"
-                    android:text=""
-                    android:textSize="19sp" />
+                    android:text="Intermedios"
+                    android:textSize="@dimen/general_text" />
 
 
-            </LinearLayout>
+
 
 
 

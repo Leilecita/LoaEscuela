@@ -3,9 +3,17 @@ package com.example.loaescuela.activities;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.loaescuela.DateHelper;
 import com.example.loaescuela.R;
-import com.example.loaescuela.activities.todelete.AssistsAndIncomesStudentActivity;
+import com.example.loaescuela.activities.noseusa.ListIncomesDayActivity;
+import com.example.loaescuela.adapters.assistsResumByDay.AssistResumAdapter;
+import com.example.loaescuela.adapters.assistsResumByDay.PlanillaResumAdapter;
 import com.example.loaescuela.data.SessionPrefs;
+import com.example.loaescuela.network.ApiClient;
+import com.example.loaescuela.network.Error;
+import com.example.loaescuela.network.GenericCallback;
+import com.example.loaescuela.network.models.ReportResumAsist;
+import com.example.loaescuela.network.models.ReportResumPlanilla;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -13,6 +21,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
 
@@ -22,7 +33,14 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener{
+
+    PlanillaResumAdapter adapterIncomeInfo;
+    GridLayoutManager gridlayoutmanager;
+    public RecyclerView mRecyclerView;
 
     Toolbar myToolbar;
     private DrawerLayout drawerLayout;
@@ -37,15 +55,20 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     ImageView spendings;
     ImageView outcomes;
 
+    public TextView name_day;
+    public TextView number_day;
+    public TextView month;
+    public TextView year;
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
         if (id == R.id.nav_assists) {
-            startActivity(new Intent(this, AssistsAndIncomesStudentActivity.class));
+            startActivity(new Intent(this, GeneralAssistActivity.class));
         } else if (id == R.id.nav_payments) {
-             startActivity(new Intent(this, ListIncomesDayActivity.class));
+             startActivity(new Intent(this, IncomesActivity.class));
         } else if (id == R.id.nav_create_student) {
             startActivity(new Intent(this, CreateStudentActivity.class));
         } else if (id == R.id.nav_resum) {
@@ -54,6 +77,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             startActivity(new Intent(this, PlanillasActivity.class));
         }  else if (id == R.id.nav_students) {
             startActivity(new Intent(this, StudentsListActivity.class));
+        } else if (id == R.id.nav_session) {
+            signOut();
         }else if( id == R.id.nav_home){
            // selectFragment(0);
         }
@@ -139,7 +164,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         payments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getBaseContext(), ListIncomesDayActivity.class);
+                Intent i = new Intent(getBaseContext(), IncomesActivity.class);
                // i.putExtra("NAMEFRAGMENT", "lei");
                 startActivity(i);
             }
@@ -148,10 +173,30 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         assists.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getBaseContext(), AssistsActivity.class));
+                startActivity(new Intent(getBaseContext(), GeneralAssistActivity.class));
             }
         });
 
+
+        name_day = findViewById(R.id.name_day);
+        number_day = findViewById(R.id.number_day);
+        month = findViewById(R.id.month);
+        year = findViewById(R.id.year);
+
+        mRecyclerView = findViewById(R.id.list_planillas);
+        gridlayoutmanager = new GridLayoutManager(this ,2   );
+        mRecyclerView.setLayoutManager(gridlayoutmanager);
+        adapterIncomeInfo = new PlanillaResumAdapter(this, new ArrayList<ReportResumPlanilla>());
+        mRecyclerView.setAdapter(adapterIncomeInfo);
+
+        listPlanillas();
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        listPlanillas();
     }
 
     @Override
@@ -165,21 +210,44 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         finish();
     }
 
-    @Override
+  /*  @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
-    }
+    }*/
 
-    public void hideToolbar(){
-        myToolbar.setVisibility(View.GONE);
-    }
 
-    public void showToolbar(){
-        myToolbar.setVisibility(View.VISIBLE);
+    public void listPlanillas(){
+        ApiClient.get().getAssistsResumByDay(0 , new GenericCallback<List<ReportResumAsist>>() {
+            @Override
+            public void onSuccess(List<ReportResumAsist> data) {
+
+                String date = DateHelper.get().onlyDate(data.get(0).day);
+                String day = DateHelper.get().getNameDay(date);
+                String number = DateHelper.get().getDay(date);
+                String month2 = DateHelper.get().getNameMonth(date);
+                String year2 = DateHelper.get().getYear(date);
+
+
+                name_day.setText(day);
+                number_day.setText(number);
+                month.setText(month2);
+                year.setText(year2);
+
+
+
+                adapterIncomeInfo.setItems(data.get(0).planillas);
+            }
+
+            @Override
+            public void onError(Error error) {
+
+            }
+        });
+
     }
 
 

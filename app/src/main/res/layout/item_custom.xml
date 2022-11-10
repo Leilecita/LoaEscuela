@@ -2,7 +2,7 @@
 
 <TextView
     android:layout_width="wrap_content"
-    android:textSize="@dimen/big_text"
+    android:textSize="@dimen/medium_text"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/textView1"
     android:layout_gravity="center"
@@ -12,7 +12,7 @@
     android:text="San clemente"
     android:maxLines="2"
     android:paddingLeft="8dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
     android:paddingRight="8dp"
-    android:paddingBottom="6dp"
-    android:paddingTop="6dp"
     android:layout_height="wrap_content" />

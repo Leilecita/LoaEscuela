@@ -40,8 +40,101 @@
         <RelativeLayout
             android:orientation="vertical" android:layout_width="match_parent"
             android:paddingBottom="40dp"
-            android:background="@drawable/fondoapp2"
+            android:background="@drawable/fondlei2"
             android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:background="@drawable/rec_rounded_8"
+                android:paddingBottom="@dimen/student_padding_bottom"
+                android:paddingLeft="8dp"
+                android:layout_marginTop="8dp"
+
+                android:backgroundTint="@color/back_transp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                >
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="6dp"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/rec_rounded_8"
+                    android:backgroundTint="@color/colorPrimaryClear"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:gravity="center"
+                        android:textSize="@dimen/small_text"
+                        android:text="Lun"
+                        android:layout_gravity="center"
+                        android:textAllCaps="true"
+                        android:id="@+id/name_day"
+                        android:textColor="@color/colorPrimaryIntLetter"
+                        android:layout_height="match_parent"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:gravity="center"
+                        android:textSize="@dimen/small_text"
+                        android:text="20"
+                        android:id="@+id/number_day"
+                        android:layout_gravity="center"
+                        android:paddingLeft="4dp"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorPrimaryIntLetter"
+                        android:layout_height="match_parent"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:gravity="center"
+                        android:textSize="@dimen/small_text"
+                        android:text="Enero"
+                        android:paddingLeft="4dp"
+                        android:layout_gravity="center"
+                        android:id="@+id/month"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorPrimaryIntLetter"
+                        android:layout_height="match_parent"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:gravity="center"
+                        android:textSize="@dimen/small_text"
+                        android:text="2022"
+                        android:paddingLeft="4dp"
+                        android:id="@+id/year"
+                        android:layout_gravity="center"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorPrimaryIntLetter"
+                        android:layout_height="match_parent"
+                        />
+
+
+
+
+                </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:id="@+id/list_planillas"
+                    android:layout_marginTop="6dp"
+                    android:layout_height="wrap_content">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+
+            </LinearLayout>
 
             <ImageView
                 android:layout_width="150dp"
@@ -56,7 +149,6 @@
                 android:layout_above="@id/students"
                 android:layout_toLeftOf="@id/box"
                 android:layout_marginBottom="-20dp"
-                android:layout_marginRight="5dp"
                 android:layout_height="120dp"
                 android:background="@drawable/custom_button"
                 />
@@ -66,7 +158,6 @@
                 android:layout_height="120dp"
                 android:id="@+id/payments"
                 android:layout_toRightOf="@+id/box"
-                android:layout_marginLeft="5dp"
                 android:layout_above="@id/students"
                 android:layout_marginBottom="-20dp"
                 android:src="@drawable/custom_button_list_box"/>

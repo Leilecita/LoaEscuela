@@ -69,6 +69,7 @@
 
     <color name="white">#FFFFFF</color>
 
+    <color name="background_searchview">#C6BCDA</color>
     <color name="colorPrimaryClear">#C6BCDA</color>
     <color name="colorPrimaryClearTr">#90DCD1F0</color>
     <color name="colorPrimaryClearSelect">#AAA1BB</color>

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ import com.example.loaescuela.network.GenericCallback;
 import com.example.loaescuela.network.models.ReportResp;
 import com.example.loaescuela.network.models.Student;
 import com.example.loaescuela.types.CategoryType;
+import com.example.loaescuela.types.Constants;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -57,17 +59,13 @@ public class CreateStudentActivity extends BaseActivity{
 
     public String mExistAlum;
 
+    public Long student_id;
+    public String typeAct;
+
+
     public void setStyleToolbar(){
         returnn= this.findViewById(R.id.returnn);
         title = findViewById(R.id.title);
-
-       /* if(getResources().getString(R.string.app_name).equals( "Fisherton app")){
-            title.setTextColor(getResources().getColor(R.color.textColorAppFisherton));
-            returnn.setColorFilter(this.getResources().getColor(R.color.textColorAppFisherton));
-        }else{
-            title.setTextColor(getResources().getColor(R.color.white));
-        }*/
-
     }
 
     @Override
@@ -85,9 +83,29 @@ public class CreateStudentActivity extends BaseActivity{
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+               // if(typeAct != null && typeAct.equals("EDITAR")){
+                 //   setResult(RESULT_OK);
+
+                  /*  Intent i=new Intent();
+
+                    i.putExtra("ID",student_id);
+                    i.putExtra("NAME", mStudentName.getText().toString());
+                    i.putExtra("SURNAME",mStudentSurName.getText().toString());
+                    i.putExtra("CATEGORY",mStudentCategory.get);
+                  //  i.putExtra("CAMEFROM",cameFrom);
+              */
                 finish();
+            //    }
             }
         });
+
+
+        typeAct = getIntent().getStringExtra("TYPE");
+
+        if(typeAct != null && typeAct.equals("EDITAR")){
+            student_id = getIntent().getLongExtra("STUDENTID", -1);
+            getStudent(student_id);
+        }
 
         setTitle("Alumno nuevo");
 
@@ -146,7 +164,6 @@ public class CreateStudentActivity extends BaseActivity{
                 public void onClick(View v) {
                     saveStudent();
                     dialog.dismiss();
-
                 }
 
             });
@@ -186,6 +203,15 @@ public class CreateStudentActivity extends BaseActivity{
                     hideKeyboard(getWindow().getDecorView().findViewById(android.R.id.content));
                     progress.dismiss();
 
+                    if(typeAct != null && typeAct.equals("EDITAR")) {
+                        Intent i = new Intent();
+                        i.putExtra("ID",data.id);
+                        i.putExtra("NAME", data.nombre);
+                        i.putExtra("SURNAME",data.apellido);
+                        i.putExtra("CATEGORY",data.category);
+
+                        setResult(RESULT_OK, i);
+                    }
                     finish();
                 }
 
@@ -197,6 +223,40 @@ public class CreateStudentActivity extends BaseActivity{
         }
     }
 
+    private Integer getSelected(String cat){
+
+        if(cat.equals(CategoryType.COLONIA.getName())){
+            return 1;
+        }else if(cat.equals(CategoryType.ESCUELA.getName())){
+            return 2;
+        }else{
+            return 3;
+        }
+    }
+
+
+    private void getStudent(Long id){
+        ApiClient.get().getStudent(id, new GenericCallback<Student>() {
+                    @Override
+                    public void onSuccess(Student data) {
+
+                        mStudentDni.setText(data.dni);
+                        mStudentName.setText(data.nombre);
+                        mStudentSurName.setText(data.apellido);
+                        mStudentNacimiento.setText(data.fecha_nacimiento);
+                        mStudentPhone.setText(data.tel_adulto);
+                        mStudentCategory.setSelection(getSelected(data.category));
+
+
+                    }
+
+                    @Override
+                    public void onError(Error error) {
+
+                    }
+                }
+        );
+    }
     private void checkExistStudent(String dni){
         ApiClient.get().checkExistStudent(dni, new GenericCallback<ReportResp>() {
             @Override
@@ -276,7 +336,12 @@ public class CreateStudentActivity extends BaseActivity{
 
     private static <T extends Enum<CategoryType>> List<String> enumCat(CategoryType[] values, List<String> spinner_type) {
         for (CategoryType value : values) {
-            spinner_type.add(value.getName());
+            if(value.getName().equals(Constants.TYPE_ALL)){
+
+            }else{
+                spinner_type.add(value.getName());
+            }
+
         }
         return spinner_type;
     }

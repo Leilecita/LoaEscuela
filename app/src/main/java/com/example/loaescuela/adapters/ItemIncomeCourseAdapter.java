@@ -136,7 +136,7 @@ public class ItemIncomeCourseAdapter extends BaseAdapter<ReportIncome, ItemIncom
         final ReportIncome current = getItem(position);
 
         holder.amount.setText(ValuesHelper.get().getIntegerQuantity(current.amount));
-        holder.date.setText(DateHelper.get().onlyDate(current.created));
+        holder.date.setText(DateHelper.get().onlyDayMonth(DateHelper.get().onlyDate(current.created)));
         holder.payment_method.setText(current.payment_method);
 
 

@@ -8,6 +8,7 @@ import android.view.View;
 
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -59,6 +60,7 @@ public class StudentsListActivity extends BaseActivity implements Paginate.Callb
     private Button orderByName;
 
     private LinearLayout add;
+    private TextView title;
 
 
     @Override
@@ -69,6 +71,9 @@ public class StudentsListActivity extends BaseActivity implements Paginate.Callb
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        title = findViewById(R.id.title);
+        title.setText(getIntent().getStringExtra("TITLE"));
 
         orderByCreated = findViewById(R.id.orderClientByCreated);
         orderByName = findViewById(R.id.orderClientBy);

@@ -8,10 +8,11 @@
         android:gravity="center_vertical"
         android:orientation="vertical"
         android:background="@drawable/rec_rounded_8"
-        android:paddingLeft="@dimen/student_padding_left"
-        android:paddingRight="@dimen/student_padding_right"
-        android:paddingTop="@dimen/student_padding_top"
-        android:paddingBottom="@dimen/student_padding_bottom"
+    android:paddingLeft="@dimen/student_padding_left"
+    android:paddingRight="@dimen/student_padding_right"
+    android:paddingTop="@dimen/student_padding_top"
+    android:paddingBottom="@dimen/student_padding_bottom"
+
         android:layout_height="wrap_content">
 
         <LinearLayout
@@ -38,7 +39,9 @@
                     android:layout_width="match_parent"
                     android:text="L"
                     android:id="@+id/firstLetter"
+                    android:textAllCaps="true"
                     android:gravity="center"
+                    android:fontFamily="@font/opensansregular"
                     android:layout_height="wrap_content"
                     android:textColor="#fff"
                     android:layout_gravity="center_vertical"
@@ -64,11 +67,11 @@
                     android:gravity="center_vertical"
                     android:layout_height="wrap_content"
                     android:text="Leila"
-                    android:fontFamily="@font/opensansregular"
+                    android:fontFamily="@font/opensanslight"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="8dp"
                     android:textColor="@color/colorPrimaryDarkLetter"
-                    android:textSize="19sp" />
+                    android:textSize="@dimen/medium_text" />
 
 
                 <TextView
@@ -77,6 +80,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Black"
+                    android:visibility="gone"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="8dp"
                     android:textColor="@color/colorPrimaryClearLetter"
@@ -108,13 +112,15 @@
                     android:textColor="@color/colorPrimaryClear" />
             </LinearLayout>
 
+
             <CheckBox
 
+                android:layout_width="wrap_content"
                 android:id="@+id/check_presente"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:button="@null"
-
+                android:layout_height="wrap_content"
+                 android:scaleX="2.2"
+                android:scaleY="1.8"
+                android:layout_marginRight="4dp"
                 android:background="?android:attr/listChoiceIndicatorMultiple"
                 android:checked="true"
                 android:layout_gravity="center"

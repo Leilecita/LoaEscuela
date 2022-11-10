@@ -27,6 +27,7 @@ import com.example.loaescuela.DateHelper;
 import com.example.loaescuela.R;
 import com.example.loaescuela.activities.AssistsCoursesIncomesByStudentActivity;
 import com.example.loaescuela.network.models.Student;
+import com.example.loaescuela.types.Constants;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter;
 
 import java.time.LocalDate;
@@ -262,8 +263,20 @@ public class StudentAdapter extends BaseAdapter<Student,StudentAdapter.ViewHolde
 
         final Student currentClient = getItem(position);
 
+        System.out.println(currentClient.nombre);
+
         holder.text_name.setText(currentClient.nombre+" "+currentClient.apellido);
         holder.category.setText(currentClient.category);
+
+        if(currentClient.category.equals(Constants.CATEGORY_COLONIA)){
+            holder.cuad_image.setColorFilter(Color.parseColor(Constants.COLOR_COLONIA), PorterDuff.Mode.SRC_ATOP);
+        }else if(currentClient.category.equals(Constants.CATEGORY_ESCUELA)){
+            holder.cuad_image.setColorFilter(Color.parseColor(Constants.COLOR_ESCUELA), PorterDuff.Mode.SRC_ATOP);
+        }else{
+            holder.cuad_image.setColorFilter(Color.parseColor(Constants.COLOR_HIGHSCHOOL), PorterDuff.Mode.SRC_ATOP);
+        }
+
+        holder.firstLetter.setText(String.valueOf(currentClient.nombre.charAt(0)));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             holder.text_year.setText(String.valueOf(getAge(currentClient)));
@@ -283,21 +296,18 @@ public class StudentAdapter extends BaseAdapter<Student,StudentAdapter.ViewHolde
             holder.line_tel_student.setVisibility(View.VISIBLE);
         }
 
-        if(currentClient.nombre_mama.matches("") && currentClient.tel_mama.matches("") ){
+
+        if(currentClient.nombre_mama != null && currentClient.nombre_mama.matches("") && currentClient.tel_mama.matches("") ){
             holder.line_mama.setVisibility(View.GONE);
         }else{
             holder.line_mama.setVisibility(View.VISIBLE);
         }
 
-        if(currentClient.nombre_papa.matches("") && currentClient.tel_papa.matches("") ){
+        if(currentClient.nombre_papa != null && currentClient.nombre_papa.matches("") && currentClient.tel_papa.matches("") ){
             holder.line_papa.setVisibility(View.GONE);
         }else{
             holder.line_papa.setVisibility(View.VISIBLE);
         }
-
-        holder.firstLetter.setText(String.valueOf(currentClient.nombre.charAt(0)));
-
-        holder.cuad_image.setColorFilter(Color.parseColor(listColor.get(random.nextInt(listColor.size()))), PorterDuff.Mode.SRC_ATOP);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -359,7 +369,7 @@ public class StudentAdapter extends BaseAdapter<Student,StudentAdapter.ViewHolde
         holder.more_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AssistsCoursesIncomesByStudentActivity.start(mContext,currentClient.id, currentClient.nombre, currentClient.apellido);
+                AssistsCoursesIncomesByStudentActivity.start(mContext,currentClient.id, currentClient.nombre, currentClient.apellido, currentClient.category, "ASISTENCIA");
             }
         });
 

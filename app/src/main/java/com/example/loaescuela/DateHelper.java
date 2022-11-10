@@ -72,6 +72,37 @@ public class DateHelper {
     }
 
 
+    //return true si son iguales
+    public Boolean compareDate(String selectedPresentDate){
+        try {
+        SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd");
+
+        String today = getActualDate();
+        String dateToday = onlyDate(today);
+
+       // Date d1 = sdformat.parse("2019-04-15");
+        Date d1 = sdformat.parse(dateToday);
+
+
+       // Date d2 = sdformat.parse("2019-08-10");
+        Date d2 = sdformat.parse(selectedPresentDate);
+
+        System.out.println("The date 1 is: " + sdformat.format(d1));
+        System.out.println("The date 2 is: " + sdformat.format(d2));
+        if(d1.compareTo(d2) > 0) {
+            return false;
+        } else if(d1.compareTo(d2) < 0) {
+            return false;
+        } else if(d1.compareTo(d2) == 0) {
+            return true;
+        }
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public String getNextDay(String date) {
         try {
 
@@ -363,11 +394,11 @@ public class DateHelper {
     }
 
     public String onlyDayMonth(String date) {
-        String[] parts = date.split("/");
+        String[] parts = date.split("-");
         String part1 = parts[0]; // dia
         String part2 = parts[1]; // mes
         String part = parts[2]; // año
-        return part1 + "-" + part2;
+        return part + "/" + part2;
     }
 
 

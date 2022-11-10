@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -127,6 +128,7 @@ public class ClassCourseAdapter extends BaseAdapter<ReportClassCourse,ClassCours
 
         public RelativeLayout info;
         public LinearLayout load_payment;
+        public LinearLayout complete_pack;
 
         public ViewHolder(View v){
             super(v);
@@ -142,6 +144,7 @@ public class ClassCourseAdapter extends BaseAdapter<ReportClassCourse,ClassCours
             dateDay = v.findViewById(R.id.date_day);
             circle = v.findViewById(R.id.circle2);
             load_payment = v.findViewById(R.id.load_income);
+            complete_pack = v.findViewById(R.id.complete_pack);
         }
     }
 
@@ -162,8 +165,6 @@ public class ClassCourseAdapter extends BaseAdapter<ReportClassCourse,ClassCours
             vh.classes_number.setText(null);
         if(vh.course_amount!=null)
             vh.course_amount.setText(null);
-
-
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -173,7 +174,9 @@ public class ClassCourseAdapter extends BaseAdapter<ReportClassCourse,ClassCours
 
         final ReportClassCourse current = getItem(position);
 
-        holder.categoria.setText(current.category);
+
+
+        holder.categoria.setText(current.category.substring(0, 1).toUpperCase()+ current.category.substring(1).toLowerCase());
         holder.classes_number.setText(String.valueOf(current.classes_number));
         holder.course_amount.setText(ValuesHelper.get().getIntegerQuantity(current.amount));
         holder.incomes_amount.setText(ValuesHelper.get().getIntegerQuantity(current.paid_amount));
@@ -186,20 +189,39 @@ public class ClassCourseAdapter extends BaseAdapter<ReportClassCourse,ClassCours
         
         checkCompletePayment(holder,current);
 
+        if(current.classes_number == 1){
+            holder.complete_pack.setVisibility(View.VISIBLE);
+        }else{
+            holder.complete_pack.setVisibility(View.GONE);
+        }
+
+        if(current.paid_amount >= current.amount){
+            holder.load_payment.setVisibility(View.GONE);
+        }else{
+            holder.load_payment.setVisibility(View.VISIBLE);
+        }
+
+        holder.complete_pack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext, "TODO", Toast.LENGTH_LONG).show();
+            }
+        });
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (holder.info.getVisibility() == View.GONE) {
-                    // prevPosOpenView=position;
                     holder.info.setVisibility(View.VISIBLE);
-                  //  notifyDataSetChanged();
                 } else {
                     holder.info.setVisibility(View.GONE);
                 }
-
-
             }
         });
+
+        if (position == 0) {
+            holder.info.setVisibility(View.VISIBLE);
+        }
 
         //list pagos informacion
         ItemIncomeCourseAdapter adapterIncomeInfo = new ItemIncomeCourseAdapter(mContext, new ArrayList<ReportIncome>(),true,current.class_course_id,
@@ -214,6 +236,10 @@ public class ClassCourseAdapter extends BaseAdapter<ReportClassCourse,ClassCours
             public void onRefreshListIncomes(ReportIncome r) {
 
                 updateCourse(current,position);
+
+                if(onRefreshListCourses != null){
+                    onRefreshListCourses.onRefreshListCourses();
+                }
 
                /* current.paid_amount = adapterIncomeInfo.getAmountIncomes();
                 holder.course_amount.setText(ValuesHelper.get().getIntegerQuantity(current.paid_amount));
@@ -266,19 +292,13 @@ public class ClassCourseAdapter extends BaseAdapter<ReportClassCourse,ClassCours
 
     }
 
-
-
-
-
     private void checkCompletePayment(ViewHolder courseViewHolder, ReportClassCourse current){
-
         if(Double.compare(current.paid_amount,0d) == 0){
             courseViewHolder.circle.setBackgroundResource(R.drawable.circle_student);
         }else if (Double.compare(current.amount, current.paid_amount) == 0 || Double.compare(current.amount, current.paid_amount) < 0){
             courseViewHolder.circle.setBackgroundResource(R.drawable.circle_done);
         }else if (Double.compare(current.amount, current.paid_amount) > 0){
             courseViewHolder.circle.setBackgroundResource(R.drawable.circle_student);
-
         }
     }
 

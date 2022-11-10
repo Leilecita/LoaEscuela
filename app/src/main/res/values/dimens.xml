@@ -6,7 +6,7 @@
     <dimen name="description_top_bar">40dp</dimen>
     <dimen name="general_text">16sp</dimen>
     <dimen name="medium_text">17sp</dimen>
-    <dimen name="big_text">20sp</dimen>
+    <dimen name="big_text">19sp</dimen>
     <dimen name="big_big_text">22sp</dimen>
     <dimen name="padding_top">19sp</dimen>
     <dimen name="small_text">15sp</dimen>
@@ -35,6 +35,9 @@
 
     <dimen name="height_button">35dp</dimen>
     <dimen name="height_rec_cuad_input">38dp</dimen>
+    <dimen name="height_tab">42dp</dimen>
+
+    <dimen name="height_rec_search">30dp</dimen>
 
     <dimen name="student_padding_top">7dp</dimen>
     <dimen name="student_padding_bottom">7dp</dimen>

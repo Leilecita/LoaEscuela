@@ -142,6 +142,7 @@ public class IncomeStudentAdapter extends BaseAdapter<ReportIncomeStudent, Incom
         public TextView textPayment;
         public TextView valPayment;
         public TextView detail;
+        public TextView surname;
 
 
         public RecyclerView list_events;
@@ -151,6 +152,7 @@ public class IncomeStudentAdapter extends BaseAdapter<ReportIncomeStudent, Incom
 
             hour= v.findViewById(R.id.hour);
             student_name= v.findViewById(R.id.student_name);
+            surname= v.findViewById(R.id.surname);
             amount= v.findViewById(R.id.amount);
             type= v.findViewById(R.id.type);
             lineDetail= v.findViewById(R.id.line_detail);
@@ -198,8 +200,14 @@ public class IncomeStudentAdapter extends BaseAdapter<ReportIncomeStudent, Incom
         holder.amount.setText(ValuesHelper.get().getIntegerQuantity(current_general.amount));
         holder.detail.setText(current_general.detail);
 
+        String[] name = current_general.description.split(" ");
 
-        holder.student_name.setText(current_general.description);
+        holder.student_name.setText(name[0]);
+
+        if(name.length > 1){
+            holder.surname.setText(name[1]);
+        }
+
 
         if(current_general.income_created == null){
             holder.hour.setText("");

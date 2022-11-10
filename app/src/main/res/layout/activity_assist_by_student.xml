@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/fondoasist"
+        android:background="@drawable/fff5"
         android:id="@+id/listado">
 
         <androidx.appcompat.widget.Toolbar
@@ -71,7 +71,7 @@
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
                 android:paddingBottom="6dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
                 android:orientation="horizontal"
                 >
 
@@ -93,6 +93,7 @@
                         android:layout_width="match_parent"
                         android:text="L"
                         android:id="@+id/firstLetter"
+                        android:textAllCaps="true"
                         android:gravity="center"
                         android:layout_height="wrap_content"
                         android:textColor="#fff"
@@ -131,7 +132,7 @@
                         android:id="@+id/category"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Black"
+                        android:text="Escuela"
                         android:fontFamily="@font/ariarounded"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="8dp"
@@ -141,10 +142,90 @@
                 </LinearLayout>
 
 
+                <FrameLayout
+                    android:layout_width="42dp"
+                    android:id="@+id/editStudent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_height="42dp">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/edit_clear"
+                        />
 
 
 
 
+                </FrameLayout>
+
+
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:layout_marginLeft="65dp"
+                android:layout_marginRight="8dp"
+                android:orientation="horizontal"
+                >
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="1.8"
+                    android:gravity="right"
+
+                    android:layout_gravity="center"
+                    android:layout_height="match_parent">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textSize="13sp"
+                        android:textColor="@color/colorPrimaryClearLetter"
+                        android:text="pagos totales"
+                        android:minWidth="55dp"
+                        android:gravity="center_vertical|right"
+                        android:fontFamily="@font/opensanslight"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/medium_text"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:layout_gravity="center_vertical"
+                        android:text=" "
+                        android:fontFamily="@font/opensansregular"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/opensanslight"
+                        android:gravity="center_vertical|right"
+                        android:minWidth="60dp"
+                        android:text="deudas"
+                        android:textColor="@color/colorPrimaryClearLetter"
+                        android:textSize="13sp" />
+
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="24dp"
+                    android:layout_height="match_parent">
+
+
+                </LinearLayout>
 
 
             </LinearLayout>
@@ -176,7 +257,7 @@
                         >
 
                         <TextView
-                            android:id="@+id/day"
+                            android:id="@+id/month"
                             android:layout_width="40dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
@@ -220,11 +301,13 @@
 
                 </LinearLayout>
 
+
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:background="@drawable/rec_rounded_8"
                     android:paddingBottom="@dimen/student_padding_bottom"
-                    android:paddingTop="@dimen/student_padding_top"
+
                     android:paddingLeft="8dp"
                     android:backgroundTint="@color/back_transp"
                     android:layout_height="wrap_content"
@@ -242,28 +325,40 @@
 
                         <TextView
                             android:layout_width="wrap_content"
+                            android:paddingTop="@dimen/student_padding_top"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/opensanslight"
-                            android:text="Resumen temporada"
+                            android:text="Resumen temp    "
                             android:textColor="@color/colorPrimaryIntLetter"
-                            android:textSize="@dimen/general_text"
+                            android:textSize="@dimen/small_text"
                             />
+
+                        <TextView
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layerType="software"
+                            android:layout_marginRight="2dp"
+                            android:background="@drawable/line_dotted_vertical"
+                            />
+
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_weight="2"
-                            android:gravity="center"
-                            android:layout_gravity="center"
+                            android:layout_weight="1.6"
+                            android:gravity="center_vertical|right"
+                            android:layout_gravity="center_vertical|right"
                             android:layout_height="match_parent">
 
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:textSize="@dimen/medium_text"
+                                android:textSize="@dimen/general_text"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:id="@+id/paid_amount"
-                                android:text="10000"
-
+                                android:text=""
+                                android:paddingRight="2dp"
+                                android:paddingTop="@dimen/student_padding_top"
                                 android:minWidth="55dp"
                                 android:gravity="right|center_vertical"
                                 android:layout_gravity="center_vertical"
@@ -272,10 +367,11 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="@dimen/medium_text"
+                                android:textSize="@dimen/general_text"
                                 android:textColor="@color/colorPrimaryDark"
                                 android:layout_gravity="center_vertical"
-                                android:text=" / "
+                                android:gravity="center_vertical"
+                                android:text="|"
                                 android:fontFamily="@font/opensansregular"
                                 />
 
@@ -285,25 +381,28 @@
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center_vertical"
                                 android:fontFamily="@font/opensansregular"
-                                android:gravity="center_vertical"
+                                android:gravity="center_vertical|right"
                                 android:minWidth="60dp"
-                                android:text="100000"
+                                android:layout_marginRight="2dp"
+                                android:paddingTop="@dimen/student_padding_top"
+                                android:text=""
                                 android:textColor="@color/colorPrimaryDark"
-                                android:textSize="@dimen/medium_text" />
+                                android:textSize="@dimen/general_text" />
 
 
 
 
                         </LinearLayout>
                         <LinearLayout
-                            android:layout_width="30dp"
+                            android:layout_width="24dp"
+                            android:paddingTop="@dimen/student_padding_top"
                             android:id="@+id/infobutton"
                             android:layout_height="match_parent">
 
                             <TextView
                                 android:id="@+id/circle2"
-                                android:layout_width="14dp"
-                                android:layout_height="14dp"
+                                android:layout_width="13dp"
+                                android:layout_height="13dp"
 
                                 android:layout_gravity="center"
                                 android:layout_margin="4dp"
@@ -315,6 +414,8 @@
 
 
                     </LinearLayout>
+
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -325,7 +426,8 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_weight="1"
+                            android:layout_weight="1.1"
+
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             >
@@ -335,8 +437,9 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/opensanslight"
                                 android:text="clases tomadas"
+                                android:id="@+id/list_presents"
                                 android:textColor="@color/colorPrimaryIntLetter"
-                                android:textSize="@dimen/general_text"
+                                android:textSize="@dimen/small_text"
                                 />
 
 
@@ -344,9 +447,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/opensansregular"
-                                android:text="12"
+                                android:text=""
                                 android:id="@+id/taken_classes"
-                                android:paddingLeft="8dp"
+                                android:paddingLeft="6dp"
                                 android:textColor="@color/colorPrimaryIntLetter"
                                 android:textSize="@dimen/medium_text"
                                 />
@@ -354,7 +457,9 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_weight="1"
+                            android:layout_weight="0.9"
+                            android:layout_gravity="center"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             >
@@ -365,7 +470,7 @@
                                 android:fontFamily="@font/opensanslight"
                                 android:text="clases restantes"
                                 android:textColor="@color/colorPrimaryIntLetter"
-                                android:textSize="@dimen/general_text"
+                                android:textSize="@dimen/small_text"
                                 />
 
 
@@ -373,16 +478,53 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/opensansregular"
-                                android:text="10"
+                                android:text=""
                                 android:id="@+id/rest_classes"
-                                android:paddingLeft="8dp"
+                                android:paddingLeft="6dp"
                                 android:textColor="@color/colorPrimaryIntLetter"
                                 android:textSize="@dimen/medium_text"
                                 />
                         </LinearLayout>
                     </LinearLayout>
                     </LinearLayout>
+
+
             </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:background="@drawable/rec_rounded_8"
+                android:paddingBottom="@dimen/student_padding_bottom"
+                android:paddingLeft="8dp"
+                android:id="@+id/view_list_presents"
+                android:visibility="gone"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/back_transp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                >
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/list_reports"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_weight="1"
+                    android:clipToPadding="false"
+                    android:paddingBottom="50dp"
+                    />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:padding="8dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/close_eye"
+                    android:layout_gravity="right"
+                    />
+
+
+            </FrameLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/list_courses"
@@ -397,15 +539,6 @@
                 />
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/list_reports"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:clipToPadding="false"
-                android:visibility="gone"
-                android:paddingBottom="90dp"
-                />
 
 
         </LinearLayout>
@@ -413,13 +546,76 @@
 
     </RelativeLayout>
 
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/lin_incomes"
+        android:layout_height="wrap_content"
+        android:id="@+id/load_income"
+        android:layout_marginBottom="70dp"
+        android:layout_marginRight="16dp"
+        android:visibility="gone"
+        android:layout_gravity="bottom|right"
+        android:layout_marginTop="6dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/rec_rounded_8"
+        android:backgroundTint="@color/colorPrimaryClearLetter"
+        >
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="6dp"
+            android:textColor="@color/white"
+            android:paddingTop="6dp"
+            android:fontFamily="@font/opensansregular"
+            android:textSize="@dimen/general_text"
+            android:layout_height="wrap_content"
+            android:text="$ cargar pago"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/lin_incomes"
+        android:layout_height="wrap_content"
+        android:id="@+id/fab"
+        android:layout_marginBottom="22dp"
+        android:layout_marginRight="16dp"
+        android:layout_gravity="bottom|right"
+        android:layout_marginTop="6dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/rec_rounded_8"
+        android:backgroundTint="@color/colorPrimary"
+        >
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="6dp"
+            android:textColor="@color/white"
+            android:paddingTop="6dp"
+            android:fontFamily="@font/opensansregular"
+            android:textSize="@dimen/general_text"
+            android:layout_height="wrap_content"
+            android:text="crear curso nuevo"
+            />
+
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="65dp"
         android:background="@drawable/add_payment"
         android:layout_gravity="bottom|right"
         android:layout_margin="30dp"
+        android:visibility="gone"
         android:orientation="vertical"
-        android:id="@+id/fab"
         android:layout_alignParentBottom="true"
         android:layout_height="65dp">
 

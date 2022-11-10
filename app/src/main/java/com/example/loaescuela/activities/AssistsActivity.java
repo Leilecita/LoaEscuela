@@ -16,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.SearchView;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -28,8 +27,6 @@ import com.example.loaescuela.R;
 import com.example.loaescuela.adapters.SpinnerAdapter;
 import com.example.loaescuela.adapters.StudentAssistAdapter;
 import com.example.loaescuela.data.SessionPrefs;
-import com.example.loaescuela.fragment.AssistsFragment;
-import com.example.loaescuela.fragment.BaseFragment;
 import com.example.loaescuela.network.ApiClient;
 import com.example.loaescuela.network.Error;
 import com.example.loaescuela.network.GenericCallback;
@@ -112,7 +109,7 @@ public class AssistsActivity extends BaseActivity implements Paginate.Callbacks,
 
     private LinearLayout line_top_info;
 
-    public void onSelectStudent(){
+    public void onSelectStudent(Long student_id,String name, String surname, String categoria){
         loadStudentsValue();
         //esto se usa para refrescar solo la cant de presentes
         //y no tener que refresacr toda la lista

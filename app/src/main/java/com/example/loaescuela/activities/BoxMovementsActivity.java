@@ -11,14 +11,13 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.loaescuela.R;
-import com.example.loaescuela.adapters.PageAdapter;
-import com.example.loaescuela.adapters.PagePaymentsAdapter;
+import com.example.loaescuela.adapters.PageIncomesAdapter;
 import com.example.loaescuela.data.SessionPrefs;
 import com.example.loaescuela.fragment.BaseFragment;
 import com.google.android.material.tabs.TabLayout;
 
 public class BoxMovementsActivity extends BaseActivity{
-    PagePaymentsAdapter mAdapter;
+    PageIncomesAdapter mAdapter;
     TabLayout mTabLayout;
     LinearLayout button;
     ImageView image_button;
@@ -51,7 +50,7 @@ public class BoxMovementsActivity extends BaseActivity{
 
         viewPager =  findViewById(R.id.viewpager);
 
-        mAdapter = new PagePaymentsAdapter(this, getSupportFragmentManager());
+        mAdapter = new PageIncomesAdapter(this, getSupportFragmentManager());
         viewPager.setAdapter(mAdapter);
 
         mTabLayout =  findViewById(R.id.tabs);

@@ -103,20 +103,16 @@
                             android:orientation="horizontal">
 
 
-                            <Spinner
+                            <TextView
                                 android:layout_width="match_parent"
                                 android:layout_weight="2"
-                                android:inputType="textCapWords"
+                                android:fontFamily="@font/opensansregular"
                                 android:layout_height="match_parent"
-                                android:backgroundTint="@color/transparent"
-                                android:fontFamily="@font/opensanslight"
-                                android:dropDownVerticalOffset="35dp"
-                                android:textColorHint="@color/word_clear"
-                                android:background="@drawable/rec_find"
-                                android:textColor="@color/colorPrimaryDarkLetter"
+                                android:gravity="center_vertical"
+                                android:text="Categoria"
+                                android:paddingLeft="8dp"
                                 android:textSize="@dimen/general_text"
-                                android:id="@+id/coin"
-                                />
+                                android:textColor="@color/colorPrimaryIntLetter2" />
 
                             <TextView
                                 android:layout_width="1dp"
@@ -130,22 +126,21 @@
                                 />
 
 
-
-                            <EditText
+                            <Spinner
                                 android:layout_width="match_parent"
                                 android:layout_weight="2"
-                                android:inputType="numberDecimal"
-                                android:keyboardNavigationCluster="true"
+                                android:inputType="textCapWords"
                                 android:layout_height="match_parent"
-                                android:background="@drawable/rec_find"
-                                android:paddingLeft="8dp"
-                                android:paddingTop="1dp"
-                                android:text=""
+                                android:backgroundTint="@color/transparent"
+                                android:fontFamily="@font/opensanslight"
+                                android:dropDownVerticalOffset="35dp"
                                 android:textColorHint="@color/word_clear"
+                                android:background="@drawable/rec_find"
                                 android:textColor="@color/colorPrimaryDarkLetter"
                                 android:textSize="@dimen/general_text"
-                                android:id="@+id/value"
+                                android:id="@+id/category"
                                 />
+
                             <TextView
                                 android:layout_width="20dp"
                                 android:textSize="@dimen/big_big_text"
@@ -170,7 +165,6 @@
                     android:layout_width="match_parent"
                     android:layout_marginTop="12dp"
                     android:layout_height="@dimen/height_rec_cuad_input"
-                    android:visibility="gone"
                     android:background="@drawable/rec_find"
                     android:orientation="horizontal">
                     <TextView
@@ -195,18 +189,19 @@
                         />
 
 
-                    <EditText
+                    <Spinner
                         android:layout_width="match_parent"
-                        android:id="@+id/type"
                         android:layout_weight="2"
-                        android:layout_height="35dp"
-                        android:inputType="textCapSentences"
-                        android:paddingLeft="8dp"
+                        android:inputType="textCapWords"
+                        android:layout_height="match_parent"
+                        android:backgroundTint="@color/transparent"
                         android:fontFamily="@font/opensanslight"
-                        android:textSize="@dimen/general_text"
-                        android:textColor="@color/word"
+                        android:dropDownVerticalOffset="35dp"
+                        android:textColorHint="@color/word_clear"
                         android:background="@drawable/rec_find"
-
+                        android:textColor="@color/colorPrimaryDarkLetter"
+                        android:textSize="@dimen/general_text"
+                        android:id="@+id/type"
                         />
 
                     <TextView

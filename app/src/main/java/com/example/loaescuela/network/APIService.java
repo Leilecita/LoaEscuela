@@ -1,6 +1,7 @@
 package com.example.loaescuela.network;
 
 import com.example.loaescuela.adapters.PlanillaAdapter;
+import com.example.loaescuela.network.models.BeachBox;
 import com.example.loaescuela.network.models.ClassCourse;
 import com.example.loaescuela.network.models.DataIncomeCourse;
 import com.example.loaescuela.network.models.Income;
@@ -8,8 +9,10 @@ import com.example.loaescuela.network.models.Outcome;
 import com.example.loaescuela.network.models.Planilla;
 import com.example.loaescuela.network.models.PlanillaAlumno;
 import com.example.loaescuela.network.models.PlanillaPresente;
+import com.example.loaescuela.network.models.ReportBox;
 import com.example.loaescuela.network.models.ReportClassCourse;
 import com.example.loaescuela.network.models.ReportIncomeStudent;
+import com.example.loaescuela.network.models.ReportNewBox;
 import com.example.loaescuela.network.models.ReportOutcome;
 import com.example.loaescuela.network.models.ReportPresent;
 import com.example.loaescuela.network.models.ReportResp;
@@ -42,7 +45,7 @@ public interface APIService {
     //PLANILLAS_PRESENTES
 
     @GET("planillas_presentes.php")
-    Observable<Response<List<ReportPresent>>> getAssistsByStudent(@Query("method") String method, @Query("page") Integer page, @Query("id") Long alumno_id);
+    Observable<Response<List<ReportPresent>>> getAssistsByStudent(@Query("method") String method,  @Query("id") Long alumno_id);
 
     @GET("planillas_presentes.php")
     Observable<Response<List<ReportResumAsist>>> getAssistsResumByDay(@Query("method") String method, @Query("page") Integer page);
@@ -76,7 +79,21 @@ public interface APIService {
     Observable<Response<Income>> postIncomeCourse(@Body DataIncomeCourse inc);
 
     @GET("incomes.php")
-    Observable<Response<List<ReportIncomeStudent>>> getAllIncomes(@Query("method") String method, @Query("page") Integer page);
+    Observable<Response<List<ReportIncomeStudent>>> getAllIncomes(@Query("method") String method, @Query("page") Integer page, @Query("payment_place") String payment_place);
+
+    //BEACH BOXES
+    @POST("beach_boxes.php")
+    Observable<Response<BeachBox>> postBeachBox(@Body BeachBox b);
+
+    @GET("beach_boxes.php")
+    Observable<Response<List<BeachBox>>> getBoxes(@Query("page") Integer page);
+
+    @GET("beach_boxes.php")
+    Observable<Response<ReportNewBox>> getPreviousBox(@Query("method") String method, @Query("to") String created, @Query("date") String date, @Query("dateTo") String dateTo);
+
+    @GET("beach_boxes.php")
+    Observable<Response<ReportBox>> getPaidAmountByDay(@Query("method") String method, @Query("date") String date);
+
 
 
 
@@ -118,6 +135,9 @@ public interface APIService {
 
     @GET("students.php")
     Observable<Response<ReportResp>> checkExistStudent(@Query("dni") String dni, @Query("method") String method);
+
+    @GET("students.php")
+    Observable<Response<Student>> getStudent(@Query("id") Long student_id);
 
     @GET("students.php")
     Observable<Response<List<Student>>> getStudents(@Query("page") Integer page, @Query("query") String query, @Query("method") String method , @Query("category") String category, @Query("order") String orderby );

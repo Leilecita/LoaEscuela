@@ -17,6 +17,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_l1_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name=".activities.MainActivity"
@@ -39,12 +40,14 @@
         <activity
             android:name=".activities.LoginActivity"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
             android:parentActivityName=".activities.MainActivity"
             />
 
         <activity
             android:name=".activities.RegisterActivity"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
             android:parentActivityName=".activities.MainActivity"
             />
 
@@ -54,11 +57,7 @@
             android:parentActivityName=".activities.MainActivity"
             />
 
-        <activity
-            android:name=".activities.todelete.AssistsAndIncomesStudentActivity"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".activities.MainActivity"
-            />
+
 
         <activity
             android:name=".activities.SelectStudentForAssistActivity"
@@ -79,7 +78,7 @@
             />
 
         <activity
-            android:name=".activities.ListIncomesDayActivity"
+            android:name=".activities.noseusa.ListIncomesDayActivity"
             android:screenOrientation="portrait"
             android:parentActivityName=".activities.MainActivity"
             />
@@ -104,6 +103,27 @@
             android:windowSoftInputMode="adjustResize"
 
          android:screenOrientation="portrait"
+            android:parentActivityName=".activities.MainActivity"
+            />
+
+        <activity
+            android:name=".activities.IncomesActivity"
+
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.MainActivity"
+            />
+
+        <activity
+            android:name=".activities.GeneralAssistActivity"
+
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.MainActivity"
+            />
+
+        <activity
+            android:name=".activities.CreateBoxActivity"
+
+            android:screenOrientation="portrait"
             android:parentActivityName=".activities.MainActivity"
             />
 

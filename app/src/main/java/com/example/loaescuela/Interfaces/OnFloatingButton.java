@@ -6,4 +6,5 @@ public interface OnFloatingButton {
     int getIconButton();
 
     int getVisibility();
+
 }

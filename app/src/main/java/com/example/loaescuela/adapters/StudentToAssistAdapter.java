@@ -1,11 +1,14 @@
 package com.example.loaescuela.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,6 +23,7 @@ import com.example.loaescuela.network.GenericCallback;
 import com.example.loaescuela.network.models.PlanillaAlumno;
 import com.example.loaescuela.network.models.ReportStudentAsist;
 import com.example.loaescuela.network.models.Student;
+import com.example.loaescuela.types.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,11 +38,18 @@ public class StudentToAssistAdapter extends BaseAdapter<Student,StudentToAssistA
     private Long mPlanillaId = -1l;
 
     private OnSelectStudent onSelectStudent = null;
+    private String typeActivity;
+    private String categoryActivity;
 
     public void setOnSelectStudent(OnSelectStudent listener){
         this.onSelectStudent = listener;
     }
 
+
+
+    public void setCategoryActivity(String category){
+        this.categoryActivity = category;
+    }
 
     public void setPlanillaId(Long planillaId){
         this.mPlanillaId = planillaId;
@@ -47,6 +58,8 @@ public class StudentToAssistAdapter extends BaseAdapter<Student,StudentToAssistA
     public StudentToAssistAdapter(Context context, List<Student> clients) {
         setItems(clients);
         mContext = context;
+        typeActivity = "PLANILLA";
+        categoryActivity = "escuela";
 
         listColor.add("#685c85");
         listColor.add("#4f426b");
@@ -74,7 +87,10 @@ public class StudentToAssistAdapter extends BaseAdapter<Student,StudentToAssistA
         public TextView category;
 
         public TextView firstLetter;
+        public TextView cuad_text;
         public LinearLayout select;
+
+        public ImageView cuad_image;
 
 
         public ViewHolder(View v) {
@@ -83,6 +99,10 @@ public class StudentToAssistAdapter extends BaseAdapter<Student,StudentToAssistA
             text_name2 = v.findViewById(R.id.name2_student);
             select = v.findViewById(R.id.select);
             category = v.findViewById(R.id.category);
+            cuad_image = v.findViewById(R.id.cuad_image);
+            cuad_text = v.findViewById(R.id.cuad_text);
+
+            firstLetter = v.findViewById(R.id.firstLetter);
         }
     }
 
@@ -101,8 +121,10 @@ public class StudentToAssistAdapter extends BaseAdapter<Student,StudentToAssistA
             vh.text_name.setText(null);
         if (vh.text_year != null)
             vh.text_year.setText(null);
+    }
 
-
+    public void setTypeActivity(String type){
+        this.typeActivity = type;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -115,13 +137,30 @@ public class StudentToAssistAdapter extends BaseAdapter<Student,StudentToAssistA
         holder.text_name.setText(current.nombre + " " + current.apellido);
         holder.category.setText(current.category);
 
+        if(typeActivity.equals("PAGOS")){
+            holder.cuad_text.setText("cargar pago");
+        }else{
+            holder.cuad_text.setText(" asignar  a  planilla");
+        }
+
+        if(current.category.equals(Constants.CATEGORY_COLONIA)){
+            holder.cuad_image.setColorFilter(Color.parseColor(Constants.COLOR_COLONIA), PorterDuff.Mode.SRC_ATOP);
+        }else if(current.category.equals(Constants.CATEGORY_ESCUELA)){
+            holder.cuad_image.setColorFilter(Color.parseColor(Constants.COLOR_ESCUELA), PorterDuff.Mode.SRC_ATOP);
+        }else{
+            holder.cuad_image.setColorFilter(Color.parseColor(Constants.COLOR_HIGHSCHOOL), PorterDuff.Mode.SRC_ATOP);
+        }
+
+        holder.firstLetter.setText(String.valueOf(current.nombre.charAt(0)));
+
         holder.select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addStudentToAssist(current.id);
 
                 if(onSelectStudent!=null){
-                    onSelectStudent.onSelectStudent();
+                    //onSelectStudent.onSelectStudent(current.id, current.nombre, current.apellido, current.category);
+                    onSelectStudent.onSelectStudent(current.id, current.nombre, current.apellido, categoryActivity);
                 }
 
             }

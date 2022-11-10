@@ -74,34 +74,33 @@
                     android:layout_height="45dp"
                     android:background="@drawable/rec_find"
                     android:layout_marginTop="16dp"
-                    android:paddingLeft="6dp"
+                    android:paddingLeft="2dp"
                     android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:src="@drawable/user"
-                        android:alpha="0.9"
-                        android:padding="1dp"
-                        android:layout_marginLeft="6dp"
-                        android:layout_gravity="center"/>
-
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_weight="1.4"
+                        android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:layout_gravity="center_vertical"
                         android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/user"
+                            android:alpha="0.9"
+                            android:padding="1dp"
+                            android:layout_marginLeft="6dp"
+                            android:layout_gravity="center"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Nombre"
                             android:textColor="@color/colorPrimaryIntLetter2"
                             android:fontFamily="@font/opensansregular"
-                            android:paddingLeft="8dp"
+                            android:paddingLeft="6dp"
                             android:textSize="@dimen/general_text"
 
                             />
@@ -149,37 +148,39 @@
                     android:layout_height="45dp"
                     android:background="@drawable/rec_find"
                     android:layout_marginTop="16dp"
-                    android:paddingLeft="4dp"
+                    android:paddingLeft="2dp"
                     android:orientation="horizontal">
 
-                    <FrameLayout
-                        android:layout_width="35sp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_height="22sp">
 
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="22dp"
-                            android:alpha="0.9"
-                            android:padding="1dp"
-                            android:layout_gravity="center"/>
-
-                    </FrameLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_weight="1.4"
+                        android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:layout_gravity="center_vertical"
                         android:layout_height="wrap_content">
+
+                        <FrameLayout
+                            android:layout_width="35sp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_height="22sp">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="22dp"
+                                android:alpha="0.9"
+                                android:padding="1dp"
+                                android:layout_gravity="center"/>
+
+                        </FrameLayout>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Apellido *"
                             android:textColor="@color/colorPrimaryIntLetter2"
                             android:fontFamily="@font/opensansregular"
-                            android:paddingLeft="8dp"
+                            android:paddingLeft="6dp"
                             android:textSize="@dimen/general_text"
 
                             />
@@ -228,38 +229,59 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="16dp"
-                    android:paddingLeft="6dp"
+                    android:paddingLeft="2dp"
                     android:background="@drawable/rec_find"
-
                     android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="45dp"
+                        android:background="@drawable/rec_find"
+                        android:orientation="horizontal">
 
                     <ImageView
                         android:layout_width="22dp"
                         android:layout_height="22dp"
-                        android:layout_marginLeft="6dp"
+                        android:layout_marginLeft="3dp"
                         android:src="@drawable/date"
                         android:layout_gravity="center"/>
-
-                    <LinearLayout
+                    <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_weight="1.4"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:layout_gravity="center_vertical"
-                        android:layout_height="wrap_content">
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_gravity="center_vertical"
+                            android:layout_height="wrap_content"
+                            android:text="Fecha nacimiento"
+                            android:textColor="@color/colorPrimaryIntLetter2"
+                            android:fontFamily="@font/opensansregular"
+                            android:paddingLeft="6dp"
+                            android:textSize="@dimen/general_text"
+
+                            />
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
-                            android:text="Fecha nacimiento *"
+                            android:text="*"
+                            android:layout_marginTop="4dp"
+                            android:layout_gravity="right|top"
+                            android:gravity="right|top"
                             android:textColor="@color/colorPrimaryIntLetter2"
                             android:fontFamily="@font/opensansregular"
-                            android:paddingLeft="8dp"
                             android:textSize="@dimen/general_text"
 
                             />
 
 
+                    </FrameLayout>
                     </LinearLayout>
 
 
@@ -293,25 +315,27 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="16dp"
-                    android:paddingLeft="6dp"
+                    android:paddingLeft="2dp"
                     android:background="@drawable/rec_find"
 
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:layout_marginLeft="6dp"
-                        android:alpha="0.5"
-                        android:layout_gravity="center"/>
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_weight="1.4"
+                        android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:layout_gravity="center_vertical"
                         android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_marginLeft="6dp"
+                            android:alpha="0.5"
+                            android:layout_gravity="center"/>
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_weight="1"
@@ -358,33 +382,35 @@
                     android:layout_height="45dp"
                     android:background="@drawable/rec_find"
                     android:layout_marginTop="16dp"
-                    android:paddingLeft="6dp"
+                    android:paddingLeft="2dp"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:padding="2dp"
-                        android:src="@drawable/phonesan"
-                        android:alpha="0.9"
-                        android:layout_marginLeft="6dp"
-                        android:layout_gravity="center"/>
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_weight="1.4"
+                        android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:layout_gravity="center_vertical"
                         android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:padding="2dp"
+                            android:src="@drawable/phonesan"
+                            android:alpha="0.9"
+                            android:layout_marginLeft="6dp"
+                            android:layout_gravity="center"/>
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Teléfono"
                             android:textColor="@color/colorPrimaryIntLetter2"
                             android:fontFamily="@font/opensansregular"
-                            android:paddingLeft="8dp"
+                            android:paddingLeft="6dp"
                             android:textSize="@dimen/general_text"
 
                             />
@@ -433,30 +459,32 @@
                     android:layout_height="45dp"
                     android:layout_marginTop="32dp"
                     android:background="@drawable/rec_find"
-                    android:paddingLeft="6dp"
+                    android:paddingLeft="2dp"
                     android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:alpha="0.9"
-                        android:layout_marginLeft="6dp"
-                        android:layout_gravity="center"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_weight="1.4"
+                        android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:layout_gravity="center_vertical"
                         android:layout_height="wrap_content">
+
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:alpha="0.9"
+                            android:layout_marginLeft="2dp"
+                            android:layout_gravity="center"/>
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Categoria"
                             android:textColor="@color/colorPrimaryClearLetter"
                             android:fontFamily="@font/opensansregular"
-                            android:paddingLeft="8dp"
+                            android:paddingLeft="6dp"
                             android:textSize="@dimen/general_text"
 
                             />
@@ -499,25 +527,27 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
-                    android:paddingLeft="6dp"
+                    android:paddingLeft="2dp"
                     android:background="@drawable/rec_find"
                     android:layout_marginTop="16dp"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_marginLeft="6dp"
-                        android:alpha="0.5"
-                        android:src="@drawable/casa"
-                        android:layout_gravity="center"/>
+
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_weight="1.4"
+                        android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:layout_gravity="center_vertical"
                         android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_marginLeft="2dp"
+                            android:alpha="0.5"
+                            android:src="@drawable/casa"
+                            android:layout_gravity="center"/>
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_weight="1"
@@ -525,7 +555,7 @@
                             android:text="Dirección "
                             android:textColor="@color/colorPrimaryClearLetter"
                             android:fontFamily="@font/opensansregular"
-                            android:paddingLeft="8dp"
+                            android:paddingLeft="6dp"
                             android:textSize="@dimen/general_text"
 
                             />
@@ -545,7 +575,7 @@
                         android:layout_width="match_parent"
                         android:layout_weight="1"
                         android:layout_gravity="center_vertical"
-                        android:inputType="number"
+                        android:inputType="text"
                         android:layout_height="35dp"
                         android:background="@drawable/rec_find"
                         android:paddingLeft="8dp"
@@ -561,23 +591,25 @@
                     android:layout_height="45dp"
                     android:background="@drawable/rec_find"
                     android:layout_marginTop="16dp"
-                    android:paddingLeft="6dp"
+                    android:paddingLeft="2dp"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
-                        android:alpha="0.5"
-                        android:layout_marginLeft="6dp"
-                        android:layout_gravity="center"/>
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_weight="1.4"
+                        android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:layout_gravity="center_vertical"
                         android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:alpha="0.5"
+                            android:layout_marginLeft="2dp"
+                            android:layout_gravity="center"/>
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_weight="1"
@@ -585,7 +617,7 @@
                             android:text="Observación "
                             android:textColor="@color/colorPrimaryClearLetter"
                             android:fontFamily="@font/opensansregular"
-                            android:paddingLeft="8dp"
+                            android:paddingLeft="6dp"
                             android:textSize="@dimen/general_text"
                             />
 

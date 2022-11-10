@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -23,12 +25,17 @@ import com.example.loaescuela.CustomLoadingListItemCreator;
 import com.example.loaescuela.DateHelper;
 import com.example.loaescuela.R;
 import com.example.loaescuela.adapters.OutcomeAdapter;
+import com.example.loaescuela.adapters.SpinnerAdapter;
+import com.example.loaescuela.data.SessionPrefs;
 import com.example.loaescuela.network.ApiClient;
 import com.example.loaescuela.network.Error;
 import com.example.loaescuela.network.GenericCallback;
 import com.example.loaescuela.network.models.Outcome;
 import com.example.loaescuela.network.models.ReportIncomeStudent;
 import com.example.loaescuela.network.models.ReportOutcome;
+import com.example.loaescuela.types.CategoryType;
+import com.example.loaescuela.types.Constants;
+import com.example.loaescuela.types.OutcomeType;
 import com.paginate.Paginate;
 import com.paginate.recycler.LoadingListItemSpanLookup;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
@@ -259,6 +266,46 @@ public class OutcomesActivity extends BaseActivity implements Paginate.Callbacks
         return !hasMoreItems;
     }
 
+    private void initialSpinner(final Spinner spinner, List<String> data){
+        ArrayAdapter<String> adapterZone = new SpinnerAdapter(this, R.layout.item_custom, data);
+        spinner.setAdapter(adapterZone);
+        spinner.setPopupBackgroundDrawable(this.getResources().getDrawable(R.drawable.rec_rounded_8));
+    }
+
+    private static <T extends Enum<CategoryType>> void enumNameToStringArray(CategoryType[] values, List<String> spinner_type_cat) {
+        for (CategoryType value: values) {
+            if(value.getName().equals(Constants.TYPE_ALL)){
+            }else{
+                spinner_type_cat.add(value.getName());
+            }
+        }
+    }
+
+    private static <T extends Enum<OutcomeType>> void enumNameToStringArray(OutcomeType[] values, List<String> spinner_type_cat) {
+        for (OutcomeType value: values) {
+            if(value.getName().equals(Constants.TYPE_ALL)){
+            }else{
+                spinner_type_cat.add(value.getName());
+            }
+        }
+    }
+
+    private void createSpinnerCat(final Spinner spinner, List<String> data){
+
+        initialSpinner(spinner, data);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String itemSelected=String.valueOf(spinner.getSelectedItem());
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+    }
+
+
 
     private void createOutcome(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -268,13 +315,23 @@ public class OutcomesActivity extends BaseActivity implements Paginate.Callbacks
 
         final TextView date=  dialogView.findViewById(R.id.date);
         final EditText descr=  dialogView.findViewById(R.id.description);
-        final EditText type=  dialogView.findViewById(R.id.type);
 
         final EditText value=  dialogView.findViewById(R.id.amount);
-        final Spinner spinnerCoin=  dialogView.findViewById(R.id.coin);
+        final Spinner spinnerType = dialogView.findViewById(R.id.type);
+        final Spinner spinnerCategory = dialogView.findViewById(R.id.category);
 
         final TextView cancel=  dialogView.findViewById(R.id.cancel);
         final Button ok=  dialogView.findViewById(R.id.ok);
+
+        //SPINNER Categoria
+        List<String> spinner_type_cat = new ArrayList<>();
+        enumNameToStringArray(CategoryType.values(),spinner_type_cat);
+        createSpinnerCat(spinnerCategory,spinner_type_cat);
+
+        //SPINNER Type outcome
+        List<String> spinner_type_out = new ArrayList<>();
+        enumNameToStringArray(OutcomeType.values(),spinner_type_out);
+        createSpinnerCat(spinnerType,spinner_type_out);
 
         mSelectedDate = DateHelper.get().getActualDate();
         date.setText(DateHelper.get().onlyDate(DateHelper.get().getActualDateToShow()));
@@ -296,14 +353,17 @@ public class OutcomesActivity extends BaseActivity implements Paginate.Callbacks
             public void onClick(View v) {
 
                 String descrT= ((descr.getText().toString().trim().matches("")) ? "" : descr.getText().toString().trim());
-                String typeT= ((type.getText().toString().trim().matches("")) ? "" : type.getText().toString().trim());
                 Double valueT=Double.valueOf(((value.getText().toString().trim().matches("")) ? "0" : value.getText().toString().trim()));
 
-                //String coin = spinnerCoin.getSelectedItem().toString().trim();
+                String typeT = spinnerType.getSelectedItem().toString().trim();
+                String categoryT = spinnerCategory.getSelectedItem().toString().trim();
 
                 Outcome out = new Outcome();
                 out.amount = valueT;
                 out.observation = descrT;
+                out.category = categoryT;
+                out.type = typeT;
+                out.user_id = Long.valueOf( SessionPrefs.get(getBaseContext()).getId());
 
                 ApiClient.get().postOutcome(out, new GenericCallback<Outcome>() {
                     @Override
