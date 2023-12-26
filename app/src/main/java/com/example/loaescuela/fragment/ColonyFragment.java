@@ -1,10 +1,12 @@
 package com.example.loaescuela.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -71,7 +73,7 @@ public class ColonyFragment extends BaseFragment implements Paginate.Callbacks, 
 
 
     public void startNewActivityFragment(ReportStudentAsistItem r,Integer pos, String category){
-        ((GeneralAssistActivity) getActivity()).startAssistAndPaymentsActivity(r,pos, category);
+        ((GeneralAssistActivity) getActivity()).startAssistAndPaymentsActivity(r,pos, category,1);
     }
 
     public void scrollToPositionAndUpdate(){
@@ -84,8 +86,11 @@ public class ColonyFragment extends BaseFragment implements Paginate.Callbacks, 
     }
 
     public void onEnablePresent(Boolean val){
-        mAdapter.setEnablePresent(val);
+        if(mAdapter != null){
+            mAdapter.setEnablePresent(val);
+        }
     }
+
 
     public void onSelectStudent(Long student_id, String name, String surname, String category){
         ((GeneralAssistActivity) requireActivity()).loadStudentsValue(Constants.CATEGORY_ESCUELA, mSubCategoria, mActualDate);
@@ -95,8 +100,14 @@ public class ColonyFragment extends BaseFragment implements Paginate.Callbacks, 
         // clearView();
     }
 
+    private void hideKeyboard(){
+        final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+    }
+
     @Override
     public void refreshList(String cat, String subcat,String date, String query, String onlyPresents){
+
         categoria = cat;
         subcategoria = subcat;
 
@@ -136,7 +147,7 @@ public class ColonyFragment extends BaseFragment implements Paginate.Callbacks, 
 
     public static <T extends Enum<SubCategoryType>> void enumNameToStringArraySub(SubCategoryType[] values, List<String> spinner_sub_cat) {
         spinner_sub_cat.add(SubCategoryColonia.SUB_CATEGORY_COLONIA_KIDS.getName());
-        spinner_sub_cat.add(SubCategoryColonia.SUB_CATEGORY_COLONIA_MINI.getName());
+       // spinner_sub_cat.add(SubCategoryColonia.SUB_CATEGORY_COLONIA_MINI.getName());
     }
 
     public List<String> onLoadSpinner(){

@@ -1,14 +1,14 @@
 
 
 <TextView
-    android:layout_width="wrap_content"
-    android:textSize="@dimen/medium_text"
+    android:layout_width="match_parent"
+    android:textSize="@dimen/general_text"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/textView1"
-    android:layout_gravity="center"
-    android:gravity="center"
-    android:fontFamily="@font/arialroundedlight"
-    android:textColor="@color/colorPrimaryIntLetter"
+    android:layout_gravity="center_vertical"
+    android:gravity="center_vertical"
+    android:fontFamily="@font/opensanslight"
+    android:textColor="@color/colorPrimaryLetterRose"
     android:text="San clemente"
     android:maxLines="2"
     android:paddingLeft="8dp"

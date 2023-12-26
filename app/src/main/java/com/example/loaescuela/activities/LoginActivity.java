@@ -160,6 +160,7 @@ public class LoginActivity extends BaseActivity implements LoaderManager.LoaderC
                     SessionPrefs.get(LoginActivity.this).setToken(data.token);
                     SessionPrefs.get(LoginActivity.this).setName(data.name);
                     SessionPrefs.get(LoginActivity.this).setId(data.id);
+                    SessionPrefs.get(LoginActivity.this).setLevel(data.level);
                 }
 
                 @Override

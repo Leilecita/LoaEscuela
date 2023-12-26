@@ -47,7 +47,7 @@ import java.util.List;
 
 public class ClassCourseAdapter extends BaseAdapter<ReportClassCourse,ClassCourseAdapter.ViewHolder> implements StickyRecyclerHeadersAdapter<RecyclerView.ViewHolder>  {
     private Context mContext;
-
+    private String paymentPlace;
 
     private OnRefresListCourses onRefreshListCourses= null;
 
@@ -59,8 +59,10 @@ public class ClassCourseAdapter extends BaseAdapter<ReportClassCourse,ClassCours
     public ClassCourseAdapter(Context context, List<ReportClassCourse> planillas){
         setItems(planillas);
         mContext = context;
+    }
 
-
+    public void setPaymentPlace(String place){
+        this.paymentPlace = place;
     }
 
     public ClassCourseAdapter(){
@@ -120,6 +122,7 @@ public class ClassCourseAdapter extends BaseAdapter<ReportClassCourse,ClassCours
         public TextView classes_number;
         public TextView course_amount;
         public TextView incomes_amount;
+        public TextView debt_amount;
         public RecyclerView list_incomes;
 
         public TextView dateMont;
@@ -136,6 +139,7 @@ public class ClassCourseAdapter extends BaseAdapter<ReportClassCourse,ClassCours
             classes_number = v.findViewById(R.id.classes_number);
             course_amount = v.findViewById(R.id.amount);
             incomes_amount = v.findViewById(R.id.paid_amount);
+            debt_amount = v.findViewById(R.id.debt_amount);
             list_incomes = v.findViewById(R.id.list_incomes);
 
             info = v.findViewById(R.id.info);
@@ -165,6 +169,8 @@ public class ClassCourseAdapter extends BaseAdapter<ReportClassCourse,ClassCours
             vh.classes_number.setText(null);
         if(vh.course_amount!=null)
             vh.course_amount.setText(null);
+        if(vh.debt_amount!=null)
+            vh.debt_amount.setText(null);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -174,12 +180,11 @@ public class ClassCourseAdapter extends BaseAdapter<ReportClassCourse,ClassCours
 
         final ReportClassCourse current = getItem(position);
 
-
-
         holder.categoria.setText(current.category.substring(0, 1).toUpperCase()+ current.category.substring(1).toLowerCase());
         holder.classes_number.setText(String.valueOf(current.classes_number));
         holder.course_amount.setText(ValuesHelper.get().getIntegerQuantity(current.amount));
         holder.incomes_amount.setText(ValuesHelper.get().getIntegerQuantity(current.paid_amount));
+        holder.debt_amount.setText(ValuesHelper.get().getIntegerQuantity(current.amount - current.paid_amount));
 
         String dateToShow = DateHelper.get().getDayEvent(current.created);
         String month =DateHelper.get().getNameMonth(DateHelper.get().getOnlyDate(current.created));
@@ -220,7 +225,7 @@ public class ClassCourseAdapter extends BaseAdapter<ReportClassCourse,ClassCours
         });
 
         if (position == 0) {
-            holder.info.setVisibility(View.VISIBLE);
+           // holder.info.setVisibility(View.VISIBLE);
         }
 
         //list pagos informacion
@@ -256,7 +261,7 @@ public class ClassCourseAdapter extends BaseAdapter<ReportClassCourse,ClassCours
         holder.load_payment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapterIncomeInfo.createIncome2(current.class_course_id, current);
+                adapterIncomeInfo.createIncome2(current.class_course_id, current, paymentPlace);
             }
         });
 
@@ -264,7 +269,7 @@ public class ClassCourseAdapter extends BaseAdapter<ReportClassCourse,ClassCours
             @Override
             public boolean onLongClick(View v) {
 
-                adapterIncomeInfo.createIncome2(current.class_course_id, current);
+                adapterIncomeInfo.createIncome2(current.class_course_id, current, paymentPlace);
               //  createIncome(current.class_course_id, current,position, holder);
                 return false;
             }

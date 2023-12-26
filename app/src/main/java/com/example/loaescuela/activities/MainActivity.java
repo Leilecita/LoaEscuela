@@ -1,6 +1,8 @@
 package com.example.loaescuela.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.example.loaescuela.DateHelper;
@@ -16,6 +18,7 @@ import com.example.loaescuela.network.models.ReportResumAsist;
 import com.example.loaescuela.network.models.ReportResumPlanilla;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -25,12 +28,14 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.telephony.AccessNetworkConstants;
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -59,22 +64,32 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public TextView number_day;
     public TextView month;
     public TextView year;
+    public LinearLayout dayResum;
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
+        String level = SessionPrefs.get(this).getLevel();
+
         if (id == R.id.nav_assists) {
             startActivity(new Intent(this, GeneralAssistActivity.class));
         } else if (id == R.id.nav_payments) {
-             startActivity(new Intent(this, IncomesActivity.class));
+            if(level.equals("admin")){
+                startActivity(new Intent(this, IncomesActivity.class));
+            }
+
         } else if (id == R.id.nav_create_student) {
             startActivity(new Intent(this, CreateStudentActivity.class));
         } else if (id == R.id.nav_resum) {
-            startActivity(new Intent(getBaseContext(),AssistsResumByDayActivity.class));
+            if(level.equals("admin")) {
+                startActivity(new Intent(getBaseContext(), AssistsResumByDayActivity.class));
+            }
         } else if (id == R.id.nav_planillas) {
-            startActivity(new Intent(this, PlanillasActivity.class));
+            if(level.equals("admin")) {
+                startActivity(new Intent(this, PlanillasActivity.class));
+            }
         }  else if (id == R.id.nav_students) {
             startActivity(new Intent(this, StudentsListActivity.class));
         } else if (id == R.id.nav_session) {
@@ -122,6 +137,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
 
     }
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,6 +145,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         this.configureToolBar();
         this.configureDrawerLayout();
         this.configureNavigationView();
+
+        getWindow().setStatusBarColor(Color.parseColor("#95215f"));
 
         frameLayout =  findViewById(R.id.main_content);
         coordinatorLayout=findViewById(R.id.rl);
@@ -145,11 +163,66 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         students = findViewById(R.id.students);
         payments = findViewById(R.id.payments);
         outcomes = findViewById(R.id.spendings);
+        dayResum = findViewById(R.id.start_resum);
 
-        outcomes.setOnClickListener(new View.OnClickListener() {
+
+        String level = SessionPrefs.get(this).getLevel();
+        String name = SessionPrefs.get(this).getName();
+
+        if(level.equals("admin")) {
+
+            dayResum.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getBaseContext(), AssistsResumByDayActivity.class));
+                }
+            });
+
+            outcomes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getBaseContext(), OutcomesActivity.class));
+                }
+            });
+
+            payments.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(getBaseContext(), IncomesActivity.class);
+                    // i.putExtra("NAMEFRAGMENT", "lei");
+                    startActivity(i);
+                }
+            });
+        }else{
+            outcomes.setAlpha(0.7f);
+            payments.setAlpha(0.7f);
+        }
+
+        assists.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getBaseContext(), OutcomesActivity.class));
+                if( name.equals("cami") || name.equals("jose") || name.equals("flor")){
+                    Intent i = new Intent(getBaseContext(), GeneralAssistActivity.class);
+                    i.putExtra("NAMEFRAGMENT", "mini");
+                    startActivity(i);
+                }else if(name.equals("sole") || name.equals("tomi")){
+                    Intent i = new Intent(getBaseContext(), GeneralAssistActivity.class);
+                    i.putExtra("NAMEFRAGMENT", "high");
+                    startActivity(i);
+
+                }else if(name.equals("gucho") || name.equals("maru")){
+                    Intent i = new Intent(getBaseContext(), GeneralAssistActivity.class);
+                    i.putExtra("NAMEFRAGMENT", "kids");
+                    startActivity(i);
+
+                }else{
+                    Intent i = new Intent(getBaseContext(), GeneralAssistActivity.class);
+                    i.putExtra("NAMEFRAGMENT", "s");
+                    startActivity(i);
+
+                   // startActivity(new Intent(getBaseContext(), GeneralAssistActivity.class));
+                }
+
             }
         });
 
@@ -157,26 +230,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getBaseContext(), StudentsListActivity.class));
-
             }
         });
-
-        payments.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getBaseContext(), IncomesActivity.class);
-               // i.putExtra("NAMEFRAGMENT", "lei");
-                startActivity(i);
-            }
-        });
-
-        assists.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getBaseContext(), GeneralAssistActivity.class));
-            }
-        });
-
 
         name_day = findViewById(R.id.name_day);
         number_day = findViewById(R.id.number_day);
@@ -185,8 +240,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         mRecyclerView = findViewById(R.id.list_planillas);
         gridlayoutmanager = new GridLayoutManager(this ,2   );
+       // gridlayoutmanager = new LinearLayoutManager(this  );
         mRecyclerView.setLayoutManager(gridlayoutmanager);
-        adapterIncomeInfo = new PlanillaResumAdapter(this, new ArrayList<ReportResumPlanilla>());
+        adapterIncomeInfo = new PlanillaResumAdapter(this, new ArrayList<ReportResumPlanilla>(),"main");
         mRecyclerView.setAdapter(adapterIncomeInfo);
 
         listPlanillas();
@@ -198,6 +254,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         super.onResume();
         listPlanillas();
     }
+
 
     @Override
     public int getLayoutRes() {
@@ -225,29 +282,38 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             @Override
             public void onSuccess(List<ReportResumAsist> data) {
 
-                String date = DateHelper.get().onlyDate(data.get(0).day);
-                String day = DateHelper.get().getNameDay(date);
-                String number = DateHelper.get().getDay(date);
-                String month2 = DateHelper.get().getNameMonth(date);
-                String year2 = DateHelper.get().getYear(date);
+                if(data.size() > 0){
+                    String date = DateHelper.get().onlyDate(data.get(0).day);
+                    String day = DateHelper.get().getNameDay(date);
+                    String number = DateHelper.get().getDay(date);
+                    String month2 = DateHelper.get().getNameMonth(date);
+                    String year2 = DateHelper.get().getYear(date);
+                    name_day.setText(day);
+                    number_day.setText(number);
+                    month.setText(month2.substring(0,3));
+                    year.setText(year2);
+
+                    adapterIncomeInfo.setItems(data.get(0).planillas);
+                }
 
 
-                name_day.setText(day);
-                number_day.setText(number);
-                month.setText(month2);
-                year.setText(year2);
-
-
-
-                adapterIncomeInfo.setItems(data.get(0).planillas);
             }
 
             @Override
             public void onError(Error error) {
-
+                checkValidSession(error);
             }
         });
 
+    }
+
+    private void checkValidSession(Error error){
+        System.out.println(error.message);
+        System.out.println(error.result);
+        if(error.message.equals("Session invalida") ){
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            finish();
+        }
     }
 
 

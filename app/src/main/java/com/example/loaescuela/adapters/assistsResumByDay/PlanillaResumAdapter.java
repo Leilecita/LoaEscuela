@@ -18,10 +18,12 @@ import java.util.List;
 
 public class PlanillaResumAdapter  extends BaseAdapter<ReportResumPlanilla,PlanillaResumAdapter.ViewHolder> {
     private Context mContext;
+    private String mPlace;
 
-    public PlanillaResumAdapter(Context context, List<ReportResumPlanilla> planillas){
+    public PlanillaResumAdapter(Context context, List<ReportResumPlanilla> planillas, String place){
         setItems(planillas);
         mContext = context;
+        mPlace = place;
     }
 
     public PlanillaResumAdapter(){
@@ -50,9 +52,14 @@ public class PlanillaResumAdapter  extends BaseAdapter<ReportResumPlanilla,Plani
     public PlanillaResumAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         // Create a new View
 
-        View v = LayoutInflater.from(mContext).inflate(R.layout.item_resum_planilla,parent,false);
-        PlanillaResumAdapter.ViewHolder vh = new PlanillaResumAdapter.ViewHolder(v);
-        return vh;
+        View v;
+
+        if(mPlace.equals("main")){
+            v = LayoutInflater.from(mContext).inflate(R.layout.item_resum_planilla_main,parent,false);
+        }else{
+            v = LayoutInflater.from(mContext).inflate(R.layout.item_resum_planilla,parent,false);
+        }
+        return new PlanillaResumAdapter.ViewHolder(v);
     }
 
 

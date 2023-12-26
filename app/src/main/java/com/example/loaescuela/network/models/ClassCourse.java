@@ -12,6 +12,7 @@ public class ClassCourse {
 
     public Double paid_amount;
     public String payment_method;
+    public String payment_place;
 
     public ClassCourse(Long student_id, String category, String sub_category, Integer classes_number, Double amount, String obs){
         this.classes_number = classes_number;

@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -187,8 +188,7 @@ public class PlanillasActivity extends BaseActivity implements Paginate.Callback
                 p.categoria = String.valueOf( spinnerType.getSelectedItem());
                 p.subcategoria = String.valueOf( spinnerSubCat.getSelectedItem());
                 p.anio = anio.getText().toString().trim();
-                p.mes = String.valueOf( spinnerMonth.getSelectedItem());
-                p.date = DateHelper.get().getDateFromMonthAndYear(p.mes,p.anio);
+                p.date = "2023-12-12";
 
                 ApiClient.get().postPlanilla(p, new GenericCallback<Planilla>() {
                     @Override
@@ -198,7 +198,7 @@ public class PlanillasActivity extends BaseActivity implements Paginate.Callback
 
                     @Override
                     public void onError(Error error) {
-                        //DialogHelper.get().showMessage("Error", "No se pudo crear la factura",getBaseContext());
+                        Toast.makeText(PlanillasActivity.this, "err "+error.message+ " "+error.result,Toast.LENGTH_LONG).show();
                     }
                 });
 

@@ -73,7 +73,7 @@ public class StudentsListActivity extends BaseActivity implements Paginate.Callb
         super.onCreate(savedInstanceState);
 
         title = findViewById(R.id.title);
-        title.setText(getIntent().getStringExtra("TITLE"));
+        //title.setText(getIntent().getStringExtra("TITLE"));
 
         orderByCreated = findViewById(R.id.orderClientByCreated);
         orderByName = findViewById(R.id.orderClientBy);

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:descendantFocusability="blocksDescendants"
     android:layout_height="match_parent"
@@ -9,7 +10,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/fff5"
         android:id="@+id/listado">
 
         <androidx.appcompat.widget.Toolbar
@@ -50,9 +50,25 @@
                     style="@style/TitleStyle"
                     />
 
+
+
             </LinearLayout>
 
+            <FrameLayout
+                android:layout_width="42dp"
+                android:visibility="gone"
+                android:id="@+id/editStudent"
+                android:layout_marginRight="8dp"
+                android:layout_gravity="right"
+                android:layout_height="42dp">
 
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/editsan"
+                    app:tint="@color/coloRose_soft" />
+            </FrameLayout>
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -60,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/toolbar"
-
+            android:background="@drawable/partes2lei"
             android:orientation="vertical">
 
 
@@ -86,7 +102,7 @@
                         android:layout_height="42dp"
                         android:id="@+id/cuad_image"
                         android:src="@drawable/bblanco"
-                        />
+                        app:tint="@color/coloRose_soft" />
 
                     <TextView
                         android:layout_weight="1"
@@ -141,355 +157,445 @@
 
                 </LinearLayout>
 
-
-                <FrameLayout
-                    android:layout_width="42dp"
-                    android:id="@+id/editStudent"
-                    android:layout_gravity="center_vertical"
-                    android:layout_height="42dp">
-
-                    <ImageView
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/edit_clear"
-                        />
-
-
-
-
-                </FrameLayout>
-
-
-
-
-
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="4dp"
-                android:layout_marginLeft="65dp"
-                android:layout_marginRight="8dp"
-                android:orientation="horizontal"
-                >
+                android:orientation="vertical"
+                android:layout_marginTop="12dp"
 
+
+                android:layout_height="wrap_content"
+                >
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_weight="1.8"
-                    android:gravity="right"
+                    android:orientation="horizontal"
+                    android:layout_height="30dp"
+                    android:paddingRight="4dp"
+                    android:background="#AE668C"
 
-                    android:layout_gravity="center"
-                    android:layout_height="match_parent">
-
+                    >
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:textSize="13sp"
-                        android:textColor="@color/colorPrimaryClearLetter"
-                        android:text="pagos totales"
-                        android:minWidth="55dp"
-                        android:gravity="center_vertical|right"
-                        android:fontFamily="@font/opensanslight"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/medium_text"
-                        android:textColor="@color/colorPrimaryDark"
+                        android:text="Resumen al"
+                        android:layout_marginLeft="16dp"
+                        android:gravity="center_vertical"
                         android:layout_gravity="center_vertical"
-                        android:text=" "
+                        android:textColor="@color/white"
                         android:fontFamily="@font/opensansregular"
-                        />
+                        android:layout_height="wrap_content">
+
+                    </TextView>
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:text="21"
+                        android:id="@+id/date_day"
+                        android:layout_marginLeft="4dp"
+                        android:gravity="center_vertical"
                         android:layout_gravity="center_vertical"
-                        android:fontFamily="@font/opensanslight"
-                        android:gravity="center_vertical|right"
-                        android:minWidth="60dp"
-                        android:text="deudas"
-                        android:textColor="@color/colorPrimaryClearLetter"
-                        android:textSize="13sp" />
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/opensansregular"
+                        android:layout_height="wrap_content">
 
+                    </TextView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="de"
+                        android:layout_marginLeft="4dp"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/opensansregular"
+                        android:layout_height="wrap_content">
 
+                    </TextView>
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="enero"
+                        android:layout_marginLeft="4dp"
+                        android:id="@+id/month"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/opensansregular"
+                        android:layout_height="wrap_content">
 
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="24dp"
-                    android:layout_height="match_parent">
+                    </TextView>
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="2024"
+                        android:layout_marginLeft="4dp"
+                        android:id="@+id/date_year"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/opensansregular"
+                        android:layout_height="wrap_content">
 
-                </LinearLayout>
+                    </TextView>
 
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="8dp"
-                android:layout_marginLeft="12dp"
-                >
-
-
-                <LinearLayout
-                    android:layout_width="50dp"
-                    android:background="@drawable/bblanco"
-                    android:layout_gravity="center_vertical"
-                    android:backgroundTint="@color/colorPrimaryClear"
-                    android:layout_alignParentBottom="true"
-                    android:layout_height="60dp">
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="2.7"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:id="@+id/line_date"
-                        >
+                        android:layout_gravity="right|center_vertical"
+                        android:gravity="right|center_vertical"
+                        android:paddingTop="@dimen/student_padding_top"
+                        android:id="@+id/infobutton"
+                        android:layout_height="match_parent">
 
                         <TextView
-                            android:id="@+id/month"
-                            android:layout_width="40dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:textAllCaps="true"
-                            android:fontFamily="@font/opensanslight"
-                            android:gravity="center_horizontal"
-                            android:text="ABR"
-                            android:textColor="@color/colorPrimaryDark"
+                            android:id="@+id/circle2"
+                            android:layout_width="13dp"
+                            android:layout_height="13dp"
 
-                            android:textSize="13sp" />
-
-                        <TextView
-                            android:id="@+id/date_day"
-                            android:layout_width="40dp"
-                            android:layout_height="wrap_content"
-                            android:textAllCaps="true"
-                            android:layout_gravity="center_horizontal"
-                            android:fontFamily="@font/opensanslight"
-                            android:gravity="center_horizontal"
-                            android:paddingTop="14dp"
-                            android:text="21"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="20sp" />
-
-                        <TextView
-                            android:id="@+id/date_year"
-                            android:layout_width="40dp"
-                            android:layout_height="wrap_content"
-                            android:textAllCaps="true"
-                            android:layout_gravity="center_horizontal"
-                            android:fontFamily="@font/opensansregular"
-                            android:gravity="center_horizontal"
-                            android:paddingTop="37dp"
-                            android:text="2022"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="12sp" />
-
-                    </RelativeLayout>
-
-
+                            android:layout_gravity="center"
+                            android:layout_margin="4dp"
+                            android:background="@drawable/circle_student"
+                            android:gravity="center"
+                            android:text=""
+                            android:textColor="@color/colorPrimaryDarkLetter" />
+                    </LinearLayout>
 
                 </LinearLayout>
-
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:background="@drawable/rec_rounded_8"
-                    android:paddingBottom="@dimen/student_padding_bottom"
-
-                    android:paddingLeft="8dp"
-                    android:backgroundTint="@color/back_transp"
-                    android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
+                    android:paddingLeft="16dp"
+                    android:paddingBottom="8dp"
+                    android:paddingRight="4dp"
+                    android:layout_height="wrap_content"
+                    android:background="#E8BAD2"
+
                     >
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="4dp"
                         android:orientation="horizontal"
+                        android:layout_marginTop="8dp"
+                        android:layout_height="wrap_content"
+                        android:background="#E8BAD2"
                         >
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:paddingTop="@dimen/student_padding_top"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/opensanslight"
-                            android:text="Resumen temp    "
-                            android:textColor="@color/colorPrimaryIntLetter"
-                            android:textSize="@dimen/small_text"
-                            />
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:text="total clases compradas"
+                            android:layout_marginLeft="4dp"
+                            android:gravity="center_vertical"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/colorPrimaryDarkLetterRose"
+                            android:fontFamily="@font/opensansregular"
+                            android:layout_height="wrap_content">
+
+                        </TextView>
+
 
                         <TextView
-                            android:layout_width="3dp"
+                            android:layout_width="40dp"
+                            android:text="1"
+                            android:paddingRight="8dp"
+
+                            android:id="@+id/buyed_classes"
+                            android:layout_marginLeft="4dp"
+                            android:gravity="center_vertical|right"
+                            android:layout_gravity="center_vertical|right"
+                            android:textColor="@color/colorPrimaryDarkLetterRose"
+                            android:fontFamily="@font/opensansregular"
+                            android:layout_height="wrap_content">
+
+                        </TextView>
+                        <TextView
+                            android:layout_width="1dp"
                             android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginLeft="4dp"
+                            android:paddingBottom="4dp"
                             android:layerType="software"
-                            android:layout_marginRight="2dp"
+                            android:backgroundTint="@color/colobarra"
+                            android:layout_marginRight="4dp"
                             android:background="@drawable/line_dotted_vertical"
                             />
 
-                        <LinearLayout
+
+                        <TextView
                             android:layout_width="match_parent"
-                            android:layout_weight="1.6"
+                            android:layout_weight="1.5"
+                            android:text=""
+                            android:gravity="center_vertical"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/colorPrimaryDarkLetterRose"
+                            android:fontFamily="@font/opensansregular"
+                            android:layout_height="wrap_content">
+
+                        </TextView>
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+
+                        android:layout_height="wrap_content"
+                        android:background="#E8BAD2"
+                        >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:text="total clases tomadas"
+                            android:layout_marginLeft="4dp"
+                            android:paddingTop="4dp"
+                            android:id="@+id/list_presents"
+                            android:gravity="center_vertical"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/colorPrimaryDarkLetterRose"
+                            android:fontFamily="@font/opensansregular"
+                            android:layout_height="wrap_content">
+
+                        </TextView>
+
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:text="1"
+                            android:layout_marginLeft="4dp"
+                            android:id="@+id/taken_classes"
                             android:gravity="center_vertical|right"
+                            android:paddingRight="8dp"
+                            android:paddingTop="4dp"
+
                             android:layout_gravity="center_vertical|right"
-                            android:layout_height="match_parent">
+                            android:textColor="@color/colorPrimaryDarkLetterRose"
+                            android:fontFamily="@font/opensansregular"
+                            android:layout_height="wrap_content">
+
+                        </TextView>
+                        <TextView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="4dp"
+                            android:layerType="software"
+                            android:backgroundTint="@color/colobarra"
+                            android:layout_marginRight="4dp"
+                            android:background="@drawable/line_dotted_vertical"
+                            />
 
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:textSize="@dimen/general_text"
-                                android:textColor="@color/colorPrimaryDark"
-                                android:id="@+id/paid_amount"
-                                android:text=""
-                                android:paddingRight="2dp"
-                                android:paddingTop="@dimen/student_padding_top"
-                                android:minWidth="55dp"
-                                android:gravity="right|center_vertical"
-                                android:layout_gravity="center_vertical"
-                                android:fontFamily="@font/opensansregular"
-                                />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="@dimen/general_text"
-                                android:textColor="@color/colorPrimaryDark"
-                                android:layout_gravity="center_vertical"
-                                android:gravity="center_vertical"
-                                android:text="|"
-                                android:fontFamily="@font/opensansregular"
-                                />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1.5"
+                            android:fontFamily="@font/opensansregular"
+                            android:gravity="center_vertical"
+                            android:paddingTop="4dp"
+                            android:textColor="@color/colorPrimaryDarkLetterRose">
 
-                            <TextView
-                                android:id="@+id/tot_amount"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="center_vertical"
-                                android:fontFamily="@font/opensansregular"
-                                android:gravity="center_vertical|right"
-                                android:minWidth="60dp"
-                                android:layout_marginRight="2dp"
-                                android:paddingTop="@dimen/student_padding_top"
-                                android:text=""
-                                android:textColor="@color/colorPrimaryDark"
-                                android:textSize="@dimen/general_text" />
-
-
-
-
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="24dp"
-                            android:paddingTop="@dimen/student_padding_top"
-                            android:id="@+id/infobutton"
-                            android:layout_height="match_parent">
-
-                            <TextView
-                                android:id="@+id/circle2"
-                                android:layout_width="13dp"
-                                android:layout_height="13dp"
-
-                                android:layout_gravity="center"
-                                android:layout_margin="4dp"
-                                android:background="@drawable/circle_student"
-                                android:gravity="center"
-                                android:text=""
-                                android:textColor="@color/colorPrimaryDarkLetter" />
-                        </LinearLayout>
+                        </TextView>
 
 
                     </LinearLayout>
 
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginRight="16dp"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/line"
+                        android:backgroundTint="@color/colorPrimaryDarkLetter"
+                        android:layout_height="2dp"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:paddingBottom="4dp"
-                        android:layout_marginTop="12dp"
+
+                        android:layout_height="wrap_content"
+                        android:background="#E8BAD2"
                         >
 
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:text="total abonado"
+                            android:layout_marginLeft="4dp"
+                            android:paddingTop="4dp"
+                            android:gravity="center_vertical"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/colorPrimaryDarkLetterRose"
+                            android:fontFamily="@font/opensansregular"
+                            android:layout_height="wrap_content">
+
+                        </TextView>
+
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_marginLeft="4dp"
+                            android:gravity="center_vertical"
+                            android:paddingTop="4dp"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/colorPrimaryDarkLetterRose"
+                            android:fontFamily="@font/opensansregular"
+                            android:layout_height="wrap_content">
+
+                        </TextView>
+                        <TextView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginTop="4dp"
+                            android:paddingBottom="1dp"
+                            android:layerType="software"
+                            android:backgroundTint="@color/colobarra"
+                            android:layout_marginRight="4dp"
+                            android:background="@drawable/line_dotted_vertical"
+                            />
+
+
+
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_weight="1.1"
-
+                            android:layout_weight="1.5"
+                            android:layout_gravity="right"
+                            android:gravity="right"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
                             >
 
                             <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensanslight"
-                                android:text="clases tomadas"
-                                android:id="@+id/list_presents"
-                                android:textColor="@color/colorPrimaryIntLetter"
-                                android:textSize="@dimen/small_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_vertical|left"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/opensansregular"
+                                android:gravity="center_vertical|left"
+                                android:paddingLeft="4dp"
+                                android:text="$"
+                                android:textColor="@color/colorPrimaryDarkLetterRose"
                                 />
+
 
 
                             <TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensansregular"
+                                android:paddingTop="4dp"
+                                android:id="@+id/paid_amount"
                                 android:text=""
-                                android:id="@+id/taken_classes"
-                                android:paddingLeft="6dp"
-                                android:textColor="@color/colorPrimaryIntLetter"
-                                android:textSize="@dimen/medium_text"
-                                />
+                                android:layout_marginRight="12dp"
+                                android:gravity="right"
+                                android:layout_gravity="center_vertical"
+                                android:textColor="@color/colorPrimaryDarkLetterRose"
+                                android:fontFamily="@font/opensansregular"
+                                android:layout_height="wrap_content">
+
+                            </TextView>
+
                         </LinearLayout>
+
+
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+
+                        android:layout_height="wrap_content"
+                        android:background="#E8BAD2"
+                        >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:text="total deuda"
+                            android:layout_marginLeft="4dp"
+                            android:paddingTop="4dp"
+                            android:gravity="center_vertical"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/colorPrimaryDarkLetterRose"
+                            android:fontFamily="@font/opensansregular"
+                            android:layout_height="wrap_content">
+
+                        </TextView>
+
+
+                        <TextView
+                            android:layout_width="40dp"
+                            android:layout_marginLeft="4dp"
+                            android:gravity="center_vertical"
+                            android:paddingTop="4dp"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="@color/colorPrimaryDarkLetterRose"
+                            android:fontFamily="@font/opensansregular"
+                            android:layout_height="wrap_content">
+
+                        </TextView>
+                        <TextView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="4dp"
+                            android:layerType="software"
+                            android:paddingTop="3dp"
+                            android:backgroundTint="@color/colobarra"
+                            android:layout_marginRight="4dp"
+                            android:background="@drawable/line_dotted_vertical"
+                            />
+
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_weight="0.9"
-                            android:layout_gravity="center"
-                            android:gravity="center"
+                            android:layout_weight="1.5"
+                            android:layout_gravity="right"
+                            android:gravity="right"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
                             >
 
                             <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensanslight"
-                                android:text="clases restantes"
-                                android:textColor="@color/colorPrimaryIntLetter"
-                                android:textSize="@dimen/small_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_vertical|left"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/opensansregular"
+                                android:gravity="center_vertical|left"
+                                android:paddingLeft="4dp"
+                                android:text="$"
+                                android:textColor="@color/colorPrimaryDarkLetterRose"
                                 />
+
 
 
                             <TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/opensansregular"
+                                android:paddingTop="4dp"
                                 android:text=""
-                                android:id="@+id/rest_classes"
-                                android:paddingLeft="6dp"
-                                android:textColor="@color/colorPrimaryIntLetter"
-                                android:textSize="@dimen/medium_text"
-                                />
+                                android:id="@+id/tot_amount"
+                                android:gravity="right"
+                                android:layout_marginRight="12dp"
+                                android:layout_gravity="center_vertical"
+                                android:textColor="@color/colorPrimaryDarkLetterRose"
+                                android:fontFamily="@font/opensansregular"
+                                android:layout_height="wrap_content">
+
+                            </TextView>
+
                         </LinearLayout>
-                    </LinearLayout>
+
+
+
                     </LinearLayout>
 
 
-            </LinearLayout>
+                </LinearLayout>
+                </LinearLayout>
+
+
+
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -518,6 +624,7 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:padding="8dp"
+                    android:visibility="gone"
                     android:layout_height="40dp"
                     android:src="@drawable/close_eye"
                     android:layout_gravity="right"
@@ -590,7 +697,7 @@
         android:layout_marginTop="6dp"
         android:layout_alignParentRight="true"
         android:background="@drawable/rec_rounded_8"
-        android:backgroundTint="@color/colorPrimary"
+        android:backgroundTint="#AE668C"
         >
 
 

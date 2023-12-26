@@ -1,22 +1,13 @@
 package com.example.loaescuela.activities;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Base64;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -32,6 +23,7 @@ import com.example.loaescuela.network.GenericCallback;
 import com.example.loaescuela.network.models.BeachBox;
 import com.example.loaescuela.network.models.ReportBox;
 import com.example.loaescuela.network.models.ReportNewBox;
+import com.example.loaescuela.types.Constants;
 
 import java.util.Calendar;
 
@@ -74,6 +66,15 @@ public class CreateBoxActivity extends BaseActivity {
     private LinearLayout fab_save;
 
     private LinearLayout home;
+    private LinearLayout mChange_category;
+
+    private String mPaymentPlace;
+    private String mCategory;
+
+    private FrameLayout porcentaje;
+    private LinearLayout colonia;
+    private TextView text_colonia;
+    private TextView text_porcentaje;
 
     @Override
     public int getLayoutRes() {
@@ -85,6 +86,9 @@ public class CreateBoxActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mPaymentPlace = getIntent().getStringExtra("PAYMENTPLACE");
+        mCategory = Constants.CATEGORY_ESCUELA;
+
         home = findViewById(R.id.line_home);
         home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,8 +97,38 @@ public class CreateBoxActivity extends BaseActivity {
             }
         });
 
-        tot_formatos = findViewById(R.id.tot_formatos);
-        tot_esc_ef = findViewById(R.id.tot_esc_ef);
+        mChange_category = findViewById(R.id.change_category);
+        text_porcentaje = findViewById(R.id.text_porcentaje);
+        text_colonia = findViewById(R.id.text_comision);
+        porcentaje = findViewById(R.id.gen);
+        colonia = findViewById(R.id.comision);
+
+        mChange_category.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    if(mCategory.equals(Constants.CATEGORY_ESCUELA)){
+                        mCategory = Constants.CATEGORY_COLONIA;
+
+                        porcentaje.setBackgroundResource(R.drawable.custom_button_3);
+                        colonia.setBackgroundResource(R.drawable.custom_button_3a);
+                        text_colonia.setTextColor(getResources().getColor(R.color.white));
+                        text_porcentaje.setTextColor(getResources().getColor(R.color.colorbutton));
+
+                        clearAllFields();
+                    }else{
+                        mCategory = Constants.CATEGORY_ESCUELA;
+
+                        porcentaje.setBackgroundResource(R.drawable.custom_button_3a);
+                        colonia.setBackgroundResource(R.drawable.custom_button_3);
+                        text_colonia.setTextColor(getResources().getColor(R.color.colorbutton));
+                        text_porcentaje.setTextColor(getResources().getColor(R.color.white));
+
+                        clearAllFields();
+                    }
+                }
+        });
+
+
 
         line_top_info = findViewById(R.id.line_top);
         finish_save = findViewById(R.id.finish_save);
@@ -103,9 +137,10 @@ public class CreateBoxActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if(!mDetailNoNUll){
-                    BeachBox b=loadInfoBox();
+                    BeachBox b = loadInfoBox();
 
                     b.created= mSelectDate;
+                    b.payment_place = mPaymentPlace;
 
                     ApiClient.get().postBeachBox(b, new GenericCallback<BeachBox>() {
                         @Override
@@ -113,6 +148,7 @@ public class CreateBoxActivity extends BaseActivity {
                             Toast.makeText(getBaseContext(),"La caja ha sido guardada"+data.id, Toast.LENGTH_SHORT).show();
                             mBox = data;
 
+                            clearAllFields();
                         }
 
                         @Override
@@ -138,8 +174,9 @@ public class CreateBoxActivity extends BaseActivity {
         day=findViewById(R.id.day);
         month=findViewById(R.id.month);
 
-        rest_box_day_before=findViewById(R.id.res_box_day_before);
+        rest_box_day_before = findViewById(R.id.res_box_day_before);
         tot_extractions = findViewById(R.id.tot_extract);
+
         counted_sale=  findViewById(R.id.counted_sale);
         credit_card=  findViewById(R.id.credit_card);
         total_amount=  findViewById(R.id.total_amount);
@@ -194,21 +231,31 @@ public class CreateBoxActivity extends BaseActivity {
             }
         });
 
+        getPreviousBox();
+    }
+
+    private void clearAllFields(){
+        tot_extractions.setText("");
+        counted_sale.setText("");
+        credit_card.setText("");
+        rest_box_day_before.setText("");
+        rest_box.setText("");
+        total_amount.setText("");
 
         getPreviousBox();
     }
 
     private void getPreviousBox(){
         ApiClient.get().getPreviousBox(DateHelper.get().getOnlyDate(mSelectDate),DateHelper.get().getOnlyDateComplete(mSelectDate),
-                DateHelper.get().getOnlyDateComplete(DateHelper.get().getNextDay(mSelectDate)),new GenericCallback<ReportNewBox>() {
+                DateHelper.get().getOnlyDateComplete(DateHelper.get().getNextDay(mSelectDate)), this.mPaymentPlace, this.mCategory,new GenericCallback<ReportNewBox>() {
                     @Override
                     public void onSuccess(ReportNewBox data) {
-                        mRestBoxDayBefore = String.valueOf(data.lastBox.rest_box);
+                        mRestBoxDayBefore = ValuesHelper.get().getIntegerQuantity(data.lastBox.rest_box);
                         mRestBoxDayBeforeValue = Double.valueOf(mRestBoxDayBefore);
                         rest_box_day_before.setText(String.valueOf(mRestBoxDayBefore));
 
                         mTotalExtractionsByDay = data.amountExtractions;
-                        tot_extractions.setText(String.valueOf(data.amountExtractions));
+                        tot_extractions.setText(ValuesHelper.get().getIntegerQuantity(data.amountExtractions));
 
                         loadInfo();
                     }
@@ -223,7 +270,6 @@ public class CreateBoxActivity extends BaseActivity {
 
     private void loadInfo(){
         loadAmountByDay();   //mCountedSale=
-        loadAmountSalesCard();   //mCreditCard=
 
         counted_sale.addTextChangedListener(new TextWatcher() {
             @Override
@@ -340,25 +386,31 @@ public class CreateBoxActivity extends BaseActivity {
         b.total_box = totalAmount;
         b.counted_sale = countedSale;
         b.rest_box = restBox;
+        b.category = mCategory;
         b.detail = det;
+        b.deposit = mTotalExtractionsByDay;
 
         return b;
     }
 
+
+    //aca dividir si es escuela o colonia
+
     private void loadAmountByDay(){
-        ApiClient.get().getPaidAmountByDay(mSelectDate, new GenericCallback<ReportBox>() {
+        ApiClient.get().getPaidAmountByDay(mSelectDate, this.mPaymentPlace, this.mCategory,new GenericCallback<ReportBox>() {
             @Override
             public void onSuccess(ReportBox data) {
-                Double totEscu = data.tot_esc_ef;
-                Double totCol = data.tot_col_ef;
-                Double totHigh = data.tot_high_ef;
 
+                counted_sale.setText(ValuesHelper.get().getIntegerQuantity(data.tot_ef));
+                mCountedSale = data.tot_ef;
+                credit_card.setText(ValuesHelper.get().getIntegerQuantity(data.tot_tarjeta));
+                mCreditCard = data.tot_tarjeta; //digital
 
-                tot_esc_ef.setText(ValuesHelper.get().getIntegerQuantity(totEscu));
-                tot_formatos.setText(ValuesHelper.get().getIntegerQuantity(totCol+totHigh));
+                mTotalExtractionsByDay = data.amount_outcomes;
+                tot_extractions.setText(ValuesHelper.get().getIntegerQuantity(data.amount_outcomes));
 
-
-                counted_sale.setText(ValuesHelper.get().getIntegerQuantity(totEscu+totCol+totHigh));
+                total_amount.setText(ValuesHelper.get().getIntegerQuantity(mCountedSale + mRestBoxDayBeforeValue));
+                rest_box.setText(ValuesHelper.get().getIntegerQuantity(mCountedSale + mRestBoxDayBeforeValue - mTotalExtractionsByDay));
             }
 
             @Override

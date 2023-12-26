@@ -118,16 +118,16 @@ public class ApiClient {
         handleRequest( ApiUtils.getAPIService().postBeachBox(inc), callback);
     }
 
-    public void getBoxes(Integer page,  final GenericCallback<List<BeachBox>> callback){
-        handleRequest( ApiUtils.getAPISessionService().getBoxes(page), callback);
+    public void getBoxes(Integer page, String payment_place,  String category, final GenericCallback<List<BeachBox>> callback){
+        handleRequest( ApiUtils.getAPISessionService().getBoxes("getBoxes",page, payment_place, category), callback);
     }
 
-    public void getPaidAmountByDay( String date, final GenericCallback<ReportBox> callback){
-        handleRequest( ApiUtils.getAPISessionService().getPaidAmountByDay("getPaidAmountByDay", date), callback);
+    public void getPaidAmountByDay( String date, String payment_place, String category,final GenericCallback<ReportBox> callback){
+        handleRequest( ApiUtils.getAPISessionService().getPaidAmountByDay("getPaidAmountByDay", date, payment_place, category), callback);
     }
 
-    public void getPreviousBox( String created,String date,String dateTo,final GenericCallback<ReportNewBox> callback ){
-        handleRequest( ApiUtils.getAPISessionService().getPreviousBox("getLastBox",created,date,dateTo), callback);
+    public void getPreviousBox( String created,String date,String dateTo, String payment_place, String category,final GenericCallback<ReportNewBox> callback ){
+        handleRequest( ApiUtils.getAPISessionService().getPreviousBox("getLastBox",created,date,dateTo, payment_place, category), callback);
     }
 
     //OUTCOMES
@@ -161,6 +161,10 @@ public class ApiClient {
 
     public void deltePlanilla(Long id, final GenericCallback<Void> callback){
         handleDeleteRequest( ApiUtils.getAPISessionService().deletePlanilla(id), callback);
+    }
+
+    public void deleteAlumnoPlanilla(Long id, final GenericCallback<Void> callback){
+        handleDeleteRequest( ApiUtils.getAPISessionService().deleteAlumnoPlanilla(id), callback);
     }
 
 

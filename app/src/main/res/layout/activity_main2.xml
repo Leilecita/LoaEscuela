@@ -6,16 +6,15 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
+
     android:orientation="vertical"
     tools:context=".activities.MainActivity"
     >
-
-
     <LinearLayout
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
 
+        >
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBar"
@@ -26,6 +25,7 @@
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:id="@+id/toolbar"
+                android:background="@color/colorPrimary"
                 android:theme="@style/TitleStyle"
                 app:layout_scrollFlags="scroll|enterAlways|snap"
                 android:layout_height="wrap_content">
@@ -36,177 +36,185 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-        <RelativeLayout
-            android:orientation="vertical" android:layout_width="match_parent"
-            android:paddingBottom="40dp"
-            android:background="@drawable/fondlei2"
-            android:layout_height="match_parent">
+            android:background="@drawable/partes2lei1"
 
+            >
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:background="@drawable/rec_rounded_8"
-                android:paddingBottom="@dimen/student_padding_bottom"
-                android:paddingLeft="8dp"
-                android:layout_marginTop="8dp"
-
-                android:backgroundTint="@color/back_transp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                >
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginTop="6dp"
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:orientation="horizontal"
-                    android:background="@drawable/rec_rounded_8"
-                    android:backgroundTint="@color/colorPrimaryClear"
-                    android:layout_height="wrap_content">
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:gravity="center"
-                        android:textSize="@dimen/small_text"
-                        android:text="Lun"
-                        android:layout_gravity="center"
-                        android:textAllCaps="true"
-                        android:id="@+id/name_day"
-                        android:textColor="@color/colorPrimaryIntLetter"
-                        android:layout_height="match_parent"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:gravity="center"
-                        android:textSize="@dimen/small_text"
-                        android:text="20"
-                        android:id="@+id/number_day"
-                        android:layout_gravity="center"
-                        android:paddingLeft="4dp"
-                        android:textAllCaps="true"
-                        android:textColor="@color/colorPrimaryIntLetter"
-                        android:layout_height="match_parent"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:gravity="center"
-                        android:textSize="@dimen/small_text"
-                        android:text="Enero"
-                        android:paddingLeft="4dp"
-                        android:layout_gravity="center"
-                        android:id="@+id/month"
-                        android:textAllCaps="true"
-                        android:textColor="@color/colorPrimaryIntLetter"
-                        android:layout_height="match_parent"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:gravity="center"
-                        android:textSize="@dimen/small_text"
-                        android:text="2022"
-                        android:paddingLeft="4dp"
-                        android:id="@+id/year"
-                        android:layout_gravity="center"
-                        android:textAllCaps="true"
-                        android:textColor="@color/colorPrimaryIntLetter"
-                        android:layout_height="match_parent"
-                        />
+                android:layout_marginBottom="40dp"
+                android:paddingBottom="40dp">
 
 
 
+                <ImageView
+                    android:id="@+id/students"
+                    android:layout_width="145dp"
+                    android:layout_height="145dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/custom_button_prod" />
 
-                </LinearLayout>
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:id="@+id/list_planillas"
-                    android:layout_marginTop="6dp"
-                    android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/asistencia"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_above="@id/students"
+                    android:layout_marginBottom="-5dp"
+                    android:layout_toLeftOf="@id/box"
+                    android:background="@drawable/custom_button" />
 
-                </androidx.recyclerview.widget.RecyclerView>
+                <ImageView
+                    android:id="@+id/payments"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_above="@id/students"
+                    android:layout_marginBottom="-5dp"
+                    android:layout_toRightOf="@+id/box"
+                    android:src="@drawable/custom_button_list_box" />
 
+                <ImageView
+                    android:id="@+id/box"
 
-            </LinearLayout>
+                    android:layout_width="102dp"
+                    android:layout_height="102dp"
+                    android:layout_above="@id/students"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/custom_button_boxes"
+                    android:visibility="invisible" />
 
-            <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_centerInParent="true"
-                android:id="@+id/students"
-                android:background="@drawable/custom_button_prod"/>
-
-            <ImageView
-                android:layout_width="120dp"
-                android:id="@+id/asistencia"
-                android:layout_above="@id/students"
-                android:layout_toLeftOf="@id/box"
-                android:layout_marginBottom="-20dp"
-                android:layout_height="120dp"
-                android:background="@drawable/custom_button"
-                />
-
-            <ImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:id="@+id/payments"
-                android:layout_toRightOf="@+id/box"
-                android:layout_above="@id/students"
-                android:layout_marginBottom="-20dp"
-                android:src="@drawable/custom_button_list_box"/>
-
-            <ImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_marginBottom="20dp"
-                android:id="@+id/box"
-                android:visibility="invisible"
-                android:layout_above="@id/students"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/custom_button_boxes"/>
+                <ImageView
+                    android:id="@+id/statistics"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_below="@id/students"
+                    android:alpha="0.7"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="-30dp"
+                    android:layout_toRightOf="@id/clients"
+                    android:src="@drawable/custom_button_statistics" />
 
 
+                <ImageView
+                    android:id="@+id/clients"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
 
-            <ImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:id="@+id/statistics"
-                android:layout_marginTop="-30dp"
-                android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@id/clients"
-                android:layout_below="@id/students"
-                android:src="@drawable/custom_button_statistics"/>
+                    android:layout_below="@id/students"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="40dp"
+                    android:alpha="0.7"
+                    android:src="@drawable/custom_button_debt" />
 
-            <ImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:id="@+id/clients"
-                android:layout_marginTop="38dp"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@id/students"
-                android:src="@drawable/custom_button_debt"/>
-
-            <ImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_below="@id/students"
-                android:layout_marginTop="-30dp"
-                android:layout_marginRight="5dp"
-                android:id="@+id/spendings"
-                android:layout_toLeftOf="@id/clients"
-                android:src="@drawable/custom_button_personal"/>
+                <ImageView
+                    android:id="@+id/spendings"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_below="@id/students"
+                    android:layout_marginTop="-30dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_toLeftOf="@id/clients"
+                    android:src="@drawable/custom_button_personal" />
 
 
 
 
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
 
-        </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="12dp"
+        android:id="@+id/start_resum"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/rec_rounded_8"
+        android:backgroundTint="@color/back_transp"
+        android:orientation="vertical"
+        android:paddingLeft="8dp"
+        android:paddingBottom="@dimen/student_padding_bottom">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/rec_rounded_8"
+            android:backgroundTint="@color/coloRose_soft_soft"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+
+            <TextView
+                android:id="@+id/name_day"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Lun"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimaryDarkLetterRose"
+                android:textSize="@dimen/small_text" />
+
+            <TextView
+                android:id="@+id/number_day"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingLeft="4dp"
+                android:text="20"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimaryDarkLetterRose"
+                android:textSize="@dimen/small_text" />
+
+            <TextView
+                android:id="@+id/month"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingLeft="4dp"
+                android:text="Enero"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimaryDarkLetterRose"
+                android:textSize="@dimen/small_text" />
+
+            <TextView
+                android:id="@+id/year"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingLeft="4dp"
+                android:text="2022"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimaryDarkLetterRose"
+                android:textSize="@dimen/small_text" />
+
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_planillas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

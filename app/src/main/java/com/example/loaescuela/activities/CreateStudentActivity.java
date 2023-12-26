@@ -16,6 +16,8 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -49,6 +51,11 @@ public class CreateStudentActivity extends BaseActivity{
     private EditText mStudentDni;
     private TextView mStudentNacimiento;
     private String mAge;
+
+    private CheckBox checkMenorEdad;
+    private LinearLayout lineMenorEdad;
+    private TextView nombreResponsabe;
+    private TextView telResponsabe;
 
     private LinearLayout save;
 
@@ -99,7 +106,6 @@ public class CreateStudentActivity extends BaseActivity{
             }
         });
 
-
         typeAct = getIntent().getStringExtra("TYPE");
 
         if(typeAct != null && typeAct.equals("EDITAR")){
@@ -119,6 +125,22 @@ public class CreateStudentActivity extends BaseActivity{
         mStudentDni =  findViewById(R.id.dni);
 
         save =  findViewById(R.id.save);
+
+        checkMenorEdad =  findViewById(R.id.check_menor_edad);
+        lineMenorEdad =  findViewById(R.id.line_menor_edad);
+        nombreResponsabe =  findViewById(R.id.nombre_responsable);
+        telResponsabe =  findViewById(R.id.phone_responsable);
+
+        checkMenorEdad.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(checkMenorEdad.isChecked()){
+                    lineMenorEdad.setVisibility(View.VISIBLE);
+                }else{
+                    lineMenorEdad.setVisibility(View.GONE);
+                }
+            }
+        });
 
         mStudentNacimiento.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,12 +208,17 @@ public class CreateStudentActivity extends BaseActivity{
         String category= mStudentCategory.getSelectedItem().toString().trim();
         String dni= mStudentDni.getText().toString().trim();
 
-        if(mStudentName.getText().toString().matches("") || mStudentPhone.getText().toString().matches("")){
+        if(mStudentDni.getText().toString().matches("") || mStudentName.getText().toString().matches("") || (lineMenorEdad.getVisibility() == View.GONE && mStudentPhone.getText().toString().matches(""))){
             Toast.makeText(getBaseContext(), "Los campos obligatorios deben estar completos" , Toast.LENGTH_SHORT).show();
         }else{
 
             Student student = new Student(name, surname, fecha_nac, phone, dni, category );
             student.edad = mAge;
+
+            if(checkMenorEdad.isChecked()){
+                student.tel_mama = telResponsabe.getText().toString().trim();
+                student.nombre_mama = nombreResponsabe.getText().toString().trim();
+            }
 
             final ProgressDialog progress = ProgressDialog.show(CreateStudentActivity.this, "Creando alumno",
                     "Aguarde un momento", true);

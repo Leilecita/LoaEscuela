@@ -60,38 +60,14 @@ public class AssistsResumByDayActivity extends BaseActivity implements Paginate.
         mAdapter = new AssistResumAdapter(this, new ArrayList<ReportResumAsist>());
         mRecyclerView.setAdapter(mAdapter);
 
-      /*  headersDecor = new StickyRecyclerHeadersDecoration(mAdapter);
-        mRecyclerView.addItemDecoration(headersDecor);
-
-        mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-            @Override public void onChanged() {
-                headersDecor.invalidateHeaders();
-            }
-        });*/
-
-
-
         implementsPaginate();
     }
-
 
     private void clearView(){
         mCurrentPage = 0;
         mAdapter.clear();
         hasMoreItems=true;
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if(!isLoading()) {
-            mCurrentPage = 0;
-            mAdapter.clear();
-            hasMoreItems=true;
-        }
-    }
-
-
 
     public void listPlanillas(){
 
@@ -119,7 +95,6 @@ public class AssistsResumByDayActivity extends BaseActivity implements Paginate.
 
             }
         });
-
     }
 
     private void implementsPaginate(){
@@ -155,10 +130,5 @@ public class AssistsResumByDayActivity extends BaseActivity implements Paginate.
     public boolean hasLoadedAllItems() {
         return !hasMoreItems;
     }
-
-
-
-
-
 
 }

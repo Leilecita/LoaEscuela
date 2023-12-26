@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view_mistake"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -19,7 +20,7 @@
             android:layout_height="30dp"
             android:text="Planilla nueva"
             android:textSize="18sp"
-            android:textColor="@color/colorPrimaryDarkLetter"
+            android:textColor="@color/colorPrimaryLetterRose"
             android:gravity="center"
             android:fontFamily="@font/opensansregular"
             />
@@ -44,7 +45,7 @@
                     android:paddingLeft="8dp"
                     style="@style/Widget.Design.TextInputLayout"
                     android:layout_width="match_parent"
-                    android:textColor="@color/colorPrimaryDarkLetter"
+                    android:textColor="@color/colorPrimaryLetterRose"
                     android:textSize="16sp"
                     android:gravity="center_vertical"
                     android:layout_weight="1"
@@ -56,7 +57,7 @@
                     android:id="@+id/date_picker"
                     android:layout_height="33dp"
                     android:src="@drawable/date"
-                    />
+                    app:tint="@color/colorbutton" />
 
             </LinearLayout>
 
@@ -130,6 +131,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="2dp"
+
             android:orientation="horizontal">
 
 
@@ -139,14 +141,22 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginRight="4dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rec_find"
                 android:orientation="horizontal">
 
+                <TextView
+                    android:fontFamily="@font/opensanslight"
+                    android:layout_width="match_parent"
+                    android:text="Ingresar año temporada. Ej. 2023-2024 / 2024-2025"
+                    android:textColor="@color/colorPrimaryLetterRose"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    />
 
                 <Spinner
                     android:id="@+id/spinner_month"
                     android:spinnerMode="dropdown"
                     android:layout_width="fill_parent"
+                    android:visibility="gone"
                     android:paddingLeft="0dp"
                     android:layout_marginLeft="3dp"
                     android:layout_weight="1"
@@ -166,12 +176,13 @@
                 android:orientation="horizontal">
                 <EditText
                     android:id="@+id/anio"
-                    android:hint="anio"
+                    android:hint="2023-2024"
                     android:fontFamily="@font/opensanslight"
                     android:layout_width="match_parent"
                     style="@style/Widget.Design.TextInputLayout"
                     android:paddingLeft="8dp"
-                    android:textColor="@color/colorPrimaryDarkLetter"
+                    android:textColorHint="@color/clearhintletter"
+                    android:textColor="@color/colorPrimaryLetterRose"
                     android:layout_height="33dp"
                     android:textSize="16sp"
                     android:background="@drawable/rec_text_edit"
@@ -185,8 +196,9 @@
 
 
 
-        </LinearLayout>
 
+
+        </LinearLayout>
 
 
 

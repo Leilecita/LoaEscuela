@@ -19,7 +19,7 @@
             android:layout_height="30dp"
             android:text="Curso nuevo"
             android:textSize="18sp"
-            android:textColor="@color/colorPrimaryDarkLetter"
+            android:textColor="@color/colorPrimaryDarkLetterRose"
             android:gravity="center"
             android:fontFamily="@font/opensansregular"
             />
@@ -27,7 +27,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_weight="1"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="12dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             >
@@ -44,7 +44,7 @@
 
                     android:background="@drawable/bblanco"
 
-                    android:backgroundTint="@color/colorPrimaryClear"
+                    android:backgroundTint="@color/background_rec_inpu"
                     android:gravity ="center|left"
                     android:paddingTop="2dp"
                     android:layout_height="40dp">
@@ -53,7 +53,7 @@
                         android:layout_height="match_parent"
                         android:text="LUN"
                         android:id="@+id/dayname"
-                        android:textColor="@color/colorPrimaryDarkLetter"
+                        android:textColor="@color/colorPrimaryDarkLetterRose"
                         android:textAllCaps="true"
                         android:fontFamily="sans-serif"
                         android:textSize="14sp"
@@ -67,7 +67,7 @@
                         android:id="@+id/num"
                         android:text="12"
                         android:paddingTop="12sp"
-                        android:textColor="@color/colorPrimaryDarkLetter"
+                        android:textColor="@color/colorPrimaryDarkLetterRose"
                         android:textSize="18sp"
                         android:gravity="center_horizontal"
                         android:fontFamily="sans-serif"
@@ -96,7 +96,7 @@
                     style="@style/Widget.Design.TextInputLayout"
                     android:layout_width="wrap_content"
                     android:text="ENERO"
-                    android:textColor="@color/colorPrimaryDarkLetter"
+                    android:textColor="@color/colorPrimaryDarkLetterRose"
                     android:textSize="17sp"
                     android:inputType="textCapWords" />
 
@@ -110,7 +110,7 @@
                     style="@style/Widget.Design.TextInputLayout"
                     android:layout_width="wrap_content"
                     android:text="2023"
-                    android:textColor="@color/colorPrimaryDarkLetter"
+                    android:textColor="@color/colorPrimaryDarkLetterRose"
 
                     android:textSize="17sp"
                     android:inputType="textCapWords" />
@@ -131,7 +131,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_rec_cuad_input"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="12dp"
             android:background="@drawable/rec_rounded_8"
             android:orientation="horizontal">
 
@@ -189,7 +189,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="2dp"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="12dp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -208,7 +208,7 @@
                     style="@style/Widget.Design.TextInputLayout"
                     android:paddingLeft="8dp"
                     android:layout_gravity="center"
-                    android:textColor="@color/colorPrimaryDarkLetter"
+                    android:textColor="@color/colorPrimaryDarkLetterRose"
                     android:layout_height="@dimen/height_rec_cuad_input"
                     android:textSize="16sp"
                     android:inputType="number"
@@ -233,12 +233,12 @@
 
                 <EditText
                     android:id="@+id/amount"
-                    android:hint="$ curso"
+                    android:hint="$ valor total curso"
                     android:fontFamily="@font/opensanslight"
                     android:layout_width="match_parent"
                     style="@style/Widget.Design.TextInputLayout"
                     android:paddingLeft="8dp"
-                    android:textColor="@color/colorPrimaryDarkLetter"
+                    android:textColor="@color/colorPrimaryDarkLetterRose"
                     android:layout_height="@dimen/height_rec_cuad_input"
                     android:textSize="16sp"
                     android:inputType="number"
@@ -258,7 +258,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="4dp"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="12dp"
             android:orientation="horizontal">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -276,7 +276,7 @@
                     android:layout_width="match_parent"
                     style="@style/Widget.Design.TextInputLayout"
                     android:paddingLeft="8dp"
-                    android:textColor="@color/colorPrimaryDarkLetter"
+                    android:textColor="@color/colorPrimaryDarkLetterRose"
                     android:layout_height="@dimen/height_rec_cuad_input"
                     android:textSize="16sp"
                     android:inputType="number"
@@ -289,10 +289,31 @@
 
             </LinearLayout>
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="@dimen/height_rec_cuad_input"
+                android:background="@drawable/rec_rounded_8"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/spinner_payment"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="@dimen/height_rec_cuad_input"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="6dp"
+                    android:dropDownVerticalOffset="40dp"
+                    android:paddingLeft="0dp"
+                    android:spinnerMode="dropdown" />
+
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:layout_height="wrap_content">
@@ -312,6 +333,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:background="@drawable/circle2"
+                            android:backgroundTint="@color/coloRose_soft_soft"
                             android:orientation="vertical"
                             android:id="@+id/efect"
                             android:layout_gravity="center"
@@ -412,7 +434,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="2dp"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="12dp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -427,7 +449,7 @@
                     android:layout_width="match_parent"
                     style="@style/Widget.Design.TextInputLayout"
                     android:paddingLeft="8dp"
-                    android:textColor="@color/colorPrimaryDarkLetter"
+                    android:textColor="@color/colorPrimaryDarkLetterRose"
                     android:layout_height="@dimen/height_rec_cuad_input"
                     android:textSize="16sp"
                     android:background="@drawable/rec_text_edit"
@@ -453,9 +475,10 @@
                 android:layout_height="35dp"
                 android:id="@+id/cancel"
                 android:layout_weight="1"
+                android:fontFamily="@font/opensansregular"
                 android:text="CANCELAR"
                 android:gravity="center"
-                android:textColor="@color/colorDialogButton"
+                android:textColor="@color/colorbutton"
                 android:textStyle="bold"
                 />
 
@@ -468,7 +491,7 @@
                 android:textColor="#ffff"
                 android:padding="4dp"
                 android:background="@drawable/rec_find"
-                android:backgroundTint="@color/colorDialogButton"
+                android:backgroundTint="@color/colorbutton"
                 android:text="guardar"/>
 
         </LinearLayout>

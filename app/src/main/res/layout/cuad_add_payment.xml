@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="@dimen/dialog_left"
-    android:paddingTop="@dimen/dialog_top"
+    android:paddingLeft="28dp"
+    android:paddingTop="10dp"
     android:background="@drawable/rec_dialog"
-    android:paddingRight="@dimen/dialog_right"
-    android:paddingBottom="@dimen/dialog_bottom"
+    android:paddingRight="28dp"
+    android:paddingBottom="10dp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -17,10 +17,10 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:text="Pago a cuenta"
-            android:textSize="18sp"
-            android:textColor="@color/colorPrimaryDarkLetter"
+            android:textSize="16sp"
+            android:textColor="@color/colorPrimaryDarkLetterRose"
             android:gravity="center"
             android:fontFamily="@font/opensansregular"
             />
@@ -28,7 +28,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_weight="1"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             >
@@ -45,7 +45,7 @@
 
                     android:background="@drawable/bblanco"
 
-                    android:backgroundTint="@color/colorPrimaryClear"
+                    android:backgroundTint="#F6EFF3"
                     android:gravity ="center|left"
                     android:paddingTop="2dp"
                     android:layout_height="40dp">
@@ -54,9 +54,9 @@
                         android:layout_height="match_parent"
                         android:text="LUN"
                         android:id="@+id/dayname"
-                        android:textColor="@color/colorPrimaryDarkLetter"
+                        android:textColor="@color/colorPrimaryDarkLetterRose"
                         android:textAllCaps="true"
-                        android:fontFamily="sans-serif"
+                        android:fontFamily="@font/opensanslight"
                         android:textSize="14sp"
                         android:gravity="center_horizontal"
                         android:layout_gravity="center_horizontal"
@@ -68,10 +68,10 @@
                         android:id="@+id/num"
                         android:text="12"
                         android:paddingTop="12sp"
-                        android:textColor="@color/colorPrimaryDarkLetter"
+                        android:textColor="@color/colorPrimaryDarkLetterRose"
                         android:textSize="18sp"
                         android:gravity="center_horizontal"
-                        android:fontFamily="sans-serif"
+                        android:fontFamily="@font/opensansregular"
                         android:layout_gravity="center"
 
                         />
@@ -84,6 +84,7 @@
                 android:layout_weight="1"
                 android:id="@+id/date"
                 android:layout_gravity="center"
+                android:backgroundTint="@color/background_rec_inpu"
                 android:background="@drawable/rec_find"
                 android:layout_height="@dimen/height_rec_cuad_input"
                 >
@@ -97,7 +98,7 @@
                     style="@style/Widget.Design.TextInputLayout"
                     android:layout_width="wrap_content"
                     android:text="ENERO"
-                    android:textColor="@color/colorPrimaryDarkLetter"
+                    android:textColor="@color/colorPrimaryDarkLetterRose"
                     android:textSize="17sp"
                     android:inputType="textCapWords" />
 
@@ -111,7 +112,7 @@
                     style="@style/Widget.Design.TextInputLayout"
                     android:layout_width="wrap_content"
                     android:text="2023"
-                    android:textColor="@color/colorPrimaryDarkLetter"
+                    android:textColor="@color/colorPrimaryDarkLetterRose"
 
                     android:textSize="17sp"
                     android:inputType="textCapWords" />
@@ -164,17 +165,17 @@
             android:layout_width="match_parent"
             android:orientation="horizontal"
             android:layout_gravity="center"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="12dp"
             android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_weight="2.5"
                 android:text="Pagado "
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/colorPrimaryDarkLetterRose"
                 android:gravity="center_vertical"
                 android:fontFamily="@font/opensanslight"
-                android:textSize="@dimen/medium_text"
+                android:textSize="@dimen/general_text"
                 android:layout_height="@dimen/height_rec_cuad_input"
 
                 />
@@ -187,50 +188,49 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:text="$"
-                    android:textColor="@color/colorPrimaryIntLetter"
+                    android:textColor="@color/colorPrimaryDarkLetterRose"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:fontFamily="@font/opensanslight"
-                    android:textSize="@dimen/text_cuad_dialog"
+                    android:textSize="@dimen/general_text"
                     android:layout_height="@dimen/height_rec_cuad_input"
 
                     />
 
                 <TextView
                     android:id="@+id/payed"
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="@dimen/height_rec_cuad_input"
-                    android:layout_gravity="center"
+                    android:layout_gravity="center_vertical|right"
                     android:fontFamily="@font/opensanslight"
-                    android:gravity="center"
-                    android:paddingRight="8dp"
+                    android:gravity="center_vertical|right"
                     android:text="100"
-                    android:textColor="@color/colorPrimaryIntLetter"
-                    android:textSize="@dimen/text_cuad_dialog"
+                    android:textColor="@color/colorPrimaryDarkLetterRose"
+                    android:textSize="@dimen/general_text"
 
                     />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:text=" / "
-                    android:textColor="@color/colorPrimaryIntLetter"
+                    android:textColor="@color/colorPrimaryDarkLetterRose"
                     android:gravity="center"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_gravity="center"
                     android:fontFamily="@font/opensanslight"
-                    android:textSize="@dimen/text_cuad_dialog"
+                    android:textSize="@dimen/general_text"
                     android:layout_height="@dimen/height_rec_cuad_input"
 
                     />
                 <TextView
                     android:layout_width="wrap_content"
                     android:text="$"
-                    android:textColor="@color/colorPrimaryIntLetter"
+                    android:textColor="@color/colorPrimaryDarkLetterRose"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:fontFamily="@font/opensanslight"
-                    android:textSize="@dimen/text_cuad_dialog"
+                    android:textSize="@dimen/general_text"
                     android:layout_height="@dimen/height_rec_cuad_input"
 
                     />
@@ -240,11 +240,11 @@
                     android:layout_weight="2"
                     android:text="90000"
                     android:gravity="center_vertical"
-                    android:textColor="@color/colorPrimaryIntLetter"
+                    android:textColor="@color/colorPrimaryDarkLetterRose"
                     android:id="@+id/pack_value"
                     android:layout_gravity="center"
                     android:fontFamily="@font/opensanslight"
-                    android:textSize="@dimen/text_cuad_dialog"
+                    android:textSize="@dimen/general_text"
                     android:layout_height="@dimen/height_rec_cuad_input"
 
                     />
@@ -259,7 +259,7 @@
             android:layout_width="match_parent"
             android:orientation="horizontal"
             android:layout_gravity="center"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="5dp"
             android:layout_height="wrap_content">
 
             <TextView
@@ -267,10 +267,10 @@
                 android:layout_weight="2.5"
                 android:text="Restan "
 
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/colorPrimaryDarkLetterRose"
                 android:gravity="center_vertical"
                 android:fontFamily="@font/opensanslight"
-                android:textSize="@dimen/text_cuad_dialog"
+                android:textSize="@dimen/general_text"
                 android:layout_height="@dimen/height_rec_cuad_input"
 
                 />
@@ -283,11 +283,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:text="$"
-                    android:textColor="@color/colorPrimaryIntLetter"
+                    android:textColor="@color/colorPrimaryDarkLetterRose"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:fontFamily="@font/opensanslight"
-                    android:textSize="@dimen/text_cuad_dialog"
+                    android:textSize="@dimen/general_text"
                     android:layout_height="@dimen/height_rec_cuad_input"
 
                     />
@@ -295,14 +295,14 @@
                 <TextView
                     android:id="@+id/rest"
 
-                    android:layout_width="365dp"
+                    android:layout_width="80dp"
                     android:layout_height="@dimen/height_rec_cuad_input"
-                    android:layout_gravity="center"
+                    android:layout_gravity="center_vertical|right"
                     android:fontFamily="@font/opensanslight"
-                    android:gravity="left|center_vertical"
+                    android:gravity="right|center_vertical"
                     android:text="8000"
-                    android:textColor="@color/colorPrimaryIntLetter"
-                    android:textSize="@dimen/text_cuad_dialog"
+                    android:textColor="@color/colorPrimaryDarkLetterRose"
+                    android:textSize="@dimen/general_text"
 
                     />
 
@@ -313,9 +313,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:id="@+id/line_payment"
 
             android:orientation="horizontal">
@@ -326,9 +327,9 @@
                 android:text="Pago   "
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/colorPrimaryDarkLetterRose"
                 android:fontFamily="@font/opensanslight"
-                android:textSize="@dimen/text_cuad_dialog"
+                android:textSize="@dimen/general_text"
                 android:layout_height="wrap_content"
 
                 />
@@ -336,10 +337,11 @@
 
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_weight="2.5"
-                android:gravity="center"
+                android:layout_width="100dp"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="18dp"
                 android:layout_gravity="center_vertical"
+                android:backgroundTint="@color/background_rec_inpu"
                 android:background="@drawable/rec_edith_dialog"
                 android:layout_height="@dimen/height_rec_cuad_input">
 
@@ -347,11 +349,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:text="$"
-                    android:textColor="@color/colorPrimaryIntLetter"
-                    android:gravity="center_vertical"
-                    android:layout_gravity="center"
+                    android:textColor="@color/colorPrimaryDarkLetterRose"
+                    android:gravity="center_vertical|left"
+                    android:layout_marginLeft="8dp"
+                    android:layout_gravity="center_vertical|left"
                     android:fontFamily="@font/opensanslight"
-                    android:textSize="@dimen/text_cuad_dialog"
+                    android:textSize="@dimen/general_text"
                     android:layout_height="@dimen/height_rec_cuad_input"
 
                     />
@@ -359,13 +362,17 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_rec_cuad_input"
-                    android:textColor="@color/colorPrimaryIntLetter"
+                    android:textColor="@color/colorPrimaryDarkLetterRose"
                     android:inputType="numberDecimal"
+                    android:layout_gravity="right"
+                    android:gravity="right|center_vertical"
                     android:background="@null"
                     android:paddingLeft="4dp"
+                    android:paddingRight="8dp"
+                    android:text=""
                     android:id="@+id/value_payment"
                     android:fontFamily="@font/opensanslight"
-                    android:textSize="@dimen/text_cuad_dialog">
+                    android:textSize="@dimen/general_text">
 
                 </EditText>
 
@@ -377,7 +384,29 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_weight="1.7"
+                android:layout_marginLeft="4dp"
+                android:layout_height="@dimen/height_rec_cuad_input"
+                android:background="@drawable/rec_rounded_8"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/spinner_payment"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="@dimen/height_rec_cuad_input"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="6dp"
+                    android:dropDownVerticalOffset="40dp"
+                    android:paddingLeft="0dp"
+                    android:spinnerMode="dropdown" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_weight="1.7"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:layout_height="wrap_content">
@@ -433,6 +462,8 @@
 
                 </LinearLayout>
 
+
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_marginLeft="30dp"
@@ -479,26 +510,42 @@
 
 
                     </LinearLayout>
-
-
-
-
                 </LinearLayout>
-
-
             </LinearLayout>
-
-
-
         </LinearLayout>
 
+         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="2.5"
+            android:gravity="center"
+             android:layout_marginTop="16dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/rec_edith_dialog"
+             android:backgroundTint="@color/background_rec_inpu"
+            android:layout_height="@dimen/height_rec_cuad_input">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_rec_cuad_input"
+            android:textColor="@color/colorPrimaryDarkLetterRose"
+            android:inputType="text"
+            android:hint="detalle"
+            android:background="@null"
+            android:paddingLeft="8dp"
+            android:id="@+id/detail"
+            android:fontFamily="@font/opensanslight"
+            android:textSize="@dimen/general_text">
+
+        </EditText>
+
+     </LinearLayout>
 
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="18dp"
             android:orientation="horizontal">
 
 
@@ -511,8 +558,6 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginRight="12dp"
                 android:id="@+id/cancel"
-                android:background="@drawable/rec_edith_dialog"
-                android:backgroundTint="@color/colorcircle"
                 android:orientation="horizontal"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp">
@@ -525,10 +570,11 @@
                     android:layout_gravity="center"
                     android:paddingLeft="12sp"
                     android:gravity="center"
+
                     android:paddingRight="12sp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorbutton"
                     android:fontFamily="@font/opensansregular"
-                    android:textSize="19sp"
+                    android:textSize="17sp"
                     android:text="Cancelar"
                     />
             </LinearLayout>
@@ -536,12 +582,12 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:layout_height="40dp"
+                android:layout_height="@dimen/height_button"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="4dp"
                 android:id="@+id/ok"
                 android:background="@drawable/rec_edith_dialog"
-                android:backgroundTint="@color/colorcircle"
+                android:backgroundTint="@color/colorbutton"
                 android:orientation="horizontal"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp">
@@ -556,7 +602,7 @@
                     android:paddingRight="12sp"
                     android:textColor="@color/white"
                     android:fontFamily="@font/opensansregular"
-                    android:textSize="19sp"
+                    android:textSize="17sp"
                     android:text="Guardar"
                     />
             </LinearLayout>

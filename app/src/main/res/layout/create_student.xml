@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:id="@+id/view">
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
@@ -43,10 +50,12 @@
 
     <RelativeLayout
         android:id="@+id/listday"
+        android:background="@drawable/partes2lei"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="8dp"
-        android:background="@color/background">
+
+       >
 
 
 
@@ -54,24 +63,23 @@
             android:layout_width="match_parent"
             android:id="@+id/scrollview"
             android:clipToPadding="false"
+
             android:paddingBottom="80dp"
             android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="4dp"
+                android:padding="12dp"
                 android:descendantFocusability="beforeDescendants"
                 android:focusableInTouchMode="true"
                 android:layout_marginBottom="6dp"
                 android:orientation="vertical"
-                android:background="@color/background">
-
-
+              >
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="@dimen/input_create_student"
                     android:background="@drawable/rec_find"
                     android:layout_marginTop="16dp"
                     android:paddingLeft="2dp"
@@ -87,8 +95,9 @@
                         android:layout_height="wrap_content">
 
                         <ImageView
-                            android:layout_width="22dp"
-                            android:layout_height="22dp"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            app:tint="@color/colorPrimaryLetterRose"
                             android:src="@drawable/user"
                             android:alpha="0.9"
                             android:padding="1dp"
@@ -98,7 +107,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Nombre"
-                            android:textColor="@color/colorPrimaryIntLetter2"
+                            android:textColor="@color/colorPrimaryLetterRose"
                             android:fontFamily="@font/opensansregular"
                             android:paddingLeft="6dp"
                             android:textSize="@dimen/general_text"
@@ -109,7 +118,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text=" *"
-                            android:textColor="@color/colorPrimaryClearLetter"
+                            android:textColor="@color/colorPrimaryLetterRose"
                             android:fontFamily="@font/opensansregular"
                             android:paddingRight="4dp"
                             android:textSize="16sp"
@@ -137,7 +146,7 @@
                         android:paddingLeft="8dp"
                         android:layout_gravity="center_vertical"
                         android:textColorHint="@color/word_clear"
-                        android:textColor="@color/colorPrimaryDarkLetter"
+                        android:textColor="@color/colorPrimaryLetterRose"
                         android:textSize="@dimen/general_text"
                         android:id="@+id/student_name"
                         />
@@ -145,7 +154,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="@dimen/input_create_student"
                     android:background="@drawable/rec_find"
                     android:layout_marginTop="16dp"
                     android:paddingLeft="2dp"
@@ -178,7 +187,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Apellido *"
-                            android:textColor="@color/colorPrimaryIntLetter2"
+                            android:textColor="@color/colorPrimaryLetterRose"
                             android:fontFamily="@font/opensansregular"
                             android:paddingLeft="6dp"
                             android:textSize="@dimen/general_text"
@@ -190,7 +199,7 @@
                             android:visibility="gone"
                             android:layout_height="wrap_content"
                             android:text=" *"
-                            android:textColor="@color/colorPrimaryClearLetter"
+                            android:textColor="@color/colorPrimaryLetterRose"
                             android:fontFamily="@font/opensansregular"
                             android:paddingRight="4dp"
                             android:textSize="16sp"
@@ -219,7 +228,7 @@
                         android:text=" "
                         android:layout_gravity="center_vertical"
                         android:textColorHint="@color/word_clear"
-                        android:textColor="@color/colorPrimaryDarkLetter"
+                        android:textColor="@color/colorPrimaryLetterRose"
                         android:textSize="@dimen/general_text"
                         android:id="@+id/surname"
                         />
@@ -227,7 +236,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="@dimen/input_create_student"
                     android:layout_marginTop="16dp"
                     android:paddingLeft="2dp"
                     android:background="@drawable/rec_find"
@@ -241,8 +250,9 @@
                         android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        app:tint="@color/colorPrimaryLetterRose"
                         android:layout_marginLeft="3dp"
                         android:src="@drawable/date"
                         android:layout_gravity="center"/>
@@ -259,7 +269,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_height="wrap_content"
                             android:text="Fecha nacimiento"
-                            android:textColor="@color/colorPrimaryIntLetter2"
+                            android:textColor="@color/colorPrimaryLetterRose"
                             android:fontFamily="@font/opensansregular"
                             android:paddingLeft="6dp"
                             android:textSize="@dimen/general_text"
@@ -274,7 +284,7 @@
                             android:layout_marginTop="4dp"
                             android:layout_gravity="right|top"
                             android:gravity="right|top"
-                            android:textColor="@color/colorPrimaryIntLetter2"
+                            android:textColor="@color/colorPrimaryLetterRose"
                             android:fontFamily="@font/opensansregular"
                             android:textSize="@dimen/general_text"
 
@@ -305,7 +315,7 @@
                         android:background="@drawable/rec_find"
                         android:paddingLeft="8dp"
                         android:textColorHint="@color/clearhintletter"
-                        android:textColor="@color/colorPrimaryDarkLetter"
+                        android:textColor="@color/colorPrimaryLetterRose"
                         android:textSize="@dimen/general_text"
                         android:id="@+id/fecha_nacimiento"
                         />
@@ -313,7 +323,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="@dimen/input_create_student"
                     android:layout_marginTop="16dp"
                     android:paddingLeft="2dp"
                     android:background="@drawable/rec_find"
@@ -341,7 +351,7 @@
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
                             android:text="DNI *"
-                            android:textColor="@color/colorPrimaryIntLetter2"
+                            android:textColor="@color/colorPrimaryLetterRose"
                             android:fontFamily="@font/opensansregular"
                             android:paddingLeft="8dp"
                             android:textSize="@dimen/general_text"
@@ -371,15 +381,18 @@
                         android:background="@drawable/rec_find"
                         android:paddingLeft="8dp"
                         android:textColorHint="@color/clearhintletter"
-                        android:textColor="@color/colorPrimaryDarkLetter"
+                        android:textColor="@color/colorPrimaryLetterRose"
                         android:textSize="@dimen/general_text"
                         android:id="@+id/dni"
                         />
                 </LinearLayout>
 
+
+
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="@dimen/input_create_student"
                     android:background="@drawable/rec_find"
                     android:layout_marginTop="16dp"
                     android:paddingLeft="2dp"
@@ -396,9 +409,10 @@
                         android:layout_height="wrap_content">
 
                         <ImageView
-                            android:layout_width="22dp"
-                            android:layout_height="22dp"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
                             android:padding="2dp"
+                            app:tint="@color/colorPrimaryLetterRose"
                             android:src="@drawable/phonesan"
                             android:alpha="0.9"
                             android:layout_marginLeft="6dp"
@@ -408,7 +422,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Teléfono"
-                            android:textColor="@color/colorPrimaryIntLetter2"
+                            android:textColor="@color/colorPrimaryLetterRose"
                             android:fontFamily="@font/opensansregular"
                             android:paddingLeft="6dp"
                             android:textSize="@dimen/general_text"
@@ -419,7 +433,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text=" *"
-                            android:textColor="@color/colorPrimaryClearLetter"
+                            android:textColor="@color/colorPrimaryLetterRose"
                             android:fontFamily="@font/opensansregular"
                             android:paddingRight="4dp"
                             android:textSize="16sp"
@@ -447,7 +461,7 @@
                         android:layout_gravity="center_vertical"
                         android:hint="22464203304"
                         android:textColorHint="@color/clearhintletter"
-                        android:textColor="@color/colorPrimaryDarkLetter"
+                        android:textColor="@color/colorPrimaryLetterRose"
                         android:textSize="@dimen/general_text"
                         android:id="@+id/phone"
                         />
@@ -456,9 +470,200 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:buttonTint="@color/colorPrimaryLetterRose"
+                        android:textColor="@color/colorPrimaryLetterRose"
+                        android:id="@+id/check_menor_edad"
+                        android:layout_height="wrap_content"
+                        >
+                    </CheckBox>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Soy menor de edad"
+                        android:textColor="@color/colorPrimaryLetterRose"
+                        android:fontFamily="@font/opensansregular"
+                        android:paddingRight="4dp"
+                        android:textSize="16sp"
+                        />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:id="@+id/line_menor_edad"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/input_create_student"
+                        android:background="@drawable/rec_find"
+                        android:layout_marginTop="16dp"
+                        android:paddingLeft="2dp"
+                        android:orientation="horizontal">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:layout_gravity="center_vertical"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/user"
+                                android:alpha="0.9"
+                                android:padding="1dp"
+                                android:layout_marginLeft="6dp"
+                                android:layout_gravity="center"
+                                app:tint="@color/colorPrimaryLetterRose" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="nombre responsable"
+                                android:textColor="@color/colorPrimaryLetterRose"
+                                android:fontFamily="@font/opensansregular"
+                                android:paddingLeft="6dp"
+                                android:textSize="@dimen/general_text"
+
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:id="@+id/nombre_responsable"
+                                android:textColor="@color/colorPrimaryLetterRose"
+                                android:fontFamily="@font/opensansregular"
+                                android:paddingRight="4dp"
+                                android:textSize="16sp"
+
+                                />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="4dp"
+                            android:background="@drawable/line_vertical"
+                            />
+
+
+                        <EditText
+                            style="@style/Widget.Design.TextInputLayout"
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:inputType="textCapWords"
+                            android:layout_height="35dp"
+                            android:fontFamily="@font/opensansregular"
+                            android:background="@drawable/rec_find"
+                            android:paddingLeft="8dp"
+                            android:layout_gravity="center_vertical"
+                            android:textColorHint="@color/word_clear"
+                            android:textColor="@color/colorPrimaryLetterRose"
+                            android:textSize="@dimen/general_text"
+                            android:id="@+id/responsable_name"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/input_create_student"
+                        android:background="@drawable/rec_find"
+                        android:layout_marginTop="16dp"
+                        android:paddingLeft="2dp"
+                        android:orientation="horizontal">
+
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:layout_gravity="center_vertical"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:padding="2dp"
+                                app:tint="@color/colorPrimaryLetterRose"
+                                android:src="@drawable/phonesan"
+                                android:alpha="0.9"
+                                android:layout_marginLeft="6dp"
+                                android:layout_gravity="center"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="teléfono responsable"
+                                android:textColor="@color/colorPrimaryLetterRose"
+                                android:fontFamily="@font/opensansregular"
+                                android:paddingLeft="6dp"
+                                android:textSize="@dimen/general_text"
+
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textColor="@color/colorPrimaryLetterRose"
+                                android:fontFamily="@font/opensansregular"
+                                android:paddingRight="4dp"
+                                android:textSize="16sp"
+
+                                />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="4dp"
+                            android:background="@drawable/line_vertical"
+                            />
+
+
+                        <EditText
+                            style="@style/Widget.Design.TextInputLayout"
+                            android:layout_width="match_parent"
+                            android:layout_weight="1"
+                            android:inputType="number"
+                            android:layout_height="35dp"
+                            android:background="@drawable/rec_find"
+                            android:paddingLeft="8dp"
+                            android:layout_gravity="center_vertical"
+                            android:hint="22464203304"
+                            android:textColorHint="@color/clearhintletter"
+                            android:textColor="@color/colorPrimaryLetterRose"
+                            android:textSize="@dimen/general_text"
+                            android:id="@+id/phone_responsable"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/input_create_student"
                     android:layout_marginTop="32dp"
                     android:background="@drawable/rec_find"
+                    android:visibility="gone"
                     android:paddingLeft="2dp"
                     android:orientation="horizontal">
 
@@ -526,7 +731,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="@dimen/input_create_student"
+                    android:visibility="gone"
                     android:paddingLeft="2dp"
                     android:background="@drawable/rec_find"
                     android:layout_marginTop="16dp"
@@ -588,13 +794,12 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="@dimen/input_create_student"
                     android:background="@drawable/rec_find"
                     android:layout_marginTop="16dp"
+                    android:visibility="gone"
                     android:paddingLeft="2dp"
                     android:orientation="horizontal">
-
-
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -656,7 +861,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginLeft="8dp"
                     android:textSize="@dimen/small_text"
-                    android:textColor="@color/colorPrimaryClearLetter"
+                    android:textColor="@color/colorPrimaryLetterRose"
                     android:text="(*) Campos obligatorios"
                     />
 
@@ -671,8 +876,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:paddingLeft="12dp"
-            android:background="@drawable/rec_rounded_16"
-            android:backgroundTint="@color/colorPrimary"
+            android:background="@drawable/rec_rounded_8"
+            android:backgroundTint="@color/colorbutton"
             android:paddingTop="6dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
@@ -708,3 +913,4 @@
     </RelativeLayout>
 
 </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

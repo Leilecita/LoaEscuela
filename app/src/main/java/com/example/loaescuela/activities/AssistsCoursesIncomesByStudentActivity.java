@@ -9,7 +9,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,7 +19,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,14 +26,12 @@ import com.example.loaescuela.CustomLoadingListItemCreator;
 import com.example.loaescuela.DateHelper;
 import com.example.loaescuela.Interfaces.OnRefresListCourses;
 import com.example.loaescuela.R;
+import com.example.loaescuela.ValidatorHelper;
 import com.example.loaescuela.ValuesHelper;
 import com.example.loaescuela.adapters.ClassCourseAdapter;
 import com.example.loaescuela.adapters.SpinnerAdapter;
 import com.example.loaescuela.adapters.StudentPresentAdapter;
-import com.example.loaescuela.fragment.BaseFragment;
-import com.example.loaescuela.fragment.ColonyFragment;
-import com.example.loaescuela.fragment.HighschoolAssistsFragment;
-import com.example.loaescuela.fragment.SchoolAssistsFragment;
+import com.example.loaescuela.data.SessionPrefs;
 import com.example.loaescuela.network.ApiClient;
 import com.example.loaescuela.network.Error;
 import com.example.loaescuela.network.GenericCallback;
@@ -45,6 +41,7 @@ import com.example.loaescuela.network.models.ReportPresent;
 import com.example.loaescuela.network.models.ReportSeasonPresent;
 import com.example.loaescuela.types.CategoryType;
 import com.example.loaescuela.types.Constants;
+import com.example.loaescuela.types.MethodPaymentType;
 import com.example.loaescuela.types.SubCategoryType;
 import com.paginate.Paginate;
 import com.paginate.recycler.LoadingListItemSpanLookup;
@@ -73,7 +70,7 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
 
     //Resum by student
     private TextView taken_classes;
-    private TextView rest_classes;
+    private TextView buyed_classes;
     private TextView paid_amount;
     private TextView tot_amount;
     private TextView circle;
@@ -100,7 +97,7 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
     private TextView dateYear;
     private TextView dateDay;
 
-    private String mActualDate;
+    private String mActualDate, mPaymentplace;
     private TextView listPresents;
 
     private Integer mPreviousAdapterPosition;
@@ -110,13 +107,16 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
 
     private static final int EDITH_STUDENT_ACTIVITY = 1121;
 
-    public static void start(Context mContext, Long id, String name, String surname, String category, String cameFrom){
+    private String mPaymentMethod = Constants.PAYMENT_EFECTIVO;
+
+    public static void start(Context mContext, Long id, String name, String surname, String category, String cameFrom, String paymentPlace){
         Intent i = new Intent(mContext, AssistsCoursesIncomesByStudentActivity.class);
         i.putExtra("ID",id);
         i.putExtra("NAME",name);
         i.putExtra("SURNAME",surname);
         i.putExtra("CATEGORY",category);
         i.putExtra("CAMEFROM",cameFrom);
+        i.putExtra("PAYMENTPLACE",paymentPlace);
         mContext.startActivity(i);
     }
 
@@ -133,6 +133,7 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
 
         ValuesHelper.get().mPreviousPosition = mPreviousAdapterPosition;
 
+        System.out.println("fragment asiss"+mFragmentPosition);
         Intent i = new Intent();
         i.putExtra("FRAGMENT", mFragmentPosition);
         setResult(RESULT_OK,i);
@@ -159,6 +160,7 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
             }
         });
 
+
         editStudent = findViewById(R.id.editStudent);
         editStudent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,6 +173,11 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
             }
         });
 
+        if( SessionPrefs.get(this).getName().equals("lei") ||  SessionPrefs.get(this).getName().equals("santi")){
+            editStudent.setVisibility(View.VISIBLE);
+        }else{
+            editStudent.setVisibility(View.GONE);
+        }
 
         text_name = findViewById(R.id.text_name);
         firstLetter = findViewById(R.id.firstLetter);
@@ -178,13 +185,16 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
         category = findViewById(R.id.category);
         cuad_image = findViewById(R.id.cuad_image);
 
+        this.mPaymentplace = "escuela";
+
         String name = getIntent().getStringExtra("NAME");
         text_name.setText(name.substring(0, 1).toUpperCase()+ name.substring(1).toLowerCase()+" "+getIntent().getStringExtra("SURNAME"));
         category.setText(getIntent().getStringExtra("CATEGORY"));
 
         if(getIntent().getStringExtra("CAMEFROM").equals("ASISTENCIAPOSITION")) {
             mPreviousAdapterPosition = getIntent().getIntExtra("POSITION", -1);
-            mFragmentPosition = getIntent().getIntExtra("FRAGMENT", -1);
+            mFragmentPosition = getIntent().getIntExtra("NUMBERFRAGMENT", -1);
+            mPaymentplace = "escuela";
         }
 
         month = findViewById(R.id.month);
@@ -216,7 +226,7 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
         //resum by season
 
         taken_classes = findViewById(R.id.taken_classes);
-        rest_classes = findViewById(R.id.rest_classes);
+        buyed_classes = findViewById(R.id.buyed_classes);
         paid_amount = findViewById(R.id.paid_amount);
         tot_amount = findViewById(R.id.tot_amount);
 
@@ -260,6 +270,7 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
         mRecyclerViewCC.setLayoutManager(layoutManagerCC);
         mCCAdapter = new ClassCourseAdapter(this, new ArrayList<ReportClassCourse>());
         mRecyclerViewCC.setAdapter(mCCAdapter);
+        mCCAdapter.setPaymentPlace(this.mPaymentplace);
         mCCAdapter.setOnRefreshListCourses(this);
 
         add = findViewById(R.id.fab);
@@ -350,7 +361,7 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
                 tot_amount_d = r.tot_amount;
 
                 taken_classes.setText(String.valueOf(r.cant_presents));
-                rest_classes.setText(String.valueOf(r.cant_buyed_classes - r.cant_presents));
+                buyed_classes.setText(String.valueOf(r.cant_buyed_classes));
                 paid_amount.setText(ValuesHelper.get().getIntegerQuantity(r.tot_paid_amount));
                 tot_amount.setText(ValuesHelper.get().getIntegerQuantity(r.tot_amount - r.tot_paid_amount));
 
@@ -432,6 +443,7 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
 
         final Spinner spinnerType=  dialogView.findViewById(R.id.spinner_cat);
         final Spinner spinnerSubCat=  dialogView.findViewById(R.id.spinner_sub_cat);
+        final Spinner spinnerPayment=  dialogView.findViewById(R.id.spinner_payment);
 
         final TextView  day = dialogView.findViewById(R.id.num);
         final TextView  month = dialogView.findViewById(R.id.month);
@@ -450,11 +462,44 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
         enumNameToStringArray(CategoryType.values(),spinner_type_cat);
         initialSpinner(spinnerType, spinner_type_cat);
 
+        //SPINNER payment
+        List<String> spinner_paymen = new ArrayList<>();
+        enumNameToStringArrayPayment(MethodPaymentType.values(),spinner_paymen);
+        initialSpinner(spinnerPayment, spinner_paymen);
+
+
+       /* spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String itemSelected=String.valueOf(spinnerType.getSelectedItem());
+
+                if(itemSelected.equals(Constants.CATEGORY_ESCUELA)){
+
+                    listFiltersDescriptions(itemSelected, description2);
+
+                    description2.setVisibility(View.VISIBLE);
+                    description.setVisibility(View.GONE);
+                }else{
+                    description2.setVisibility(View.GONE);
+                    description.setVisibility(View.VISIBLE);
+                }
+
+                if(itemSelected.equals("Otro")){
+                    other_type.setVisibility(View.VISIBLE);
+                }else{
+                    other_type.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });*/
+
         //SPINNER Subcat
         List<String> spinner_sub_cat = new ArrayList<>();
         enumNameToStringArraySub(SubCategoryType.values(),spinner_sub_cat);
         initialSpinner(spinnerSubCat, spinner_sub_cat);
-
 
         final TextView cancel=  dialogView.findViewById(R.id.cancel);
         final Button ok=  dialogView.findViewById(R.id.ok);
@@ -464,30 +509,50 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
             @Override
             public void onClick(View v) {
 
-                ClassCourse course = new ClassCourse(student_id,String.valueOf( spinnerType.getSelectedItem()),String.valueOf( spinnerSubCat.getSelectedItem()),
-                        Integer.valueOf( number_classes.getText().toString().trim()),Double.valueOf(amount_course.getText().toString().trim()),obs.getText().toString().trim() );
+                if( !amount_course.getText().toString().trim().matches("") && !number_classes.getText().toString().trim().matches("") &&
+                        !paid_amount_course.getText().toString().trim().matches("")){
 
-                course.paid_amount = Double.valueOf(paid_amount_course.getText().toString().trim());
-                course.payment_method = "efectivo";
 
-                course.created = mActualDate;
+                    mPaymentMethod = String.valueOf(spinnerPayment.getSelectedItem());
 
-                ApiClient.get().postClassCourse(course, new GenericCallback<ClassCourse>() {
-                    @Override
-                    public void onSuccess(ClassCourse data) {
-                        clearView();
-                        getResumStudent(student_id);
+                    Double am_course = Double.valueOf(amount_course.getText().toString().trim());
+                    Double am_pay = Double.valueOf(paid_amount_course.getText().toString().trim());
+                    String text = "a cta";
 
+                    if(am_course.equals(am_pay)){
+                        text = "salda";
                     }
+                    String observation =  obs.getText().toString().trim()+" "+text+" "+number_classes.getText().toString().trim()+"cl";
 
-                    @Override
-                    public void onError(Error error) {
+                    ClassCourse course = new ClassCourse(student_id,String.valueOf( spinnerType.getSelectedItem()),String.valueOf( spinnerSubCat.getSelectedItem()),
+                            Integer.valueOf( number_classes.getText().toString().trim()), am_course,observation );
 
-                    }
-                });
+                    course.paid_amount = am_pay;
+                    course.payment_method = mPaymentMethod;
 
+                    course.payment_place = mPaymentplace;
 
-                dialog.dismiss();
+                    course.created = DateHelper.get().getActualDate2();
+
+                    ApiClient.get().postClassCourse(course, new GenericCallback<ClassCourse>() {
+                        @Override
+                        public void onSuccess(ClassCourse data) {
+                            clearView();
+                            getResumStudent(student_id);
+
+                        }
+
+                        @Override
+                        public void onError(Error error) {
+
+                        }
+                    });
+                    dialog.dismiss();
+
+                }else{
+                    Toast.makeText(getBaseContext(),"El valor del curso, la cantidad de clases y el monto a cuenta deben estar completos.",Toast.LENGTH_LONG).show();
+                }
+
             }
         });
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -505,6 +570,7 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
     private void initialSpinner(final Spinner spinner, List<String> data){
         ArrayAdapter<String> adapterZone = new SpinnerAdapter(this, R.layout.item_custom, data);
         spinner.setAdapter(adapterZone);
+        spinner.setSelection(1);
         spinner.setPopupBackgroundDrawable(this.getResources().getDrawable(R.drawable.rec_rounded_8));
     }
 
@@ -512,10 +578,16 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
         for (CategoryType value: values) {
             if(value.getName().equals(Constants.TYPE_ALL)){
                 // spinner_type_cat.add(Constants.TYPE_ALL);
-                spinner_type_cat.add("Formato");
+                //spinner_type_cat.add("Formato");
             }else{
                 spinner_type_cat.add(value.getName());
             }
+        }
+    }
+
+    private static <T extends Enum<MethodPaymentType>> void enumNameToStringArrayPayment(MethodPaymentType[] values, List<String> spinner_type_cat) {
+        for (MethodPaymentType value: values) {
+                spinner_type_cat.add(value.getName());
         }
     }
 
@@ -523,7 +595,7 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
         for (SubCategoryType value : values) {
             if (value.getName().equals(Constants.TYPE_ALL)) {
                 // spinner_sub_cat.add(Constants.TYPE_ALL);
-                spinner_sub_cat.add("Categoria");
+               // spinner_sub_cat.add("Categoria");
             } else {
                 spinner_sub_cat.add(value.getName());
             }

@@ -34,7 +34,6 @@ import java.util.List;
 
 public class IncomesLocalFragment extends BaseFragment implements Paginate.Callbacks {
 
-
     private RecyclerView mRecyclerView;
     private IncomeStudentAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -52,7 +51,6 @@ public class IncomesLocalFragment extends BaseFragment implements Paginate.Callb
 
     private String mQuery = "";
     private String paymentPlace = "negocio";
-
 
     public void refreshList(Long student_id){
         clearView();
@@ -88,9 +86,6 @@ public class IncomesLocalFragment extends BaseFragment implements Paginate.Callb
         final StickyRecyclerHeadersDecoration headersDecor = new StickyRecyclerHeadersDecoration(mAdapter);
         mRecyclerView.addItemDecoration(headersDecor);
 
-        // Add decoration for dividers between list items
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
-                DividerItemDecoration.VERTICAL));
 
         mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override public void onChanged() {

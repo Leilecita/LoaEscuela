@@ -26,6 +26,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.loaescuela.DateHelper;
 import com.example.loaescuela.R;
 import com.example.loaescuela.ValuesHelper;
+import com.example.loaescuela.network.ApiClient;
+import com.example.loaescuela.network.Error;
+import com.example.loaescuela.network.GenericCallback;
 import com.example.loaescuela.network.models.ReportOutcome;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter;
 
@@ -59,6 +62,8 @@ public class OutcomeAdapter extends BaseAdapter<ReportOutcome, OutcomeAdapter.Vi
         if (position >= getItemCount()) {
             return -1;
         } else {
+
+
             if(groupBy.equals("day")){
                 Date date = DateHelper.get().parseDate(DateHelper.get().onlyDateComplete(getItem(position).created));
                 return date.getTime();
@@ -72,7 +77,7 @@ public class OutcomeAdapter extends BaseAdapter<ReportOutcome, OutcomeAdapter.Vi
     @Override
     public RecyclerView.ViewHolder onCreateHeaderViewHolder(ViewGroup parent) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.view_header_out, parent, false);
+                .inflate(R.layout.viewheader_extr, parent, false);
         return new RecyclerView.ViewHolder(view) {
         };
     }
@@ -123,13 +128,9 @@ public class OutcomeAdapter extends BaseAdapter<ReportOutcome, OutcomeAdapter.Vi
                             }else{
                                 t2.setVisibility(View.GONE);
                             }
-
-
                         }else if (i == 2) {
-
                             TextView t2 = (TextView) v;
                             t2.setText(month);
-
                         }else if (i == 3) {
 
                             TextView t2 = (TextView) v;
@@ -152,7 +153,7 @@ public class OutcomeAdapter extends BaseAdapter<ReportOutcome, OutcomeAdapter.Vi
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView description;
+        public TextView detail;
         public TextView coin_name;
         public TextView value;
         public TextView type;
@@ -167,14 +168,13 @@ public class OutcomeAdapter extends BaseAdapter<ReportOutcome, OutcomeAdapter.Vi
         public ViewHolder(View v) {
             super(v);
 
-            description = v.findViewById(R.id.description);
-            //coin_name = v.findViewById(R.id.coin_name);
+            detail = v.findViewById(R.id.detail);
             value = v.findViewById(R.id.value);
             type = v.findViewById(R.id.type);
 
-            line_info_user=v.findViewById(R.id.line_info_user);
-            user_name=v.findViewById(R.id.user_name);
-            hour=v.findViewById(R.id.hour);
+//            line_info_user=v.findViewById(R.id.line_info_user);
+           // user_name=v.findViewById(R.id.user_name);
+         //   hour=v.findViewById(R.id.hour);
 
             category = v.findViewById(R.id.category);
         }
@@ -189,10 +189,12 @@ public class OutcomeAdapter extends BaseAdapter<ReportOutcome, OutcomeAdapter.Vi
     }
 
     private void clearViewHolder(OutcomeAdapter.ViewHolder vh) {
-        if (vh.description != null)
-            vh.description.setText(null);
+        if (vh.detail != null)
+            vh.detail.setText(null);
         if (vh.type != null)
             vh.type.setText(null);
+        if (vh.category != null)
+            vh.category.setText(null);
         if (vh.value != null)
             vh.value.setText(null);
         if (vh.coin_name != null)
@@ -207,16 +209,17 @@ public class OutcomeAdapter extends BaseAdapter<ReportOutcome, OutcomeAdapter.Vi
 
         final ReportOutcome outcome = getItem(position);
 
-        holder.description.setText(outcome.observation);
-        holder.category.setText(outcome.type);
+        holder.detail.setText(outcome.observation);
+        holder.category.setText(outcome.category);
+        holder.type.setText(outcome.type);
 
         holder.value.setText(  ValuesHelper.get().getIntegerQuantityRounded(outcome.amount));
         // holder.type.setText(firstLettrUpCase(outcome.type));
 
        // holder.user_name.setText(outcome.user_name);
-        holder.hour.setText(DateHelper.get().onlyHourMinut(DateHelper.get().getOnlyTime(outcome.created)));
+//        holder.hour.setText(DateHelper.get().onlyHourMinut(DateHelper.get().getOnlyTime(outcome.created)));
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        /*holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(holder.line_info_user.getVisibility() == View.VISIBLE){
@@ -225,7 +228,7 @@ public class OutcomeAdapter extends BaseAdapter<ReportOutcome, OutcomeAdapter.Vi
                     holder.line_info_user.setVisibility(View.VISIBLE);
                 }
             }
-        });
+        });*/
 
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -241,7 +244,7 @@ public class OutcomeAdapter extends BaseAdapter<ReportOutcome, OutcomeAdapter.Vi
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.menu_delete:
-                                //deleteOutcome(outcome, position);
+                                deleteOutcome(outcome, position);
                                 return true;
                             case R.id.menu_edit:
                                 //edithOutcome(outcome, position);
@@ -266,7 +269,7 @@ public class OutcomeAdapter extends BaseAdapter<ReportOutcome, OutcomeAdapter.Vi
             return text.substring(0,1).toUpperCase() + text.substring(1).toLowerCase();
         }
     }
-/*
+
     private void deleteOutcome(final ReportOutcome o, final int position){
 
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
@@ -283,8 +286,8 @@ public class OutcomeAdapter extends BaseAdapter<ReportOutcome, OutcomeAdapter.Vi
         final TextView cancel = dialogView.findViewById(R.id.cancel);
 
         type.setText(o.type);
-        descr.setText(o.description);
-        value.setText(String.valueOf(o.value));
+        descr.setText(o.observation);
+        value.setText(String.valueOf(o.amount));
 
         final AlertDialog dialog = builder.create();
 
@@ -292,7 +295,7 @@ public class OutcomeAdapter extends BaseAdapter<ReportOutcome, OutcomeAdapter.Vi
             @Override
             public void onClick(View view) {
 
-                ApiClient.get().deleteOutcome(o.outcome_id, new GenericCallback<Void>() {
+                ApiClient.get().delteOutcome(o.id, new GenericCallback<Void>() {
                     @Override
                     public void onSuccess(Void data) {
                         removeItem(position);
@@ -304,6 +307,7 @@ public class OutcomeAdapter extends BaseAdapter<ReportOutcome, OutcomeAdapter.Vi
 
                     }
                 });
+
                 dialog.dismiss();
             }
         });
@@ -316,7 +320,7 @@ public class OutcomeAdapter extends BaseAdapter<ReportOutcome, OutcomeAdapter.Vi
         dialog.show();
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
-
+/*
     private void edithOutcome(final ReportOutcome o,final int position){
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

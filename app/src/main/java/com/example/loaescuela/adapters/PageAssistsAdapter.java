@@ -10,6 +10,8 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.example.loaescuela.fragment.BaseFragment;
 import com.example.loaescuela.fragment.ColonyFragment;
 import com.example.loaescuela.fragment.HighschoolAssistsFragment;
+import com.example.loaescuela.fragment.IntSchoolFragment;
+import com.example.loaescuela.fragment.MiniFragment;
 import com.example.loaescuela.fragment.SchoolAssistsFragment;
 
 import java.util.ArrayList;
@@ -26,7 +28,9 @@ public class PageAssistsAdapter extends FragmentPagerAdapter {
         mFragments = new ArrayList<>();
 
         mFragments.add(new SchoolAssistsFragment());
+        mFragments.add(new IntSchoolFragment());
         mFragments.add(new ColonyFragment());
+        mFragments.add(new MiniFragment());
         mFragments.add(new HighschoolAssistsFragment());
 
     }
@@ -45,18 +49,22 @@ public class PageAssistsAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 5;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
 
         if(position ==0){
-            return "ESCUELA";
+            return "Adultos";
         }else if(position == 1){
-            return "COLONIA";
+            return "Int";
+        }else if(position == 2){
+            return "Kids";
+        }else if(position == 3){
+            return "MINI";
         }else{
-            return "HIGHSCHOOL";
+            return "HIGH";
         }
     }
 }

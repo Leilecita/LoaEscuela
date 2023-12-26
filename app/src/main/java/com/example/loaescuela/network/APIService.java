@@ -86,15 +86,13 @@ public interface APIService {
     Observable<Response<BeachBox>> postBeachBox(@Body BeachBox b);
 
     @GET("beach_boxes.php")
-    Observable<Response<List<BeachBox>>> getBoxes(@Query("page") Integer page);
+    Observable<Response<List<BeachBox>>> getBoxes(@Query("method") String method, @Query("page") Integer page,  @Query("payment_place") String payment_place,  @Query("category") String category);
 
     @GET("beach_boxes.php")
-    Observable<Response<ReportNewBox>> getPreviousBox(@Query("method") String method, @Query("to") String created, @Query("date") String date, @Query("dateTo") String dateTo);
+    Observable<Response<ReportNewBox>>  getPreviousBox(@Query("method") String method, @Query("to") String created, @Query("date") String date, @Query("dateTo") String dateTo,  @Query("payment_place") String payment_place, @Query("category") String category);
 
     @GET("beach_boxes.php")
-    Observable<Response<ReportBox>> getPaidAmountByDay(@Query("method") String method, @Query("date") String date);
-
-
+    Observable<Response<ReportBox>> getPaidAmountByDay(@Query("method") String method, @Query("date") String date,  @Query("payment_place") String payment_place,  @Query("category") String category);
 
 
 
@@ -127,6 +125,9 @@ public interface APIService {
 
     @DELETE("planillas.php")
     Observable<ResponseBody>  deletePlanilla(@Query("id") Long id);
+
+    @DELETE("planillas_alumnos.php")
+    Observable<ResponseBody>  deleteAlumnoPlanilla(@Query("id") Long id);
 
     //STUDENTS
 

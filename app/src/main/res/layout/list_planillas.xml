@@ -10,7 +10,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background"
+
+
         android:id="@+id/listado">
 
         <androidx.appcompat.widget.Toolbar
@@ -56,6 +57,7 @@
             android:layout_below="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/partes2lei"
             android:clipToPadding="false"
             android:paddingBottom="90dp"
             />
@@ -66,7 +68,7 @@
     <LinearLayout
         android:layout_width="65dp"
         android:background="@drawable/bblanco"
-        android:backgroundTint="@color/colorPrimary"
+        android:backgroundTint="@color/colorbutton"
         android:layout_gravity="bottom|right"
         android:layout_margin="30dp"
         android:id="@+id/fab"

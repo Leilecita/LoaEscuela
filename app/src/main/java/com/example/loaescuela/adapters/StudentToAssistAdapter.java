@@ -7,6 +7,7 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -39,6 +40,7 @@ public class StudentToAssistAdapter extends BaseAdapter<Student,StudentToAssistA
 
     private OnSelectStudent onSelectStudent = null;
     private String typeActivity;
+    private String paymentPlace;
     private String categoryActivity;
 
     public void setOnSelectStudent(OnSelectStudent listener){
@@ -60,6 +62,7 @@ public class StudentToAssistAdapter extends BaseAdapter<Student,StudentToAssistA
         mContext = context;
         typeActivity = "PLANILLA";
         categoryActivity = "escuela";
+        paymentPlace = "escuela";
 
         listColor.add("#685c85");
         listColor.add("#4f426b");
@@ -85,6 +88,7 @@ public class StudentToAssistAdapter extends BaseAdapter<Student,StudentToAssistA
         public TextView text_name2;
         public TextView text_year;
         public TextView category;
+        public TextView dni;
 
         public TextView firstLetter;
         public TextView cuad_text;
@@ -92,17 +96,34 @@ public class StudentToAssistAdapter extends BaseAdapter<Student,StudentToAssistA
 
         public ImageView cuad_image;
 
+        public TextView nombre_mama;
+        public TextView tel_mama;
+        public TextView nombre_papa;
+        public TextView tel_papa;
+        public LinearLayout info_student;
+        public LinearLayout line_mama;
+        public LinearLayout line_papa;
+
 
         public ViewHolder(View v) {
             super(v);
             text_name = v.findViewById(R.id.text_name);
             text_name2 = v.findViewById(R.id.name2_student);
             select = v.findViewById(R.id.select);
-            category = v.findViewById(R.id.category);
+            //category = v.findViewById(R.id.category);
             cuad_image = v.findViewById(R.id.cuad_image);
             cuad_text = v.findViewById(R.id.cuad_text);
 
             firstLetter = v.findViewById(R.id.firstLetter);
+            dni = v.findViewById(R.id.dni);
+
+            nombre_mama = v.findViewById(R.id.nombre_mama);
+            nombre_papa = v.findViewById(R.id.nombre_papa);
+            tel_mama = v.findViewById(R.id.tel_mama);
+            tel_papa = v.findViewById(R.id.tel_papa);
+            line_mama = v.findViewById(R.id.line_mama);
+            line_papa = v.findViewById(R.id.line_papa);
+            info_student = v.findViewById(R.id.info_student);
         }
     }
 
@@ -121,10 +142,20 @@ public class StudentToAssistAdapter extends BaseAdapter<Student,StudentToAssistA
             vh.text_name.setText(null);
         if (vh.text_year != null)
             vh.text_year.setText(null);
+        if (vh.dni != null)
+            vh.dni.setText(null);
     }
 
     public void setTypeActivity(String type){
         this.typeActivity = type;
+    }
+
+    public void setPaymentPLace(String place){
+        this.paymentPlace = place;
+    }
+
+    public String getPaymentPlace(){
+        return this.paymentPlace;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -135,7 +166,37 @@ public class StudentToAssistAdapter extends BaseAdapter<Student,StudentToAssistA
         final Student current = getItem(position);
 
         holder.text_name.setText(current.nombre + " " + current.apellido);
-        holder.category.setText(current.category);
+       // holder.category.setText(current.category);
+        holder.dni.setText(current.dni);
+
+        holder.nombre_mama.setText(current.nombre_mama);
+        holder.nombre_papa.setText(current.nombre_papa);
+        holder.tel_mama.setText(current.tel_mama);
+        holder.tel_papa.setText(current.tel_papa);
+
+
+        if(current.nombre_mama != null && current.nombre_mama.matches("") && current.tel_mama.matches("") ){
+            holder.line_mama.setVisibility(View.GONE);
+        }else{
+            holder.line_mama.setVisibility(View.VISIBLE);
+        }
+
+        if(current.nombre_papa != null && current.nombre_papa.matches("") && current.tel_papa.matches("") ){
+            holder.line_papa.setVisibility(View.GONE);
+        }else{
+            holder.line_papa.setVisibility(View.VISIBLE);
+        }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(holder.info_student.getVisibility() == View.VISIBLE){
+                    holder.info_student.setVisibility(View.GONE);
+                }else{
+                    holder.info_student.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         if(typeActivity.equals("PAGOS")){
             holder.cuad_text.setText("cargar pago");
@@ -160,13 +221,13 @@ public class StudentToAssistAdapter extends BaseAdapter<Student,StudentToAssistA
 
                 if(onSelectStudent!=null){
                     //onSelectStudent.onSelectStudent(current.id, current.nombre, current.apellido, current.category);
+
                     onSelectStudent.onSelectStudent(current.id, current.nombre, current.apellido, categoryActivity);
                 }
 
             }
         });
     }
-
 
     private void addStudentToAssist(Long id){
 

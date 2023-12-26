@@ -86,8 +86,8 @@ public class IncomesBeachFragment extends BaseFragment implements Paginate.Callb
         mRecyclerView.addItemDecoration(headersDecor);
 
         // Add decoration for dividers between list items
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
-                DividerItemDecoration.VERTICAL));
+       // mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
+          //      DividerItemDecoration.VERTICAL));
 
         mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override public void onChanged() {

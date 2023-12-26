@@ -11,10 +11,12 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +36,9 @@ import com.example.loaescuela.network.models.Income;
 import com.example.loaescuela.network.models.ReportClassCourse;
 import com.example.loaescuela.network.models.ReportIncome;
 import com.example.loaescuela.types.Constants;
+import com.example.loaescuela.types.MethodPaymentType;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -53,6 +57,7 @@ public class ItemIncomeCourseAdapter extends BaseAdapter<ReportIncome, ItemIncom
     private Long mClassCourseId=null;
     private Double mCourseAmount=null;
     private Double mCoursePaidAmount=null;
+    private String mPaymentMethod = Constants.PAYMENT_EFECTIVO;
 
 
     public ItemIncomeCourseAdapter(Context context, List<ReportIncome> events, Boolean viewInfo, Long classCourseId, Double courseAmount, Double coursePaidAmount){
@@ -344,11 +349,22 @@ public class ItemIncomeCourseAdapter extends BaseAdapter<ReportIncome, ItemIncom
 
             }
         });
-
-
     }
 
-    public void createIncome2(final Long mClassCourseId, ReportClassCourse currentCourse){
+    private static <T extends Enum<MethodPaymentType>> void enumNameToStringArrayPayment(MethodPaymentType[] values, List<String> spinner_type_cat) {
+        for (MethodPaymentType value: values) {
+            spinner_type_cat.add(value.getName());
+        }
+    }
+
+    private void initialSpinner(final Spinner spinner, List<String> data){
+        ArrayAdapter<String> adapterZone = new SpinnerAdapter(mContext, R.layout.item_custom, data);
+        spinner.setAdapter(adapterZone);
+        spinner.setSelection(1);
+        spinner.setPopupBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.rec_rounded_8));
+    }
+
+    public void createIncome2(final Long mClassCourseId, ReportClassCourse currentCourse, String paymentPlace){
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View dialogView = inflater.inflate(R.layout.cuad_add_payment, null);
@@ -359,11 +375,14 @@ public class ItemIncomeCourseAdapter extends BaseAdapter<ReportIncome, ItemIncom
         final TextView payed=  dialogView.findViewById(R.id.payed);
         final TextView pack_value=  dialogView.findViewById(R.id.pack_value);
         final TextView rest=  dialogView.findViewById(R.id.rest);
+        final EditText detail =  dialogView.findViewById(R.id.detail);
 
         final TextView  day = dialogView.findViewById(R.id.num);
         final TextView  month = dialogView.findViewById(R.id.month);
         final TextView year = dialogView.findViewById(R.id.year);
         final TextView dayName = dialogView.findViewById(R.id.dayname);
+
+        final Spinner spinnerPayment=  dialogView.findViewById(R.id.spinner_payment);
 
         String mActualDate = DateHelper.get().getActualDate2();
         String mOnlyDate = DateHelper.get().onlyDate(mActualDate);
@@ -373,6 +392,10 @@ public class ItemIncomeCourseAdapter extends BaseAdapter<ReportIncome, ItemIncom
         month.setText(DateHelper.get().getNameMonth2((mOnlyDate)));
         dayName.setText(DateHelper.get().getNameDay((mOnlyDate)));
 
+        //SPINNER payment
+        List<String> spinner_paymen = new ArrayList<>();
+        enumNameToStringArrayPayment(MethodPaymentType.values(),spinner_paymen);
+        initialSpinner(spinnerPayment, spinner_paymen);
 
        /*date.setText(DateHelper.get().getActualDate());
         date.setOnClickListener(new View.OnClickListener() {
@@ -382,31 +405,12 @@ public class ItemIncomeCourseAdapter extends BaseAdapter<ReportIncome, ItemIncom
             }
         });*/
 
-        //payment method
-        final LinearLayout efect=  dialogView.findViewById(R.id.efect);
-        final LinearLayout card=  dialogView.findViewById(R.id.card);
-
-        card.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                card.setBackgroundResource(R.drawable.circle2);
-                efect.setBackgroundResource(R.drawable.circle_unselected);
-            }
-        });
-
-        efect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                card.setBackgroundResource(R.drawable.circle_unselected);
-                efect.setBackgroundResource(R.drawable.circle2);
-            }
-        });
 
         //input
         pack_value.setText(ValuesHelper.get().getIntegerQuantity(mCourseAmount));
         payed.setText(ValuesHelper.get().getIntegerQuantity(mCoursePaidAmount));
         Double d= mCourseAmount - mCoursePaidAmount;
-        rest.setText(String.valueOf(d));
+        rest.setText(ValuesHelper.get().getIntegerQuantity(d));
 
         value.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -436,13 +440,33 @@ public class ItemIncomeCourseAdapter extends BaseAdapter<ReportIncome, ItemIncom
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String text = "a cta";
 
-                String detail = currentCourse.category+" "+currentCourse.sub_category+" "+currentCourse.classes_number+"cl";
+                mPaymentMethod = String.valueOf(spinnerPayment.getSelectedItem());
 
-                if(ValidatorHelper.get().isTypeDouble(value.getText().toString().trim())){
-                    createIncome(Double.valueOf(value.getText().toString()),mClassCourseId, mActualDate, detail);
-                    dialog.dismiss();
+                if(ValidatorHelper.get().isTypeDouble(value.getText().toString().trim()) ||  !value.getText().toString().trim().matches("") ){
+                    if(d.equals(Double.valueOf(value.getText().toString()))){
+                        text = "salda";
+                    }
+                    if(Double.parseDouble(value.getText().toString()) > d ){
+                        Toast.makeText(mContext, "El valor a ingresar no puede ser mayor a la deuda del alumno", Toast.LENGTH_LONG).show();
+                    }else{
+
+                        String det = detail.getText().toString().trim()+" "+text+" "+currentCourse.classes_number+"cl";
+
+                        createIncome(Double.valueOf(value.getText().toString()),mClassCourseId, mActualDate, det, paymentPlace, mPaymentMethod);
+                        dialog.dismiss();
+                    }
+
+                }else{
+                    Toast.makeText(mContext, "El valor ingresado no es válido", Toast.LENGTH_LONG).show();
                 }
+
+
+
+
+
+
             }
         });
 
@@ -454,22 +478,21 @@ public class ItemIncomeCourseAdapter extends BaseAdapter<ReportIncome, ItemIncom
         });
     }
 
-    public void createIncome(Double amount,Long class_course_id, String date, String detail){
+    public void createIncome(Double amount,Long class_course_id, String date, String detail, String paymentPlace, String paymentMethod){
 
-        DataIncomeCourse inc= new DataIncomeCourse(amount,"efectivo", class_course_id, detail);
+        DataIncomeCourse inc= new DataIncomeCourse(amount, paymentMethod, class_course_id, detail);
         // inc.datetime= DateHelper.get().getActualDate();
       //  inc.datetime = date.getText().toString().trim();
        // inc.created = date.getText().toString().trim();
         inc.datetime = date;
         inc.created = date;
+        inc.payment_place = paymentPlace;
 
         ApiClient.get().postIncomeCourse(inc, new GenericCallback<Income>() {
             @Override
             public void onSuccess(Income data) {
                 ReportIncome r= new ReportIncome(data.amount,data.payment_method,data.created);
                 r.income_id=data.id;
-
-
 
                if(onRefreshIncomes!=null){
                     onRefreshIncomes.onRefreshListIncomes(r);

@@ -1,6 +1,7 @@
 package com.example.loaescuela.network;
 
 
+import com.example.loaescuela.BuildConfig;
 import com.example.loaescuela.LoaEscuelaApp;
 import com.example.loaescuela.data.SessionPrefs;
 import com.google.gson.Gson;
@@ -12,6 +13,7 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -54,6 +56,18 @@ public class RetrofitClient {
                     return chain.proceed(request);
                 }
             });
+
+         /*   if(BuildConfig.DEBUG) {
+
+                HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+                logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+                httpClient.addInterceptor(logging);
+
+            }*/
+
+
+
+
             sessionRetrofit = new Retrofit.Builder()
                     .client(httpClient.build())
                     .baseUrl(baseUrl)

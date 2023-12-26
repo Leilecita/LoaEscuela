@@ -73,23 +73,23 @@
                         android:gravity="center_vertical"
                         android:layout_height="wrap_content"
                         android:text="Leila"
-                        android:fontFamily="@font/opensanslight"
+                        android:fontFamily="@font/opensansregular"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="8dp"
-                        android:textColor="@color/colorPrimaryDarkLetter"
+                        android:textColor="@color/colorPrimaryLetterRose"
                         android:textSize="@dimen/medium_text" />
 
 
                     <TextView
                         android:layout_weight="1"
-                        android:id="@+id/category"
+                        android:id="@+id/dni"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Black"
+                        android:textColor="@color/colorPrimaryLetterRose"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="8dp"
-                        android:textColor="@color/colorPrimaryClearLetter"
-                        android:textSize="@dimen/small_text" />
+                        android:text="123123"
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
@@ -104,12 +104,12 @@
                         android:orientation="vertical"
                         android:id="@+id/select"
                         android:gravity="center"
-                        android:backgroundTint="@color/colorPrimaryClear2"
+                        android:backgroundTint="@color/coloRose_soft_soft"
                         android:layout_height="50dp">
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:textColor="@color/colorPrimaryDark"
+                            android:textColor="@color/colorPrimaryDarkLetterRose"
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:id="@+id/cuad_text"
@@ -119,34 +119,93 @@
                             android:layout_height="match_parent" />
 
                     </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="120dp"
-                        android:background="@drawable/rec_rounded_8"
-                        android:layout_gravity="center"
-                        android:orientation="vertical"
-
-                        android:visibility="gone"
-                        android:id="@+id/view_list"
-                        android:gravity="center"
-                        android:backgroundTint="@color/background"
-                        android:layout_height="wrap_content">
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/list_coins"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginBottom="4dp"
-                            android:layout_gravity="center_vertical"
-                            android:minHeight="55dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-
-                            />
-                    </LinearLayout>
-
-
                 </FrameLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:id="@+id/info_student"
+                android:orientation="vertical"
+                android:layout_marginLeft="50dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:id="@+id/line_mama"
+                    android:orientation="horizontal"
+                    >
 
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/nombre_mama"
+                        android:layout_width="match_parent"
+                        android:textSize="@dimen/small_text"
+                        android:layout_height="wrap_content"
+                        android:text="Martha"
+                        android:textColor="@color/colorPrimaryDarkLetterRose"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                    <TextView
+                        android:layout_weight="1.2"
+
+                        android:id="@+id/tel_mama"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="1140432745"
+                        android:layout_marginRight="8dp"
+                        android:gravity="right"
+                        android:textColor="@color/colorPrimaryDarkLetterRose"
+                        android:layout_gravity="center_vertical|right"
+                        android:layout_marginLeft="8dp"
+                        android:textSize="@dimen/small_text" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/line_papa"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+
+
+                    >
+
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:id="@+id/nombre_papa"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/small_text"
+                        android:text="Fernando"
+                        android:textColor="@color/colorPrimaryDarkLetterRose"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                    <TextView
+                        android:layout_weight="1.2"
+                        android:id="@+id/tel_papa"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:gravity="right"
+                        android:layout_marginRight="8dp"
+                        android:textColor="@color/colorPrimaryDarkLetterRose"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="8dp"
+                        android:textSize="@dimen/small_text" />
+
+
+
+                </LinearLayout>
 
 
 

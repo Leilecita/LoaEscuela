@@ -106,12 +106,6 @@ public class OutcomesActivity extends BaseActivity implements Paginate.Callbacks
         final StickyRecyclerHeadersDecoration headersDecor = new StickyRecyclerHeadersDecoration(mAdapter);
         mRecyclerView.addItemDecoration(headersDecor);
 
-        mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-            @Override public void onChanged() {
-                headersDecor.invalidateHeaders();
-            }
-        });
-
         button= findViewById(R.id.add_outcome);
 
         implementsPaginate();
@@ -269,6 +263,7 @@ public class OutcomesActivity extends BaseActivity implements Paginate.Callbacks
     private void initialSpinner(final Spinner spinner, List<String> data){
         ArrayAdapter<String> adapterZone = new SpinnerAdapter(this, R.layout.item_custom, data);
         spinner.setAdapter(adapterZone);
+        spinner.setSelection(1);
         spinner.setPopupBackgroundDrawable(this.getResources().getDrawable(R.drawable.rec_rounded_8));
     }
 
@@ -363,7 +358,7 @@ public class OutcomesActivity extends BaseActivity implements Paginate.Callbacks
                 out.observation = descrT;
                 out.category = categoryT;
                 out.type = typeT;
-                out.user_id = Long.valueOf( SessionPrefs.get(getBaseContext()).getId());
+                //out.user_id = Long.valueOf( SessionPrefs.get(getBaseContext()).getId());
 
                 ApiClient.get().postOutcome(out, new GenericCallback<Outcome>() {
                     @Override

@@ -5,9 +5,8 @@ public class Planilla {
     public Long id;
     public String categoria;
     public String subcategoria;
-    public String mes;
     public String anio;
-    public String date;
+    public String date,created;
 
 
     public Planilla(){}

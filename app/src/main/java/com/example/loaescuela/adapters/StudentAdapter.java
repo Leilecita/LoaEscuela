@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.loaescuela.DateHelper;
 import com.example.loaescuela.R;
 import com.example.loaescuela.activities.AssistsCoursesIncomesByStudentActivity;
+import com.example.loaescuela.data.SessionPrefs;
 import com.example.loaescuela.network.models.Student;
 import com.example.loaescuela.types.Constants;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter;
@@ -175,8 +176,9 @@ public class StudentAdapter extends BaseAdapter<Student,StudentAdapter.ViewHolde
         public TextView tel_mama;
         public TextView nombre_papa;
         public TextView tel_papa;
-        public TextView direccion;
-        public TextView localidad;
+        public TextView dni;
+       // public TextView direccion;
+       // public TextView localidad;
         public TextView tel;
         public TextView category;
 
@@ -202,9 +204,10 @@ public class StudentAdapter extends BaseAdapter<Student,StudentAdapter.ViewHolde
             nombre_papa = v.findViewById(R.id.nombre_papa);
             tel_mama = v.findViewById(R.id.tel_mama);
             tel_papa = v.findViewById(R.id.tel_papa);
-            direccion = v.findViewById(R.id.direccion);
-            localidad = v.findViewById(R.id.loc);
+           // direccion = v.findViewById(R.id.direccion);
+           // localidad = v.findViewById(R.id.loc);
             tel = v.findViewById(R.id.tel);
+            dni = v.findViewById(R.id.dni);
             line_tel_student = v.findViewById(R.id.line_tel_student);
             line_mama = v.findViewById(R.id.line_mama);
             line_papa = v.findViewById(R.id.line_papa);
@@ -215,7 +218,7 @@ public class StudentAdapter extends BaseAdapter<Student,StudentAdapter.ViewHolde
             whatsapp_papa = v.findViewById(R.id.wh_pap);
             whatsapp_alumno = v.findViewById(R.id.wh_student);
 
-            category = v.findViewById(R.id.category);
+//            category = v.findViewById(R.id.category);
 
             more_info = v.findViewById(R.id.more_info);
         }
@@ -244,10 +247,9 @@ public class StudentAdapter extends BaseAdapter<Student,StudentAdapter.ViewHolde
             vh.nombre_mama.setText(null);
         if(vh.tel_mama!=null)
             vh.tel_mama.setText(null);
-        if(vh.direccion!=null)
-            vh.direccion.setText(null);
-        if(vh.localidad!=null)
-            vh.localidad.setText(null);
+        if(vh.dni!=null)
+            vh.dni.setText(null);
+
         if(vh.firstLetter!=null){
             vh.firstLetter.setText(null);
         }
@@ -266,7 +268,7 @@ public class StudentAdapter extends BaseAdapter<Student,StudentAdapter.ViewHolde
         System.out.println(currentClient.nombre);
 
         holder.text_name.setText(currentClient.nombre+" "+currentClient.apellido);
-        holder.category.setText(currentClient.category);
+        //holder.category.setText(currentClient.category);
 
         if(currentClient.category.equals(Constants.CATEGORY_COLONIA)){
             holder.cuad_image.setColorFilter(Color.parseColor(Constants.COLOR_COLONIA), PorterDuff.Mode.SRC_ATOP);
@@ -275,8 +277,11 @@ public class StudentAdapter extends BaseAdapter<Student,StudentAdapter.ViewHolde
         }else{
             holder.cuad_image.setColorFilter(Color.parseColor(Constants.COLOR_HIGHSCHOOL), PorterDuff.Mode.SRC_ATOP);
         }
+        if(currentClient.nombre.length() > 0){
+            holder.firstLetter.setText(String.valueOf(currentClient.nombre.trim().charAt(0)));
 
-        holder.firstLetter.setText(String.valueOf(currentClient.nombre.charAt(0)));
+        }
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             holder.text_year.setText(String.valueOf(getAge(currentClient)));
@@ -285,8 +290,9 @@ public class StudentAdapter extends BaseAdapter<Student,StudentAdapter.ViewHolde
         holder.nombre_papa.setText(currentClient.nombre_papa);
         holder.tel_mama.setText(currentClient.tel_mama);
         holder.tel_papa.setText(currentClient.tel_papa);
-        holder.direccion.setText(currentClient.direccion);
-        holder.localidad.setText(currentClient.localidad);
+        holder.dni.setText(currentClient.dni);
+       // holder.direccion.setText(currentClient.direccion);
+      //  holder.localidad.setText(currentClient.localidad);
 
         holder.tel.setText(currentClient.tel_adulto);
 
@@ -369,7 +375,14 @@ public class StudentAdapter extends BaseAdapter<Student,StudentAdapter.ViewHolde
         holder.more_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AssistsCoursesIncomesByStudentActivity.start(mContext,currentClient.id, currentClient.nombre, currentClient.apellido, currentClient.category, "ASISTENCIA");
+
+                if(SessionPrefs.get(mContext).getLevel().equals("admin")){
+
+                    AssistsCoursesIncomesByStudentActivity.start(mContext,currentClient.id, currentClient.nombre, currentClient.apellido, currentClient.category, "ASISTENCIA", "ESCUELA");
+                }else{
+                    Toast.makeText(mContext,"consultar a Lei",Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 

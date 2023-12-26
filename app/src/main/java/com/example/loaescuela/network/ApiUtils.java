@@ -4,10 +4,14 @@ public class ApiUtils {
 
     private ApiUtils() {}
 
-     //public static final String BASE_URL = "http://school.loasurf.com.ar/";
+    //USAR HTTPS EN VEZ DE HTTP SIN LA con la S porque usamos el servidor loasurf
 
-    public static final String BASE_URL = "http://192.168.0.36/loa_school/";
-   // public static final String BASE_URL = "http://192.168.52.198/loa_school/";
+
+
+     public static final String BASE_URL = "https://school.loasurf.com.ar/";
+
+    //public static final String BASE_URL = "http://192.168.0.36/loa_school/";
+   // public static final String BASE_URL = "http://192.168.88.12/loa_school/";
 
     public static APIService getAPIService() {
         return RetrofitClient.getClient(BASE_URL).create(APIService.class);

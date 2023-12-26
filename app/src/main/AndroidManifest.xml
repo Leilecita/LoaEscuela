@@ -35,19 +35,21 @@
         <activity
             android:name=".activities.StudentsListActivity"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan"
+
             android:parentActivityName=".activities.MainActivity"
             />
         <activity
             android:name=".activities.LoginActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"
+            android:windowSoftInputMode="adjustPan"
             android:parentActivityName=".activities.MainActivity"
             />
 
         <activity
             android:name=".activities.RegisterActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"
+            android:windowSoftInputMode="adjustPan"
             android:parentActivityName=".activities.MainActivity"
             />
 
@@ -62,6 +64,8 @@
         <activity
             android:name=".activities.SelectStudentForAssistActivity"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan"
+
             android:parentActivityName=".activities.MainActivity"
             />
 
@@ -86,6 +90,7 @@
         <activity
             android:name=".activities.CreateStudentActivity"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"
             android:parentActivityName=".activities.MainActivity"
             />
         <activity
@@ -100,8 +105,7 @@
             />
         <activity
             android:name=".activities.AssistsActivity"
-            android:windowSoftInputMode="adjustResize"
-
+            android:windowSoftInputMode="stateVisible|adjustPan|adjustResize"
          android:screenOrientation="portrait"
             android:parentActivityName=".activities.MainActivity"
             />
@@ -117,12 +121,14 @@
             android:name=".activities.GeneralAssistActivity"
 
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan"
+
             android:parentActivityName=".activities.MainActivity"
             />
 
         <activity
             android:name=".activities.CreateBoxActivity"
-
+            android:windowSoftInputMode="stateHidden|adjustResize"
             android:screenOrientation="portrait"
             android:parentActivityName=".activities.MainActivity"
             />

@@ -56,17 +56,16 @@
                         android:layout_marginLeft="8dp"
                         android:layout_height="wrap_content">
                         <LinearLayout
-                            android:layout_width="40dp"
+                            android:layout_width="38dp"
                             android:background="@drawable/bblanco"
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="8dp"
                             android:orientation="vertical"
-                            android:backgroundTint="@color/santi"
-                            android:layout_height="40dp">
+                            android:backgroundTint="@color/color_escuela"
+                            android:layout_height="38dp">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:text="E"
                                 android:layout_gravity="center"
                                 android:textColor="#fff"
                                 android:gravity="center"
@@ -90,19 +89,18 @@
                         android:layout_marginLeft="8dp"
                         android:layout_height="wrap_content">
                         <LinearLayout
-                            android:layout_width="40dp"
+                            android:layout_width="38dp"
                             android:background="@drawable/bblanco"
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="8dp"
 
                             android:layout_gravity="center"
                             android:orientation="vertical"
-                            android:backgroundTint="@color/pers"
-                            android:layout_height="40dp">
+                            android:backgroundTint="@color/color_high"
+                            android:layout_height="38dp">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:text="H"
                                 android:layout_gravity="center"
                                 android:textColor="#fff"
                                 android:gravity="center"
@@ -126,20 +124,19 @@
                         android:layout_marginLeft="8dp"
                         android:layout_height="wrap_content">
                         <LinearLayout
-                            android:layout_width="40dp"
+                            android:layout_width="38dp"
                             android:background="@drawable/bblanco"
                             android:layout_marginLeft="8dp"
                             android:layout_marginRight="8dp"
                             android:orientation="vertical"
-                            android:backgroundTint="@color/local"
-                            android:layout_height="40dp">
+                            android:backgroundTint="@color/color_colonia"
+                            android:layout_height="38dp">
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
                                 android:gravity="center"
-                                android:text="C"
                                 android:textColor="#fff"
                                 android:textSize="18sp" />
 
@@ -163,8 +160,10 @@
                         android:layout_marginRight="8dp"
                         android:id="@+id/all"
                         android:orientation="vertical"
-                        android:background="@drawable/ball"
+                        android:background="@drawable/bblanco"
                         android:layout_height="40dp">
+
+
 
                     </LinearLayout>
 

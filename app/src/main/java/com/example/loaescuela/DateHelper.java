@@ -77,7 +77,7 @@ public class DateHelper {
         try {
         SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd");
 
-        String today = getActualDate();
+        String today = actualDate2();
         String dateToday = onlyDate(today);
 
        // Date d1 = sdformat.parse("2019-04-15");

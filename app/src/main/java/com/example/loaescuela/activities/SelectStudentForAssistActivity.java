@@ -63,6 +63,7 @@ public class SelectStudentForAssistActivity extends BaseActivity implements Pagi
     private String mOrderBy;
     private String typeActivity;
     private String fragmentCategory;
+    private String paymentPlace;
 
     private LinearLayout add;
 
@@ -70,7 +71,9 @@ public class SelectStudentForAssistActivity extends BaseActivity implements Pagi
     public void onSelectStudent(Long id, String name, String surname, String category){
 
         if(typeActivity.equals("PAGOS")){
-            AssistsCoursesIncomesByStudentActivity.start(this, id, name, surname, category, typeActivity);
+            System.out.println(mAdapter.getPaymentPlace());
+            System.out.println(mAdapter.getPaymentPlace());
+            AssistsCoursesIncomesByStudentActivity.start(this, id, name, surname, category, typeActivity, mAdapter.getPaymentPlace());
         }
 
         Intent intent=new Intent();
@@ -94,6 +97,7 @@ public class SelectStudentForAssistActivity extends BaseActivity implements Pagi
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 finish();
             }
         });
@@ -103,6 +107,8 @@ public class SelectStudentForAssistActivity extends BaseActivity implements Pagi
         mSubCategoria = getIntent().getStringExtra("SUBCATEGORIA");
         typeActivity = getIntent().getStringExtra("TYPE");
         fragmentCategory = getIntent().getStringExtra("FRAGMENTCATEGORY");
+        paymentPlace = getIntent().getStringExtra("PAYMENTPLACE");
+
 
         mRecyclerView = findViewById(R.id.list_users);
         layoutManager = new LinearLayoutManager(this    );
@@ -112,6 +118,7 @@ public class SelectStudentForAssistActivity extends BaseActivity implements Pagi
         mAdapter.setOnSelectStudent(this);
         mAdapter.setCategoryActivity(getIntent().getStringExtra("CATEGORIA"));
         mAdapter.setTypeActivity(typeActivity);
+        mAdapter.setPaymentPLace(paymentPlace);
 
         mAdapter.setPlanillaId(mPlanillaId);
 

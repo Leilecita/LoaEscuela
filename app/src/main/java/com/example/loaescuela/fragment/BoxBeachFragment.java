@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,6 +23,7 @@ import com.example.loaescuela.network.Error;
 import com.example.loaescuela.network.GenericCallback;
 import com.example.loaescuela.network.models.BeachBox;
 import com.example.loaescuela.network.models.ReportIncomeStudent;
+import com.example.loaescuela.types.Constants;
 import com.paginate.Paginate;
 import com.paginate.recycler.LoadingListItemSpanLookup;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
@@ -30,7 +32,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BoxBeachFragment extends BaseFragment implements Paginate.Callbacks {
-
 
     private RecyclerView mRecyclerView;
     private BeachBoxAdapter mAdapter;
@@ -47,9 +48,15 @@ public class BoxBeachFragment extends BaseFragment implements Paginate.Callbacks
     private String selectedDate;
     private LinearLayout home;
     private LinearLayout add;
+    private LinearLayout bottomSheet;
+    private LinearLayout dia;
+    private LinearLayout esc;
+    private LinearLayout col;
+    private LinearLayout all;
+    private LinearLayout mes;
+    private LinearLayout periodo;
 
-    private String mQuery = "";
-    private TextView textSearchView;
+    private String mCategory;
 
 
     public void refreshList(Long student_id){
@@ -71,32 +78,21 @@ public class BoxBeachFragment extends BaseFragment implements Paginate.Callbacks
 
         mRootView = inflater.inflate(R.layout.fragment_box, container, false);
 
-        home= mRootView.findViewById(R.id.line_home);
+        home = mRootView.findViewById(R.id.line_home);
 
-        mRecyclerView = mRootView.findViewById(R.id.list_events);
+        mRecyclerView = mRootView.findViewById(R.id.list_box_month);
         layoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(layoutManager);
         mAdapter = new BeachBoxAdapter(getContext(), new ArrayList<BeachBox>());
         mRecyclerView.setAdapter(mAdapter);
 
-        //STICKY
-        // Add the sticky headers decoration
-      /*  final StickyRecyclerHeadersDecoration headersDecor = new StickyRecyclerHeadersDecoration(mAdapter);
-        mRecyclerView.addItemDecoration(headersDecor);
-
-        // Add decoration for dividers between list items
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),
-                DividerItemDecoration.VERTICAL));
-
-        mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-            @Override public void onChanged() {
-                headersDecor.invalidateHeaders();
-            }
-        });
-*/
         registerForContextMenu(mRecyclerView);
 
         implementsPaginate();
+        bottomSheet = mRootView.findViewById(R.id.bottomSheet);
+        topbarListener(bottomSheet);
+
+        mCategory = "Todas";
 
         return mRootView;
     }
@@ -115,7 +111,7 @@ public class BoxBeachFragment extends BaseFragment implements Paginate.Callbacks
     private void listEvents(){
 
         loadingInProgress=true;
-        ApiClient.get().getBoxes(mCurrentPage, new GenericCallback<List<BeachBox>>() {
+        ApiClient.get().getBoxes(mCurrentPage, "escuela", mCategory,new GenericCallback<List<BeachBox>>() {
             @Override
             public void onSuccess(List<BeachBox> data) {
 
@@ -137,6 +133,96 @@ public class BoxBeachFragment extends BaseFragment implements Paginate.Callbacks
                 loadingInProgress = false;
             }
         });
+    }
+
+    private void topbarListener(View bottomSheet){
+
+        esc = bottomSheet.findViewById(R.id.escuela);
+        col = bottomSheet.findViewById(R.id.colonia);
+        all = bottomSheet.findViewById(R.id.all);
+
+        esc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCategory = Constants.CATEGORY_ESCUELA;
+                clearView();
+            }
+        });
+
+        col.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCategory = Constants.CATEGORY_COLONIA;
+                clearView();
+            }
+        });
+        all.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCategory = "Todas";
+                clearView();
+            }
+        });
+
+
+        dia=bottomSheet.findViewById(R.id.dia);
+       /* dia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!mSelectedView.equals("dia")){
+                    mSelectedView="dia";
+
+                    mRecyclerViewMonth.setVisibility(View.GONE);
+                    mRecyclerViewPeriod.setVisibility(View.GONE);
+                    mRecyclerView.setVisibility(View.VISIBLE);
+                    rest_box.setVisibility(View.VISIBLE);
+
+
+                    mAdapter.getList().clear();
+                    implementsPaginate();
+                }
+
+            }
+        });
+        mes=bottomSheet.findViewById(R.id.mes);
+        mes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(SessionPrefs.get(getContext()).getName().equals("santi") || SessionPrefs.get(getContext()).getName().equals("lei")) {
+                    if (!mSelectedView.equals("mes")) {
+                        mSelectedView = "mes";
+
+                        mRecyclerView.setVisibility(View.GONE);
+                        mRecyclerViewPeriod.setVisibility(View.GONE);
+                        mRecyclerViewMonth.setVisibility(View.VISIBLE);
+
+                        rest_box.setVisibility(View.GONE);
+                        mAdapterMonth.getList().clear();
+
+
+                        implementsPaginate();
+
+                    }
+                }else{
+                    Toast.makeText(getContext(),"Debe loguearse como administrador", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        periodo=bottomSheet.findViewById(R.id.periodo);
+
+        periodo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(SessionPrefs.get(getContext()).getName().equals("santi") || SessionPrefs.get(getContext()).getName().equals("lei")) {
+                    cuadSelectPeriod();
+                }else{
+                    Toast.makeText(getContext(),"Debe loguearse como administrador", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });*/
+
     }
 
 

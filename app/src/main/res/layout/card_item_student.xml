@@ -59,21 +59,22 @@
                     android:id="@+id/text_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimaryDarkLetter"
+                    android:textColor="@color/colorPrimaryLetterRose"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="8dp"
                     android:text="Leila del campo"
+                    android:fontFamily="@font/opensansregular"
                     android:textSize="@dimen/medium_text" />
 
                 <TextView
                     android:layout_weight="1"
-                    android:id="@+id/category"
+                    android:id="@+id/dni"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimaryClearLetter"
+                    android:textColor="@color/colorPrimaryLetterRose"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="8dp"
-                    android:text="Escuela"
+                    android:text="123123"
                     android:textSize="15sp" />
 
 
@@ -88,15 +89,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:orientation="horizontal"
-
                 >
-
 
                 <TextView
                     android:id="@+id/year"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimaryClearLetter"
+                    android:textColor="@color/colorPrimaryLetterRose"
 
                     android:layout_marginLeft="8dp"
                     android:text=""
@@ -105,18 +104,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimaryClearLetter"
+                    android:textColor="@color/colorPrimaryLetterRose"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="8dp"
                     android:text="años"
                     android:textSize="@dimen/general_text" />
 
             </LinearLayout>
-
-
-
-
-
 
         </LinearLayout>
 
@@ -126,40 +120,43 @@
             android:visibility="gone"
             android:id="@+id/info_student"
             android:orientation="vertical"
-            android:layout_marginLeft="30dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
             >
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginTop="8dp"
                 android:id="@+id/line_tel_student"
                 android:visibility="gone"
                 >
 
 
                 <TextView
-                    android:layout_weight="1.3"
+                    android:layout_weight="1.1"
                     android:id="@+id/name2_student"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textColor="@color/colorPrimaryDarkLetter"
+                    android:textSize="@dimen/small_text"
+                    android:textColor="@color/colorPrimaryDarkLetterRose"
                     android:layout_gravity="center_vertical"
-                    android:textSize="18sp" />
+                    />
 
                 <TextView
-                    android:layout_weight="1"
+                    android:layout_weight="1.2"
                     android:id="@+id/tel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="1140432745"
-                    android:textColor="@color/colorPrimaryDarkLetter"
+                    android:textColor="@color/colorPrimaryDarkLetterRose"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="8dp"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/small_text" />
 
 
                 <LinearLayout
@@ -173,8 +170,9 @@
                     >
 
                     <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        card_view:tint="@color/colorPrimaryLetterRose"
                         android:src="@drawable/phone2"
                         />
                 </LinearLayout>
@@ -190,9 +188,10 @@
                     >
 
                     <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
                         android:padding="1dp"
+                        card_view:tint="@color/colorPrimaryLetterRose"
                         android:src="@drawable/whatsan"
                         />
                 </LinearLayout>
@@ -202,33 +201,34 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="18dp"
                 android:id="@+id/line_mama"
                 android:orientation="horizontal"
                 >
 
 
                 <TextView
-                    android:layout_weight="1.3"
+                    android:layout_weight="1.1"
                     android:id="@+id/nombre_mama"
                     android:layout_width="match_parent"
+                    android:textSize="@dimen/small_text"
                     android:layout_height="wrap_content"
                     android:text="Martha"
-                    android:textColor="@color/colorPrimaryDarkLetter"
+                    android:textColor="@color/colorPrimaryDarkLetterRose"
                     android:layout_gravity="center_vertical"
-                    android:textSize="18sp" />
+                />
 
                 <TextView
-                    android:layout_weight="1"
+                    android:layout_weight="1.2"
 
                     android:id="@+id/tel_mama"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="1140432745"
-                    android:textColor="@color/colorPrimaryDarkLetter"
+                    android:textColor="@color/colorPrimaryDarkLetterRose"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="8dp"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/small_text" />
 
 
                 <LinearLayout
@@ -242,10 +242,10 @@
                     >
 
                     <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
                         android:src="@drawable/phone2"
-                        />
+                        card_view:tint="@color/colorPrimaryLetterRose" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -259,9 +259,10 @@
                     >
 
                     <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
                         android:padding="1dp"
+                        card_view:tint="@color/colorPrimaryLetterRose"
                         android:src="@drawable/whatsan"
                         />
                 </LinearLayout>
@@ -274,7 +275,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:id="@+id/line_papa"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="18dp"
                 android:orientation="horizontal"
 
 
@@ -282,25 +283,26 @@
 
 
                 <TextView
-                    android:layout_weight="1.3"
+                    android:layout_weight="1.1"
                     android:id="@+id/nombre_papa"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/small_text"
                     android:text="Fernando"
-                    android:textColor="@color/colorPrimaryDarkLetter"
+                    android:textColor="@color/colorPrimaryDarkLetterRose"
                     android:layout_gravity="center_vertical"
-                    android:textSize="18sp" />
+                    />
 
                 <TextView
-                    android:layout_weight="1"
+                    android:layout_weight="1.2"
                     android:id="@+id/tel_papa"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="1140432745"
-                    android:textColor="@color/colorPrimaryDarkLetter"
+                    android:textColor="@color/colorPrimaryDarkLetterRose"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="8dp"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/small_text" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -313,8 +315,9 @@
                     >
 
                     <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        card_view:tint="@color/colorPrimaryLetterRose"
                         android:src="@drawable/phone2"
                         />
                 </LinearLayout>
@@ -330,9 +333,11 @@
                     >
 
                     <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        card_view:tint="@color/colorPrimaryLetterRose"
                         android:src="@drawable/whatsan"
+
                         android:padding="1dp"
 
                         />
@@ -344,7 +349,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="18dp"
                 android:id="@+id/more_info"
                 android:layout_gravity="right"
                 android:gravity="right"
@@ -357,40 +362,12 @@
                     android:layout_height="wrap_content"
                     android:text="+ info"
                     android:layout_marginRight="16dp"
-                    android:textColor="@color/colorPrimaryDarkLetter"
+                    android:fontFamily="@font/opensansregular"
+                    android:textColor="@color/colorPrimaryLetterRose"
                     android:layout_gravity="center_vertical"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/medium_text" />
 
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:orientation="horizontal"
-
-                >
-
-
-                <TextView
-                    android:id="@+id/direccion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="@color/colorPrimaryDarkLetter"
-                    android:layout_gravity="center_vertical"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/loc"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="@color/colorPrimaryDarkLetter"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="8dp"
-                    android:textSize="18sp" />
             </LinearLayout>
 
         </LinearLayout>

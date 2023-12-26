@@ -2,7 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/background"
+    android:background="@color/background_rose"
     android:descendantFocusability="blocksDescendants"
     android:layout_height="match_parent"
     android:id="@+id/listado">
@@ -14,8 +14,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/description_top_bar"
-            android:background="@color/background_violet"
+            android:layout_height="34dp"
+            android:background="#F3D9E5"
             android:id="@+id/line1"
             android:gravity="center_vertical"
             android:orientation="horizontal"
@@ -24,7 +24,7 @@
             <TextView
                 android:layout_width="45sp"
                 android:id="@+id/date"
-                android:textColor="@color/colorPrimaryDarkLetter"
+                android:textColor="@color/colorPrimaryDarkLetterRose"
                 android:gravity="center"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -35,30 +35,30 @@
             <TextView
                 android:layout_width="match_parent"
                 android:id="@+id/venta_ctdo"
-                android:textColor="@color/colorPrimaryDarkLetter"
+                android:textColor="@color/colorPrimaryDarkLetterRose"
                 android:gravity="center"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text=" ctdo"
+                android:text="efec"
                 />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:textColor="@color/colorPrimaryDarkLetter"
+                android:textColor="@color/colorPrimaryDarkLetterRose"
                 android:gravity="center"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:id="@+id/credit_card"
                 android:layout_height="wrap_content"
-                android:text="tarjeta"
+                android:text="digital"
                 />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:id="@+id/total_amount"
-                android:textColor="@color/colorPrimaryDarkLetter"
+                android:textColor="@color/colorPrimaryDarkLetterRose"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:gravity="center"
@@ -70,7 +70,7 @@
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:id="@+id/rest_box"
-                android:textColor="@color/colorPrimaryDarkLetter"
+                android:textColor="@color/colorPrimaryDarkLetterRose"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:gravity="center"
@@ -82,7 +82,7 @@
                 android:id="@+id/dep"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@color/colorPrimaryDarkLetter"
+                android:textColor="@color/colorPrimaryDarkLetterRose"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -103,7 +103,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:id="@+id/tot_venta_ctdo"
-                android:textColor="@color/colorPrimaryDarkLetter"
+                android:textColor="@color/colorPrimaryDarkLetterRose"
                 android:gravity="center"
                 android:textSize="15sp"
                 android:layout_weight="1"
@@ -112,7 +112,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:textColor="@color/colorPrimaryDarkLetter"
+                android:textColor="@color/colorPrimaryDarkLetterRose"
                 android:gravity="center"
                 android:textSize="15sp"
                 android:id="@+id/tot_credit_card"
@@ -122,7 +122,7 @@
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:id="@+id/tot_total_amount"
-                android:textColor="@color/colorPrimaryDarkLetter"
+                android:textColor="@color/colorPrimaryDarkLetterRose"
                 android:textSize="15sp"
                 android:gravity="center"
                 android:layout_height="wrap_content"
@@ -132,7 +132,7 @@
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:id="@+id/tot_rest_box"
-                android:textColor="@color/colorPrimaryDarkLetter"
+                android:textColor="@color/colorPrimaryDarkLetterRose"
                 android:textSize="15sp"
                 android:gravity="center"
                 android:layout_height="wrap_content"
@@ -141,7 +141,7 @@
                 android:layout_width="match_parent"
                 android:id="@+id/tot_dep"
                 android:textSize="15sp"
-                android:textColor="@color/colorPrimaryDarkLetter"
+                android:textColor="@color/colorPrimaryDarkLetterRose"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -208,7 +208,6 @@
     </LinearLayout>
 
 
-    <!-- Bottom Sheet
-    <include layout="@layout/bottom_shet_box" />-->
+    <include layout="@layout/bottom_shet_box" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

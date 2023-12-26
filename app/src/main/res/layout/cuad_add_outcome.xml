@@ -25,7 +25,7 @@
                 android:text="Gasto "
                 android:fontFamily="@font/opensansregular"
                 android:textSize="20sp"
-                android:textColor="@color/word"
+                android:textColor="@color/colorPrimaryDarkLetterRose"
                 android:gravity="center"
                 />
 
@@ -50,7 +50,7 @@
                         android:text="Fecha "
                         android:paddingLeft="8dp"
                         android:textSize="@dimen/general_text"
-                        android:textColor="@color/colorPrimaryIntLetter2" />
+                        android:textColor="@color/colorPrimaryDarkLetterRose" />
                     <TextView
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
@@ -72,7 +72,7 @@
                         android:paddingLeft="8dp"
                         android:fontFamily="@font/opensansregular"
                         android:textSize="@dimen/general_text"
-                        android:textColor="@color/word"
+                        android:textColor="@color/colorPrimaryLetterRose"
                         android:background="@drawable/rec_find"
 
                         />
@@ -112,7 +112,7 @@
                                 android:text="Categoria"
                                 android:paddingLeft="8dp"
                                 android:textSize="@dimen/general_text"
-                                android:textColor="@color/colorPrimaryIntLetter2" />
+                                android:textColor="@color/colorPrimaryDarkLetterRose" />
 
                             <TextView
                                 android:layout_width="1dp"
@@ -136,7 +136,7 @@
                                 android:dropDownVerticalOffset="35dp"
                                 android:textColorHint="@color/word_clear"
                                 android:background="@drawable/rec_find"
-                                android:textColor="@color/colorPrimaryDarkLetter"
+                                android:textColor="@color/colorPrimaryLetterRose"
                                 android:textSize="@dimen/general_text"
                                 android:id="@+id/category"
                                 />
@@ -176,7 +176,7 @@
                         android:text="Tipo "
                         android:paddingLeft="8dp"
                         android:textSize="@dimen/general_text"
-                        android:textColor="@color/colorPrimaryIntLetter2" />
+                        android:textColor="@color/colorPrimaryDarkLetterRose" />
                     <TextView
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
@@ -199,7 +199,7 @@
                         android:dropDownVerticalOffset="35dp"
                         android:textColorHint="@color/word_clear"
                         android:background="@drawable/rec_find"
-                        android:textColor="@color/colorPrimaryDarkLetter"
+                        android:textColor="@color/colorPrimaryLetterRose"
                         android:textSize="@dimen/general_text"
                         android:id="@+id/type"
                         />
@@ -231,7 +231,7 @@
                         android:text="Descripcion "
                         android:paddingLeft="8dp"
                         android:textSize="@dimen/general_text"
-                        android:textColor="@color/colorPrimaryIntLetter2" />
+                        android:textColor="@color/colorPrimaryDarkLetterRose" />
 
                     <TextView
                         android:layout_width="1dp"
@@ -249,7 +249,7 @@
                         android:layout_width="match_parent"
                         android:layout_weight="2"
                         android:layout_height="35dp"
-                        android:textColor="@color/word"
+                        android:textColor="@color/colorPrimaryDarkLetterRose"
                         android:id="@+id/description"
                         android:textSize="@dimen/general_text"
                         android:fontFamily="@font/opensanslight"
@@ -265,7 +265,7 @@
                         android:text=""
                         android:gravity="center"
                         android:layout_gravity="center"
-                        android:textColor="@color/colorPrimaryClearLetter"
+                        android:textColor="@color/colorPrimaryLetterRose"
                         android:fontFamily="@font/arialroundedreg"
                         android:layout_height="wrap_content" />
 
@@ -286,7 +286,7 @@
                         android:text="Valor "
                         android:paddingLeft="8dp"
                         android:textSize="@dimen/general_text"
-                        android:textColor="@color/colorPrimaryIntLetter2" />
+                        android:textColor="@color/colorPrimaryDarkLetterRose" />
 
                     <TextView
                         android:layout_width="1dp"
@@ -304,7 +304,7 @@
                         android:layout_width="match_parent"
                         android:layout_weight="2"
                         android:layout_height="35dp"
-                        android:textColor="@color/word"
+                        android:textColor="@color/colorPrimaryLetterRose"
                         android:id="@+id/amount"
                         android:textSize="@dimen/general_text"
                         android:fontFamily="@font/opensanslight"
@@ -343,7 +343,7 @@
                     android:fontFamily="@font/opensansregular"
                     android:textSize="@dimen/general_text"
                     android:gravity="center"
-                    android:textColor="@color/colorDialogButton"
+                    android:textColor="@color/colorbutton"
                     />
 
                 <Button
@@ -356,7 +356,7 @@
                     android:textAllCaps="false"
 
                     android:background="@drawable/rec_find"
-                    android:backgroundTint="@color/colorDialogButton"
+                    android:backgroundTint="@color/colorbutton"
                     android:text="Guardar"/>
 
             </LinearLayout>

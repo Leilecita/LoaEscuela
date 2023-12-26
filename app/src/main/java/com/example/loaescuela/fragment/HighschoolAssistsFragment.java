@@ -1,11 +1,13 @@
 package com.example.loaescuela.fragment;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -82,7 +84,7 @@ public class HighschoolAssistsFragment extends BaseFragment implements Paginate.
     private Integer mPreviousPosition;
 
     public void startNewActivityFragment(ReportStudentAsistItem r,Integer pos, String category){
-        ((GeneralAssistActivity) getActivity()).startAssistAndPaymentsActivity(r,pos,category);
+        ((GeneralAssistActivity) getActivity()).startAssistAndPaymentsActivity(r,pos,category,2);
     }
 
     public void scrollToPositionAndUpdate(){
@@ -95,8 +97,9 @@ public class HighschoolAssistsFragment extends BaseFragment implements Paginate.
     }
 
     public void onEnablePresent(Boolean val){
-        if(mAdapter != null)
-        mAdapter.setEnablePresent(val);
+        if(mAdapter != null){
+            mAdapter.setEnablePresent(val);
+        }
     }
 
     public void onSelectStudent(Long id, String name, String surname, String category){
@@ -105,6 +108,11 @@ public class HighschoolAssistsFragment extends BaseFragment implements Paginate.
         //esto se usa para refrescar solo la cant de presentes
         //y no tener que refresacr toda la lista
         // clearView();
+    }
+
+    private void hideKeyboard(){
+        final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
     }
 
     @Override
@@ -154,7 +162,7 @@ public class HighschoolAssistsFragment extends BaseFragment implements Paginate.
         //SPINNER Subcat
         List<String> spinner_sub_cate = new ArrayList<>();
         spinner_sub_cate.add(Constants.CATEGORY_HIGHSCHOOL);
-        //enumNameToStringArraySub(SubCategoryType.values(),spinner_sub_cate);
+        enumNameToStringArraySub(SubCategoryType.values(),spinner_sub_cate);
         return  spinner_sub_cate;
     }
 
@@ -202,6 +210,9 @@ public class HighschoolAssistsFragment extends BaseFragment implements Paginate.
         this.mQuery = query;
         final String newToken = UUID.randomUUID().toString();
         this.token =  newToken;
+
+        System.out.println(mCategory);
+        System.out.println(mSubCategoria);
 
         ApiClient.get().getStudentsAsists(query, mCurrentPage, mCategory, Constants.CATEGORY_HIGHSCHOOL, subcategoria, datePresent, mOnlyPresents,new GenericCallback<ReportStudentAsist>() {
             @Override

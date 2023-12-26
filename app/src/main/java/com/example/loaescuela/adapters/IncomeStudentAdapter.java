@@ -17,6 +17,7 @@ import com.example.loaescuela.R;
 import com.example.loaescuela.ValuesHelper;
 import com.example.loaescuela.network.models.ReportIncomeStudent;
 import com.example.loaescuela.network.models.ReportOutcome;
+import com.example.loaescuela.types.Constants;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersAdapter;
 
 import java.util.Date;
@@ -137,11 +138,13 @@ public class IncomeStudentAdapter extends BaseAdapter<ReportIncomeStudent, Incom
         public LinearLayout moreInfo;
 
         public ImageView image;
+        public ImageView card;
 
         public LinearLayout linePayment;
         public TextView textPayment;
         public TextView valPayment;
         public TextView detail;
+        public TextView detail2;
         public TextView surname;
 
 
@@ -161,12 +164,14 @@ public class IncomeStudentAdapter extends BaseAdapter<ReportIncomeStudent, Incom
 
             lineDetailText = v.findViewById(R.id.line_detail_text);
             detail = v.findViewById(R.id.detail);
+            detail2 = v.findViewById(R.id.detail2);
             linePayment= v.findViewById(R.id.line_payment);
             textPayment= v.findViewById(R.id.textpayment);
             valPayment= v.findViewById(R.id.valpayment);
 
 
             list_events = v.findViewById(R.id.list_events);
+            card = v.findViewById(R.id.card);
         }
     }
 
@@ -186,7 +191,8 @@ public class IncomeStudentAdapter extends BaseAdapter<ReportIncomeStudent, Incom
             vh.student_name.setText(null);
         if(vh.detail!=null)
             vh.detail.setText(null);
-
+        if(vh.detail2!=null)
+            vh.detail2.setText(null);
     }
 
 
@@ -198,6 +204,8 @@ public class IncomeStudentAdapter extends BaseAdapter<ReportIncomeStudent, Incom
         final ReportIncomeStudent current_general = getItem(position);
 
         holder.amount.setText(ValuesHelper.get().getIntegerQuantity(current_general.amount));
+
+        holder.detail2.setText(current_general.category);
         holder.detail.setText(current_general.detail);
 
         String[] name = current_general.description.split(" ");
@@ -208,11 +216,16 @@ public class IncomeStudentAdapter extends BaseAdapter<ReportIncomeStudent, Incom
             holder.surname.setText(name[1]);
         }
 
-
         if(current_general.income_created == null){
             holder.hour.setText("");
         }else{
             holder.hour.setText(DateHelper.get().getOnlyTimeFromCreated(current_general.income_created));
+        }
+
+        if(!current_general.payment_method.equals(Constants.PAYMENT_EFECTIVO)){
+            holder.card.setVisibility(View.VISIBLE);
+        }else{
+            holder.card.setVisibility(View.GONE);
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

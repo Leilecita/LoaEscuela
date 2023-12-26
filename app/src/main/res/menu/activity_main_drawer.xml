@@ -4,7 +4,7 @@
 
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/options_white"
+            android:icon="@drawable/home"
             android:title="Inicio"/>
 
 
@@ -17,27 +17,27 @@
 
             <item
                 android:id="@+id/nav_assists"
-                android:icon="@drawable/options_white"
+                android:icon="@drawable/asist"
                 android:title="Asistencias"/>
 
             <item
                 android:id="@+id/nav_payments"
-                android:icon="@drawable/options_white"
+                android:icon="@drawable/ganancias"
                 android:title="Pagos"/>
 
             <item
                 android:id="@+id/nav_resum"
-                android:icon="@drawable/options_white"
+                android:icon="@drawable/resumen"
                 android:title="Resumen diario asistencias"/>
 
             <item
                 android:id="@+id/nav_students"
-                android:icon="@drawable/options_white"
+                android:icon="@drawable/user"
                 android:title="Alumnos"/>
 
             <item
                 android:id="@+id/nav_create_student"
-                android:icon="@drawable/options_white"
+                android:icon="@drawable/alum_nuevo"
                 android:title="Alumno nuevo"/>
 
 
@@ -50,7 +50,7 @@
         <menu>
             <item
                 android:id="@+id/nav_planillas"
-                android:icon="@drawable/options_white"
+                android:icon="@drawable/planillas"
                 android:title="Planillas"/>
 
 
@@ -61,7 +61,7 @@
 
         <item
             android:id="@+id/nav_session"
-            android:icon="@drawable/options_white"
+            android:icon="@drawable/user_viol"
             android:title="Cerrar sesión"/>
     </group>
 

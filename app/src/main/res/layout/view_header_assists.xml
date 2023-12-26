@@ -8,7 +8,7 @@
     android:paddingRight="10dp"
     android:orientation="horizontal"
     android:background="@drawable/rec_rounded_8"
-    android:backgroundTint="@color/colorPrimaryClear"
+    android:backgroundTint="@color/coloRose_soft_soft"
     android:layout_height="wrap_content">
 
 
@@ -19,7 +19,7 @@
             android:text="2020"
             android:layout_gravity="center"
             android:textAllCaps="true"
-            android:textColor="@color/colorPrimaryIntLetter"
+            android:textColor="@color/colorPrimaryLetterRose"
             android:layout_height="match_parent"
             />
 

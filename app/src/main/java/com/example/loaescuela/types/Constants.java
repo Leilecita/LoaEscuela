@@ -4,8 +4,17 @@ public class Constants {
     public static String TYPE_ALL = "Todo";
 
     public static String CATEGORY_ESCUELA = "escuela";
+    public static String CATEGORY_ESCUELA_INT = "intermedios";
     public static String CATEGORY_HIGHSCHOOL = "highschool";
     public static String CATEGORY_COLONIA = "colonia";
+    public static String CATEGORY_MINI = "mini";
+    public static String PLACE_NEGOCIO = "negocio";
+    public static String PLACE_ESCUELA = "escuela";
+
+    public static String PAYMENT_TARJETA = "tarjeta";
+    public static String PAYMENT_EFECTIVO = "efectivo";
+    public static String PAYMENT_MP = "mercadopago";
+    public static String PAYMENT_TRANSFERENCIA = "transferencia";
 
     public static String COLOR_ESCUELA = "#90CAF9";
     public static String COLOR_HIGHSCHOOL = "#81C784";

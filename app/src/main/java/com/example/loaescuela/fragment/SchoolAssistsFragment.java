@@ -1,10 +1,12 @@
 package com.example.loaescuela.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -70,7 +72,8 @@ public class SchoolAssistsFragment extends BaseFragment implements Paginate.Call
     private Integer mPreviousPosition;
 
     public void startNewActivityFragment(ReportStudentAsistItem r,Integer pos, String category){
-        ((GeneralAssistActivity) getActivity()).startAssistAndPaymentsActivity(r,pos,category);
+
+        ((GeneralAssistActivity) getActivity()).startAssistAndPaymentsActivity(r,pos,category,0);
     }
 
     public void scrollToPositionAndUpdate(){
@@ -83,15 +86,24 @@ public class SchoolAssistsFragment extends BaseFragment implements Paginate.Call
     }
 
     public void onEnablePresent(Boolean val){
-        mAdapter.setEnablePresent(val);
+        if(mAdapter != null){
+            mAdapter.setEnablePresent(val);
+        }
     }
+
 
     public void onSelectStudent(Long student_id, String name, String surname, String categoria){
         ((GeneralAssistActivity) requireActivity()).loadStudentsValue(Constants.CATEGORY_ESCUELA, mSubCategoria, mActualDate);
     }
 
+    private void hideKeyboard(){
+        final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+    }
+
     @Override
     public void refreshList(String cat, String subcat,String date, String query, String onlyPresents){
+
         categoria = cat;
         subcategoria = subcat;
 
@@ -105,6 +117,7 @@ public class SchoolAssistsFragment extends BaseFragment implements Paginate.Call
         clearView();
         //ver si esto es necesario
         listStudents(mQuery);
+
     }
 
     public void clearView(){
@@ -137,7 +150,7 @@ public class SchoolAssistsFragment extends BaseFragment implements Paginate.Call
     }
 
     public static <T extends Enum<SubCategoryType>> void enumNameToStringArraySub(SubCategoryType[] values, List<String> spinner_sub_cat) {
-        spinner_sub_cat.add(SubCategoryEscuela.SUB_CATEGORY_ESCUELA_INT.getName());
+       // spinner_sub_cat.add(SubCategoryEscuela.SUB_CATEGORY_ESCUELA_INT.getName());
         spinner_sub_cat.add(SubCategoryEscuela.SUB_CATEGORY_ESCUELA_AD.getName());
     }
 
@@ -250,123 +263,4 @@ public class SchoolAssistsFragment extends BaseFragment implements Paginate.Call
     public boolean hasLoadedAllItems() {
         return !hasMoreItems;
     }
-
 }
- /*
-  private static <T extends Enum<CategoryType>> void enumNameToStringArray(CategoryType[] values, List<String> spinner_type_cat) {
-        for (CategoryType value: values) {
-            if(value.getName().equals(Constants.TYPE_ALL)){
-                // spinner_type_cat.add(Constants.TYPE_ALL);
-                spinner_type_cat.add("Formato");
-            }else{
-                spinner_type_cat.add(value.getName());
-            }
-        }
-    }
-
- private void createSpinnerCat(final Spinner spinner, List<String> data){
-
-        initialSpinner(spinner, data);
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String itemSelected=String.valueOf(spinner.getSelectedItem());
-                if(itemSelected.equals(Constants.TYPE_ALL)){
-                    mCategoria = Constants.TYPE_ALL;
-                }else{
-                    mCategoria = itemSelected;
-                }
-
-                if(initAppCat){
-                    initAppCat = false;
-                }else{
-                    clearView();
-                    loadStudentsValue();
-                }
-
-                System.out.println("entra aca cat ");
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
-    }
-
-
-    private void selectDate(){
-        final DatePickerDialog datePickerDialog;
-        final Calendar c = Calendar.getInstance();
-        int mYear = c.get(Calendar.YEAR); // current year
-        int mMonth = c.get(Calendar.MONTH); // current month
-        final int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
-
-        datePickerDialog = new DatePickerDialog(getContext(),R.style.datepicker,
-                new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year,
-                                          int monthOfYear, int dayOfMonth) {
-                        String sdayOfMonth = String.valueOf(dayOfMonth);
-                        if (sdayOfMonth.length() == 1) {
-                            sdayOfMonth = "0" + dayOfMonth;
-                        }
-                        String smonthOfYear = String.valueOf(monthOfYear + 1);
-                        if (smonthOfYear.length() == 1) {
-                            smonthOfYear = "0" + smonthOfYear;
-                        }
-                        mActualDate = year+"-"+smonthOfYear+"-"+sdayOfMonth;
-                        brakeDownDate();
-                        clearView();
-                        loadStudentsValue();
-                        refreshList(mCategoria, mSubCategoria, mActualDate, mQuery, mOnlyPresents);
-                    }
-                }, mYear, mMonth, mDay);
-
-        datePickerDialog.show();
-
-        private void brakeDownDate(){
-        year.setText(DateHelper.get().getYear(mActualDate));
-
-        day.setText(DateHelper.get().getOnlyDay((mActualDate)));
-        month.setText(DateHelper.get().getNameMonth2((mActualDate)));
-        dayName.setText(DateHelper.get().getNameDay((mActualDate)));
-    }
-
-
-    private void initialSpinner(final Spinner spinner, List<String> data){
-
-        ArrayAdapter<String> adapterZone = new SpinnerAdapter(getContext(), R.layout.item_custom, data);
-        spinner.setAdapter(adapterZone);
-        spinner.setPopupBackgroundDrawable(this.getResources().getDrawable(R.drawable.rec_rounded_8));
-    }
-
-
-    private void createSpinnerSubCat(final Spinner spinner, List<String> data){
-
-        initialSpinner(spinner, data);
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String itemSelected=String.valueOf(spinner.getSelectedItem());
-                if(itemSelected.equals(Constants.TYPE_ALL)){
-                    mSubCategoria = Constants.TYPE_ALL;
-                }else{
-                    mSubCategoria = itemSelected;
-                }
-
-                if(initAppSubCat){
-                    initAppSubCat = false;
-                }else{
-                    refreshList(mCategoria, mSubCategoria, mActualDate, mQuery, mOnlyPresents);
-                    clearView();
-                    loadStudentsValue();
-                }
-                System.out.println("entra aca sub ");
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
-
-    */

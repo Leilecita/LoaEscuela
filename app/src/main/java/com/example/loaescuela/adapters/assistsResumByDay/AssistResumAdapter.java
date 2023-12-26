@@ -1,5 +1,6 @@
 package com.example.loaescuela.adapters.assistsResumByDay;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class AssistResumAdapter  extends BaseAdapter<ReportResumAsist ,AssistResumAdapter.ViewHolder> implements StickyRecyclerHeadersAdapter<RecyclerView.ViewHolder> {
+public class AssistResumAdapter  extends BaseAdapter<ReportResumAsist ,AssistResumAdapter.ViewHolder> {
     private Context mContext;
 
 
@@ -37,50 +38,6 @@ public class AssistResumAdapter  extends BaseAdapter<ReportResumAsist ,AssistRes
 
     }
 
-    @Override
-    public long getHeaderId(int position) {
-        if (position >= getItemCount()) {
-            return -1;
-        } else {
-            Date date = DateHelper.get().parseDate(DateHelper.get().onlyDateComplete(getItem(position).day));
-            return date.getYear();
-        }
-    }
-
-
-    @Override
-    public RecyclerView.ViewHolder onCreateHeaderViewHolder(ViewGroup parent) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.view_header_assists, parent, false);
-        return new RecyclerView.ViewHolder(view) {
-        };
-    }
-
-    @Override
-    public void onBindHeaderViewHolder(RecyclerView.ViewHolder holder, int position) {
-
-        if (position < getItemCount()) {
-
-            LinearLayout linear = (LinearLayout) holder.itemView;
-            final ReportResumAsist e = getItem(position);
-
-            String date = DateHelper.get().getOnlyDate(e.day);
-            String year = DateHelper.get().getYear(date);
-
-            int count = linear.getChildCount();
-            View v = null;
-            View v2 = null;
-
-            for (int k = 0; k < count; k++) {
-                v = linear.getChildAt(k);
-                if (k == 0) {
-
-                    TextView t = (TextView) v;
-                    t.setText(year);
-                }
-            }
-        }
-    }
 
     public List<ReportResumAsist> getListClient(){
         return getList();
@@ -97,6 +54,8 @@ public class AssistResumAdapter  extends BaseAdapter<ReportResumAsist ,AssistRes
         public TextView incomes_escuela;
         public TextView incomes_highschool;
         public TextView incomes_colonia_highschool;
+        public LinearLayout line_detail_formatos;
+        public LinearLayout line_tot_formatos;
 
         public ViewHolder(View v){
             super(v);
@@ -110,6 +69,8 @@ public class AssistResumAdapter  extends BaseAdapter<ReportResumAsist ,AssistRes
             incomes_escuela = v.findViewById(R.id.incomes_escuela);
             incomes_colonia = v.findViewById(R.id.incomes_colonia);
             incomes_colonia_highschool = v.findViewById(R.id.incomes_col_y_high);
+            line_detail_formatos = v.findViewById(R.id.line_detail_formatos);
+            line_tot_formatos = v.findViewById(R.id.line_tot_formatos);
         }
     }
 
@@ -132,10 +93,12 @@ public class AssistResumAdapter  extends BaseAdapter<ReportResumAsist ,AssistRes
             vh.tot_presents.setText(null);
         if(vh.tot_incomes!=null)
             vh.tot_incomes.setText(null);
-
+        if(vh.incomes_escuela!=null)
+            vh.incomes_escuela.setText(null);
 
     }
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onBindViewHolder(final AssistResumAdapter.ViewHolder holder, final int position) {
@@ -143,8 +106,15 @@ public class AssistResumAdapter  extends BaseAdapter<ReportResumAsist ,AssistRes
 
         final ReportResumAsist current = getItem(position);
 
-        holder.day.setText(DateHelper.get().onlyDayMonthSimpleDate(current.day));
-        holder.year.setText(DateHelper.get().onlyYearSimpleDate(current.day));
+
+        String nameDay = DateHelper.get().getNameDay(current.day);
+        String numberDay = DateHelper.get().numberDay(current.day);
+        String month = DateHelper.get().getNameMonth2(DateHelper.get().onlyDate(current.day));
+        String year = DateHelper.get().getYear(DateHelper.get().onlyDate(current.day));
+
+
+        holder.day.setText(nameDay+" "+numberDay+" "+month);
+        holder.year.setText(year);
 
         holder.tot_presents.setText(String.valueOf(current.tot_presents));
         holder.tot_incomes.setText(String.valueOf(current.tot_incomes));
@@ -161,11 +131,24 @@ public class AssistResumAdapter  extends BaseAdapter<ReportResumAsist ,AssistRes
         holder.list_planillas.setAdapter(adapterIncomeInfo);
         adapterIncomeInfo.setItems(current.planillas);*/
 
-        final PlanillaResumAdapter adapterIncomeInfo = new PlanillaResumAdapter(mContext, new ArrayList<ReportResumPlanilla>());
-        GridLayoutManager gridlayoutmanager = new GridLayoutManager(mContext, 2);
+        final PlanillaResumAdapter adapterIncomeInfo = new PlanillaResumAdapter(mContext, new ArrayList<ReportResumPlanilla>(),"s");
+        LinearLayoutManager gridlayoutmanager =new LinearLayoutManager(mContext);
         holder.list_planillas.setLayoutManager(gridlayoutmanager);
         holder.list_planillas.setAdapter(adapterIncomeInfo);
         adapterIncomeInfo.setItems(current.planillas);
+
+        holder.line_tot_formatos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(holder.line_detail_formatos.getVisibility() == View.VISIBLE){
+                    holder.line_detail_formatos.setVisibility(View.GONE);
+                }else{
+                    holder.line_detail_formatos.setVisibility(View.VISIBLE);
+                }
+
+
+            }
+        });
 
 
     }

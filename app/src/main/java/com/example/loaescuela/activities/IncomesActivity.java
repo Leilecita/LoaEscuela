@@ -15,6 +15,8 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.loaescuela.R;
 import com.example.loaescuela.adapters.PageIncomesAdapter;
 import com.example.loaescuela.fragment.BaseFragment;
+import com.example.loaescuela.fragment.BoxBeachFragment;
+import com.example.loaescuela.fragment.BoxLocalFragment;
 import com.example.loaescuela.fragment.HighschoolAssistsFragment;
 import com.example.loaescuela.fragment.IncomesBeachFragment;
 import com.example.loaescuela.fragment.IncomesLocalFragment;
@@ -49,6 +51,7 @@ public class IncomesActivity extends BaseActivity{
         i.putExtra("CATEGORIA", "");
         i.putExtra("SUBCATEGORIA", "");
         i.putExtra("TYPE", "PAGOS");
+        i.putExtra("PAYMENTPLACE", this.payment_place);
        // i.putExtra("CAMEFROM", this.payment_place);
         startActivityForResult(i, ADD_STUDENT_ACTIVITY);
     }
@@ -56,12 +59,7 @@ public class IncomesActivity extends BaseActivity{
     public void startCreateBoxActivity() {
 
         Intent i = new Intent(this, CreateBoxActivity.class);
-     //   i.putExtra("TITLE", "Seleccionar alumno para crear pago");
-      //  i.putExtra("ID", -1l);
-       // i.putExtra("CATEGORIA", "");
-        //i.putExtra("SUBCATEGORIA", "");
-        //i.putExtra("TYPE", "PAGOS");
-        // i.putExtra("CAMEFROM", this.payment_place);
+        i.putExtra("PAYMENTPLACE", this.payment_place);
         startActivityForResult(i, CREATE_BOX_ACTIVITY);
     }
 
@@ -70,17 +68,34 @@ public class IncomesActivity extends BaseActivity{
         super.onActivityResult(requestCode, resultCode, data);
 
 
+        if(requestCode == CREATE_BOX_ACTIVITY ){
+            Fragment f;
+            if(payment_place.equals("escuela")){
+                selectFragment(1);
+                f = mAdapter.getItem(1);
+                if (f instanceof BaseFragment) {
+                    ((BoxBeachFragment) f).refreshList(-1l);
+                }
+
+            }else{
+                System.out.println("entra aca nego");
+                selectFragment(2);
+                f = mAdapter.getItem(2);
+                if(f instanceof BaseFragment) {
+                    ((BoxLocalFragment) f).refreshList(-1l);
+                }
+            }
+        }
+
         if (requestCode == ADD_STUDENT_ACTIVITY) {
 
             System.out.println("entra aca pagos");
-
             System.out.println(payment_place);
 
             if (resultCode == RESULT_OK) {
                 this.student_id = data.getLongExtra("STUDENTID",-1l);
 
                // payment_place = data.getStringExtra("CAMEFROM");
-
                // System.out.println("asd"+data.getStringExtra("CAMEFROM"));
                 Fragment f;
 
@@ -98,7 +113,7 @@ public class IncomesActivity extends BaseActivity{
                     selectFragment(1);
                     f = mAdapter.getItem(1);
                     if(f instanceof BaseFragment) {
-                        ((IncomesBeachFragment) f).refreshList(this.student_id);
+                        ((IncomesLocalFragment) f).refreshList(this.student_id);
                     }
                 }
 
@@ -184,7 +199,7 @@ public class IncomesActivity extends BaseActivity{
             public void onTabUnselected(TabLayout.Tab tab) {
                 View im=tab.getCustomView();
                 TextView t=im.findViewById(R.id.text1);
-                t.setTextColor(getResources().getColor(R.color.word_clear));
+                t.setTextColor(getResources().getColor(R.color.coloRose_soft_2));
 
             }
 
@@ -221,12 +236,9 @@ public class IncomesActivity extends BaseActivity{
         if (i == 0) {
             t.setText("Escuela");
             t.setTextColor(getResources().getColor(R.color.white));
-        } else if(i == 1){
-            t.setText("Negocio");
-            t.setTextColor(getResources().getColor(R.color.word_clear));
-        }else{
+        } else{
             t.setText("Caja playa");
-            t.setTextColor(getResources().getColor(R.color.word_clear));
+            t.setTextColor(getResources().getColor(R.color.coloRose_soft_2));
         }
     }
 
@@ -237,10 +249,10 @@ public class IncomesActivity extends BaseActivity{
     }
 
     private void setPaymentPlaceByPosition(Integer i) {
-        if (i == 0) {
+        if (i == 0 || i == 2) {
             this.payment_place = "escuela";
         } else  {
-            this.payment_place = "negocio";
+            this.payment_place = "escuela";
         }
     }
 
@@ -277,6 +289,5 @@ public class IncomesActivity extends BaseActivity{
             });
         }
     }
-
 
 }

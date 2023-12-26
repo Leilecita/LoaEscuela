@@ -38,7 +38,7 @@ public class PlanillaAdapter  extends BaseAdapter<Planilla,PlanillaAdapter.ViewH
         if (position >= getItemCount()) {
             return -1;
         } else {
-            Date date = DateHelper.get().parseDate(DateHelper.get().onlyDateComplete(getItem(position).date));
+            Date date = DateHelper.get().parseDate(DateHelper.get().onlyDateComplete(getItem(position).created));
             return date.getYear();
         }
     }
@@ -86,7 +86,7 @@ public class PlanillaAdapter  extends BaseAdapter<Planilla,PlanillaAdapter.ViewH
         public TextView categoria;
         public TextView subcategoria;
         public TextView anio;
-        public TextView mes;
+        public TextView date;
 
 
 
@@ -95,7 +95,7 @@ public class PlanillaAdapter  extends BaseAdapter<Planilla,PlanillaAdapter.ViewH
             categoria= v.findViewById(R.id.categoria);
             subcategoria= v.findViewById(R.id.subcategoria);
             anio= v.findViewById(R.id.anio);
-            mes= v.findViewById(R.id.mes);
+            date= v.findViewById(R.id.date);
 
         }
     }
@@ -117,8 +117,8 @@ public class PlanillaAdapter  extends BaseAdapter<Planilla,PlanillaAdapter.ViewH
             vh.subcategoria.setText(null);
         if(vh.anio!=null)
             vh.anio.setText(null);
-        if(vh.mes!=null)
-            vh.mes.setText(null);
+        if(vh.date!=null)
+            vh.date.setText(null);
 
     }
 
@@ -132,7 +132,7 @@ public class PlanillaAdapter  extends BaseAdapter<Planilla,PlanillaAdapter.ViewH
         holder.categoria.setText(current.categoria);
         holder.subcategoria.setText(current.subcategoria);
         holder.anio.setText(current.anio);
-        holder.mes.setText(current.mes);
+        holder.date.setText(current.created);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,8 +140,6 @@ public class PlanillaAdapter  extends BaseAdapter<Planilla,PlanillaAdapter.ViewH
 
             }
         });
-
-
 
     }
 

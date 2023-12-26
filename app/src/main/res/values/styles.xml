@@ -20,7 +20,7 @@
 
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/colorPrimaryIntLetter</item>
+        <item name="android:textColor">@color/colorPrimaryLetterRose</item>
 
         <item name="android:fontFamily">@font/opensansregular</item>
     </style>
@@ -37,7 +37,7 @@
 
     <style name="NavItemTextStyle" parent="android:Widget.TextView">
         <item name="android:fontFamily">@font/opensansregular</item>
-        <item name="android:textColor">@color/colorPrimaryDarkLetter</item>
+        <item name="android:textColor">@color/colorPrimaryLetterRose</item>
     </style>
 
     <style name="NavigationDrawerStyle">
@@ -53,8 +53,8 @@
         <item name="listPreferredItemPaddingLeft">16dp</item>
 
         <!-- headers title-->
-        <item name="android:textColorSecondary">@color/colorDialogButton</item>
-        <item name="android:listDivider">@color/colorPrimaryClearLetter</item>
+        <item name="android:textColorSecondary">@color/colorPrimaryLetterRose</item>
+        <item name="android:listDivider">@color/coloRose_soft_soft</item>
 
         <!-- item padding right in menu-->
         <item name="android:listPreferredItemPaddingRight">8dp</item>
@@ -94,8 +94,8 @@
 
 
     <style name="Autocomplete">
-        <item name="colorControlNormal">@color/colorDialogButton</item>
-        <item name="colorControlActivated">@color/colorDialogButton</item>
+        <item name="colorControlNormal">@color/colorPrimaryLetterRose</item>
+        <item name="colorControlActivated">@color/colorPrimaryLetterRose</item>
     </style>
 
     <style name="datepicker" parent="Theme.AppCompat.Light.Dialog">

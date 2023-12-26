@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#685c85</color>
-    <color name="colorPrimaryDark">#4f426b</color>
+    <color name="colorPrimary">#cb498e</color>
+        <color name="colorPrimaryDark">#95215f</color>
+        <color name="colorPrimaryDarkLetterRose">#713A59</color>
+    <color name="colorPrimaryLetterRose">#7A4964</color>
+    <color name="colorPrimaryClearLetterRose">#B88EA5</color>
 
-    <color name="colorTab">#5b4e78</color>
+    <color name="colorTab">#95215f</color>
+    <color name="colorbutton">#AE668C</color>
+    <color name="colorbuttonclear">#CFBEC7</color>
 
     <color name="background_violet">#C0BBCE</color>
+    <color name="background_rose">#FAF6F8</color>
+
+    <color name="coloRose_soft_soft">#F3DDE9</color>
+    <color name="coloRose_soft">#EFC8DD</color>
+    <color name="coloRose_soft_2">#B88EA5</color>
+
+    <color name="colobarra">#A34A79</color>
+    <color name="color_colonia">#D4E157</color>
+    <color name="color_escuela">#90CAF9</color>
+    <color name="color_high">#81C784</color>
 
     <color name="background">#f7f7f7</color>
+    <color name="background_rec_inpu">#F6EFF3</color>
     <color name="background_line1">#f7f7f7</color>
     <color name="background_line2">#F3EBEB</color>
 
@@ -47,9 +63,9 @@
     <color name="color_red_warning">#E47D65</color>
     <color name="color_yellow">#F0D279</color>
 
-    <color name="colorAccent">#9788b8</color>
+    <color name="colorAccent">#AE668C</color>
 
-    <color name="clearhintletter">#cbc9d1</color>
+    <color name="clearhintletter">#E1CAD7</color>
 
     <color name="color_line_div">#cac1de</color>
     <color name="color_line_punt">#cac1de</color>
@@ -70,11 +86,13 @@
     <color name="white">#FFFFFF</color>
 
     <color name="background_searchview">#C6BCDA</color>
+    <color name="background_searchview_rose">#CDAFBF</color>
+    <color name="background_searchview_r">#E8BAD2</color>
     <color name="colorPrimaryClear">#C6BCDA</color>
     <color name="colorPrimaryClearTr">#90DCD1F0</color>
     <color name="colorPrimaryClearSelect">#AAA1BB</color>
     <color name="violetClear">#F5F2FC</color>
-    <color name="colorDialogButton"> #685c85</color>
+    <color name="colorDialogButton"> #AE668C</color>
     <color name="edithText">#310d58</color>
 
     <color name="green1">#234936</color>

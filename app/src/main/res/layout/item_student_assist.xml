@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
 <LinearLayout
         android:layout_width="match_parent"
-        android:layout_margin="4dp"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="2dp"
         android:gravity="center_vertical"
         android:orientation="vertical"
         android:background="@drawable/rec_rounded_8"
@@ -67,24 +71,23 @@
                     android:gravity="center_vertical"
                     android:layout_height="wrap_content"
                     android:text="Leila"
-                    android:fontFamily="@font/opensanslight"
+                    android:fontFamily="@font/opensansregular"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="8dp"
-                    android:textColor="@color/colorPrimaryDarkLetter"
+                    android:textColor="@color/colorPrimaryLetterRose"
                     android:textSize="@dimen/medium_text" />
 
 
                 <TextView
                     android:layout_weight="1"
-                    android:id="@+id/category"
+                    android:id="@+id/dni"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Black"
-                    android:visibility="gone"
+                    android:text="34797715"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="8dp"
-                    android:textColor="@color/colorPrimaryClearLetter"
-                    android:textSize="@dimen/small_text" />
+                    android:textColor="@color/coloRose_soft_2"
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -118,13 +121,13 @@
                 android:layout_width="wrap_content"
                 android:id="@+id/check_presente"
                 android:layout_height="wrap_content"
-                 android:scaleX="2.2"
+                android:scaleX="2.0"
                 android:scaleY="1.8"
                 android:layout_marginRight="4dp"
                 android:background="?android:attr/listChoiceIndicatorMultiple"
                 android:checked="true"
                 android:layout_gravity="center"
-                android:buttonTint="@color/colorPrimaryClear"
+                android:buttonTint="@color/colorbutton"
 
                 />
 
@@ -138,37 +141,10 @@
             android:visibility="gone"
             android:id="@+id/info_student"
             android:orientation="vertical"
-            android:layout_marginLeft="50dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="12dp"
             android:layout_marginTop="16dp"
             >
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:id="@+id/line_info_clases"
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="Clases tomadas"
-                    android:textColor="@color/colorPrimaryDarkLetter"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/taken_classes"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:text="12"
-                    android:textColor="@color/colorPrimaryDarkLetter"
-                    android:layout_gravity="center_vertical"
-                    android:textSize="18sp" />
-
-            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -177,56 +153,364 @@
                 >
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="Clases pagadas"
-                    android:textColor="@color/colorPrimaryDarkLetter"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/buyed_classes"
                     android:layout_width="match_parent"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:text="12"
-                    android:textColor="@color/colorPrimaryDarkLetter"
                     android:layout_gravity="center_vertical"
-                    android:textSize="18sp" />
+                    android:text="clases tomadas"
+                    android:textColor="@color/colorPrimaryLetterRose"
+                    android:textSize="@dimen/general_text" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="right"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <TextView
+                        android:id="@+id/taken_classes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10"
+                        android:gravity="right"
+
+                        android:fontFamily="@font/opensansregular"
+                        android:textColor="@color/colorPrimaryLetterRose"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="@dimen/general_text" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" de "
+                        android:fontFamily="@font/opensansregular"
+                        android:textColor="@color/colorPrimaryLetterRose"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="@dimen/general_text" />
+                    <TextView
+                        android:id="@+id/buyed_classes"
+                        android:layout_width="wrap_content"
+
+                        android:layout_height="wrap_content"
+                        android:text="2 "
+                        android:layout_marginRight="16dp"
+                        android:fontFamily="@font/opensansregular"
+                        android:textColor="@color/colorPrimaryLetterRose"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="@dimen/general_text" />
+
+                </LinearLayout>
+
+
+
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:orientation="horizontal"
+                android:id="@+id/line_info_clases"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="clases tomadas"
+                    android:textColor="@color/colorPrimaryLetterRose"
+                    android:textSize="@dimen/medium_text" />
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
                 android:orientation="horizontal"
                 >
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="Debe"
-                    android:textColor="@color/colorPrimaryDarkLetter"
-                    android:textSize="18sp" />
+                    android:text="deuda"
+                    android:textColor="@color/colorPrimaryLetterRose"
+                    android:textSize="@dimen/general_text" />
 
                 <TextView
                     android:id="@+id/debt_amount"
                     android:layout_width="match_parent"
+                    android:layout_weight="2"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:text="12"
-                    android:textColor="@color/colorPrimaryDarkLetter"
+                    android:text=""
+                    android:gravity="right"
+                    android:layout_marginRight="16dp"
+                    android:fontFamily="@font/opensansregular"
+                    android:textColor="@color/colorPrimaryLetterRose"
                     android:layout_gravity="center_vertical"
-                    android:textSize="18sp" />
+                    android:textSize="@dimen/general_text" />
 
             </LinearLayout>
 
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="16dp"
+                android:gravity="center_vertical"
+                android:layout_below="@id/first2"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/line"
+                android:backgroundTint="@color/colorPrimaryLetterRose"
+                android:layout_height="2dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                android:layout_marginBottom="8dp"
+                >
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:id="@+id/line_tel_student"
+                    android:orientation="horizontal"
+                    >
+
+
+                    <TextView
+                        android:layout_weight="1.1"
+                        android:id="@+id/nombre_adulto"
+                        android:layout_width="match_parent"
+                        android:textSize="@dimen/general_text"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensanslight"
+                        android:text=""
+                        android:textColor="@color/colorPrimaryLetterRose"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                    <TextView
+                        android:layout_weight="1.2"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="1140432745"
+                        android:visibility="invisible"
+                        android:textColor="@color/colorPrimaryLetterRose"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="8dp"
+                        android:textSize="@dimen/small_text" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_gravity="center"
+                        android:id="@+id/call_student"
+                        android:gravity="center"
+                        android:layout_weight="1.5"
+                        android:layout_height="wrap_content"
+
+                        >
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/phone2"
+                            app:tint="@color/colorPrimaryLetterRose" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_gravity="center"
+                        android:id="@+id/wh_student"
+                        android:gravity="center"
+                        android:layout_weight="1.5"
+                        android:layout_height="wrap_content"
+
+                        >
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:padding="1dp"
+                            app:tint="@color/colorPrimaryLetterRose"
+                            android:src="@drawable/whatsan"
+                            />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:id="@+id/line_mama"
+                    android:orientation="horizontal"
+                    >
+
+
+                    <TextView
+                        android:layout_weight="1.1"
+                        android:id="@+id/nombre_mama"
+                        android:layout_width="match_parent"
+                        android:textSize="@dimen/general_text"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/opensanslight"
+                        android:text="Martha"
+                        android:textColor="@color/colorPrimaryLetterRose"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                    <TextView
+                        android:layout_weight="1.2"
+
+                        android:id="@+id/tel_mama"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="1140432745"
+                        android:visibility="invisible"
+                        android:textColor="@color/colorPrimaryLetterRose"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="8dp"
+                        android:textSize="@dimen/small_text" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_gravity="center"
+                        android:id="@+id/call_mama"
+                        android:gravity="center"
+                        android:layout_weight="1.5"
+                        android:layout_height="wrap_content"
+
+                        >
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/phone2"
+                            app:tint="@color/colorPrimaryLetterRose" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_gravity="center"
+                        android:id="@+id/wh_mam"
+                        android:gravity="center"
+                        android:layout_weight="1.5"
+                        android:layout_height="wrap_content"
+
+                        >
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:padding="1dp"
+                            app:tint="@color/colorPrimaryLetterRose"
+                            android:src="@drawable/whatsan"
+                            />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/line_papa"
+                    android:layout_marginTop="14dp"
+                    android:orientation="horizontal"
+
+
+                    >
+
+
+                    <TextView
+                        android:layout_weight="1.1"
+                        android:id="@+id/nombre_papa"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/general_text"
+                        android:text="Fernando"
+                        android:textColor="@color/colorPrimaryLetterRose"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                    <TextView
+                        android:layout_weight="1.2"
+                        android:id="@+id/tel_papa"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="1140432745"
+                        android:visibility="invisible"
+                        android:textColor="@color/colorPrimaryLetterRose"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="8dp"
+                        android:textSize="@dimen/small_text" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:id="@+id/call_papa"
+                        android:layout_weight="1.5"
+                        android:layout_height="wrap_content"
+
+                        >
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            app:tint="@color/colorPrimaryLetterRose"
+                            android:src="@drawable/phone2"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_gravity="center"
+                        android:id="@+id/wh_pap"
+                        android:gravity="center"
+                        android:layout_weight="1.5"
+                        android:layout_height="wrap_content"
+
+                        >
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/whatsan"
+
+                            android:padding="1dp"
+
+                            app:tint="@color/colorPrimaryLetterRose" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="8dp"
                 android:id="@+id/more_info"
                 android:layout_gravity="right"
                 android:gravity="right"
@@ -238,191 +522,15 @@
                     android:gravity="right"
                     android:layout_height="wrap_content"
                     android:text="+ info"
+                    android:fontFamily="@font/opensansregular"
                     android:layout_marginRight="16dp"
-                    android:textColor="@color/colorPrimaryDarkLetter"
+                    android:textColor="@color/colorPrimaryLetterRose"
                     android:layout_gravity="center_vertical"
                     android:textSize="18sp" />
 
 
             </LinearLayout>
 
-
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:id="@+id/line_mama"
-                android:visibility="gone"
-                android:orientation="horizontal"
-                >
-
-
-                <TextView
-                    android:layout_weight="1.3"
-                    android:id="@+id/nombre_mama"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Martha"
-                    android:textColor="@color/colorPrimaryDarkLetter"
-                    android:layout_gravity="center_vertical"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:layout_weight="1"
-
-                    android:id="@+id/tel_mama"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="1140432745"
-                    android:textColor="@color/colorPrimaryDarkLetter"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="8dp"
-                    android:textSize="18sp" />
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_gravity="center"
-                    android:id="@+id/call_mama"
-                    android:gravity="center"
-                    android:layout_weight="1.5"
-                    android:layout_height="wrap_content"
-
-                    >
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:src="@drawable/phone2"
-                        />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_gravity="center"
-                    android:id="@+id/wh_mam"
-                    android:gravity="center"
-                    android:layout_weight="1.5"
-                    android:layout_height="wrap_content"
-
-                    >
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:padding="1dp"
-                        android:src="@drawable/whatsan"
-                        />
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:id="@+id/line_papa"
-                android:visibility="gone"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal"
-
-
-                >
-
-
-                <TextView
-                    android:layout_weight="1.3"
-                    android:id="@+id/nombre_papa"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Fernando"
-                    android:textColor="@color/colorPrimaryDarkLetter"
-                    android:layout_gravity="center_vertical"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:layout_weight="1"
-                    android:id="@+id/tel_papa"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="1140432745"
-                    android:textColor="@color/colorPrimaryDarkLetter"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="8dp"
-                    android:textSize="18sp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:id="@+id/call_papa"
-                    android:layout_weight="1.5"
-                    android:layout_height="wrap_content"
-
-                    >
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:src="@drawable/phone2"
-                        />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_gravity="center"
-                    android:id="@+id/wh_pap"
-                    android:gravity="center"
-                    android:layout_weight="1.5"
-                    android:layout_height="wrap_content"
-
-                    >
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:src="@drawable/whatsan"
-                        android:padding="1dp"
-
-                        />
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:visibility="gone"
-                android:orientation="horizontal"
-
-                >
-
-
-                <TextView
-                    android:id="@+id/direccion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="@color/colorPrimaryDarkLetter"
-                    android:layout_gravity="center_vertical"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/loc"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="@color/colorPrimaryDarkLetter"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="8dp"
-                    android:textSize="18sp" />
-            </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>

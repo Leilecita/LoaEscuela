@@ -2,11 +2,13 @@ package com.example.loaescuela.activities;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -16,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
@@ -27,9 +30,12 @@ import com.example.loaescuela.R;
 import com.example.loaescuela.ValuesHelper;
 import com.example.loaescuela.adapters.PageAssistsAdapter;
 import com.example.loaescuela.adapters.SpinnerAdapter;
+import com.example.loaescuela.data.SessionPrefs;
 import com.example.loaescuela.fragment.BaseFragment;
 import com.example.loaescuela.fragment.ColonyFragment;
 import com.example.loaescuela.fragment.HighschoolAssistsFragment;
+import com.example.loaescuela.fragment.IntSchoolFragment;
+import com.example.loaescuela.fragment.MiniFragment;
 import com.example.loaescuela.fragment.SchoolAssistsFragment;
 import com.example.loaescuela.network.ApiClient;
 import com.example.loaescuela.network.Error;
@@ -69,6 +75,7 @@ public class GeneralAssistActivity extends BaseActivity{
     private TextView cant_presents;
     private TextView cant_students_by_planilla;
     private LinearLayout line_cant_presents;
+    private LinearLayout line_cant_alumnos;
 
     private String mCategoria= Constants.TYPE_ALL;
     private String mSubCategoria= Constants.TYPE_ALL;
@@ -82,13 +89,14 @@ public class GeneralAssistActivity extends BaseActivity{
     private RelativeLayout line_date;
 
     private Boolean initAppSubCat = true;
+    private Boolean mOnlyPresent = false;
 
     private Spinner spinner_sub_cat;
 
-    private Button listOnlyPresents;
+    private LinearLayout listOnlyPresents;
     private Boolean enablePresent = true;
 
-    public void startAssistAndPaymentsActivity(ReportStudentAsistItem s, Integer position, String category){
+    public void startAssistAndPaymentsActivity(ReportStudentAsistItem s, Integer position, String category, Integer numberfragment){
 
         Intent i = new Intent(this, AssistsCoursesIncomesByStudentActivity.class);
         i.putExtra("ID",s.student_id);
@@ -98,6 +106,7 @@ public class GeneralAssistActivity extends BaseActivity{
         i.putExtra("CAMEFROM", "ASISTENCIAPOSITION");
 
         i.putExtra("POSITION",position);
+        i.putExtra("NUMBERFRAGMENT",numberfragment);
 
         System.out.println("POSITION TO EDITh"+position);
 
@@ -120,6 +129,7 @@ public class GeneralAssistActivity extends BaseActivity{
         });
 
         line_cant_presents = findViewById(R.id.line_cant_presents);
+        line_cant_alumnos = findViewById(R.id.line_cant_alumnos);
         cant_presents = findViewById(R.id.cant_presents);
         cant_students_by_planilla = findViewById(R.id.cant_students_by_planilla);
 
@@ -129,6 +139,7 @@ public class GeneralAssistActivity extends BaseActivity{
         year =findViewById(R.id.year);
         dayName = findViewById(R.id.dayname);
         line_top_info = findViewById(R.id.line_top_info);
+        listOnlyPresents = findViewById(R.id.onlypresents);
 
         mActualDate = DateHelper.get().onlyDate(DateHelper.get().getActualDate2());
 
@@ -168,10 +179,16 @@ public class GeneralAssistActivity extends BaseActivity{
         }
 
         actionFloatingButton();
-        actionSpinner();
         setCategoryByPosition(0);
+        actionSpinner();
+        checkEnablePresent(enablePresent,0);
 
         search();
+
+        mOnlyPresent = false;
+        listOnlypresentsMethod();
+
+
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -185,9 +202,11 @@ public class GeneralAssistActivity extends BaseActivity{
                 setVisibilityButton();
 
                 actionSpinner();
-                checkEnablePresent(enablePresent);
+                checkEnablePresent(enablePresent, position);
 
                 setCategoryByPosition(position);
+
+                listOnlypresentsMethod();
             }
 
             @Override
@@ -206,16 +225,18 @@ public class GeneralAssistActivity extends BaseActivity{
 
                 setCategoryByPosition(  tab.getPosition());
                 actionSpinner();
-                checkEnablePresent(enablePresent);
+                checkEnablePresent(enablePresent, tab.getPosition());
 
                 loadStudentsValue(mCategoria, Constants.TYPE_ALL, mActualDate);
+
+                listOnlypresentsMethod();
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
                 View im=tab.getCustomView();
                 TextView t=im.findViewById(R.id.text1);
-                t.setTextColor(getResources().getColor(R.color.word_clear));
+                t.setTextColor(getResources().getColor(R.color.coloRose_soft_2));
             }
 
             @Override
@@ -224,18 +245,20 @@ public class GeneralAssistActivity extends BaseActivity{
             }
         });
 
-         /*  listOnlyPresents.setOnClickListener(new View.OnClickListener() {
+        line_cant_presents.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mOnlyPresents.equals("true")){
-                    mOnlyPresents = "false";
+                if(line_cant_alumnos.getVisibility() == View.VISIBLE){
+                    line_cant_alumnos.setVisibility(View.GONE);
                 }else{
-                    mOnlyPresents = "true";
+                    line_cant_alumnos.setVisibility(View.VISIBLE);
                 }
-                refreshList(mCategoria, mSubCategoria, mActualDate, mQuery, mOnlyPresents);
-                clearView();
             }
-        });*/
+        });
+
+
+
+
      /*   String name=getIntent().getStringExtra("NAMEFRAGMENT2");
         if(name.equals("special")){
             selectFragment(1);
@@ -246,11 +269,26 @@ public class GeneralAssistActivity extends BaseActivity{
             ((LinearLayout) mTabLayout.getTabAt(1).view).setVisibility(View.GONE);
         }*/
 
+        String name=getIntent().getStringExtra("NAMEFRAGMENT");
+        if(name != null){
+            if(name.equals("mini")){
+                selectFragment(3);
+            }else if(name.equals("kids")){
+                selectFragment(2);
+            }else if(name.equals("high")){
+                selectFragment(4);
+            }else{
+            }
+        }
+
+
+
     }
 
     public void createSpinner(List<String> spinner_sub_cate){
         spinner_sub_cat = findViewById(R.id.spinner_sub_cat);
         createSpinnerSubCat(spinner_sub_cat, spinner_sub_cate);
+
     }
 
     private void search(){
@@ -301,10 +339,6 @@ public class GeneralAssistActivity extends BaseActivity{
 
     public void loadStudentsValue(String mCategoria, String mSubCategoria, String mActualDate ){
 
-       // this.mCategoria = mCategoria;
-        //this.mSubCategoria = mSubCategoria;
-        //this.mActualDate = mActualDate;
-
         System.out.println(this.mCategoria);
         System.out.println(this.mSubCategoria);
         System.out.println(this.mActualDate);
@@ -333,22 +367,39 @@ public class GeneralAssistActivity extends BaseActivity{
 
     private void setTextByPosition(TextView t, Integer i) {
         if (i == 0) {
-            t.setText("Escuela");
+            t.setText("Adultos");
             t.setTextColor(getResources().getColor(R.color.white));
         } else if(i == 1) {
-            t.setText("Colonia");
-            t.setTextColor(getResources().getColor(R.color.word_clear));
+            t.setText("Int");
+            t.setTextColor(getResources().getColor(R.color.coloRose_soft_2));
+
+        }else if(i == 2) {
+            t.setText("Kids");
+            t.setTextColor(getResources().getColor(R.color.coloRose_soft_2));
+
+        }else if(i == 3) {
+            t.setText("Mini");
+            t.setTextColor(getResources().getColor(R.color.coloRose_soft_2));
+
         }else {
-            t.setText("Highschool");
-            t.setTextColor(getResources().getColor(R.color.word_clear));
+            t.setText("High");
+            t.setTextColor(getResources().getColor(R.color.coloRose_soft_2));
         }
     }
 
     private void setCategoryByPosition(Integer i) {
         if (i == 0) {
             mCategoria = Constants.CATEGORY_ESCUELA;
+            mSubCategoria = Constants.SUB_CATEGORY_ESCUELA_ADULTOS;
         } else if(i == 1) {
+            mCategoria = Constants.CATEGORY_ESCUELA;
+            mSubCategoria = Constants.SUB_CATEGORY_ESCUELA_INTERMEDIOS;
+        }else if(i == 2) {
             mCategoria = Constants.CATEGORY_COLONIA;
+            mSubCategoria = Constants.SUB_CATEGORY_COLONIA_KIDS;
+        } else if(i == 3) {
+            mCategoria = Constants.CATEGORY_COLONIA;
+            mSubCategoria = Constants.SUB_CATEGORY_COLONIA_MINI;
         }else {
             mCategoria = Constants.CATEGORY_HIGHSCHOOL;
             mSubCategoria = Constants.CATEGORY_HIGHSCHOOL;
@@ -381,14 +432,15 @@ public class GeneralAssistActivity extends BaseActivity{
         }
     }
 
-    public void checkEnablePresent(Boolean val){
-        int position = mTabLayout.getSelectedTabPosition();
-        final Fragment f = mAdapter.getItem(position);
+    public void checkEnablePresent(Boolean val, Integer pos){
+        int pos2 = mTabLayout.getSelectedTabPosition();
+        final Fragment f = mAdapter.getItem(pos2);
         if(f instanceof BaseFragment){
             ((BaseFragment)f).onEnablePresent(val);
         }
 
     }
+
 
     public void setButtonVisibility(Integer v ){
         button.setVisibility(v);
@@ -410,6 +462,29 @@ public class GeneralAssistActivity extends BaseActivity{
         }
     }
 
+    public void listOnlypresentsMethod(){
+        int position = mTabLayout.getSelectedTabPosition();
+        final Fragment f = mAdapter.getItem(position);
+
+        if(f instanceof BaseFragment){
+            listOnlyPresents.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String val="";
+                    if(mOnlyPresent){
+                        mOnlyPresent = false;
+                        val = "false";
+                    }else{
+                        mOnlyPresent = true;
+                        val = "true";
+                    }
+
+                    ((BaseFragment)f).refreshList(mCategoria, mSubCategoria, mActualDate, mQuery, val);
+                }
+            });
+        }
+    }
+
     public void actionSpinner(){
         int position = mTabLayout.getSelectedTabPosition();
         final Fragment f = mAdapter.getItem(position);
@@ -420,25 +495,36 @@ public class GeneralAssistActivity extends BaseActivity{
     }
 
     public void startAddStudentActivity(Long planilla_id){
-        Intent i = new Intent(this, SelectStudentForAssistActivity.class);
-        i.putExtra("ID", planilla_id);
-        i.putExtra("CATEGORIA", mCategoria);
-        i.putExtra("SUBCATEGORIA", mSubCategoria);
-        i.putExtra("TYPE", "ASISTENCIA");
-        i.putExtra("FRAGMENT", mTabLayout.getSelectedTabPosition());
 
-        startActivityForResult(i, ADD_STUDENT_ACTIVITY);
+        if(SessionPrefs.get(this).getLevel().equals("admin")){
+            Intent i = new Intent(this, SelectStudentForAssistActivity.class);
+            i.putExtra("ID", planilla_id);
+            i.putExtra("CATEGORIA", mCategoria);
+            i.putExtra("SUBCATEGORIA", mSubCategoria);
+            i.putExtra("TYPE", "ASISTENCIA");
+            i.putExtra("FRAGMENT", mTabLayout.getSelectedTabPosition());
+
+            startActivityForResult(i, ADD_STUDENT_ACTIVITY);
+        }else{
+            Toast.makeText(this,"consultar a lei", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    protected void hideKeyboard(View view) {
+        InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.RESULT_HIDDEN);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        System.out.println("acaaaa");
-
         if(requestCode == ASSIST_INCOMES_STUDENTS ){
 
             if(resultCode == RESULT_OK){
+
+                System.out.println("fragment"+data.getIntExtra("FRAGMENT", 0));
 
                 if(data.getIntExtra("FRAGMENT", 0) == 0){
                     selectFragment(0);
@@ -449,23 +535,45 @@ public class GeneralAssistActivity extends BaseActivity{
                 }else if(data.getIntExtra("FRAGMENT", 0) == 1){
                     selectFragment(1);
                     Fragment f = mAdapter.getItem(1);
+                    if( f instanceof IntSchoolFragment){
+                        ((IntSchoolFragment)f).scrollToPositionAndUpdate();
+                    }
+                }else if(data.getIntExtra("FRAGMENT", 0) == 2){
+                    selectFragment(2);
+                    Fragment f = mAdapter.getItem(2);
                     if( f instanceof ColonyFragment){
                         ((ColonyFragment)f).scrollToPositionAndUpdate();
                     }
+                }else if(data.getIntExtra("FRAGMENT", 0) == 3){
+                    selectFragment(3);
+                    Fragment f = mAdapter.getItem(3);
+                    if( f instanceof MiniFragment){
+                        ((MiniFragment)f).scrollToPositionAndUpdate();
+                    }
                 }else{
                     System.out.println("Values"+ ValuesHelper.get().mPreviousPosition);
-                    selectFragment(2);
-                    Fragment f = mAdapter.getItem(2);
+                    selectFragment(4);
+                    Fragment f = mAdapter.getItem(4);
                     if( f instanceof HighschoolAssistsFragment){
                         ((HighschoolAssistsFragment)f).scrollToPositionAndUpdate();
                     }
                 }
 
-
-
             }else if(resultCode == RESULT_CANCELED){
+
+
+
+               /* if(data.getIntExtra("FRAGMENT", 0) == 0){
+                    selectFragment(0);
+                }else if(data.getIntExtra("FRAGMENT", 0) == 1){
+                    selectFragment(1);
+                }else if(data.getIntExtra("FRAGMENT", 0) == 2){
+                    selectFragment(2);
+                }else {
+                    selectFragment(3);
+                }*/
                 selectFragment(2);
-                Fragment f = mAdapter.getItem(2);
+                //Fragment f = mAdapter.getItem(2);
                /* if( f instanceof ToPrepareFragment){
                     ((ToPrepareFragment)f).scrollToPosition();
                 }*/
@@ -488,18 +596,30 @@ public class GeneralAssistActivity extends BaseActivity{
                     if (f instanceof BaseFragment) {
                         ((SchoolAssistsFragment) f).refreshList(this.mCategoria, this.mSubCategoria, this.mActualDate,"","false");
                     }
-                }else if(this.mCategoria.equals(Constants.CATEGORY_COLONIA)) {
+                }else if(this.mCategoria.equals(Constants.CATEGORY_ESCUELA_INT)) {
                     selectFragment(1);
                     f = mAdapter.getItem(1);
                     if(f instanceof BaseFragment) {
-                        ((ColonyFragment) f).refreshList(this.mCategoria, this.mSubCategoria, this.mActualDate, "", "false");
+                        ((IntSchoolFragment) f).refreshList(this.mCategoria, this.mSubCategoria, this.mActualDate, "", "false");
                     }
-                }else{
+                } else if(this.mCategoria.equals(Constants.CATEGORY_COLONIA)) {
                     selectFragment(2);
                     f = mAdapter.getItem(2);
                     if(f instanceof BaseFragment) {
-                        ((HighschoolAssistsFragment) f).refreshList(this.mCategoria, this.mSubCategoria, this.mActualDate,"","false");
+                        ((ColonyFragment) f).refreshList(this.mCategoria, this.mSubCategoria, this.mActualDate, "", "false");
+                    }
+                }else if(this.mCategoria.equals(Constants.CATEGORY_MINI)) {
+                    selectFragment(3);
+                    f = mAdapter.getItem(3);
+                    if(f instanceof BaseFragment) {
+                        ((MiniFragment) f).refreshList(this.mCategoria, this.mSubCategoria, this.mActualDate,"","false");
 
+                    }
+                }else{
+                    selectFragment(4);
+                    f = mAdapter.getItem(4);
+                    if(f instanceof BaseFragment) {
+                        ((HighschoolAssistsFragment) f).refreshList(this.mCategoria, this.mSubCategoria, this.mActualDate,"","false");
                     }
                  }
             }
@@ -528,7 +648,6 @@ public class GeneralAssistActivity extends BaseActivity{
                 }else{
                     mSubCategoria = itemSelected;
                 }
-
                // if(initAppSubCat){
                  //   initAppSubCat = false;
                 //}else{
@@ -572,7 +691,7 @@ public class GeneralAssistActivity extends BaseActivity{
                         refresh(mCategoria, mSubCategoria, mActualDate, "", "false");
 
                         enablePresent = DateHelper.get().compareDate(mActualDate);
-                        checkEnablePresent(enablePresent);
+                        checkEnablePresent(enablePresent,0);
 
                     }
                 }, mYear, mMonth, mDay);
