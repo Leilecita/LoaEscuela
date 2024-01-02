@@ -194,6 +194,8 @@ public class StudentAssistAdapter extends BaseAdapter<ReportStudentAsistItem,Stu
     private void clearViewHolder(StudentAssistAdapter.ViewHolder vh) {
         if (vh.text_name != null)
             vh.text_name.setText(null);
+        if (vh.text_name2 != null)
+            vh.text_name2.setText(null);
         if (vh.text_year != null)
             vh.text_year.setText(null);
         if (vh.taken_clases != null)
@@ -296,8 +298,6 @@ public class StudentAssistAdapter extends BaseAdapter<ReportStudentAsistItem,Stu
             holder.cuad_image.setColorFilter(Color.parseColor(Constants.COLOR_HIGHSCHOOL), PorterDuff.Mode.SRC_ATOP);
         }
 
-        System.out.println("nombre"+currentClient.nombre);
-        System.out.println("taken"+currentClient.taken_classes.size());
 
         if(currentClient.taken_classes.size() > 0){
 
@@ -314,7 +314,10 @@ public class StudentAssistAdapter extends BaseAdapter<ReportStudentAsistItem,Stu
         }
 
         if(!enablePresent){
-            holder.check_presente.setEnabled(false);
+            if(!SessionPrefs.get(mContext).getName().equals("lei")){
+                holder.check_presente.setEnabled(false);
+            }
+
             holder.check_presente.setAlpha(.2f);
             holder.cuad_image.setAlpha(.2f);
 
@@ -327,7 +330,8 @@ public class StudentAssistAdapter extends BaseAdapter<ReportStudentAsistItem,Stu
         holder.check_presente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(enablePresent){
+
+                if(enablePresent || SessionPrefs.get(mContext).getName().equals("lei")){
 
                     if(!holder.check_presente.isChecked()){
                         holder.check_presente.setChecked(true);

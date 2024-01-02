@@ -116,7 +116,7 @@ public class AssistsActivity extends BaseActivity implements Paginate.Callbacks,
        // clearView();
     }
 
-    public void refreshList(String cat, String subcat,String date, String query, String onlyPresents){
+    public void refreshList(String cat, String subcat,String date, String query, String onlyPresents, String orderby){
         categoria = cat;
         subcategoria = subcat;
 
@@ -130,7 +130,7 @@ public class AssistsActivity extends BaseActivity implements Paginate.Callbacks,
         System.out.println("clear");
         clearView();
         //ver si esto es necesario
-        listStudents(mQuery);
+        listStudents(mQuery, orderby);
     }
 
     public void clearView(){
@@ -213,7 +213,7 @@ public class AssistsActivity extends BaseActivity implements Paginate.Callbacks,
                 }else{
                     mOnlyPresents = "true";
                 }
-                refreshList(mCategoria, mSubCategoria, mActualDate, mQuery, mOnlyPresents);
+                refreshList(mCategoria, mSubCategoria, mActualDate, mQuery, mOnlyPresents, "");
                 clearView();
             }
         });
@@ -357,7 +357,7 @@ public class AssistsActivity extends BaseActivity implements Paginate.Callbacks,
             public boolean onQueryTextChange(String newText) {
                 if(!newText.trim().toLowerCase().equals(mQuery)) {
                     mQuery = newText.trim().toLowerCase();
-                    refreshList(mCategoria, mSubCategoria, mActualDate, mQuery, mOnlyPresents);
+                    refreshList(mCategoria, mSubCategoria, mActualDate, mQuery, mOnlyPresents,"");
                     clearView();
 
                    /* mCurrentPage = 0;
@@ -436,7 +436,7 @@ public class AssistsActivity extends BaseActivity implements Paginate.Callbacks,
                 if(initAppSubCat){
                     initAppSubCat = false;
                 }else{
-                    refreshList(mCategoria, mSubCategoria, mActualDate, mQuery, mOnlyPresents);
+                    refreshList(mCategoria, mSubCategoria, mActualDate, mQuery, mOnlyPresents,"");
                     clearView();
                     loadStudentsValue();
                 }
@@ -458,7 +458,7 @@ public class AssistsActivity extends BaseActivity implements Paginate.Callbacks,
                 String itemSelected=String.valueOf(spinner.getSelectedItem());
                 mYear = itemSelected;
 
-                refreshList(mCategoria, mSubCategoria, mActualDate, mQuery, mOnlyPresents);
+                refreshList(mCategoria, mSubCategoria, mActualDate, mQuery, mOnlyPresents,"");
                 loadStudentsValue();
             }
             @Override
@@ -506,7 +506,7 @@ public class AssistsActivity extends BaseActivity implements Paginate.Callbacks,
                         brakeDownDate();
                         clearView();
                         loadStudentsValue();
-                        refreshList(mCategoria, mSubCategoria, mActualDate, mQuery, mOnlyPresents);
+                        refreshList(mCategoria, mSubCategoria, mActualDate, mQuery, mOnlyPresents,"");
                     }
                 }, mYear, mMonth, mDay);
 
@@ -514,13 +514,13 @@ public class AssistsActivity extends BaseActivity implements Paginate.Callbacks,
     }
 
 
-    public void listStudents(String query){
+    public void listStudents(String query, String orderby){
         loadingInProgress=true;
         this.mQuery = query;
         final String newToken = UUID.randomUUID().toString();
         this.token =  newToken;
 
-        ApiClient.get().getStudentsAsists(query, mCurrentPage, mCategory, categoria, subcategoria, datePresent, mOnlyPresents,new GenericCallback<ReportStudentAsist>() {
+        ApiClient.get().getStudentsAsists(query, mCurrentPage, mCategory, categoria, subcategoria, datePresent, mOnlyPresents, orderby,new GenericCallback<ReportStudentAsist>() {
             @Override
             public void onSuccess(ReportStudentAsist data) {
                 planilla_id = data.planilla_id;
@@ -574,7 +574,7 @@ public class AssistsActivity extends BaseActivity implements Paginate.Callbacks,
 
     @Override
     public void onLoadMore() {
-        listStudents(mQuery);
+        listStudents(mQuery,"");
     }
 
     @Override

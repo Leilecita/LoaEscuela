@@ -5,6 +5,7 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -37,14 +38,14 @@ public class PlanillaResumAdapter  extends BaseAdapter<ReportResumPlanilla,Plani
     public static class ViewHolder extends RecyclerView.ViewHolder  {
         public TextView nombre_planilla;
         public TextView tot_presents;
+        public LinearLayout line_view;
 
 
         public ViewHolder(View v){
             super(v);
             nombre_planilla = v.findViewById(R.id.nombre_planilla);
             tot_presents = v.findViewById(R.id.tot_presents);
-
-
+            line_view = v.findViewById(R.id.line_view);
         }
     }
 
@@ -81,8 +82,11 @@ public class PlanillaResumAdapter  extends BaseAdapter<ReportResumPlanilla,Plani
         holder.nombre_planilla.setText(current.nombre_planilla);
         holder.tot_presents.setText(String.valueOf(current.cant_presentes));
 
-
+        if(current.cant_presentes == 0){
+            holder.line_view.setVisibility(View.GONE);
+        }else{
+            holder.line_view.setVisibility(View.VISIBLE);
+        }
     }
-
 }
 

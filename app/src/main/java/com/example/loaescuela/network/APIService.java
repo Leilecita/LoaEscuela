@@ -148,7 +148,7 @@ public interface APIService {
 
 
     @GET("students.php")
-    Observable<Response<ReportStudentAsist>> getStudentsAsists(@Query("method") String method , @Query("query") String query, @Query("page") Integer page, @Query("category") String category, @Query("categoria") String categoria, @Query("subcategoria") String subcategoria ,@Query("date") String datepresent, @Query("onlyPresents") String onlyP );
+    Observable<Response<ReportStudentAsist>> getStudentsAsists(@Query("method") String method , @Query("query") String query, @Query("page") Integer page, @Query("category") String category, @Query("categoria") String categoria, @Query("subcategoria") String subcategoria ,@Query("date") String datepresent, @Query("onlyPresents") String onlyP, @Query("orderby") String orderby );
 
     @PUT("students.php")
     Observable<Response<ReportStudentAsist>> updateStudentAsist(@Query("method") String method, @Body ReportStudentAsist studentAsist);

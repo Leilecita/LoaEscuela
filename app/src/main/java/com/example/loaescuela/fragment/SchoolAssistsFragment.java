@@ -71,6 +71,14 @@ public class SchoolAssistsFragment extends BaseFragment implements Paginate.Call
 
     private Integer mPreviousPosition;
 
+    public String getCategory(){
+        return Constants.CATEGORY_ESCUELA;
+    }
+
+    public String getSubcategoria(){
+        return Constants.SUB_CATEGORY_ESCUELA_ADULTOS;
+    }
+
     public void startNewActivityFragment(ReportStudentAsistItem r,Integer pos, String category){
 
         ((GeneralAssistActivity) getActivity()).startAssistAndPaymentsActivity(r,pos,category,0);
@@ -102,13 +110,15 @@ public class SchoolAssistsFragment extends BaseFragment implements Paginate.Call
     }
 
     @Override
-    public void refreshList(String cat, String subcat,String date, String query, String onlyPresents){
+    public void refreshList(String cat, String subcat,String date, String query, String onlyPresents,String orderby){
 
         categoria = cat;
         subcategoria = subcat;
 
         datePresent = date;
-        mAdapter.setDatePresent(date);
+        if(mAdapter != null) {
+            mAdapter.setDatePresent(date);
+        }
 
         mQuery = query;
 
@@ -116,7 +126,7 @@ public class SchoolAssistsFragment extends BaseFragment implements Paginate.Call
 
         clearView();
         //ver si esto es necesario
-        listStudents(mQuery);
+        listStudents(mQuery,orderby);
 
     }
 
@@ -191,13 +201,13 @@ public class SchoolAssistsFragment extends BaseFragment implements Paginate.Call
         return mRootView;
     }
 
-    public void listStudents(String query){
+    public void listStudents(String query,String orderby){
         loadingInProgress=true;
         this.mQuery = query;
         final String newToken = UUID.randomUUID().toString();
         this.token =  newToken;
 
-        ApiClient.get().getStudentsAsists(query, mCurrentPage, mCategory, Constants.CATEGORY_ESCUELA, subcategoria, datePresent, mOnlyPresents,new GenericCallback<ReportStudentAsist>() {
+        ApiClient.get().getStudentsAsists(query, mCurrentPage, mCategory, Constants.CATEGORY_ESCUELA, subcategoria, datePresent, mOnlyPresents, orderby,new GenericCallback<ReportStudentAsist>() {
             @Override
             public void onSuccess(ReportStudentAsist data) {
                 planilla_id = data.planilla_id;
@@ -251,7 +261,7 @@ public class SchoolAssistsFragment extends BaseFragment implements Paginate.Call
 
     @Override
     public void onLoadMore() {
-        listStudents(mQuery);
+        listStudents(mQuery, "");
     }
 
     @Override

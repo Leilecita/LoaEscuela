@@ -102,21 +102,25 @@ public class HighschoolAssistsFragment extends BaseFragment implements Paginate.
         }
     }
 
+    public String getCategory(){
+        return Constants.CATEGORY_HIGHSCHOOL;
+    }
+
+    public String getSubcategoria(){
+        return Constants.CATEGORY_HIGHSCHOOL;
+    }
+
     public void onSelectStudent(Long id, String name, String surname, String category){
-        ((GeneralAssistActivity) requireActivity()).loadStudentsValue(Constants.CATEGORY_ESCUELA, mSubCategoria, mActualDate);
+        ((GeneralAssistActivity) requireActivity()).loadStudentsValue( Constants.CATEGORY_HIGHSCHOOL, mSubCategoria, mActualDate);
         // loadStudentsValue();
         //esto se usa para refrescar solo la cant de presentes
         //y no tener que refresacr toda la lista
         // clearView();
     }
 
-    private void hideKeyboard(){
-        final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
-    }
 
     @Override
-    public void refreshList(String cat, String subcat,String date, String query, String onlyPresents){
+    public void refreshList(String cat, String subcat,String date, String query, String onlyPresents, String orderby){
         categoria = cat;
         subcategoria = subcat;
 
@@ -129,7 +133,7 @@ public class HighschoolAssistsFragment extends BaseFragment implements Paginate.
 
         clearView();
         //ver si esto es necesario
-        listStudents(mQuery);
+        listStudents(mQuery, orderby);
     }
 
     public void clearView(){
@@ -155,7 +159,7 @@ public class HighschoolAssistsFragment extends BaseFragment implements Paginate.
     }
 
     public static <T extends Enum<SubCategoryType>> void enumNameToStringArraySub(SubCategoryType[] values, List<String> spinner_sub_cat) {
-        spinner_sub_cat.add(SubCategoryColonia.SUB_CATEGORY_COLONIA_KIDS.getName());
+        spinner_sub_cat.add("HIGHSCHOOL");
     }
 
     public List<String> onLoadSpinner(){
@@ -205,7 +209,7 @@ public class HighschoolAssistsFragment extends BaseFragment implements Paginate.
         return mRootView;
     }
 
-    public void listStudents(String query){
+    public void listStudents(String query, String orderby){
         loadingInProgress=true;
         this.mQuery = query;
         final String newToken = UUID.randomUUID().toString();
@@ -214,7 +218,7 @@ public class HighschoolAssistsFragment extends BaseFragment implements Paginate.
         System.out.println(mCategory);
         System.out.println(mSubCategoria);
 
-        ApiClient.get().getStudentsAsists(query, mCurrentPage, mCategory, Constants.CATEGORY_HIGHSCHOOL, subcategoria, datePresent, mOnlyPresents,new GenericCallback<ReportStudentAsist>() {
+        ApiClient.get().getStudentsAsists(query, mCurrentPage, mCategory, Constants.CATEGORY_HIGHSCHOOL, subcategoria, datePresent, mOnlyPresents, orderby,new GenericCallback<ReportStudentAsist>() {
             @Override
             public void onSuccess(ReportStudentAsist data) {
                 System.out.println("planillaid"+data.planilla_id);
@@ -269,7 +273,7 @@ public class HighschoolAssistsFragment extends BaseFragment implements Paginate.
 
     @Override
     public void onLoadMore() {
-        listStudents(mQuery);
+        listStudents(mQuery,"" );
     }
 
     @Override

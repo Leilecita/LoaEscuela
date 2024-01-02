@@ -4,10 +4,16 @@ public class Constants {
     public static String TYPE_ALL = "Todo";
 
     public static String CATEGORY_ESCUELA = "escuela";
-    public static String CATEGORY_ESCUELA_INT = "intermedios";
     public static String CATEGORY_HIGHSCHOOL = "highschool";
     public static String CATEGORY_COLONIA = "colonia";
-    public static String CATEGORY_MINI = "mini";
+
+    public static String SUB_CATEGORY_ESCUELA_ADULTOS = "adultos";
+    public static String SUB_CATEGORY_ESCUELA_INTERMEDIOS = "intermedios";
+    public static String SUB_CATEGORY_COLONIA_KIDS = "kids";
+    public static String SUB_CATEGORY_COLONIA_MINI = "mini";
+
+
+
     public static String PLACE_NEGOCIO = "negocio";
     public static String PLACE_ESCUELA = "escuela";
 
@@ -25,11 +31,6 @@ public class Constants {
     public static String OUTCOME_SPEND = "gasto";
     public static String OUTCOME_SANTI= "santi";
 
-
-    public static String SUB_CATEGORY_ESCUELA_ADULTOS = "adultos";
-    public static String SUB_CATEGORY_ESCUELA_INTERMEDIOS = "intermedios";
-    public static String SUB_CATEGORY_COLONIA_KIDS = "kids";
-    public static String SUB_CATEGORY_COLONIA_MINI = "mini";
 
 
 }

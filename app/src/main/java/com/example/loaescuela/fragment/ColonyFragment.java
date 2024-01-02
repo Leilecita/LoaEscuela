@@ -105,8 +105,16 @@ public class ColonyFragment extends BaseFragment implements Paginate.Callbacks, 
         imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
     }
 
+    public String getCategory(){
+        return Constants.CATEGORY_COLONIA;
+    }
+
+    public String getSubcategoria(){
+        return Constants.SUB_CATEGORY_COLONIA_KIDS;
+    }
+
     @Override
-    public void refreshList(String cat, String subcat,String date, String query, String onlyPresents){
+    public void refreshList(String cat, String subcat,String date, String query, String onlyPresents, String order){
 
         categoria = cat;
         subcategoria = subcat;
@@ -120,7 +128,7 @@ public class ColonyFragment extends BaseFragment implements Paginate.Callbacks, 
 
         clearView();
         //ver si esto es necesario
-        listStudents(mQuery);
+        listStudents(mQuery, order);
     }
 
     public void clearView(){
@@ -194,13 +202,13 @@ public class ColonyFragment extends BaseFragment implements Paginate.Callbacks, 
         return mRootView;
     }
 
-    public void listStudents(String query){
+    public void listStudents(String query, String order){
         loadingInProgress=true;
         this.mQuery = query;
         final String newToken = UUID.randomUUID().toString();
         this.token =  newToken;
 
-        ApiClient.get().getStudentsAsists(query, mCurrentPage, mCategory, Constants.CATEGORY_COLONIA, subcategoria, datePresent, mOnlyPresents,new GenericCallback<ReportStudentAsist>() {
+        ApiClient.get().getStudentsAsists(query, mCurrentPage, mCategory, Constants.CATEGORY_COLONIA, subcategoria, datePresent, mOnlyPresents, order,new GenericCallback<ReportStudentAsist>() {
             @Override
             public void onSuccess(ReportStudentAsist data) {
                 planilla_id = data.planilla_id;
@@ -254,7 +262,7 @@ public class ColonyFragment extends BaseFragment implements Paginate.Callbacks, 
 
     @Override
     public void onLoadMore() {
-        listStudents(mQuery);
+        listStudents(mQuery, "");
     }
 
     @Override

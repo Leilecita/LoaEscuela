@@ -100,13 +100,21 @@ public class MiniFragment extends BaseFragment implements Paginate.Callbacks, On
         // clearView();
     }
 
+    public String getCategory(){
+        return Constants.CATEGORY_COLONIA;
+    }
+
+    public String getSubcategoria(){
+        return Constants.SUB_CATEGORY_COLONIA_MINI;
+    }
+
     private void hideKeyboard(){
         final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
     }
 
     @Override
-    public void refreshList(String cat, String subcat,String date, String query, String onlyPresents){
+    public void refreshList(String cat, String subcat,String date, String query, String onlyPresents, String orderby){
 
         categoria = cat;
         subcategoria = subcat;
@@ -115,12 +123,13 @@ public class MiniFragment extends BaseFragment implements Paginate.Callbacks, On
         mAdapter.setDatePresent(date);
 
         mQuery = query;
+        System.out.println(mQuery);
 
         mOnlyPresents = onlyPresents;
 
         clearView();
         //ver si esto es necesario
-        listStudents(mQuery);
+        listStudents(mQuery, orderby);
     }
 
     public void clearView(){
@@ -194,13 +203,16 @@ public class MiniFragment extends BaseFragment implements Paginate.Callbacks, On
         return mRootView;
     }
 
-    public void listStudents(String query){
+    public void listStudents(String query, String order){
         loadingInProgress=true;
         this.mQuery = query;
         final String newToken = UUID.randomUUID().toString();
         this.token =  newToken;
 
-        ApiClient.get().getStudentsAsists(query, mCurrentPage, mCategory, Constants.CATEGORY_COLONIA, subcategoria, datePresent, mOnlyPresents,new GenericCallback<ReportStudentAsist>() {
+        System.out.println(subcategoria);
+        System.out.println(categoria);
+
+        ApiClient.get().getStudentsAsists(query, mCurrentPage, mCategory, Constants.CATEGORY_COLONIA, subcategoria, datePresent, mOnlyPresents, order,new GenericCallback<ReportStudentAsist>() {
             @Override
             public void onSuccess(ReportStudentAsist data) {
                 planilla_id = data.planilla_id;
@@ -254,7 +266,7 @@ public class MiniFragment extends BaseFragment implements Paginate.Callbacks, On
 
     @Override
     public void onLoadMore() {
-        listStudents(mQuery);
+        listStudents(mQuery, "");
     }
 
     @Override

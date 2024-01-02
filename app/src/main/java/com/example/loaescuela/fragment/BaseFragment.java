@@ -12,8 +12,8 @@ import java.util.List;
 
 public class BaseFragment extends Fragment implements OnFloatingButton, OnInfoFragment, OnEnablePresent {
 
-    public void refreshList(String cat, String subcat, String date, String query, String onlyPresents){
-        refreshList(cat,subcat, date, query, onlyPresents);
+    public void refreshList(String cat, String subcat, String date, String query, String onlyPresents, String orderby){
+        refreshList(cat,subcat, date, query, onlyPresents, orderby);
     }
 
     public void changeDate(String date){
@@ -27,6 +27,8 @@ public class BaseFragment extends Fragment implements OnFloatingButton, OnInfoFr
     }
 
     public int getVisibility(){return 0;}
+    public String getCategory(){return "";}
+    public String getSubCategory(){return "";}
 
     public List<String> onLoadSpinner(){return new ArrayList<>() ;}
 

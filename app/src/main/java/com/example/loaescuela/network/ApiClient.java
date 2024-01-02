@@ -191,8 +191,8 @@ public class ApiClient {
         handleRequest( ApiUtils.getAPISessionService().getStudents2(query,page, "getStudents"), callback);
     }
 
-    public void getStudentsAsists(String query,Integer page,String category,String categoria, String subcategoria, String datePresent ,String onlyPresents, final GenericCallback<ReportStudentAsist> callback ){
-                handleRequest( ApiUtils.getAPISessionService().getStudentsAsists( "getStudentsByAssists",query,page,category,categoria,subcategoria, datePresent, onlyPresents), callback);
+    public void getStudentsAsists(String query,Integer page,String category,String categoria, String subcategoria, String datePresent ,String onlyPresents, String orderby,final GenericCallback<ReportStudentAsist> callback ){
+                handleRequest( ApiUtils.getAPISessionService().getStudentsAsists( "getStudentsByAssists",query,page,category,categoria,subcategoria, datePresent, onlyPresents, orderby), callback);
     }
 
     public void getStudentsValue(String category,String categoria, String subcategoria, String datePresent ,final GenericCallback<ReportStudentValue> callback ){

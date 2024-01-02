@@ -48,11 +48,11 @@ import com.example.loaescuela.types.SubCategoryEscuela;
 import com.example.loaescuela.types.SubCategoryType;
 import com.google.android.material.tabs.TabLayout;
 
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class GeneralAssistActivity extends BaseActivity{
@@ -77,8 +77,10 @@ public class GeneralAssistActivity extends BaseActivity{
     private LinearLayout line_cant_presents;
     private LinearLayout line_cant_alumnos;
 
-    private String mCategoria= Constants.TYPE_ALL;
-    private String mSubCategoria= Constants.TYPE_ALL;
+    private String mCategoria;
+   // private String mCategoria= Constants.TYPE_ALL;
+    private String mSubCategoria;
+  //  private String mSubCategoria= Constants.TYPE_ALL;
 
     private String mActualDate;
     private TextView day;
@@ -94,7 +96,9 @@ public class GeneralAssistActivity extends BaseActivity{
     private Spinner spinner_sub_cat;
 
     private LinearLayout listOnlyPresents;
+    private LinearLayout lineOrderBy, refresh;
     private Boolean enablePresent = true;
+    private String orderBy;
 
     public void startAssistAndPaymentsActivity(ReportStudentAsistItem s, Integer position, String category, Integer numberfragment){
 
@@ -140,6 +144,33 @@ public class GeneralAssistActivity extends BaseActivity{
         dayName = findViewById(R.id.dayname);
         line_top_info = findViewById(R.id.line_top_info);
         listOnlyPresents = findViewById(R.id.onlypresents);
+        lineOrderBy = findViewById(R.id.orderBy);
+        refresh = findViewById(R.id.refresh);
+
+        orderBy = "alf";
+        //lineOrderBy.setVisibility(View.GONE);
+
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                refresh(mCategoria,mSubCategoria,mActualDate,mQuery,"false",orderBy);
+
+                loadStudentsValue(mCategoria, mSubCategoria, mActualDate);
+            }
+        });
+
+        lineOrderBy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(orderBy.equals("alf")){
+                    orderBy = "s";
+                }else{
+                    orderBy = "alf";
+                }
+
+                refresh(mCategoria,mSubCategoria,mActualDate,mQuery,"false",orderBy);
+            }
+        });
 
         mActualDate = DateHelper.get().onlyDate(DateHelper.get().getActualDate2());
 
@@ -189,7 +220,6 @@ public class GeneralAssistActivity extends BaseActivity{
         listOnlypresentsMethod();
 
 
-
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -227,7 +257,7 @@ public class GeneralAssistActivity extends BaseActivity{
                 actionSpinner();
                 checkEnablePresent(enablePresent, tab.getPosition());
 
-                loadStudentsValue(mCategoria, Constants.TYPE_ALL, mActualDate);
+                loadStudentsValue(mCategoria, mSubCategoria, mActualDate);
 
                 listOnlypresentsMethod();
             }
@@ -278,7 +308,10 @@ public class GeneralAssistActivity extends BaseActivity{
             }else if(name.equals("high")){
                 selectFragment(4);
             }else{
+                selectFragment(0);
             }
+        }else{
+            selectFragment(0);
         }
 
 
@@ -288,7 +321,6 @@ public class GeneralAssistActivity extends BaseActivity{
     public void createSpinner(List<String> spinner_sub_cate){
         spinner_sub_cat = findViewById(R.id.spinner_sub_cat);
         createSpinnerSubCat(spinner_sub_cat, spinner_sub_cate);
-
     }
 
     private void search(){
@@ -309,7 +341,7 @@ public class GeneralAssistActivity extends BaseActivity{
 
                 mQuery = "";
                 //clearView();
-                refresh(mCategoria, mSubCategoria, mActualDate, mQuery, "false");
+                refresh(mCategoria, mSubCategoria, mActualDate, mQuery, "false",orderBy);
 
                 setButtonVisibility(View.VISIBLE);
                 return false;
@@ -330,7 +362,7 @@ public class GeneralAssistActivity extends BaseActivity{
             public boolean onQueryTextChange(String newText) {
                 if(!newText.trim().toLowerCase().equals(mQuery)) {
                     mQuery = newText.trim().toLowerCase();
-                    refresh(mCategoria, mSubCategoria, mActualDate, mQuery, "false");
+                    refresh(mCategoria, mSubCategoria, mActualDate, mQuery, "false",orderBy);
                 }
                 return false;
             }
@@ -388,6 +420,17 @@ public class GeneralAssistActivity extends BaseActivity{
     }
 
     private void setCategoryByPosition(Integer i) {
+
+        int position = mTabLayout.getSelectedTabPosition();
+        final Fragment f = mAdapter.getItem(position);
+
+        if(f instanceof BaseFragment){
+            mCategoria = ((BaseFragment)f).getCategory();
+            mSubCategoria = ((BaseFragment)f).getSubCategory();
+        }
+
+
+
         if (i == 0) {
             mCategoria = Constants.CATEGORY_ESCUELA;
             mSubCategoria = Constants.SUB_CATEGORY_ESCUELA_ADULTOS;
@@ -479,7 +522,7 @@ public class GeneralAssistActivity extends BaseActivity{
                         val = "true";
                     }
 
-                    ((BaseFragment)f).refreshList(mCategoria, mSubCategoria, mActualDate, mQuery, val);
+                    ((BaseFragment)f).refreshList(mCategoria, mSubCategoria, mActualDate, mQuery, val,orderBy);
                 }
             });
         }
@@ -561,18 +604,18 @@ public class GeneralAssistActivity extends BaseActivity{
 
             }else if(resultCode == RESULT_CANCELED){
 
-
-
-               /* if(data.getIntExtra("FRAGMENT", 0) == 0){
+                if(data.getIntExtra("FRAGMENT", 0) == 0){
                     selectFragment(0);
                 }else if(data.getIntExtra("FRAGMENT", 0) == 1){
                     selectFragment(1);
                 }else if(data.getIntExtra("FRAGMENT", 0) == 2){
                     selectFragment(2);
-                }else {
+                }else if(data.getIntExtra("FRAGMENT", 0) == 3) {
                     selectFragment(3);
-                }*/
-                selectFragment(2);
+                }else{
+                    selectFragment(4);
+                }
+
                 //Fragment f = mAdapter.getItem(2);
                /* if( f instanceof ToPrepareFragment){
                     ((ToPrepareFragment)f).scrollToPosition();
@@ -588,38 +631,44 @@ public class GeneralAssistActivity extends BaseActivity{
                this.mSubCategoria = data.getStringExtra("SUBCATEGORIA");
 
                 System.out.println("cat"+this.mCategoria);
+                System.out.println("subcat"+this.mSubCategoria);
                 Fragment f;
 
                 if(this.mCategoria.equals(Constants.CATEGORY_ESCUELA)){
-                    selectFragment(0);
-                     f = mAdapter.getItem(0);
-                    if (f instanceof BaseFragment) {
-                        ((SchoolAssistsFragment) f).refreshList(this.mCategoria, this.mSubCategoria, this.mActualDate,"","false");
+                    if(this.mSubCategoria.equals(Constants.SUB_CATEGORY_ESCUELA_ADULTOS)) {
+                        selectFragment(0);
+                        f = mAdapter.getItem(0);
+                        if (f instanceof BaseFragment) {
+                            ((SchoolAssistsFragment) f).refreshList(this.mCategoria, this.mSubCategoria, this.mActualDate,"","false",orderBy);
+                        }
+                    }else{
+                        selectFragment(1);
+                        f = mAdapter.getItem(1);
+                        if(f instanceof BaseFragment) {
+                            ((IntSchoolFragment) f).refreshList(this.mCategoria, this.mSubCategoria, this.mActualDate, "", "false",orderBy);
+                        }
                     }
-                }else if(this.mCategoria.equals(Constants.CATEGORY_ESCUELA_INT)) {
-                    selectFragment(1);
-                    f = mAdapter.getItem(1);
-                    if(f instanceof BaseFragment) {
-                        ((IntSchoolFragment) f).refreshList(this.mCategoria, this.mSubCategoria, this.mActualDate, "", "false");
-                    }
-                } else if(this.mCategoria.equals(Constants.CATEGORY_COLONIA)) {
-                    selectFragment(2);
-                    f = mAdapter.getItem(2);
-                    if(f instanceof BaseFragment) {
-                        ((ColonyFragment) f).refreshList(this.mCategoria, this.mSubCategoria, this.mActualDate, "", "false");
-                    }
-                }else if(this.mCategoria.equals(Constants.CATEGORY_MINI)) {
-                    selectFragment(3);
-                    f = mAdapter.getItem(3);
-                    if(f instanceof BaseFragment) {
-                        ((MiniFragment) f).refreshList(this.mCategoria, this.mSubCategoria, this.mActualDate,"","false");
 
+                }else if(this.mCategoria.equals(Constants.CATEGORY_COLONIA)) {
+                    if(this.mSubCategoria.equals(Constants.SUB_CATEGORY_COLONIA_KIDS)) {
+                        selectFragment(2);
+                        f = mAdapter.getItem(2);
+                        if(f instanceof BaseFragment) {
+                            ((ColonyFragment) f).refreshList(this.mCategoria, this.mSubCategoria, this.mActualDate, "", "false",orderBy);
+                        }
+                    }else{
+                        selectFragment(3);
+                        f = mAdapter.getItem(3);
+                        if(f instanceof BaseFragment) {
+                            ((MiniFragment) f).refreshList(this.mCategoria, this.mSubCategoria, this.mActualDate,"","false",orderBy);
+                        }
                     }
+
                 }else{
                     selectFragment(4);
                     f = mAdapter.getItem(4);
                     if(f instanceof BaseFragment) {
-                        ((HighschoolAssistsFragment) f).refreshList(this.mCategoria, this.mSubCategoria, this.mActualDate,"","false");
+                        ((HighschoolAssistsFragment) f).refreshList(this.mCategoria, this.mSubCategoria, this.mActualDate,"","false",orderBy);
                     }
                  }
             }
@@ -648,11 +697,17 @@ public class GeneralAssistActivity extends BaseActivity{
                 }else{
                     mSubCategoria = itemSelected;
                 }
+
+               // mSubCategoria = Constants.SUB_CATEGORY_COLONIA_MINI;
                // if(initAppSubCat){
                  //   initAppSubCat = false;
                 //}else{
 
-                    refresh(mCategoria, mSubCategoria, mActualDate, "", "false");
+                System.out.println(mCategoria);
+                System.out.println(mSubCategoria);
+                System.out.println(mActualDate);
+
+                    refresh(mCategoria, mSubCategoria, mActualDate, "", "false",orderBy);
                     loadStudentsValue(mCategoria, mSubCategoria, mActualDate);
                 //}
             }
@@ -688,7 +743,7 @@ public class GeneralAssistActivity extends BaseActivity{
                         mActualDate = year + "-" + smonthOfYear + "-" + sdayOfMonth;
                         brakeDownDate();
                         loadStudentsValue(mCategoria, mSubCategoria, mActualDate);
-                        refresh(mCategoria, mSubCategoria, mActualDate, "", "false");
+                        refresh(mCategoria, mSubCategoria, mActualDate, "", "false",orderBy);
 
                         enablePresent = DateHelper.get().compareDate(mActualDate);
                         checkEnablePresent(enablePresent,0);
@@ -698,12 +753,12 @@ public class GeneralAssistActivity extends BaseActivity{
         datePickerDialog.show();
     }
 
-    public void refresh(String cat, String subcat, String date, String s, String onlyPresent){
+    public void refresh(String cat, String subcat, String date, String s, String onlyPresent, String orderBy){
         int position = mTabLayout.getSelectedTabPosition();
         final Fragment f = mAdapter.getItem(position);
 
         if(f instanceof BaseFragment){
-            ((BaseFragment)f).refreshList(cat,subcat,date,s,onlyPresent);
+            ((BaseFragment)f).refreshList(cat,subcat,date,s,onlyPresent, orderBy);
         }
     }
 
