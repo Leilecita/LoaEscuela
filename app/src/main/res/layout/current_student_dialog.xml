@@ -1,0 +1,144 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view_mistake"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rec_dialog"
+    android:layout_margin="8dp"
+    android:backgroundTint="@color/background_dialog"
+
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dialog_margin_bottom"
+        android:layout_marginTop="@dimen/dialog_margin_top"
+        android:layout_marginLeft="@dimen/dialog_margin_left"
+        android:layout_marginRight="@dimen/dialog_margin_right"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="El alumno "
+                android:fontFamily="@font/opensanslight"
+                android:textSize="@dimen/medium_text"
+                android:textColor="@color/colorPrimaryLetterRose" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/nombre"
+                android:text="leila"
+                android:fontFamily="@font/opensansregular"
+                android:textSize="@dimen/medium_text"
+                android:textColor="@color/colorPrimaryLetterRose" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/medium_text"
+                android:text=" esta asistiendo a clases en "
+                android:textColor="@color/colorPrimaryLetterRose" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/planilla"
+                android:fontFamily="@font/opensansregular"
+                android:textSize="@dimen/medium_text"
+                android:textColor="@color/colorPrimaryLetterRose" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:text="Si presiona NO, será ubicado al final de la lista"
+                android:textColor="@color/colorPrimaryClearLetterRose" />
+
+
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="19dp"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:id="@+id/no"
+                android:layout_height="@dimen/height_button"
+                android:layout_weight="1"
+                android:layout_marginRight="16sp"
+                android:textAllCaps="false"
+                android:textSize="@dimen/general_text"
+                android:textColor="#ffff"
+                android:backgroundTint="@color/colorDialogButton"
+                android:background="@drawable/rec_dialog"
+                android:text="No"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:id="@+id/ok"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_height="@dimen/height_button"
+                android:layout_weight="1"
+                android:textAllCaps="false"
+                android:textSize="@dimen/general_text"
+                android:textColor="#ffff"
+                android:backgroundTint="@color/colorDialogButton"
+                android:background="@drawable/rec_dialog"
+                android:text="Si"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/cancel"
+                android:layout_weight="1"
+                android:text="Cancelar"
+                android:textSize="@dimen/general_text"
+                android:fontFamily="@font/opensansregular"
+                android:gravity="center"
+                android:textColor="@color/colorDialogButton"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
+
+
+

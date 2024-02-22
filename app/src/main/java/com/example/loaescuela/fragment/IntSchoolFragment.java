@@ -63,6 +63,7 @@ public class IntSchoolFragment extends BaseFragment implements Paginate.Callback
     private Long planilla_id = -1l;
 
     private String mActualDate;
+    private String mOrderBy="alf";
 
     private LinearLayout line_filters;
     private LinearLayout filters;
@@ -73,7 +74,7 @@ public class IntSchoolFragment extends BaseFragment implements Paginate.Callback
 
     public void startNewActivityFragment(ReportStudentAsistItem r, Integer pos, String category){
 
-        ((GeneralAssistActivity) getActivity()).startAssistAndPaymentsActivity(r,pos,category,0);
+        ((GeneralAssistActivity) getActivity()).startAssistAndPaymentsActivity(r,pos,category,1);
     }
 
     public void scrollToPositionAndUpdate(){
@@ -123,10 +124,11 @@ public class IntSchoolFragment extends BaseFragment implements Paginate.Callback
         mQuery = query;
 
         mOnlyPresents = onlyPresents;
+        mOrderBy = orderby;
 
         clearView();
         //ver si esto es necesario
-        listStudents(mQuery, orderby);
+        listStudents(mQuery);
 
 
     }
@@ -202,13 +204,13 @@ public class IntSchoolFragment extends BaseFragment implements Paginate.Callback
         return mRootView;
     }
 
-    public void listStudents(String query, String order){
+    public void listStudents(String query){
         loadingInProgress=true;
         this.mQuery = query;
         final String newToken = UUID.randomUUID().toString();
         this.token =  newToken;
 
-        ApiClient.get().getStudentsAsists(query, mCurrentPage, mCategory, Constants.CATEGORY_ESCUELA, subcategoria, datePresent, mOnlyPresents, order,new GenericCallback<ReportStudentAsist>() {
+        ApiClient.get().getStudentsAsists(query, mCurrentPage, mCategory, Constants.CATEGORY_ESCUELA, subcategoria, datePresent, mOnlyPresents, mOrderBy,new GenericCallback<ReportStudentAsist>() {
             @Override
             public void onSuccess(ReportStudentAsist data) {
                 planilla_id = data.planilla_id;
@@ -262,7 +264,7 @@ public class IntSchoolFragment extends BaseFragment implements Paginate.Callback
 
     @Override
     public void onLoadMore() {
-        listStudents(mQuery, "");
+        listStudents(mQuery);
     }
 
     @Override

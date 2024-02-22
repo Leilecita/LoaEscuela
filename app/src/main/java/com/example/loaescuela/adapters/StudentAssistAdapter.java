@@ -37,6 +37,8 @@ import com.example.loaescuela.network.ApiClient;
 import com.example.loaescuela.network.Error;
 import com.example.loaescuela.network.GenericCallback;
 import com.example.loaescuela.network.models.ClassCourse;
+import com.example.loaescuela.network.models.Planilla;
+import com.example.loaescuela.network.models.PlanillaAlumno;
 import com.example.loaescuela.network.models.PlanillaPresente;
 import com.example.loaescuela.network.models.ReportSeasonPresent;
 import com.example.loaescuela.network.models.ReportStudentAsist;
@@ -115,6 +117,8 @@ public class StudentAssistAdapter extends BaseAdapter<ReportStudentAsistItem,Stu
         public TextView text_name2;
         public TextView text_year;
         public TextView taken_clases;
+        public TextView taken_clases_2;
+        public TextView last_present;
         public TextView buyed_classes;
         public TextView debt_amount;
         public TextView dni;
@@ -139,6 +143,7 @@ public class StudentAssistAdapter extends BaseAdapter<ReportStudentAsistItem,Stu
         public TextView tel_mama;
         public TextView nombre_papa;
         public TextView tel_papa;
+        public TextView student_observation;
 
         public LinearLayout line_mama;
         public LinearLayout line_papa;
@@ -152,6 +157,7 @@ public class StudentAssistAdapter extends BaseAdapter<ReportStudentAsistItem,Stu
             check_presente = v.findViewById(R.id.check_presente);
             line_info_student = v.findViewById(R.id.info_student);
             taken_clases = v.findViewById(R.id.taken_classes);
+            taken_clases_2 = v.findViewById(R.id.taken_classes_2);
             more_info = v.findViewById(R.id.more_info);
             buyed_classes = v.findViewById(R.id.buyed_classes);
             debt_amount = v.findViewById(R.id.debt_amount);
@@ -177,6 +183,8 @@ public class StudentAssistAdapter extends BaseAdapter<ReportStudentAsistItem,Stu
             line_mama = v.findViewById(R.id.line_mama);
             line_papa = v.findViewById(R.id.line_papa);
             line_tel_student = v.findViewById(R.id.line_tel_student);
+            student_observation = v.findViewById(R.id.student_observation);
+            last_present = v.findViewById(R.id.last_present);
 
         }
     }
@@ -200,6 +208,8 @@ public class StudentAssistAdapter extends BaseAdapter<ReportStudentAsistItem,Stu
             vh.text_year.setText(null);
         if (vh.taken_clases != null)
             vh.taken_clases.setText(null);
+        if (vh.taken_clases_2 != null)
+            vh.taken_clases_2.setText(null);
 
         if (vh.buyed_classes != null)
             vh.buyed_classes.setText(null);
@@ -208,6 +218,8 @@ public class StudentAssistAdapter extends BaseAdapter<ReportStudentAsistItem,Stu
             vh.debt_amount.setText(null);
         if (vh.dni != null)
             vh.dni.setText(null);
+        if (vh.student_observation != null)
+            vh.student_observation.setText(null);
 
     }
 
@@ -235,6 +247,15 @@ public class StudentAssistAdapter extends BaseAdapter<ReportStudentAsistItem,Stu
         holder.nombre_papa.setText(currentClient.nombre_papa);
         holder.tel_mama.setText(currentClient.tel_mama);
         holder.tel_papa.setText(currentClient.tel_papa);
+
+        if(currentClient.student_observation.length() > 0){
+            holder.student_observation.setText(currentClient.student_observation);
+            holder.student_observation.setVisibility(View.VISIBLE);
+
+        }else{
+            holder.student_observation.setVisibility(View.GONE);
+        }
+
 
 
         if(currentClient.tel_adulto.matches("")){
@@ -302,6 +323,7 @@ public class StudentAssistAdapter extends BaseAdapter<ReportStudentAsistItem,Stu
         if(currentClient.taken_classes.size() > 0){
 
             holder.taken_clases.setText(String.valueOf(currentClient.taken_classes.get(0).cant_presents));
+            holder.taken_clases_2.setText(String.valueOf(currentClient.taken_classes.get(0).cant_presents));
             holder.buyed_classes.setText(String.valueOf(currentClient.taken_classes.get(0).cant_buyed_classes));
             holder.debt_amount.setText(String.valueOf(currentClient.taken_classes.get(0).tot_amount - currentClient.taken_classes.get(0).tot_paid_amount));
         }
@@ -406,7 +428,7 @@ public class StudentAssistAdapter extends BaseAdapter<ReportStudentAsistItem,Stu
 
                                     return true;
                                 case R.id.menu_edit:
-                                    //edithOutcome(outcome, position);
+                                    currentStudent(currentClient,position,"");
                                     return true;
                                 default:
                                     return false;
@@ -448,6 +470,79 @@ public class StudentAssistAdapter extends BaseAdapter<ReportStudentAsistItem,Stu
                     public void onSuccess(Void data) {
                         removeItem(position);
                         Toast.makeText(mContext, "Se ha eliminado el alumno de la planilla", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onError(Error error) {
+
+                    }
+                });
+                dialog.dismiss();
+            }
+        });
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    }
+
+    private void currentStudent(final ReportStudentAsistItem o, final int position,final String planilla){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+
+        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View dialogView = inflater.inflate(R.layout.current_student_dialog, null);
+        builder.setView(dialogView);
+
+        final TextView nombre = dialogView.findViewById(R.id.nombre);
+        final TextView planila = dialogView.findViewById(R.id.planilla);
+        final Button ok = dialogView.findViewById(R.id.ok);
+        final Button no = dialogView.findViewById(R.id.no);
+        final TextView cancel = dialogView.findViewById(R.id.cancel);
+
+        nombre.setText(o.nombre);
+        planila.setText(planilla);
+
+        final AlertDialog dialog = builder.create();
+
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PlanillaAlumno p = new PlanillaAlumno();
+                p.id = o.planilla_alumno_id;
+                p.current_student = "no";
+
+                ApiClient.get().putPlanillaAlumno(p, new GenericCallback<PlanillaAlumno>() {
+                    @Override
+                    public void onSuccess(PlanillaAlumno data) {
+
+                    }
+
+                    @Override
+                    public void onError(Error error) {
+
+                    }
+                });
+                dialog.dismiss();
+            }
+        });
+
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                PlanillaAlumno p = new PlanillaAlumno();
+                p.id = o.planilla_alumno_id;
+                p.current_student = "si";
+
+                ApiClient.get().putPlanillaAlumno(p, new GenericCallback<PlanillaAlumno>() {
+                    @Override
+                    public void onSuccess(PlanillaAlumno data) {
+
                     }
 
                     @Override

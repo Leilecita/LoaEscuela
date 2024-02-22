@@ -212,7 +212,10 @@ public class StudentToAssistAdapter extends BaseAdapter<Student,StudentToAssistA
             holder.cuad_image.setColorFilter(Color.parseColor(Constants.COLOR_HIGHSCHOOL), PorterDuff.Mode.SRC_ATOP);
         }
 
-        holder.firstLetter.setText(String.valueOf(current.nombre.charAt(0)));
+        if(current.nombre.length() > 0){
+            holder.firstLetter.setText(String.valueOf(current.nombre.trim().charAt(0)));
+        }
+
 
         holder.select.setOnClickListener(new View.OnClickListener() {
             @Override

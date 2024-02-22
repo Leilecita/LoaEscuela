@@ -53,6 +53,10 @@ public class ApiClient {
         handleRequest( ApiUtils.getAPISessionService().postAlumnoPlanilla(c), callback);
     }
 
+    public void putPlanillaAlumno(PlanillaAlumno c,GenericCallback<PlanillaAlumno> callback){
+        handleRequest( ApiUtils.getAPISessionService().updateStudentAsist(c), callback);
+    }
+
     //PLANILLAS_PRESENTES
 
     public void postPlanillaPresente(PlanillaPresente c,GenericCallback<PlanillaPresente> callback){

@@ -79,12 +79,11 @@ public class PlanillaResumAdapter  extends BaseAdapter<ReportResumPlanilla,Plani
 
         final ReportResumPlanilla current = getItem(position);
 
-        holder.nombre_planilla.setText(current.nombre_planilla);
-        holder.tot_presents.setText(String.valueOf(current.cant_presentes));
-
         if(current.cant_presentes == 0){
             holder.line_view.setVisibility(View.GONE);
         }else{
+            holder.nombre_planilla.setText(current.nombre_planilla);
+            holder.tot_presents.setText(String.valueOf(current.cant_presentes));
             holder.line_view.setVisibility(View.VISIBLE);
         }
     }

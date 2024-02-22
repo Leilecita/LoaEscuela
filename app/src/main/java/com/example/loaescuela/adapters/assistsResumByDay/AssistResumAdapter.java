@@ -106,7 +106,6 @@ public class AssistResumAdapter  extends BaseAdapter<ReportResumAsist ,AssistRes
 
         final ReportResumAsist current = getItem(position);
 
-
         String nameDay = DateHelper.get().getNameDay(current.day);
         String numberDay = DateHelper.get().numberDay(current.day);
         String month = DateHelper.get().getNameMonth2(DateHelper.get().onlyDate(current.day));
@@ -145,13 +144,8 @@ public class AssistResumAdapter  extends BaseAdapter<ReportResumAsist ,AssistRes
                 }else{
                     holder.line_detail_formatos.setVisibility(View.VISIBLE);
                 }
-
-
             }
         });
-
-
     }
-
 }
 

@@ -86,17 +86,38 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_tab"
             android:background="@color/colorPrimaryDark" />
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height_rec_search"
+            android:orientation="horizontal"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="12dp"
             android:layout_marginRight="16dp"
-            android:backgroundTint="@color/background_searchview_r"
-            android:background="@drawable/rec_rounded_8"
-            android:layout_alignParentBottom="true"
-            android:clickable="true" />
+            android:layout_height="wrap_content"
+        >
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="@dimen/height_rec_search"
+
+                android:backgroundTint="@color/background_searchview_r"
+                android:background="@drawable/rec_rounded_8"
+                android:layout_alignParentBottom="true"
+                android:clickable="true" />
+
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/delete_viol"
+                android:id="@+id/clean_text_search"
+                app:tint="@color/colorPrimaryClearLetterRose">
+
+            </ImageView>
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"

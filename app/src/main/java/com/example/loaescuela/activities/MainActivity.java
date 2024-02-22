@@ -169,7 +169,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         String level = SessionPrefs.get(this).getLevel();
         String name = SessionPrefs.get(this).getName();
 
-        if(!level.equals("") && level.equals("admin")) {
+        if(level != null && !level.equals("") && level.equals("admin")) {
 
             dayResum.setOnClickListener(new View.OnClickListener() {
                 @Override

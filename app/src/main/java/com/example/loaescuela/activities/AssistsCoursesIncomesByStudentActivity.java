@@ -1,16 +1,20 @@
 package com.example.loaescuela.activities;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -48,6 +52,7 @@ import com.paginate.recycler.LoadingListItemSpanLookup;
 import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class AssistsCoursesIncomesByStudentActivity extends BaseActivity implements Paginate.Callbacks , OnRefresListCourses {
@@ -457,6 +462,42 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
         month.setText(DateHelper.get().getNameMonth2((mOnlyDate)));
         dayName.setText(DateHelper.get().getNameDay((mOnlyDate)));
 
+        amount_course.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int i, int i1, int i2) {
+                paid_amount_course.setText(amount_course.getText().toString().trim());
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        paid_amount_course.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                paid_amount_course.setText("");
+            }
+        });
+        paid_amount_course.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                paid_amount_course.setText("");
+            }
+        });
+
+
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectDate(year, month, day, dayName);
+            }
+        });
+
         //SPINNER Categoria
         List<String> spinner_type_cat = new ArrayList<>();
         enumNameToStringArray(CategoryType.values(),spinner_type_cat);
@@ -467,34 +508,6 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
         enumNameToStringArrayPayment(MethodPaymentType.values(),spinner_paymen);
         initialSpinner(spinnerPayment, spinner_paymen);
 
-
-       /* spinnerType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String itemSelected=String.valueOf(spinnerType.getSelectedItem());
-
-                if(itemSelected.equals(Constants.CATEGORY_ESCUELA)){
-
-                    listFiltersDescriptions(itemSelected, description2);
-
-                    description2.setVisibility(View.VISIBLE);
-                    description.setVisibility(View.GONE);
-                }else{
-                    description2.setVisibility(View.GONE);
-                    description.setVisibility(View.VISIBLE);
-                }
-
-                if(itemSelected.equals("Otro")){
-                    other_type.setVisibility(View.VISIBLE);
-                }else{
-                    other_type.setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });*/
 
         //SPINNER Subcat
         List<String> spinner_sub_cat = new ArrayList<>();
@@ -532,7 +545,8 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
 
                     course.payment_place = mPaymentplace;
 
-                    course.created = DateHelper.get().getActualDate2();
+                  //  course.created = DateHelper.get().getActualDate2();
+                    course.created = mActualDate;
 
                     ApiClient.get().postClassCourse(course, new GenericCallback<ClassCourse>() {
                         @Override
@@ -628,5 +642,47 @@ public class AssistsCoursesIncomesByStudentActivity extends BaseActivity impleme
     }
 
 
+
+    private void selectDate(TextView year2, TextView month, TextView day, TextView dayName){
+        final DatePickerDialog datePickerDialog;
+        final Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR); // current year
+        int mMonth = c.get(Calendar.MONTH); // current month
+        int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+        // date picker dialog
+        datePickerDialog = new DatePickerDialog(this ,R.style.datepicker,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+                        // set day of month , month and year value in the edit text
+                        String sdayOfMonth = String.valueOf(dayOfMonth);
+                        if (sdayOfMonth.length() == 1) {
+                            sdayOfMonth = "0" + dayOfMonth;
+                        }
+
+                        String smonthOfYear = String.valueOf(monthOfYear + 1);
+                        if (smonthOfYear.length() == 1) {
+                            smonthOfYear = "0" + smonthOfYear;
+                        }
+
+                        String time= DateHelper.get().getOnlyTime(DateHelper.get().getActualDate());
+
+                        String datePicker=year + "-" + smonthOfYear + "-" +  sdayOfMonth +" "+time ;
+                        mActualDate = datePicker;
+
+                        year2.setText(DateHelper.get().getYear(year + "-" + smonthOfYear + "-" +  sdayOfMonth));
+                        day.setText(DateHelper.get().getOnlyDay((year + "-" + smonthOfYear + "-" +  sdayOfMonth)));
+                        month.setText(DateHelper.get().getNameMonth2((year + "-" + smonthOfYear + "-" +  sdayOfMonth)));
+                        dayName.setText(DateHelper.get().getNameDay((year + "-" + smonthOfYear + "-" +  sdayOfMonth)));
+
+                        //date.setText(DateHelper.get().changeFormatDate(datePicker));
+
+                    }
+                }, mYear, mMonth, mDay);
+
+        datePickerDialog.show();
+    }
 
 }

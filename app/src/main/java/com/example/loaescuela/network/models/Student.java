@@ -22,6 +22,7 @@ public class Student {
     public String nombre_papa;
     public String tel_mama;
     public String tel_papa;
+    public String student_obserevation;
 
     public Student(){}
 

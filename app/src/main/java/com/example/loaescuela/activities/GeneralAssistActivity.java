@@ -98,7 +98,10 @@ public class GeneralAssistActivity extends BaseActivity{
     private LinearLayout listOnlyPresents;
     private LinearLayout lineOrderBy, refresh;
     private Boolean enablePresent = true;
-    private String orderBy;
+    private String orderBy = "alf";
+
+    private SearchView searchView;
+    private ImageView cleanTextSearch;
 
     public void startAssistAndPaymentsActivity(ReportStudentAsistItem s, Integer position, String category, Integer numberfragment){
 
@@ -146,8 +149,9 @@ public class GeneralAssistActivity extends BaseActivity{
         listOnlyPresents = findViewById(R.id.onlypresents);
         lineOrderBy = findViewById(R.id.orderBy);
         refresh = findViewById(R.id.refresh);
+        cleanTextSearch = findViewById(R.id.clean_text_search);
 
-        orderBy = "alf";
+       // orderBy = "alf";
         //lineOrderBy.setVisibility(View.GONE);
 
         refresh.setOnClickListener(new View.OnClickListener() {
@@ -169,6 +173,22 @@ public class GeneralAssistActivity extends BaseActivity{
                 }
 
                 refresh(mCategoria,mSubCategoria,mActualDate,mQuery,"false",orderBy);
+            }
+        });
+
+        listOnlyPresents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String val="";
+                if(mOnlyPresent){
+                    mOnlyPresent = false;
+                    val = "false";
+                }else{
+                    mOnlyPresent = true;
+                    val = "true";
+                }
+
+                refresh(mCategoria,mSubCategoria,mActualDate,mQuery,val,orderBy);
             }
         });
 
@@ -217,7 +237,7 @@ public class GeneralAssistActivity extends BaseActivity{
         search();
 
         mOnlyPresent = false;
-        listOnlypresentsMethod();
+      //  listOnlypresentsMethod();
 
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -236,7 +256,7 @@ public class GeneralAssistActivity extends BaseActivity{
 
                 setCategoryByPosition(position);
 
-                listOnlypresentsMethod();
+               // listOnlypresentsMethod();
             }
 
             @Override
@@ -259,7 +279,7 @@ public class GeneralAssistActivity extends BaseActivity{
 
                 loadStudentsValue(mCategoria, mSubCategoria, mActualDate);
 
-                listOnlypresentsMethod();
+               // listOnlypresentsMethod();
             }
 
             @Override
@@ -308,10 +328,20 @@ public class GeneralAssistActivity extends BaseActivity{
             }else if(name.equals("high")){
                 selectFragment(4);
             }else{
-                selectFragment(0);
+                if(DateHelper.get().compareDate(DateHelper.get().getOnlyDate(DateHelper.get().getActualDate2())+" 13:30:00")){
+                    selectFragment(0);
+                }else{
+                    selectFragment(1);
+                }
             }
         }else{
-            selectFragment(0);
+
+            if(DateHelper.get().compareDate(DateHelper.get().getOnlyDate(DateHelper.get().getActualDate2())+" 13:30:00")){
+                selectFragment(0);
+            }else{
+                selectFragment(1);
+            }
+
         }
 
 
@@ -324,7 +354,8 @@ public class GeneralAssistActivity extends BaseActivity{
     }
 
     private void search(){
-        final SearchView searchView = findViewById(R.id.searchView);
+
+        searchView = findViewById(R.id.searchView);
         searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -347,6 +378,8 @@ public class GeneralAssistActivity extends BaseActivity{
                 return false;
             }
         });
+
+
         searchView.setOnSearchClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -365,6 +398,17 @@ public class GeneralAssistActivity extends BaseActivity{
                     refresh(mCategoria, mSubCategoria, mActualDate, mQuery, "false",orderBy);
                 }
                 return false;
+            }
+        });
+
+        cleanTextSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mQuery = "";
+                //clearView();
+                refresh(mCategoria, mSubCategoria, mActualDate, mQuery, "false",orderBy);
+                searchView.setQuery("", false);
+                setButtonVisibility(View.VISIBLE);
             }
         });
     }
@@ -527,6 +571,7 @@ public class GeneralAssistActivity extends BaseActivity{
             });
         }
     }
+
 
     public void actionSpinner(){
         int position = mTabLayout.getSelectedTabPosition();

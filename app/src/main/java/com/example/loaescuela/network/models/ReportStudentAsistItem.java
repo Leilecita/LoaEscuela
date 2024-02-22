@@ -8,7 +8,7 @@ public class ReportStudentAsistItem {
     public String nombre, dni;
     public String apellido;
     public String presente;
-    public String color, observacion;
+    public String color, observacion, student_observation;
    // public Integer taken_classes;
     public List<ReportSeasonPresent> taken_classes;
 

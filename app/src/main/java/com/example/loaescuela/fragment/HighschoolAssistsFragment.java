@@ -75,6 +75,7 @@ public class HighschoolAssistsFragment extends BaseFragment implements Paginate.
     private Long planilla_id = -1l;
 
     private String mActualDate;
+    private String mOrderBy = "alf";
 
     private LinearLayout line_filters;
     private LinearLayout filters;
@@ -84,7 +85,7 @@ public class HighschoolAssistsFragment extends BaseFragment implements Paginate.
     private Integer mPreviousPosition;
 
     public void startNewActivityFragment(ReportStudentAsistItem r,Integer pos, String category){
-        ((GeneralAssistActivity) getActivity()).startAssistAndPaymentsActivity(r,pos,category,2);
+        ((GeneralAssistActivity) getActivity()).startAssistAndPaymentsActivity(r,pos,category,4);
     }
 
     public void scrollToPositionAndUpdate(){
@@ -131,9 +132,11 @@ public class HighschoolAssistsFragment extends BaseFragment implements Paginate.
 
         mOnlyPresents = onlyPresents;
 
+        mOrderBy = orderby;
+
         clearView();
         //ver si esto es necesario
-        listStudents(mQuery, orderby);
+        listStudents(mQuery);
     }
 
     public void clearView(){
@@ -209,7 +212,7 @@ public class HighschoolAssistsFragment extends BaseFragment implements Paginate.
         return mRootView;
     }
 
-    public void listStudents(String query, String orderby){
+    public void listStudents(String query){
         loadingInProgress=true;
         this.mQuery = query;
         final String newToken = UUID.randomUUID().toString();
@@ -218,7 +221,7 @@ public class HighschoolAssistsFragment extends BaseFragment implements Paginate.
         System.out.println(mCategory);
         System.out.println(mSubCategoria);
 
-        ApiClient.get().getStudentsAsists(query, mCurrentPage, mCategory, Constants.CATEGORY_HIGHSCHOOL, subcategoria, datePresent, mOnlyPresents, orderby,new GenericCallback<ReportStudentAsist>() {
+        ApiClient.get().getStudentsAsists(query, mCurrentPage, mCategory, Constants.CATEGORY_HIGHSCHOOL, subcategoria, datePresent, mOnlyPresents, mOrderBy,new GenericCallback<ReportStudentAsist>() {
             @Override
             public void onSuccess(ReportStudentAsist data) {
                 System.out.println("planillaid"+data.planilla_id);
@@ -273,7 +276,7 @@ public class HighschoolAssistsFragment extends BaseFragment implements Paginate.
 
     @Override
     public void onLoadMore() {
-        listStudents(mQuery,"" );
+        listStudents(mQuery);
     }
 
     @Override

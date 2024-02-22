@@ -615,7 +615,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/list_reports"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="350dp"
                     android:layout_weight="1"
                     android:clipToPadding="false"
                     android:paddingBottom="50dp"

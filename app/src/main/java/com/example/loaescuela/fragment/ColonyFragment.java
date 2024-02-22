@@ -64,6 +64,7 @@ public class ColonyFragment extends BaseFragment implements Paginate.Callbacks, 
     private Long planilla_id = -1l;
 
     private String mActualDate;
+    private String mOrderBy = "alf";
 
     private LinearLayout line_filters;
     private LinearLayout filters;
@@ -73,7 +74,7 @@ public class ColonyFragment extends BaseFragment implements Paginate.Callbacks, 
 
 
     public void startNewActivityFragment(ReportStudentAsistItem r,Integer pos, String category){
-        ((GeneralAssistActivity) getActivity()).startAssistAndPaymentsActivity(r,pos, category,1);
+        ((GeneralAssistActivity) getActivity()).startAssistAndPaymentsActivity(r,pos, category,2);
     }
 
     public void scrollToPositionAndUpdate(){
@@ -123,12 +124,13 @@ public class ColonyFragment extends BaseFragment implements Paginate.Callbacks, 
         mAdapter.setDatePresent(date);
 
         mQuery = query;
+        mOrderBy = order;
 
         mOnlyPresents = onlyPresents;
 
         clearView();
         //ver si esto es necesario
-        listStudents(mQuery, order);
+        listStudents(mQuery);
     }
 
     public void clearView(){
@@ -202,13 +204,13 @@ public class ColonyFragment extends BaseFragment implements Paginate.Callbacks, 
         return mRootView;
     }
 
-    public void listStudents(String query, String order){
+    public void listStudents(String query){
         loadingInProgress=true;
         this.mQuery = query;
         final String newToken = UUID.randomUUID().toString();
         this.token =  newToken;
 
-        ApiClient.get().getStudentsAsists(query, mCurrentPage, mCategory, Constants.CATEGORY_COLONIA, subcategoria, datePresent, mOnlyPresents, order,new GenericCallback<ReportStudentAsist>() {
+        ApiClient.get().getStudentsAsists(query, mCurrentPage, mCategory, Constants.CATEGORY_COLONIA, subcategoria, datePresent, mOnlyPresents, mOrderBy,new GenericCallback<ReportStudentAsist>() {
             @Override
             public void onSuccess(ReportStudentAsist data) {
                 planilla_id = data.planilla_id;
@@ -262,7 +264,7 @@ public class ColonyFragment extends BaseFragment implements Paginate.Callbacks, 
 
     @Override
     public void onLoadMore() {
-        listStudents(mQuery, "");
+        listStudents(mQuery);
     }
 
     @Override

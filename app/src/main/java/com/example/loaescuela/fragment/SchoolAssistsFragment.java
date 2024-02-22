@@ -1,9 +1,11 @@
 package com.example.loaescuela.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -63,9 +65,10 @@ public class SchoolAssistsFragment extends BaseFragment implements Paginate.Call
     private Long planilla_id = -1l;
 
     private String mActualDate;
+    private String mOrderBy = "alf";
 
     private LinearLayout line_filters;
-    private LinearLayout filters;
+    private LinearLayout filters, scrollView;
 
     private View mRootView;
 
@@ -102,6 +105,7 @@ public class SchoolAssistsFragment extends BaseFragment implements Paginate.Call
 
     public void onSelectStudent(Long student_id, String name, String surname, String categoria){
         ((GeneralAssistActivity) requireActivity()).loadStudentsValue(Constants.CATEGORY_ESCUELA, mSubCategoria, mActualDate);
+
     }
 
     private void hideKeyboard(){
@@ -123,10 +127,11 @@ public class SchoolAssistsFragment extends BaseFragment implements Paginate.Call
         mQuery = query;
 
         mOnlyPresents = onlyPresents;
+        mOrderBy = orderby;
 
         clearView();
         //ver si esto es necesario
-        listStudents(mQuery,orderby);
+        listStudents(mQuery);
 
     }
 
@@ -170,6 +175,16 @@ public class SchoolAssistsFragment extends BaseFragment implements Paginate.Call
 
         mRootView = inflater.inflate(R.layout.assists_activity, container, false);
 
+        scrollView = mRootView.findViewById(R.id.scrollview);
+        scrollView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+            }
+        });
+
+
         mRecyclerView = mRootView.findViewById(R.id.list_students);
         layoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(layoutManager);
@@ -186,7 +201,6 @@ public class SchoolAssistsFragment extends BaseFragment implements Paginate.Call
         line_filters = mRootView.findViewById(R.id.line_filters);
         filters = mRootView.findViewById(R.id.filters);
 
-
         filters.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -201,13 +215,13 @@ public class SchoolAssistsFragment extends BaseFragment implements Paginate.Call
         return mRootView;
     }
 
-    public void listStudents(String query,String orderby){
+    public void listStudents(String query){
         loadingInProgress=true;
         this.mQuery = query;
         final String newToken = UUID.randomUUID().toString();
         this.token =  newToken;
 
-        ApiClient.get().getStudentsAsists(query, mCurrentPage, mCategory, Constants.CATEGORY_ESCUELA, subcategoria, datePresent, mOnlyPresents, orderby,new GenericCallback<ReportStudentAsist>() {
+        ApiClient.get().getStudentsAsists(query, mCurrentPage, mCategory, Constants.CATEGORY_ESCUELA, subcategoria, datePresent, mOnlyPresents, mOrderBy,new GenericCallback<ReportStudentAsist>() {
             @Override
             public void onSuccess(ReportStudentAsist data) {
                 planilla_id = data.planilla_id;
@@ -261,7 +275,7 @@ public class SchoolAssistsFragment extends BaseFragment implements Paginate.Call
 
     @Override
     public void onLoadMore() {
-        listStudents(mQuery, "");
+        listStudents(mQuery);
     }
 
     @Override
